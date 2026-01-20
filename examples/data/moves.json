@@ -1,0 +1,82 @@
+[
+  {
+    "Id": 1,
+    "Name": "Pound",
+    "Description": "A physical attack using the user's body",
+    "Type": 0,
+    "Category": 0,
+    "Power": 40,
+    "Accuracy": 100,
+    "PP": 35,
+    "Priority": 0,
+    "Target": "Single",
+    "Effects": [],
+    "MakesContact": true,
+    "CanBeProtected": true,
+    "CanBeMirrored": true
+  },
+  {
+    "Id": 33,
+    "Name": "Tackle",
+    "Description": "A physical attack in which the user charges at the target",
+    "Type": 0,
+    "Category": 0,
+    "Power": 40,
+    "Accuracy": 100,
+    "PP": 35,
+    "Priority": 0,
+    "Target": "Single",
+    "Effects": [],
+    "MakesContact": true,
+    "CanBeProtected": true,
+    "CanBeMirrored": true
+  },
+  {
+    "Id": 52,
+    "Name": "Ember",
+    "Description": "The target is attacked with small flames",
+    "Type": 9,
+    "Category": 1,
+    "Power": 40,
+    "Accuracy": 100,
+    "PP": 25,
+    "Priority": 0,
+    "Target": "Single",
+    "Effects": [
+      {
+        "Type": "Status",
+        "Chance": 10,
+        "Parameters": {
+          "Status": "Burn"
+        }
+      }
+    ],
+    "MakesContact": false,
+    "CanBeProtected": true,
+    "CanBeMirrored": true
+  },
+  {
+    "Id": 85,
+    "Name": "Thunderbolt",
+    "Description": "A strong electric blast is loosed at the target",
+    "Type": 12,
+    "Category": 1,
+    "Power": 90,
+    "Accuracy": 100,
+    "PP": 15,
+    "Priority": 0,
+    "Target": "Single",
+    "Effects": [
+      {
+        "Type": "Status",
+        "Chance": 10,
+        "Parameters": {
+          "Status": "Paralysis"
+        }
+      }
+    ],
+    "MakesContact": false,
+    "CanBeProtected": true,
+    "CanBeMirrored": true
+  }
+]
