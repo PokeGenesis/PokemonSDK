@@ -242,7 +242,10 @@ public class EnhancedDataManager
     private string GetLocalizedFlavorText(List<PokeApiFlavorText> flavorTexts, string languageCode)
     {
         var text = flavorTexts.FirstOrDefault(f => f.Language?.Name == languageCode);
-        return text?.FlavorText.Replace("\n", " ").Replace("\f", " ") ?? string.Empty;
+        if (text == null) return string.Empty;
+        
+        // Clean up formatting characters
+        return System.Text.RegularExpressions.Regex.Replace(text.FlavorText, @"[\n\f]+", " ");
     }
     
     private PokemonType MapPokemonType(string apiTypeName) => apiTypeName.ToLower() switch

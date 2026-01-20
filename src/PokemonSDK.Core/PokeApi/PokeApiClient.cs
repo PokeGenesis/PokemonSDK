@@ -28,7 +28,11 @@ public class PokeApiClient
                 cancellationToken
             );
         }
-        catch
+        catch (HttpRequestException)
+        {
+            return null;
+        }
+        catch (TaskCanceledException)
         {
             return null;
         }
@@ -46,7 +50,11 @@ public class PokeApiClient
                 cancellationToken
             );
         }
-        catch
+        catch (HttpRequestException)
+        {
+            return null;
+        }
+        catch (TaskCanceledException)
         {
             return null;
         }
@@ -64,7 +72,11 @@ public class PokeApiClient
                 cancellationToken
             );
         }
-        catch
+        catch (HttpRequestException)
+        {
+            return null;
+        }
+        catch (TaskCanceledException)
         {
             return null;
         }
@@ -82,7 +94,11 @@ public class PokeApiClient
                 cancellationToken
             );
         }
-        catch
+        catch (HttpRequestException)
+        {
+            return null;
+        }
+        catch (TaskCanceledException)
         {
             return null;
         }
@@ -100,7 +116,11 @@ public class PokeApiClient
                 cancellationToken
             );
         }
-        catch
+        catch (HttpRequestException)
+        {
+            return null;
+        }
+        catch (TaskCanceledException)
         {
             return null;
         }
