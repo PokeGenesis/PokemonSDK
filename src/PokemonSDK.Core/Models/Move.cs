@@ -27,7 +27,7 @@ public class Move
     public bool MakesContact { get; set; }
     public bool CanBeProtected { get; set; } = true;
     public bool CanBeMirrored { get; set; } = true;
-    public bool CanBeSnatchted { get; set; }
+    public bool CanBeSnatched { get; set; }
     public bool IsSoundBased { get; set; }
     public bool IsPunchMove { get; set; }
     public bool IsBiteMove { get; set; }
