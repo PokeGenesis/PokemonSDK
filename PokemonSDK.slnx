@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Battle/Battle.csproj" />
+    <Project Path="src/Core/Core.csproj" />
+    <Project Path="src/Data/Data.csproj" />
+    <Project Path="src/Tools/Tools.csproj" />
+    <Project Path="src/UI/UI.csproj" />
+    <Project Path="src/World/World.csproj" />
+  </Folder>
+  <Folder Name="/src/Rendering.MonoGame/">
+    <Project Path="src/Rendering.MonoGame/Game.csproj" />
+  </Folder>
+</Solution>
