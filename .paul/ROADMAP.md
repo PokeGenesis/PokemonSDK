@@ -37,7 +37,7 @@ Phases: 0 of 4 complete
 
 **Plans:**
 
-- [x] 01-01: Solution scaffold .NET 10 + SDK.Core domain models + CoreDependencyTests ← *Planning*
+- [x] 01-01: Solution scaffold .NET 10 + SDK.Core domain models + CoreDependencyTests ← *Done 2026-06-01*
 - [ ] 01-02: EF Core 10 + PokemonDbContext + Fluent API + Migration 001 + SqliteTestFixture
 - [ ] 01-03: DbContextExtensions (GetByGeneration/GetTranslations) + DataSeeder + seed CLI
 - [ ] 01-04: End-to-end SDK test + PLAT-01/03 cross-target scan
