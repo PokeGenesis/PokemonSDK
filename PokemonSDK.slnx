@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SDK.Battle/SDK.Battle.csproj" />
+    <Project Path="src/SDK.Core/SDK.Core.csproj" />
+    <Project Path="src/SDK.Data/SDK.Data.csproj" />
+    <Project Path="src/SDK.Scripting/SDK.Scripting.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SDK.Core.Tests/SDK.Core.Tests.csproj" />
+  </Folder>
+</Solution>

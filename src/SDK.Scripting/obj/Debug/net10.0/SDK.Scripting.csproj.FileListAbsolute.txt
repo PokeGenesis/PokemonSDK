@@ -1,0 +1,16 @@
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/bin/Debug/net10.0/SDK.Scripting.deps.json
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/bin/Debug/net10.0/SDK.Scripting.dll
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/bin/Debug/net10.0/SDK.Scripting.pdb
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/bin/Debug/net10.0/SDK.Core.dll
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/bin/Debug/net10.0/SDK.Core.pdb
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/obj/Debug/net10.0/SDK.Scripting.csproj.AssemblyReference.cache
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/obj/Debug/net10.0/SDK.Scripting.GeneratedMSBuildEditorConfig.editorconfig
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/obj/Debug/net10.0/SDK.Scripting.AssemblyInfoInputs.cache
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/obj/Debug/net10.0/SDK.Scripting.AssemblyInfo.cs
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/obj/Debug/net10.0/SDK.Scripting.csproj.CoreCompileInputs.cache
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/obj/Debug/net10.0/SDK.Scripting.sourcelink.json
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/obj/Debug/net10.0/SDK.Scri.602887B6.Up2Date
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/obj/Debug/net10.0/SDK.Scripting.dll
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/obj/Debug/net10.0/refint/SDK.Scripting.dll
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/obj/Debug/net10.0/SDK.Scripting.pdb
+/home/subarnan/projects/PokemonSDK/src/SDK.Scripting/obj/Debug/net10.0/ref/SDK.Scripting.dll

@@ -163,7 +163,7 @@ Superpowers → EXÉCUTION : TDD, implémentation, vérification
 ## 9. COMMANDES UTILES
 
 ```bash
-dotnet build PokemonSDK.sln
+dotnet build PokemonSDK.slnx
 dotnet test tests/ --collect:"XPlat Code Coverage"
 dotnet ef migrations add InitialCreate --project src/SDK.Data --startup-project src/SDK.MonoGame
 dotnet ef database update --project src/SDK.Data --startup-project src/SDK.MonoGame
