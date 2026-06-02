@@ -6,20 +6,21 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 1 (SDK.Core + SDK.Data) — Plan 01-03 UNIFY complet, prêt pour Plan 01-04
+**Current focus:** v0.1 — Phase 2 (Battle Engine Core) — Phase 1 complete, prêt à planifier
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 1 of 4 (SDK.Core + SDK.Data) — In progress (3/4 plans complets)
-Plan: 01-03 UNIFY complet — prochain : 01-04
-Status: Ready for /paul:plan 01-04
-Last activity: 2026-06-02 — Plan 01-03 UNIFY complet
+Phase: 2 of 4 (Battle Engine Core) — Not started
+Plan: Not started
+Status: Ready to plan Phase 2
+Last activity: 2026-06-02 — Phase 1 complete (4/4 plans), transition Phase 2
 
 Progress:
 
 - Milestone v0.1: [███░░░░░░░] ~25%
-- Phase 1: [███████░░░] ~75%
+- Phase 1: [██████████] 100% ✅
+- Phase 2: [░░░░░░░░░░] 0%
 
 ## Loop Position
 
@@ -27,7 +28,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complet — prêt pour Plan 01-04]
+  ✓        ✓        ✓     [Phase 1 fermée — IDLE, prêt pour Phase 2]
 ```
 
 ## Accumulated Context
@@ -74,9 +75,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-02
-Stopped at: Plan 01-03 UNIFY complet
-Next action: `/paul:plan 01-04` — end-to-end SDK test + PLAT-01/03 cross-target scan
-Resume file: `.paul/phases/01-sdk-core-data/01-03-SUMMARY.md`
+Stopped at: Phase 1 complète — 4/4 plans, 12/12 tests verts, transition vers Phase 2
+Next action: `/paul:plan 02-01` — Phase 2 : Battle Engine Core (SDK.Core battle models)
+Resume file: `.paul/ROADMAP.md`
 
 ---
 

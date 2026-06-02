@@ -8,6 +8,8 @@ public static class DataSeeder
     {
         SeedTypes(ctx);
         SeedTypeTranslations(ctx);
+        SeedSpecies(ctx);
+        SeedSpeciesTranslations(ctx);
     }
 
     public static void SeedTypes(PokemonDbContext ctx)
@@ -75,6 +77,41 @@ public static class DataSeeder
                 EntityType = "PokemonType", EntityId = id,
                 Locale = "fr", Field = "name", Value = fr
             });
+        }
+        ctx.SaveChanges();
+    }
+
+    public static void SeedSpecies(PokemonDbContext ctx)
+    {
+        if (ctx.PokemonSpecies.Any()) return;
+
+        ctx.PokemonSpecies.AddRange(
+            new PokemonSpecies { Id =   1, Identifier = "bulbasaur", Generation = 1, Type1Id = 5, Type2Id = 8 },
+            new PokemonSpecies { Id =  25, Identifier = "pikachu",   Generation = 1, Type1Id = 4, Type2Id = null },
+            new PokemonSpecies { Id = 175, Identifier = "togepi",    Generation = 2, Type1Id = 1, Type2Id = null }
+        );
+        ctx.SaveChanges();
+    }
+
+    public static void SeedSpeciesTranslations(PokemonDbContext ctx)
+    {
+        if (ctx.Translations.Any(t => t.EntityType == "PokemonSpecies")) return;
+
+        var data = new (int id, string en, string fr, string de, string es, string ja)[]
+        {
+            (  1, "Bulbasaur", "Bulbizarre", "Bisasam", "Bulbasaur", "フシギダネ"),
+            ( 25, "Pikachu",   "Pikachu",   "Pikachu", "Pikachu",   "ピカチュウ"),
+            (175, "Togepi",    "Togepi",    "Togepi",  "Togepi",    "トゲピー"),
+        };
+
+        foreach (var (id, en, fr, de, es, ja) in data)
+        {
+            foreach (var (locale, value) in new[] { ("en", en), ("fr", fr), ("de", de), ("es", es), ("ja", ja) })
+                ctx.Translations.Add(new Translation
+                {
+                    EntityType = "PokemonSpecies", EntityId = id,
+                    Locale = locale, Field = "name", Value = value
+                });
         }
         ctx.SaveChanges();
     }

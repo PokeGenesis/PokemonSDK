@@ -8,13 +8,13 @@
 
 **v0.1 Proof of Concept** (v0.1.0)
 Status: In progress
-Phases: 0 of 4 complete
+Phases: 1 of 4 complete
 
 ## Phases
 
 | Phase | Name          | Plans | Status      | Completed |
 |-------|---------------|-------|-------------|-----------|
-| 1     | SDK.Core + SDK.Data     | 4     | Planning    | -         |
+| 1     | SDK.Core + SDK.Data     | 4     | ✅ Complete | 2026-06-02 |
 | 2     | Battle Engine Core      | 4     | Not started | -         |
 | 3     | World Foundation        | 4     | Not started | -         |
 | 4     | Scripting + Progression | 3     | Not started | -         |
@@ -39,8 +39,8 @@ Phases: 0 of 4 complete
 
 - [x] 01-01: Solution scaffold .NET 10 + SDK.Core domain models + CoreDependencyTests ← *Done 2026-06-01*
 - [x] 01-02: EF Core 10 + PokemonDbContext + Fluent API + Migration 001 + SqliteTestFixture ← *Done 2026-06-02*
-- [ ] 01-03: DbContextExtensions (GetByGeneration/GetTranslations) + DataSeeder + seed CLI
-- [ ] 01-04: End-to-end SDK test + PLAT-01/03 cross-target scan
+- [x] 01-03: DbContextExtensions (GetByGeneration/GetTranslations) + DataSeeder + seed CLI ← *Done 2026-06-02*
+- [x] 01-04: End-to-end SDK test + PLAT-01/03 cross-target scan ← *Done 2026-06-02*
 
 ### Phase 2: Battle Engine Core
 

@@ -14,8 +14,8 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 |-----------|-------|
 | Type | Application |
 | Version | 0.0.0 |
-| Status | Initializing — .NET 10 fresh start |
-| Last Updated | 2026-06-01 |
+| Status | Phase 1 complete — Phase 2 (Battle Engine) starting |
+| Last Updated | 2026-06-02 — Phase 1 shipped |
 
 ## Requirements
 
@@ -29,9 +29,12 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 - SDK.Scripting : MoonSharp Preset_SoftSandbox, GameState, SaveSystem JSON
 - SDK.MonoGame : runtime jouable, RenderPipeline HD (480×270 → xBR ×4 → 1920×1080)
 
-### Validated (À recréer .NET 10)
-- DATA-01→06 (structure, schéma SQLite, formes, migrations, filtres, translations)
-- PLAT-01, PLAT-03 (.NET 10 cross-platform)
+### Shipped in Phase 1 ✅
+- DATA-01→06 — Solution scaffold, SDK.Core entités, EF Core 10 + SQLite, migrations, filtres génération, table translations centrale — *2026-06-02*
+- PLAT-01 — Tous .csproj net10.0 (vérifié automatiquement par PlatformTests) — *2026-06-02*
+- PLAT-03 — Zéro chemin Windows hardcodé dans src/ (vérifié automatiquement) — *2026-06-02*
+
+### Validated (À implémenter .NET 10)
 - BATTLE-01→03, BATTLE-07 (moteur 1v1, formules, IA, config)
 - SCRIPT-01→03 (MoonSharp, badges, save)
 
@@ -69,7 +72,7 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 
 | Metric | Target | Current | Status |
 |--------|--------|---------|--------|
-| Phase 1 complete | dotnet ef + requêtes génération/translations OK | Not started | Not started |
+| Phase 1 complete | dotnet ef + requêtes génération/translations OK | 12/12 tests verts | ✅ Complete |
 | Phase 2 complete | Combat 1v1 headless de start à KO | Not started | Not started |
 | v0.1 | Joueur sur map, combat, badge, save/load | Not started | Not started |
 | v1.0 | dotnet add package PokéForge.SDK fonctionnel | Not started | Not started |
@@ -90,5 +93,5 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | JSON | System.Text.Json | Intégré .NET 10 |
 
 ---
-*Created: 2026-06-01*
+*Created: 2026-06-01 | Last updated: 2026-06-02 after Phase 1*
 *Full context: PROJECT.md | REQUIREMENTS.md | .claude/ARCHITECTURE.md | CLAUDE.md*
