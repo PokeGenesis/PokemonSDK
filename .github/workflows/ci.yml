@@ -28,12 +28,7 @@ jobs:
         run: dotnet build PokemonSDK.slnx --no-restore --configuration Release
 
       - name: Test + Coverage
-        run: |
-          dotnet test PokemonSDK.slnx \
-            --no-build \
-            --configuration Release \
-            --collect:"XPlat Code Coverage" \
-            --logger "console;verbosity=normal"
+        run: dotnet test PokemonSDK.slnx --no-build --configuration Release --collect:"XPlat Code Coverage" --logger "console;verbosity=normal"
 
       - name: Validate SDK.Core dependencies (doit être vide)
         run: dotnet list src/SDK.Core/SDK.Core.csproj package
