@@ -6,20 +6,20 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 1 (SDK.Core + SDK.Data) — Plan 01-02 complet, prêt pour Plan 01-03
+**Current focus:** v0.1 — Phase 1 (SDK.Core + SDK.Data) — Plan 01-03 UNIFY complet, prêt pour Plan 01-04
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 1 of 4 (SDK.Core + SDK.Data) — In progress (2/4 plans complets)
-Plan: 01-02 complet
-Status: Loop fermé — prêt pour prochain PLAN
-Last activity: 2026-06-02 — Plan 01-02 UNIFY complet
+Phase: 1 of 4 (SDK.Core + SDK.Data) — In progress (3/4 plans complets)
+Plan: 01-03 UNIFY complet — prochain : 01-04
+Status: Ready for /paul:plan 01-04
+Last activity: 2026-06-02 — Plan 01-03 UNIFY complet
 
 Progress:
 
-- Milestone v0.1: [██░░░░░░░░] ~16%
-- Phase 1: [█████░░░░░] ~50%
+- Milestone v0.1: [███░░░░░░░] ~25%
+- Phase 1: [███████░░░] ~75%
 
 ## Loop Position
 
@@ -27,7 +27,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop 01-02 complet — prêt pour /paul:plan 01-03]
+  ✓        ✓        ✓     [Loop complet — prêt pour Plan 01-04]
 ```
 
 ## Accumulated Context
@@ -74,9 +74,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-02
-Stopped at: Plan 01-02 UNIFY complet
-Next action: `/paul:plan 01-03`
-Resume file: `.paul/phases/01-sdk-core-data/01-02-SUMMARY.md`
+Stopped at: Plan 01-03 UNIFY complet
+Next action: `/paul:plan 01-04` — end-to-end SDK test + PLAT-01/03 cross-target scan
+Resume file: `.paul/phases/01-sdk-core-data/01-03-SUMMARY.md`
 
 ---
 
