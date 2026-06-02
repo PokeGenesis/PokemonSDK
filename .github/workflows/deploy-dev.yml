@@ -1,0 +1,38 @@
+name: Deploy DEV
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: dev
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build Release
+        run: dotnet build PokemonSDK.slnx --configuration Release
+
+      - name: Run all tests (bloquant)
+        run: dotnet test PokemonSDK.slnx --configuration Release --no-build
+
+      # TODO: Phase 3 — remplacer par SDK.MonoGame quand disponible
+      - name: Publish SDK.Tools
+        run: |
+          dotnet publish src/SDK.Tools/SDK.Tools.csproj \
+            --configuration Release \
+            --output ./publish/dev
+
+      - name: Upload artifact DEV
+        uses: actions/upload-artifact@v4
+        with:
+          name: pokemonsdk-dev-${{ github.sha }}
+          path: ./publish/dev
+          retention-days: 7

@@ -163,7 +163,7 @@ Superpowers → EXÉCUTION : TDD, implémentation, vérification
 ## 9. COMMANDES UTILES
 
 ```bash
-dotnet build PokemonSDK.sln
+dotnet build PokemonSDK.slnx
 dotnet test tests/ --collect:"XPlat Code Coverage"
 dotnet ef migrations add InitialCreate --project src/SDK.Data --startup-project src/SDK.MonoGame
 dotnet ef database update --project src/SDK.Data --startup-project src/SDK.MonoGame
@@ -194,3 +194,22 @@ git checkout dev && git pull && git checkout -b feature/nom-feature
 ---
 
 *Généré 2026-06-01 — .NET 10 fresh start*
+
+## Skill routing
+
+When the user's request matches an available skill, invoke it via the Skill tool. When in doubt, invoke the skill.
+
+Key routing rules:
+- Product ideas/brainstorming → invoke /office-hours
+- Strategy/scope → invoke /plan-ceo-review
+- Architecture → invoke /plan-eng-review
+- Design system/plan review → invoke /design-consultation or /plan-design-review
+- Full review pipeline → invoke /autoplan
+- Bugs/errors → invoke /investigate
+- QA/testing site behavior → invoke /qa or /qa-only
+- Code review/diff check → invoke /review
+- Visual polish → invoke /design-review
+- Ship/deploy/PR → invoke /ship or /land-and-deploy
+- Save progress → invoke /context-save
+- Resume context → invoke /context-restore
+- Author a backlog-ready spec/issue → invoke /spec
