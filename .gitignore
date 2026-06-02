@@ -1,0 +1,23 @@
+# .NET build artifacts
+bin/
+obj/
+
+# SQLite databases (generated at runtime/design-time)
+*.db
+*.db-shm
+*.db-wal
+data/
+
+# User-specific files
+*.user
+*.suo
+.vs/
+.vscode/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Logs
+*.log
