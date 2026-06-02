@@ -1,0 +1,42 @@
+name: Deploy STAGING
+
+on:
+  push:
+    branches: [staging]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build + Test
+        run: |
+          dotnet build PokemonSDK.slnx --configuration Release
+          dotnet test PokemonSDK.slnx --configuration Release --no-build
+
+      # TODO: Phase 3 — remplacer par SDK.MonoGame quand disponible
+      - name: Publish SDK.Tools STAGING
+        run: |
+          dotnet publish src/SDK.Tools/SDK.Tools.csproj \
+            --configuration Release \
+            --output ./publish/staging
+
+      - name: Upload artifact STAGING
+        uses: actions/upload-artifact@v4
+        with:
+          name: pokemonsdk-staging-${{ github.sha }}
+          path: ./publish/staging
+          retention-days: 14
+
+      - name: Notify — validation recette requise
+        run: |
+          echo "✅ Build staging ${{ github.sha }} prêt"
+          echo "⏳ Validation manuelle recette requise avant merge → main"
