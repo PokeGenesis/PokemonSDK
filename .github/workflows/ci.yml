@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [dev, staging, main]
+  push:
+    branches: [feature/**, bugfix/**]
+
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore PokemonSDK.slnx
+
+      - name: Build
+        run: dotnet build PokemonSDK.slnx --no-restore --configuration Release
+
+      - name: Test + Coverage
+        run: dotnet test PokemonSDK.slnx --no-build --configuration Release --collect:"XPlat Code Coverage" --logger "console;verbosity=normal"
+
+      - name: Validate SDK.Core dependencies (doit être vide)
+        run: dotnet list src/SDK.Core/SDK.Core.csproj package
+
+      # TODO: Phase 7 — activer quand SDK.Tools asset-validate implémenté
+      # - name: Validate sprites
+      #   run: dotnet run --project src/SDK.Tools -- asset-validate
+
+      # TODO: Phase 3 — activer quand SDK.MonoGame créé
+      # - name: Headless smoke test
+      #   if: matrix.os == 'ubuntu-latest'
+      #   run: dotnet run --project src/SDK.MonoGame -- --headless
