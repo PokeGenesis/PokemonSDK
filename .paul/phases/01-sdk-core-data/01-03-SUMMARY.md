@@ -10,7 +10,7 @@ requires:
 
 provides:
   - DbContextExtensions (GetSpeciesByGeneration, GetTypesByGeneration, GetTranslations, GetTranslation)
-  - DataSeeder idempotent — 18 types + traductions fr/en
+  - DataSeeder idempotent — 18 types + 108 traductions (6 locales)
   - SDK.Tools CLI — dotnet run -- seed <path>
 
 affects: [01-04, 02-02, battle-engine, scripting]
@@ -51,7 +51,7 @@ completed: 2026-06-02T20:43:00Z
 
 # Phase 1 Plan 03: DbContextExtensions + DataSeeder + SDK.Tools Summary
 
-**DbContextExtensions (filtre génération + lookup traductions), DataSeeder idempotent 18 types fr/en, et CLI `dotnet run -- seed <path>` ajoutés à SDK.Data et SDK.Tools.**
+**DbContextExtensions (filtre génération + lookup traductions), DataSeeder idempotent 18 types 6 locales, et CLI `dotnet run -- seed <path>` ajoutés à SDK.Data et SDK.Tools.**
 
 ## Performance
 
@@ -76,7 +76,7 @@ completed: 2026-06-02T20:43:00Z
 ## Accomplishments
 
 - `DbContextExtensions` : 4 méthodes d'extension IQueryable composables (GetSpeciesByGeneration, GetTypesByGeneration, GetTranslations, GetTranslation)
-- `DataSeeder` : 18 PokemonType (15 gen1 + dark/steel gen2 + fairy gen6) + 36 traductions (fr + en × 18) — pleinement idempotent
+- `DataSeeder` : 18 PokemonType (15 gen1 + dark/steel gen2 + fairy gen6) + 108 traductions (6 locales × 18 types) — pleinement idempotent
 - `SDK.Tools` console app net10.0 sans MonoGame — commande `seed <path>` applique migrations puis seeds
 - 8/8 tests verts dans SDK.Data.Tests ; CoreDependencyTests non régressé (1/1)
 - D-01 (SDK.Core zéro NuGet), D-17 (SDK.Tools zéro MonoGame), D-07 (traductions centrales) respectés
@@ -86,7 +86,7 @@ completed: 2026-06-02T20:43:00Z
 | Fichier | Changement | Rôle |
 |---------|-----------|------|
 | `src/SDK.Data/Extensions/DbContextExtensions.cs` | Créé | 4 méthodes d'extension sur PokemonDbContext |
-| `src/SDK.Data/Seeding/DataSeeder.cs` | Créé | Seeder idempotent 18 types + traductions fr/en |
+| `src/SDK.Data/Seeding/DataSeeder.cs` | Créé | Seeder idempotent 18 types + 108 traductions (6 locales) |
 | `src/SDK.Tools/SDK.Tools.csproj` | Créé | Console app net10.0, SDK.Core + SDK.Data uniquement |
 | `src/SDK.Tools/Program.cs` | Créé | CLI seed : migrate + SeedAll + exit 0 |
 | `tests/SDK.Data.Tests/DbContextExtensionsTests.cs` | Créé | 3 tests GetSpeciesByGeneration, GetTypesByGeneration, GetTranslation |
@@ -114,7 +114,7 @@ Aucune.
 
 **Prêt :**
 - DB interrogeable via DbContextExtensions (filtre génération)
-- 18 types + traductions fr/en disponibles en DB après seed
+- 18 types + 108 traductions 6 locales disponibles en DB après seed
 - CLI `dotnet run -- seed` fonctionnel et idempotent
 - SDK.Tools établi comme point d'entrée CLI headless (D-17)
 
