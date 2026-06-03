@@ -6,11 +6,11 @@ tags: [ef-core, sqlite, seeding, platform, testing, end-to-end]
 
 requires:
   - phase: 01-sdk-core-data plan 01-03
-    provides: DbContextExtensions (GetSpeciesByGeneration, GetTranslation), DataSeeder (18 types + fr/en), SqliteTestFixture
+    provides: DbContextExtensions (GetSpeciesByGeneration, GetTranslation), DataSeeder (18 types + en/fr), SqliteTestFixture
 
 provides:
   - DataSeeder.SeedSpecies — 3 espèces (Bulbasaur/Pikachu/Togepi) persistées en SQLite
-  - DataSeeder.SeedSpeciesTranslations — 15 traductions (3 espèces × 5 locales en/fr/de/es/ja)
+  - DataSeeder.SeedSpeciesTranslations — 18 traductions (3 espèces × 6 locales en/es/fr/de/it/ja)
   - Phase1EndToEndTests — preuve exécutable de la Phase 1 goal
   - PlatformTests — PLAT-01 (net10.0) + PLAT-03 (pas de chemin Windows) validés
 
@@ -21,7 +21,7 @@ tech-stack:
   patterns:
     - End-to-end test Phase goal via SeedAll + GetSpeciesByGeneration + GetTranslation
     - PLAT scan tests via Directory.GetFiles + XDocument.Load (headless, pas de MonoGame)
-    - 5 locales via tuple array + double foreach (locale, value)
+    - 6 locales via tuple array + double foreach (locale, value)
 
 key-files:
   created:
@@ -31,7 +31,7 @@ key-files:
     - src/SDK.Data/Seeding/DataSeeder.cs
 
 key-decisions:
-  - "5 locales seedées : en/fr/de/es/ja — satisfait goal 'lire son nom en 5 langues'"
+  - "6 locales seedées : en/es/fr/de/it/ja — satisfait goal 'lire son nom en 6 langues'"
   - "PlatformTests filtrent obj/ via Path.DirectorySeparatorChar (cross-platform)"
   - "Phase1EndToEndTests utilise fixture locale (not IClassFixture) — SeedAll mute l'état"
 
@@ -47,7 +47,7 @@ completed: 2026-06-02T21:20:00Z
 
 # Phase 1 Plan 04: Phase 1 Closure — Species Seeding + E2E Test + Platform Scans Summary
 
-**Phase 1 goal démontrée : un développeur peut créer un Pokémon (Bulbasaur), le persister en SQLite, le requêter avec filtre génération, et lire son nom en 5 langues (en/fr/de/es/ja = "Bulbasaur"/"Bulbizarre"/"Bisasam"/"Bulbasaur"/"フシギダネ").**
+**Phase 1 goal démontrée : un développeur peut créer un Pokémon (Bulbasaur), le persister en SQLite, le requêter avec filtre génération, et lire son nom en 6 langues (en/es/fr/de/it/ja = "Bulbasaur"/"Bulbasaur"/"Bulbizarre"/"Bisasam"/"Bulbasaur"/"フシギダネ").**
 
 ## Performance
 
@@ -64,14 +64,14 @@ completed: 2026-06-02T21:20:00Z
 
 | Critère | Statut | Notes |
 |---------|--------|-------|
-| AC-1: Phase 1 goal — génération + 5 locales | Pass | bulbasaur/pikachu gen1 ✓, togepi gen2 exclu ✓, "Bulbizarre" ✓, "ピカチュウ" ✓, 5 locales distinctes ✓ |
+| AC-1: Phase 1 goal — génération + 6 locales | Pass | bulbasaur/pikachu gen1 ✓, togepi gen2 exclu ✓, "Bulbizarre" ✓, "ピカチュウ" ✓, 6 locales distinctes ✓ |
 | AC-2: PLAT-01 — tous .csproj → net10.0 | Pass | 7 .csproj scannés, tous net10.0 |
 | AC-3: PLAT-03 — zéro "C:\" dans src/ | Pass | 0 fichier avec chemin Windows hardcodé |
 
 ## Accomplishments
 
 - `DataSeeder.SeedSpecies` : 3 espèces (Bulbasaur id=1, Pikachu id=25, Togepi id=175) avec FK types correctes (grass=5, poison=8, electric=4, normal=1)
-- `DataSeeder.SeedSpeciesTranslations` : 15 traductions (3 espèces × 5 locales), guard `Any()` idempotent
+- `DataSeeder.SeedSpeciesTranslations` : 18 traductions (3 espèces × 6 locales), guard `Any()` idempotent
 - `DataSeeder.SeedAll()` étendu : SeedTypes → SeedTypeTranslations → SeedSpecies → SeedSpeciesTranslations
 - `Phase1EndToEndTests` : 1 test intégration prouvant la Phase 1 goal de bout en bout
 - `PlatformTests` : AllProjects_TargetNet10 + SourceFiles_ContainNoHardcodedWindowsPaths — scans headless automatisés
@@ -89,7 +89,7 @@ completed: 2026-06-02T21:20:00Z
 
 | Décision | Rationale | Impact |
 |----------|-----------|--------|
-| 5 locales : en/fr/de/es/ja | Satisfait "5 langues" sans over-engineer | Pattern réutilisable pour toutes les entités futures |
+| 6 locales : en/es/fr/de/it/ja | Satisfait "6 langues" sans over-engineer | Pattern réutilisable pour toutes les entités futures |
 | PlatformTests dans SDK.Core.Tests | Headless, pas de MonoGame, accès repo root | D-17 respecté — scans CI-safe |
 | fixture locale dans Phase1EndToEndTests | SeedAll mute l'état — IClassFixture provoquerait pollution | Cohérent avec DataSeederTests (Plan 01-03) |
 
