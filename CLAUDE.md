@@ -135,6 +135,7 @@ v2.0 → + Phases 6+10+11 (post v1.0)  CLI + docs + features avancées
 | D-19 | **Sample consomme via NuGet** — jamais référence projet |
 | D-20 | **CLI scaffold = sample stabilisé** — template embarqué |
 | D-21 | **Docs = APIs stables uniquement** — pas de doc sur du WIP |
+| D-22 | **6 locales obligatoires** — toute donnée traduite doit avoir en/es/fr/de/it/ja. Jamais moins. |
 
 ---
 
@@ -188,7 +189,7 @@ git checkout dev && git pull && git checkout -b feature/nom-feature
 | `.claude/CICD.md` | GitHub Actions workflows (ci, dev, staging, prod, publish) |
 | `ROADMAP.md` | Phases 1→11, waves, critères de succès |
 | `REQUIREMENTS.md` | 34 requirements, traceability complète |
-| `PROJECT.md` | Vision, contraintes, 21 décisions clés |
+| `PROJECT.md` | Vision, contraintes, 22 décisions clés |
 | `STATE.md` | État courant (géré par PAUL) |
 
 ---
