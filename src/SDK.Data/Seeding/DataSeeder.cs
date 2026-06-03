@@ -97,16 +97,16 @@ public static class DataSeeder
     {
         if (ctx.Translations.Any(t => t.EntityType == "PokemonSpecies")) return;
 
-        var data = new (int id, string en, string fr, string de, string es, string ja)[]
+        var data = new (int id, string en, string es, string fr, string de, string it, string ja)[]
         {
-            (  1, "Bulbasaur", "Bulbizarre", "Bisasam", "Bulbasaur", "フシギダネ"),
-            ( 25, "Pikachu",   "Pikachu",   "Pikachu", "Pikachu",   "ピカチュウ"),
-            (175, "Togepi",    "Togepi",    "Togepi",  "Togepi",    "トゲピー"),
+            (  1, "Bulbasaur", "Bulbasaur", "Bulbizarre", "Bisasam",  "Bulbasaur", "フシギダネ"),
+            ( 25, "Pikachu",   "Pikachu",   "Pikachu",    "Pikachu",  "Pikachu",   "ピカチュウ"),
+            (175, "Togepi",    "Togepi",    "Togepi",     "Togepi",   "Togepi",    "トゲピー"),
         };
 
-        foreach (var (id, en, fr, de, es, ja) in data)
+        foreach (var (id, en, es, fr, de, it, ja) in data)
         {
-            foreach (var (locale, value) in new[] { ("en", en), ("fr", fr), ("de", de), ("es", es), ("ja", ja) })
+            foreach (var (locale, value) in new[] { ("en", en), ("es", es), ("fr", fr), ("de", de), ("it", it), ("ja", ja) })
                 ctx.Translations.Add(new Translation
                 {
                     EntityType = "PokemonSpecies", EntityId = id,
