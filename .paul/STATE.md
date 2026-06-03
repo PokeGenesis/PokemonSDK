@@ -11,16 +11,16 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 2 of 4 (Battle Engine Core) — Planning
-Plan: 02-01 fermé (UNIFY complet)
-Status: Ready for Plan 02-02
-Last activity: 2026-06-03 — Plan 02-01 complet — 10 fichiers créés, 13/13 tests verts
+Phase: 2 of 4 (Battle Engine Core) — In progress
+Plan: 02-02 fermé (UNIFY complet)
+Status: Ready for Plan 02-03
+Last activity: 2026-06-03 — Plan 02-02 complet — Migration 002, BattleDataSeeder, 17/17 tests verts, commit 3337ee8
 
 Progress:
 
-- Milestone v0.1: [███░░░░░░░] ~25%
+- Milestone v0.1: [████░░░░░░] ~35%
 - Phase 1: [██████████] 100% ✅
-- Phase 2: [█░░░░░░░░░] 25% (1/4 plans)
+- Phase 2: [██░░░░░░░░] 50% (2/4 plans)
 
 ## Loop Position
 
@@ -28,7 +28,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Plan 02-01 fermé — prêt pour Plan 02-02]
+  ✓        ✓        ✓     [Plan 02-02 fermé — prêt pour Plan 02-03]
 ```
 
 ## Accumulated Context
@@ -75,9 +75,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-03
-Stopped at: Plan 02-01 fermé — 10 fichiers créés, 13/13 tests verts, commit 63ea5f5
-Next action: `/paul:plan 02-02` — Phase 2 : Migration 002 + BattleDataSeeder
-Resume file: `.paul/phases/02-battle-engine-core/02-01-SUMMARY.md`
+Stopped at: Plan 02-02 fermé — Migration 002, BattleDataSeeder, 17/17 tests verts, commit 3337ee8
+Next action: `/paul:plan 02-03` — Phase 2 : SDK.Battle (BattleState immuable, IDamageFormula, BattleEngine)
+Resume file: `.paul/phases/02-battle-engine-core/02-02-SUMMARY.md`
 
 ---
 
