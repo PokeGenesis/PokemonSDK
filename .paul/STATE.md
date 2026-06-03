@@ -12,15 +12,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 Milestone: v0.1 Proof of Concept
 Phase: 2 of 4 (Battle Engine Core) — In progress
-Plan: 02-02 fermé (UNIFY complet)
-Status: Ready for Plan 02-03
-Last activity: 2026-06-03 — Plan 02-02 complet — Migration 002, BattleDataSeeder, 17/17 tests verts, commit 3337ee8
+Plan: 02-03 fermé (UNIFY complet)
+Status: Ready for Plan 02-04
+Last activity: 2026-06-03 — Plan 02-03 complet — SDK.Battle BattleEngine + formules + IA, 17/17 tests verts
 
 Progress:
 
-- Milestone v0.1: [████░░░░░░] ~35%
+- Milestone v0.1: [█████░░░░░] ~45%
 - Phase 1: [██████████] 100% ✅
-- Phase 2: [██░░░░░░░░] 50% (2/4 plans)
+- Phase 2: [███░░░░░░░] 75% (3/4 plans)
 
 ## Loop Position
 
@@ -28,7 +28,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Plan 02-02 fermé — prêt pour Plan 02-03]
+  ✓        ✓        ✓     [Plan 02-03 fermé — prêt pour Plan 02-04]
 ```
 
 ## Accumulated Context
@@ -75,9 +75,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-03
-Stopped at: Plan 02-02 fermé — Migration 002, BattleDataSeeder, 17/17 tests verts, commit 3337ee8
-Next action: `/paul:plan 02-03` — Phase 2 : SDK.Battle (BattleState immuable, IDamageFormula, BattleEngine)
-Resume file: `.paul/phases/02-battle-engine-core/02-02-SUMMARY.md`
+Stopped at: Plan 02-03 créé — SDK.Battle (BattleState, IDamageFormula×2, IDifficultyMode×2, BattleEngine)
+Next action: `/paul:plan 02-04` — Phase 2 : SDK.Battle.Tests (loop, damage, AI, config, status, switch)
+Resume file: `.paul/phases/02-battle-engine-core/02-03-SUMMARY.md`
 
 ---
 
