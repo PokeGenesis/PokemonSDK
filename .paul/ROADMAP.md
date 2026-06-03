@@ -30,7 +30,7 @@ Phases: 1 of 4 complete
 
 ### Phase 1: SDK.Core + SDK.Data
 
-**Goal:** Un développeur peut créer un Pokémon, le persister en SQLite, le requêter avec filtre génération, lire son nom en 5 langues. SDK.Core sans aucune dépendance externe.
+**Goal:** Un développeur peut créer un Pokémon, le persister en SQLite, le requêter avec filtre génération, lire son nom en 6 langues. SDK.Core sans aucune dépendance externe.
 **Depends on:** Nothing (first phase)
 **Research:** Unlikely (patterns EF Core connus, validés sur .NET 8)
 **Requirements:** DATA-01→06, PLAT-01, PLAT-03

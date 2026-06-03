@@ -20,7 +20,7 @@ public class Phase1EndToEndTests
         gen1Species.Should().NotContain("togepi");
 
         using var ctx3 = fixture.CreateContext();
-        var locales = new[] { "en", "fr", "de", "es", "ja", "it" };
+        var locales = new[] { "en", "es", "fr", "de", "it", "ja" };
         foreach (var locale in locales)
         {
             var name = ctx3.GetTranslation("PokemonSpecies", 1, locale, "name");
