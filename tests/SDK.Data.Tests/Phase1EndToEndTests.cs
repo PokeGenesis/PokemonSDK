@@ -7,7 +7,7 @@ using FluentAssertions;
 public class Phase1EndToEndTests
 {
     [Fact]
-    public void Phase1_Can_Persist_Query_By_Generation_And_Read_In_5_Locales()
+    public void Phase1_Can_Persist_Query_By_Generation_And_Read_In_6_Locales()
     {
         using var fixture = new SqliteTestFixture();
         using (var ctx = fixture.CreateContext())
@@ -20,7 +20,7 @@ public class Phase1EndToEndTests
         gen1Species.Should().NotContain("togepi");
 
         using var ctx3 = fixture.CreateContext();
-        var locales = new[] { "en", "fr", "de", "es", "ja" };
+        var locales = new[] { "en", "fr", "de", "es", "ja", "it" };
         foreach (var locale in locales)
         {
             var name = ctx3.GetTranslation("PokemonSpecies", 1, locale, "name");
@@ -29,6 +29,7 @@ public class Phase1EndToEndTests
 
         ctx3.GetTranslation("PokemonSpecies", 1, "fr", "name").Should().Be("Bulbizarre");
         ctx3.GetTranslation("PokemonSpecies", 25, "ja", "name").Should().Be("ピカチュウ");
+        ctx3.GetTranslation("PokemonSpecies", 1, "it", "name").Should().Be("Bulbasaur");
 
         using var ctx4 = fixture.CreateContext();
         var distinctLocales = ctx4.Translations
@@ -36,7 +37,7 @@ public class Phase1EndToEndTests
             .Select(t => t.Locale)
             .Distinct()
             .ToList();
-        distinctLocales.Should().HaveCount(5);
+        distinctLocales.Should().HaveCount(6);
         distinctLocales.Should().BeEquivalentTo(locales);
     }
 }
