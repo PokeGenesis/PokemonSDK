@@ -9,7 +9,7 @@ public class CoreBattleDependencyTests
     public void SdkBattle_HasZeroNuGetPackageReferences()
     {
         var root = GetRepoRoot();
-        var csproj = Path.Combine(root, "src", "SDK.Battle", "SDK.Battle.csproj");
+        var csproj = Path.Join(root, "src", "SDK.Battle", "SDK.Battle.csproj");
         File.Exists(csproj).Should().BeTrue($"SDK.Battle.csproj introuvable à {csproj}");
 
         var doc = XDocument.Load(csproj);
@@ -22,7 +22,7 @@ public class CoreBattleDependencyTests
         var dir = new DirectoryInfo(AppContext.BaseDirectory);
         for (int i = 0; i < 6; i++)
         {
-            if (File.Exists(Path.Combine(dir!.FullName, "PokemonSDK.slnx")))
+            if (File.Exists(Path.Join(dir!.FullName, "PokemonSDK.slnx")))
                 return dir.FullName;
             dir = dir.Parent;
         }
