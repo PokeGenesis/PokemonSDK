@@ -7,6 +7,7 @@
     <Project Path="src/SDK.Tools/SDK.Tools.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/SDK.Battle.Tests/SDK.Battle.Tests.csproj" />
     <Project Path="tests/SDK.Core.Tests/SDK.Core.Tests.csproj" />
     <Project Path="tests/SDK.Data.Tests/SDK.Data.Tests.csproj" />
   </Folder>
