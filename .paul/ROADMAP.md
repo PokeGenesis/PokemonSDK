@@ -16,7 +16,7 @@ Phases: 2 of 4 complete
 |-------|---------------|-------|-------------|-----------|
 | 1     | SDK.Core + SDK.Data     | 4     | ✅ Complete | 2026-06-02 |
 | 2     | Battle Engine Core      | 4     | ✅ Complete | 2026-06-04 |
-| 3     | World Foundation        | 4     | Planning    | -         |
+| 3     | World Foundation        | 4     | In progress | -         |
 | 4     | Scripting + Progression | 3     | Not started | -         |
 | 5     | Plugins + Characters    | TBD   | Not started | -         |
 | 7     | Developer Experience    | 4     | Not started | -         |

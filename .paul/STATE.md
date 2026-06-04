@@ -12,16 +12,16 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 Milestone: v0.1 Proof of Concept
 Phase: 3 of 4 (World Foundation) — In progress (1/4 plans)
-Plan: 03-01 complet (UNIFY ✓)
-Status: Prêt pour Plan 03-02
-Last activity: 2026-06-04 — Plan 03-01 UNIFY — EncounterZone + Migration 003 + translations D-22 — 49/49 tests
+Plan: 03-02 créé, en attente d'approbation
+Status: PLAN créé, prêt pour APPLY
+Last activity: 2026-06-04 — Plan 03-02 PLAN — RealTimeClock + WeatherSystem + EncounterSystem
 
 Progress:
 
 - Milestone v0.1: [██████░░░░] ~60%
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
-- Phase 3: [██░░░░░░░░] 25% (1/4 plans)
+- Phase 3: [██░░░░░░░░] 25% (1/4 plans — plan 03-02 en cours)
 
 ## Loop Position
 
@@ -29,7 +29,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Plan 03-01 fermé — Phase 3 in progress — prêt pour Plan 03-02]
+  ✓        ○        ○     [Plan 03-02 créé, en attente d'approbation]
 ```
 
 ## Accumulated Context
@@ -100,9 +100,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-04
-Stopped at: Plan 03-01 UNIFY complet — 49/49 tests, D-22 résolu
-Next action: `/paul:plan 03-02` — EncounterSystem + RealTimeClock + WeatherSystem + tests
-Resume file: `.paul/phases/03-world-foundation/03-01-SUMMARY.md`
+Stopped at: Plan 03-02 PLAN créé — RealTimeClock + WeatherSystem + EncounterSystem
+Next action: Approuver et exécuter `/paul:apply` — `.paul/phases/03-world-foundation/03-02-PLAN.md`
+Resume file: `.paul/phases/03-world-foundation/03-02-PLAN.md`
 
 ---
 
