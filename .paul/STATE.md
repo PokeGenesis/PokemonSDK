@@ -11,17 +11,17 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 3 of 4 (World Foundation) — Ready to plan
-Plan: Not started
-Status: Phase 2 complète — prêt pour Phase 3
-Last activity: 2026-06-04 — Phase 2 UNIFY+TRANSITION — 47/47 tests, Phase 2 100%
+Phase: 3 of 4 (World Foundation) — Planning
+Plan: 03-01 exécuté, prêt pour UNIFY
+Status: APPLY complet — 49/49 tests verts
+Last activity: 2026-06-04 — Plan 03-01 APPLY complet (EncounterZone, Migration 003, SeedMoveTranslations, SeedAbilityTranslations)
 
 Progress:
 
 - Milestone v0.1: [██████░░░░] ~55%
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
-- Phase 3: [░░░░░░░░░░] 0% (not started)
+- Phase 3: [░░░░░░░░░░] 0% (planning)
 
 ## Loop Position
 
@@ -29,7 +29,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Plan 02-04 fermé — Phase 2 complète — prêt pour Phase 3]
+  ✓        ✓        ○     [Plan 03-01 APPLY complet — prêt pour UNIFY]
 ```
 
 ## Accumulated Context
@@ -94,9 +94,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-04
-Stopped at: Phase 2 complète — SDK.Battle.Tests (30 tests), 47/47 solution verts, transition Phase 3 prête
-Next action: `/paul:plan 03-01` — Migration 003 + SDK.Core world primitives
-Resume file: `.paul/ROADMAP.md`
+Stopped at: Plan 03-01 créé, prêt pour APPLY
+Next action: `/paul:apply .paul/phases/03-world-foundation/03-01-PLAN.md`
+Resume file: `.paul/phases/03-world-foundation/03-01-PLAN.md`
 
 ---
 
