@@ -14,8 +14,8 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 |-----------|-------|
 | Type | Application |
 | Version | 0.0.0 |
-| Status | Phase 1 complete — Phase 2 (Battle Engine) starting |
-| Last Updated | 2026-06-02 — Phase 1 shipped |
+| Status | Phase 2 complete — Phase 3 (World Foundation) ready |
+| Last Updated | 2026-06-04 — Phase 2 shipped |
 
 ## Requirements
 
@@ -34,8 +34,13 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 - PLAT-01 — Tous .csproj net10.0 (vérifié automatiquement par PlatformTests) — *2026-06-02*
 - PLAT-03 — Zéro chemin Windows hardcodé dans src/ (vérifié automatiquement) — *2026-06-02*
 
+### Shipped in Phase 2 ✅
+- BATTLE-01 — Combat 1v1 headless de start à KO — *2026-06-04*
+- BATTLE-02 — IDamageFormula × 2 (Gen1DamageFormula, StandardDamageFormula) + ITypeChart + TypeChart — *2026-06-04*
+- BATTLE-03 — IDifficultyMode × 2 (StoryDifficultyMode, HardDifficultyMode) — *2026-06-04*
+- BATTLE-07 — BattleConfig (génération, crit, difficulté) — *2026-06-04*
+
 ### Validated (À implémenter .NET 10)
-- BATTLE-01→03, BATTLE-07 (moteur 1v1, formules, IA, config)
 - SCRIPT-01→03 (MoonSharp, badges, save)
 
 ### Active (v0.1)
@@ -73,7 +78,7 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | Metric | Target | Current | Status |
 |--------|--------|---------|--------|
 | Phase 1 complete | dotnet ef + requêtes génération/translations OK | 12/12 tests verts | ✅ Complete |
-| Phase 2 complete | Combat 1v1 headless de start à KO | Not started | Not started |
+| Phase 2 complete | Combat 1v1 headless de start à KO | 47/47 tests verts | ✅ Complete |
 | v0.1 | Joueur sur map, combat, badge, save/load | Not started | Not started |
 | v1.0 | dotnet add package PokéForge.SDK fonctionnel | Not started | Not started |
 
@@ -93,5 +98,5 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | JSON | System.Text.Json | Intégré .NET 10 |
 
 ---
-*Created: 2026-06-01 | Last updated: 2026-06-02 after Phase 1*
+*Created: 2026-06-01 | Last updated: 2026-06-04 after Phase 2*
 *Full context: PROJECT.md | REQUIREMENTS.md | .claude/ARCHITECTURE.md | CLAUDE.md*

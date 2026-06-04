@@ -10,6 +10,7 @@ public static class DataSeeder
         SeedTypeTranslations(ctx);
         SeedSpecies(ctx);
         SeedSpeciesTranslations(ctx);
+        BattleDataSeeder.SeedAll(ctx);
     }
 
     public static void SeedTypes(PokemonDbContext ctx)
