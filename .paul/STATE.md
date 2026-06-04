@@ -70,6 +70,14 @@ Décisions émergentes (Plan 03-01) :
 - `EncounterZone.SpeciesId` FK direct (une row par espèce/zone) — modèle table de rencontre simple
 - `EntityType = "Move"` / `"Ability"` en PascalCase — cohérent avec `"PokemonType"` / `"PokemonSpecies"`
 
+Décisions émergentes (Plan 03-02) :
+
+- `IGameClock` séparé de `IRealTimeClock` — deux contrats distincts : real-time (Gen 2) vs game-time configurable
+- `GameTimeClock.Speed` = game-minutes par real-second — `Speed=1f/60f` (1:1), `Speed=1f` (1s=1 min game), `Speed=60f` (1s=1h game)
+- `RealTimeClock.MapHour(int hour)` internal static — partagé avec `GameTimeClock` pour éviter duplication du switch
+- `IGameClock.SetGameTime(TimeSpan)` — contrat save/load, Plan 04-03 (ISaveSystem) persistera `GameElapsed`
+- Pokégear (Phase 5+) configure `Speed` via DI — `IGameClock` injecté dans le service Pokégear
+
 Décisions émergentes (Phase 2) :
 
 - D-11 : Sleep/Freeze ne sautent pas les tours — correction critique validée, testée
