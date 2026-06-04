@@ -12,9 +12,9 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 Milestone: v0.1 Proof of Concept
 Phase: 3 of 4 (World Foundation) — In progress (1/4 plans)
-Plan: 03-02 créé, en attente d'approbation
-Status: PLAN créé, prêt pour APPLY
-Last activity: 2026-06-04 — Plan 03-02 PLAN — RealTimeClock + WeatherSystem + EncounterSystem
+Plan: 03-02 APPLY complet (UNIFY en attente)
+Status: APPLY complet — prêt pour UNIFY
+Last activity: 2026-06-04 — Plan 03-02 APPLY — 74/74 tests verts, 25 nouveaux
 
 Progress:
 
@@ -29,7 +29,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ○        ○     [Plan 03-02 créé, en attente d'approbation]
+  ✓        ✓        ○     [Plan 03-02 APPLY complet — prêt pour UNIFY]
 ```
 
 ## Accumulated Context
@@ -109,7 +109,7 @@ None.
 
 Last session: 2026-06-04
 Stopped at: Plan 03-02 PLAN créé — RealTimeClock + WeatherSystem + EncounterSystem
-Next action: Approuver et exécuter `/paul:apply` — `.paul/phases/03-world-foundation/03-02-PLAN.md`
+Next action: `/paul:unify` — `.paul/phases/03-world-foundation/03-02-PLAN.md`
 Resume file: `.paul/phases/03-world-foundation/03-02-PLAN.md`
 
 ---
