@@ -15,7 +15,7 @@
 - [x] **DATA-03**: Les formes Pokémon (régionales, spéciales, légendaires, Fakemons) sont des entités `pokemon_forms` indépendantes — jamais des colonnes nullables sur `pokemon_species`
 - [x] **DATA-04**: Les migrations EF Core permettent de créer, versionner et appliquer le schéma SQLite sans perte de données
 - [x] **DATA-05**: Le filtre par génération fonctionne sur toutes les requêtes data (Pokémon, capacités, objets, types)
-- [x] **DATA-06**: La table `translations` centrale gère les noms et descriptions en FR, EN, ES, DE, IT via (entity_type, entity_id, locale, field) — aucune colonne locale sur les tables d'entités
+- [x] **DATA-06**: La table `translations` centrale gère les noms et descriptions en EN, ES, FR, DE, IT, JA via (entity_type, entity_id, locale, field) — aucune colonne locale sur les tables d'entités
 
 ### PLAT — Plateforme & Cross-Platform
 

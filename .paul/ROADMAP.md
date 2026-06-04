@@ -8,14 +8,14 @@
 
 **v0.1 Proof of Concept** (v0.1.0)
 Status: In progress
-Phases: 1 of 4 complete
+Phases: 2 of 4 complete
 
 ## Phases
 
 | Phase | Name          | Plans | Status      | Completed |
 |-------|---------------|-------|-------------|-----------|
 | 1     | SDK.Core + SDK.Data     | 4     | ✅ Complete | 2026-06-02 |
-| 2     | Battle Engine Core      | 4     | Not started | -         |
+| 2     | Battle Engine Core      | 4     | ✅ Complete | 2026-06-04 |
 | 3     | World Foundation        | 4     | Not started | -         |
 | 4     | Scripting + Progression | 3     | Not started | -         |
 | 5     | Plugins + Characters    | TBD   | Not started | -         |
@@ -30,7 +30,7 @@ Phases: 1 of 4 complete
 
 ### Phase 1: SDK.Core + SDK.Data
 
-**Goal:** Un développeur peut créer un Pokémon, le persister en SQLite, le requêter avec filtre génération, lire son nom en 5 langues. SDK.Core sans aucune dépendance externe.
+**Goal:** Un développeur peut créer un Pokémon, le persister en SQLite, le requêter avec filtre génération, lire son nom en 6 langues. SDK.Core sans aucune dépendance externe.
 **Depends on:** Nothing (first phase)
 **Research:** Unlikely (patterns EF Core connus, validés sur .NET 8)
 **Requirements:** DATA-01→06, PLAT-01, PLAT-03
@@ -51,10 +51,10 @@ Phases: 1 of 4 complete
 
 **Plans:**
 
-- [ ] 02-01: SDK.Core battle models (Move, Learnset, Ability, TypeEffectiveness, BattleConfig, enums)
-- [ ] 02-02: SDK.Data Migration 002 (types, moves, type chart 18×18, abilities) + BattleDataSeeder
-- [ ] 02-03: SDK.Battle (BattleState immuable, IDamageFormula ×2, IDifficultyMode ×2, BattleEngine)
-- [ ] 02-04: SDK.Battle.Tests (loop, damage, AI, config, status, switch)
+- [x] 02-01: SDK.Core battle models (Move, Learnset, Ability, TypeEffectiveness, BattleConfig, enums) ← *Done 2026-06-03*
+- [x] 02-02: SDK.Data Migration 002 (types, moves, type chart 18×18, abilities) + BattleDataSeeder ← *Done 2026-06-03*
+- [x] 02-03: SDK.Battle (BattleState immuable, IDamageFormula ×2, IDifficultyMode ×2, BattleEngine) ← *Done 2026-06-03*
+- [x] 02-04: SDK.Battle.Tests (loop, damage, AI, config, STAB, type immunity) ← *Done 2026-06-04*
 
 ### Phase 3: World Foundation
 
