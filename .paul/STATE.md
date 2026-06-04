@@ -6,22 +6,22 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 3 (World Foundation) — Phases 1 & 2 complètes, prêt à planifier
+**Current focus:** v0.1 — Phase 3 (World Foundation) — Plan 03-01 complet, 1/4 plans
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 3 of 4 (World Foundation) — Planning
-Plan: 03-01 exécuté, prêt pour UNIFY
-Status: APPLY complet — 49/49 tests verts
-Last activity: 2026-06-04 — Plan 03-01 APPLY complet (EncounterZone, Migration 003, SeedMoveTranslations, SeedAbilityTranslations)
+Phase: 3 of 4 (World Foundation) — In progress (1/4 plans)
+Plan: 03-01 complet (UNIFY ✓)
+Status: Prêt pour Plan 03-02
+Last activity: 2026-06-04 — Plan 03-01 UNIFY — EncounterZone + Migration 003 + translations D-22 — 49/49 tests
 
 Progress:
 
-- Milestone v0.1: [██████░░░░] ~55%
+- Milestone v0.1: [██████░░░░] ~60%
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
-- Phase 3: [░░░░░░░░░░] 0% (planning)
+- Phase 3: [██░░░░░░░░] 25% (1/4 plans)
 
 ## Loop Position
 
@@ -29,7 +29,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ○     [Plan 03-01 APPLY complet — prêt pour UNIFY]
+  ✓        ✓        ✓     [Plan 03-01 fermé — Phase 3 in progress — prêt pour Plan 03-02]
 ```
 
 ## Accumulated Context
@@ -64,6 +64,12 @@ Décisions émergentes (SDK.Tools) :
 
 - `SDK.Tools` default db-path = `src/SDK.Data/data/PokemonSDK.db` (relatif repo root) — jamais `data/PokemonSDK.db` qui pointe ailleurs. Toujours lancer depuis la racine du repo.
 
+Décisions émergentes (Plan 03-01) :
+
+- EF migrations `--startup-project src/SDK.Data` jusqu'à Plan 03-03 (SDK.MonoGame absent) — pattern établi
+- `EncounterZone.SpeciesId` FK direct (une row par espèce/zone) — modèle table de rencontre simple
+- `EntityType = "Move"` / `"Ability"` en PascalCase — cohérent avec `"PokemonType"` / `"PokemonSpecies"`
+
 Décisions émergentes (Phase 2) :
 
 - D-11 : Sleep/Freeze ne sautent pas les tours — correction critique validée, testée
@@ -84,8 +90,8 @@ Décisions émergentes (Phase 2) :
 | Vérifier compat MoonSharp 2.0.0 / .NET 10 | Init | Avant Phase 4 | 🔲 |
 | Créer compte NuGet + réserver PokéForge.SDK | Init | Avant Phase 8 | 🔲 |
 | FluentAssertions v8 licence Xceed (commercial) | Plan 01-01 | Avant Phase 8 | ⚠️ OK open-source/non-commercial. Envisager pin v7.x (Apache 2.0) si SDK distribué commercialement. |
-| Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | 🔲 BattleDataSeeder ne seed pas les noms de capacités en 6 locales. Ajouter `SeedMoveTranslations` (en/es/fr/de/it/ja) dans plan 03-01 avec la migration 003. |
-| Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | 🔲 BattleDataSeeder ne seed pas les noms de talents en 6 locales. Ajouter `SeedAbilityTranslations` (en/es/fr/de/it/ja) dans plan 03-01 avec la migration 003. |
+| Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedMoveTranslations (15×6=90 rows), BattleTranslationsD22Tests passe. |
+| Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedAbilityTranslations (6×6=36 rows), BattleTranslationsD22Tests passe. |
 
 ### Blockers/Concerns
 
@@ -94,9 +100,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-04
-Stopped at: Plan 03-01 créé, prêt pour APPLY
-Next action: `/paul:apply .paul/phases/03-world-foundation/03-01-PLAN.md`
-Resume file: `.paul/phases/03-world-foundation/03-01-PLAN.md`
+Stopped at: Plan 03-01 UNIFY complet — 49/49 tests, D-22 résolu
+Next action: `/paul:plan 03-02` — EncounterSystem + RealTimeClock + WeatherSystem + tests
+Resume file: `.paul/phases/03-world-foundation/03-01-SUMMARY.md`
 
 ---
 
