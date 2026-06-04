@@ -13,6 +13,9 @@ public class PokemonDbContext : DbContext
     public DbSet<Translation> Translations => Set<Translation>();
     public DbSet<PokemonType> PokemonTypes => Set<PokemonType>();
     public DbSet<TypeEffectiveness> TypeEffectiveness => Set<TypeEffectiveness>();
+    public DbSet<Move> Moves => Set<Move>();
+    public DbSet<Ability> Abilities => Set<Ability>();
+    public DbSet<Learnset> Learnsets => Set<Learnset>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         => modelBuilder.ApplyConfigurationsFromAssembly(typeof(PokemonDbContext).Assembly);

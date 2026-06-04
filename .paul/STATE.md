@@ -6,21 +6,22 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 2 (Battle Engine Core) — Phase 1 complete, prêt à planifier
+**Current focus:** v0.1 — Phase 3 (World Foundation) — Phases 1 & 2 complètes, prêt à planifier
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 2 of 4 (Battle Engine Core) — Not started
+Phase: 3 of 4 (World Foundation) — Ready to plan
 Plan: Not started
-Status: Ready to plan Phase 2
-Last activity: 2026-06-02 — Phase 1 complete (4/4 plans), transition Phase 2
+Status: Phase 2 complète — prêt pour Phase 3
+Last activity: 2026-06-04 — Phase 2 UNIFY+TRANSITION — 47/47 tests, Phase 2 100%
 
 Progress:
 
-- Milestone v0.1: [███░░░░░░░] ~25%
+- Milestone v0.1: [██████░░░░] ~55%
 - Phase 1: [██████████] 100% ✅
-- Phase 2: [░░░░░░░░░░] 0%
+- Phase 2: [██████████] 100% ✅
+- Phase 3: [░░░░░░░░░░] 0% (not started)
 
 ## Loop Position
 
@@ -28,14 +29,14 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Phase 1 fermée — IDLE, prêt pour Phase 2]
+  ✓        ✓        ✓     [Plan 02-04 fermé — Phase 2 complète — prêt pour Phase 3]
 ```
 
 ## Accumulated Context
 
 ### Decisions
 
-Architecture figée D-01→D-21 — voir CLAUDE.md section 8.
+Architecture figée D-01→D-22 — voir CLAUDE.md section 8.
 
 Clés pour Phase 1 :
 
@@ -56,8 +57,24 @@ Décisions émergentes (Plan 01-02) :
 - EF Core 10 crée `__EFMigrationsLock` en plus de `__EFMigrationsHistory` — 8 tables au total (6 entités + 2 system)
 - `data/PokemonSDK.db` créé dans `src/SDK.Data/data/` via design-time factory (cwd = répertoire projet, pas racine repo) — comportement attendu
 - `Microsoft.EntityFrameworkCore.Design` PrivateAssets auto-configuré par `dotnet add package`
-- Pattern IDesignTimeDbContextFactory établi dans `SDK.Data/DesignTime/` — réutilisable Plans 02-02, 03-01, 04-02
+- Pattern IDesignTimeDbContextFactory établi dans `SDK.Data/DesignTime/` — réutilisable Plans 03-01, 04-02
 - Pattern SqliteTestFixture :memory: établi — réutilisable pour tous les tests Data futurs
+
+Décisions émergentes (SDK.Tools) :
+
+- `SDK.Tools` default db-path = `src/SDK.Data/data/PokemonSDK.db` (relatif repo root) — jamais `data/PokemonSDK.db` qui pointe ailleurs. Toujours lancer depuis la racine du repo.
+
+Décisions émergentes (Phase 2) :
+
+- D-11 : Sleep/Freeze ne sautent pas les tours — correction critique validée, testée
+- `BattleConfig` n'a pas de `AccuracyEnabled` — déterminisme via `move.Accuracy=100` dans les tests
+- STAB (×1.5) calculé dans `BattleEngine.ApplyMove`, passé comme argument `typeMultiplier` à `IDamageFormula.Calculate`
+- `BattleResult` : propriétés `PlayerWon`, `TurnsElapsed`, `EndReason`
+- Immunité type (typeChart retourne 0.0m) court-circuite `formula.Calculate` — jamais appelé
+- Gen1DamageFormula utilise `defender.SpecialAttack` pour D (pas de SpDef en Gen1) — StandardDamageFormula utilise `defender.SpecialDefense`
+- `BattleEngine.MaxTurns = 200` — timeout → `EndReason = "MaxTurns"`, `PlayerWon = false`
+- Pattern Moq Callback pour capturer les arguments passés aux interfaces (vérification STAB)
+- `BattleTestHelpers` factory établi — réutilisable Phase 5 (plugins)
 
 ### Deferred Issues
 
@@ -67,6 +84,8 @@ Décisions émergentes (Plan 01-02) :
 | Vérifier compat MoonSharp 2.0.0 / .NET 10 | Init | Avant Phase 4 | 🔲 |
 | Créer compte NuGet + réserver PokéForge.SDK | Init | Avant Phase 8 | 🔲 |
 | FluentAssertions v8 licence Xceed (commercial) | Plan 01-01 | Avant Phase 8 | ⚠️ OK open-source/non-commercial. Envisager pin v7.x (Apache 2.0) si SDK distribué commercialement. |
+| Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | 🔲 BattleDataSeeder ne seed pas les noms de capacités en 6 locales. Ajouter `SeedMoveTranslations` (en/es/fr/de/it/ja) dans plan 03-01 avec la migration 003. |
+| Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | 🔲 BattleDataSeeder ne seed pas les noms de talents en 6 locales. Ajouter `SeedAbilityTranslations` (en/es/fr/de/it/ja) dans plan 03-01 avec la migration 003. |
 
 ### Blockers/Concerns
 
@@ -74,9 +93,9 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-02
-Stopped at: Phase 1 complète — 4/4 plans, 12/12 tests verts, transition vers Phase 2
-Next action: `/paul:plan 02-01` — Phase 2 : Battle Engine Core (SDK.Core battle models)
+Last session: 2026-06-04
+Stopped at: Phase 2 complète — SDK.Battle.Tests (30 tests), 47/47 solution verts, transition Phase 3 prête
+Next action: `/paul:plan 03-01` — Migration 003 + SDK.Core world primitives
 Resume file: `.paul/ROADMAP.md`
 
 ---
