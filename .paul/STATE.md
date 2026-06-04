@@ -60,6 +60,10 @@ Décisions émergentes (Plan 01-02) :
 - Pattern IDesignTimeDbContextFactory établi dans `SDK.Data/DesignTime/` — réutilisable Plans 03-01, 04-02
 - Pattern SqliteTestFixture :memory: établi — réutilisable pour tous les tests Data futurs
 
+Décisions émergentes (SDK.Tools) :
+
+- `SDK.Tools` default db-path = `src/SDK.Data/data/PokemonSDK.db` (relatif repo root) — jamais `data/PokemonSDK.db` qui pointe ailleurs. Toujours lancer depuis la racine du repo.
+
 Décisions émergentes (Phase 2) :
 
 - D-11 : Sleep/Freeze ne sautent pas les tours — correction critique validée, testée
@@ -80,6 +84,8 @@ Décisions émergentes (Phase 2) :
 | Vérifier compat MoonSharp 2.0.0 / .NET 10 | Init | Avant Phase 4 | 🔲 |
 | Créer compte NuGet + réserver PokéForge.SDK | Init | Avant Phase 8 | 🔲 |
 | FluentAssertions v8 licence Xceed (commercial) | Plan 01-01 | Avant Phase 8 | ⚠️ OK open-source/non-commercial. Envisager pin v7.x (Apache 2.0) si SDK distribué commercialement. |
+| Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | 🔲 BattleDataSeeder ne seed pas les noms de capacités en 6 locales. Ajouter `SeedMoveTranslations` (en/es/fr/de/it/ja) dans plan 03-01 avec la migration 003. |
+| Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | 🔲 BattleDataSeeder ne seed pas les noms de talents en 6 locales. Ajouter `SeedAbilityTranslations` (en/es/fr/de/it/ja) dans plan 03-01 avec la migration 003. |
 
 ### Blockers/Concerns
 
