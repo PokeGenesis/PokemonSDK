@@ -6,21 +6,22 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 2 (Battle Engine Core) — Phase 1 complete, prêt à planifier
+**Current focus:** v0.1 — Phase 3 (World Foundation) — Phases 1 & 2 complètes, prêt à planifier
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 2 of 4 (Battle Engine Core) — In progress
-Plan: 02-03 fermé (UNIFY complet)
-Status: Ready for Plan 02-04
-Last activity: 2026-06-03 — Plan 02-03 complet — SDK.Battle BattleEngine + formules + IA, 17/17 tests verts
+Phase: 3 of 4 (World Foundation) — Ready to plan
+Plan: Not started
+Status: Phase 2 complète — prêt pour Phase 3
+Last activity: 2026-06-04 — Phase 2 UNIFY+TRANSITION — 47/47 tests, Phase 2 100%
 
 Progress:
 
-- Milestone v0.1: [█████░░░░░] ~45%
+- Milestone v0.1: [██████░░░░] ~55%
 - Phase 1: [██████████] 100% ✅
-- Phase 2: [███░░░░░░░] 75% (3/4 plans)
+- Phase 2: [██████████] 100% ✅
+- Phase 3: [░░░░░░░░░░] 0% (not started)
 
 ## Loop Position
 
@@ -28,14 +29,14 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Plan 02-03 fermé — prêt pour Plan 02-04]
+  ✓        ✓        ✓     [Plan 02-04 fermé — Phase 2 complète — prêt pour Phase 3]
 ```
 
 ## Accumulated Context
 
 ### Decisions
 
-Architecture figée D-01→D-21 — voir CLAUDE.md section 8.
+Architecture figée D-01→D-22 — voir CLAUDE.md section 8.
 
 Clés pour Phase 1 :
 
@@ -56,8 +57,20 @@ Décisions émergentes (Plan 01-02) :
 - EF Core 10 crée `__EFMigrationsLock` en plus de `__EFMigrationsHistory` — 8 tables au total (6 entités + 2 system)
 - `data/PokemonSDK.db` créé dans `src/SDK.Data/data/` via design-time factory (cwd = répertoire projet, pas racine repo) — comportement attendu
 - `Microsoft.EntityFrameworkCore.Design` PrivateAssets auto-configuré par `dotnet add package`
-- Pattern IDesignTimeDbContextFactory établi dans `SDK.Data/DesignTime/` — réutilisable Plans 02-02, 03-01, 04-02
+- Pattern IDesignTimeDbContextFactory établi dans `SDK.Data/DesignTime/` — réutilisable Plans 03-01, 04-02
 - Pattern SqliteTestFixture :memory: établi — réutilisable pour tous les tests Data futurs
+
+Décisions émergentes (Phase 2) :
+
+- D-11 : Sleep/Freeze ne sautent pas les tours — correction critique validée, testée
+- `BattleConfig` n'a pas de `AccuracyEnabled` — déterminisme via `move.Accuracy=100` dans les tests
+- STAB (×1.5) calculé dans `BattleEngine.ApplyMove`, passé comme argument `typeMultiplier` à `IDamageFormula.Calculate`
+- `BattleResult` : propriétés `PlayerWon`, `TurnsElapsed`, `EndReason`
+- Immunité type (typeChart retourne 0.0m) court-circuite `formula.Calculate` — jamais appelé
+- Gen1DamageFormula utilise `defender.SpecialAttack` pour D (pas de SpDef en Gen1) — StandardDamageFormula utilise `defender.SpecialDefense`
+- `BattleEngine.MaxTurns = 200` — timeout → `EndReason = "MaxTurns"`, `PlayerWon = false`
+- Pattern Moq Callback pour capturer les arguments passés aux interfaces (vérification STAB)
+- `BattleTestHelpers` factory établi — réutilisable Phase 5 (plugins)
 
 ### Deferred Issues
 
@@ -74,10 +87,10 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-03
-Stopped at: Plan 02-03 créé — SDK.Battle (BattleState, IDamageFormula×2, IDifficultyMode×2, BattleEngine)
-Next action: `/paul:plan 02-04` — Phase 2 : SDK.Battle.Tests (loop, damage, AI, config, status, switch)
-Resume file: `.paul/phases/02-battle-engine-core/02-03-SUMMARY.md`
+Last session: 2026-06-04
+Stopped at: Phase 2 complète — SDK.Battle.Tests (30 tests), 47/47 solution verts, transition Phase 3 prête
+Next action: `/paul:plan 03-01` — Migration 003 + SDK.Core world primitives
+Resume file: `.paul/ROADMAP.md`
 
 ---
 

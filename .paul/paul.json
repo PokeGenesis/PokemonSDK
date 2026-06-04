@@ -7,9 +7,9 @@
     "status": "in_progress"
   },
   "phase": {
-    "number": 2,
-    "name": "Battle Engine Core",
-    "status": "in_progress"
+    "number": 3,
+    "name": "World Foundation",
+    "status": "not_started"
   },
   "loop": {
     "plan": null,
@@ -17,7 +17,7 @@
   },
   "timestamps": {
     "created_at": "2026-06-01T00:00:00.000Z",
-    "updated_at": "2026-06-03T21:20:00.000Z"
+    "updated_at": "2026-06-04T19:30:00.000Z"
   },
   "satellite": {
     "groom": true
