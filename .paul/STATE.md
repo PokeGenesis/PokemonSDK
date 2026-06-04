@@ -6,22 +6,22 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 3 (World Foundation) — Plan 03-01 complet, 1/4 plans
+**Current focus:** v0.1 — Phase 3 (World Foundation) — Plan 03-02 complet, 2/4 plans
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 3 of 4 (World Foundation) — In progress (1/4 plans)
-Plan: 03-02 APPLY complet (UNIFY en attente)
-Status: APPLY complet — prêt pour UNIFY
-Last activity: 2026-06-04 — Plan 03-02 APPLY — 74/74 tests verts, 25 nouveaux
+Phase: 3 of 4 (World Foundation) — In progress (2/4 plans)
+Plan: 03-02 complet (UNIFY ✓) — prêt pour Plan 03-03
+Status: Boucle fermée — prêt pour /paul:plan 03-03
+Last activity: 2026-06-04 — Plan 03-02 UNIFY — 74/74 tests verts, loop fermée
 
 Progress:
 
-- Milestone v0.1: [██████░░░░] ~60%
+- Milestone v0.1: [██████░░░░] ~65%
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
-- Phase 3: [██░░░░░░░░] 25% (1/4 plans — plan 03-02 en cours)
+- Phase 3: [████░░░░░░] 50% (2/4 plans)
 
 ## Loop Position
 
@@ -29,7 +29,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ○     [Plan 03-02 APPLY complet — prêt pour UNIFY]
+  ✓        ✓        ✓     [Loop 03-02 fermée — prêt pour Plan 03-03]
 ```
 
 ## Accumulated Context
@@ -108,9 +108,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-04
-Stopped at: Plan 03-02 PLAN créé — RealTimeClock + WeatherSystem + EncounterSystem
-Next action: `/paul:unify` — `.paul/phases/03-world-foundation/03-02-PLAN.md`
-Resume file: `.paul/phases/03-world-foundation/03-02-PLAN.md`
+Stopped at: Plan 03-02 UNIFY complet — boucle fermée
+Next action: `/paul:plan 03-03` — Game1 + WorldSystem + RenderPipeline + SDK.MonoGame
+Resume file: `.paul/phases/03-world-foundation/03-02-SUMMARY.md`
 
 ---
 
