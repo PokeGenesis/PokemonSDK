@@ -6,22 +6,22 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 3 (World Foundation) — Plan 03-03 créé, en attente APPLY
+**Current focus:** v0.1 — Phase 3 (World Foundation) — Plan 03-03 complet, prêt pour Plan 03-04
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 3 of 4 (World Foundation) — In progress (2/4 plans)
-Plan: 03-03 APPLY complet (UNIFY en attente)
-Status: APPLY complet — prêt pour UNIFY
-Last activity: 2026-06-05 — Plan 03-03 APPLY — 74/74 tests verts, 16 fichiers
+Phase: 3 of 4 (World Foundation) — In progress (3/4 plans)
+Plan: 03-03 UNIFY complet ✅
+Status: Loop fermé — prêt pour `/paul:plan 03-04`
+Last activity: 2026-06-05 — Plan 03-03 UNIFY — SDK.MonoGame scaffold complet
 
 Progress:
 
-- Milestone v0.1: [██████░░░░] ~65%
+- Milestone v0.1: [███████░░░] ~72%
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
-- Phase 3: [████░░░░░░] 50% (2/4 plans)
+- Phase 3: [███████░░░] 75% (3/4 plans)
 
 ## Loop Position
 
@@ -29,7 +29,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ○     [Plan 03-03 APPLY complet — prêt pour UNIFY]
+  ✓        ✓        ✓     [Loop complet — prêt pour /paul:plan 03-04]
 ```
 
 ## Accumulated Context
@@ -78,6 +78,14 @@ Décisions émergentes (Plan 03-02) :
 - `IGameClock.SetGameTime(TimeSpan)` — contrat save/load, Plan 04-03 (ISaveSystem) persistera `GameElapsed`
 - Pokégear (Phase 5+) configure `Speed` via DI — `IGameClock` injecté dans le service Pokégear
 
+Décisions émergentes (Plan 03-03) :
+
+- `WorldSystem.Update(delta)` appelle `_clock.Update(delta)` en interne — HeadlessRunner et Game1 n'appellent que `world.Update()`, pas clock directement
+- `NullInputProvider` enregistré via DI (`IInputProvider`) quand `--headless` — même interface, zéro branchement conditionnel dans PlayerSystem
+- `MonoGame.Extended` absent du projet — compat avec MonoGame 3.8.4.1 non vérifiée. TilemapRenderer stub jusqu'à Plan 03-04
+- `MS.DI 10.0.8` minimum — EF Core 10.0.8 impose cette contrainte transitive (NU1605 si inférieur)
+- Shaders `.fx` hors `Content.mgcb` — compilation MGCB déférée Plan 03-04 CI ; null-safe via try/catch dans RenderPipeline
+
 Décisions émergentes (Phase 2) :
 
 - D-11 : Sleep/Freeze ne sautent pas les tours — correction critique validée, testée
@@ -108,9 +116,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-05
-Stopped at: Plan 03-03 PLAN créé — SDK.MonoGame scaffold + Game1 + RenderPipeline + WorldSystem
-Next action: `/paul:apply` — `.paul/phases/03-world-foundation/03-03-PLAN.md`
-Resume file: `.paul/phases/03-world-foundation/03-03-PLAN.md`
+Stopped at: Plan 03-03 UNIFY complet — SDK.MonoGame scaffold, 74/74 tests, loop fermé
+Next action: `/paul:plan 03-04` — HeadlessSmokeTester (xUnit) + CI GitHub Actions matrix (ubuntu + windows)
+Resume file: `.paul/phases/03-world-foundation/03-03-SUMMARY.md`
 
 ---
 
