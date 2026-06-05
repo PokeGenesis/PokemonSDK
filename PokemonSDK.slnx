@@ -3,6 +3,7 @@
     <Project Path="src/SDK.Battle/SDK.Battle.csproj" />
     <Project Path="src/SDK.Core/SDK.Core.csproj" />
     <Project Path="src/SDK.Data/SDK.Data.csproj" />
+    <Project Path="src/SDK.MonoGame/SDK.MonoGame.csproj" />
     <Project Path="src/SDK.Scripting/SDK.Scripting.csproj" />
     <Project Path="src/SDK.Tools/SDK.Tools.csproj" />
   </Folder>
