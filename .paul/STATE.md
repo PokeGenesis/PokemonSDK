@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 3 (World Foundation) — Plan 03-03 complet, prêt pour Plan 03-04
+**Current focus:** v0.1 — Phase 3 (World Foundation) — Plan 03-04 créé, en attente APPLY
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
 Phase: 3 of 4 (World Foundation) — In progress (3/4 plans)
-Plan: 03-03 UNIFY complet ✅
-Status: Loop fermé — prêt pour `/paul:plan 03-04`
-Last activity: 2026-06-05 — Plan 03-03 UNIFY — SDK.MonoGame scaffold complet
+Plan: 03-04 PLAN créé, en attente APPLY
+Status: PLAN créé — prêt pour APPLY
+Last activity: 2026-06-05 — Plan 03-04 PLAN créé — HeadlessSmokeTester + CI
 
 Progress:
 
@@ -29,7 +29,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complet — prêt pour /paul:plan 03-04]
+  ✓        ○        ○     [Plan 03-04 créé — prêt pour APPLY]
 ```
 
 ## Accumulated Context
@@ -116,9 +116,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-05
-Stopped at: Plan 03-03 UNIFY complet — SDK.MonoGame scaffold, 74/74 tests, loop fermé
-Next action: `/paul:plan 03-04` — HeadlessSmokeTester (xUnit) + CI GitHub Actions matrix (ubuntu + windows)
-Resume file: `.paul/phases/03-world-foundation/03-03-SUMMARY.md`
+Stopped at: Plan 03-04 PLAN créé — HeadlessSmokeTester + CI activation
+Next action: `/paul:apply 03-04` — `.paul/phases/03-world-foundation/03-04-PLAN.md`
+Resume file: `.paul/phases/03-world-foundation/03-04-PLAN.md`
 
 ---
 
