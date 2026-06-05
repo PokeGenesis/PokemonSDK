@@ -135,6 +135,7 @@ v2.0 → + Phases 6+10+11 (post v1.0)  CLI + docs + features avancées
 | D-19 | **Sample consomme via NuGet** — jamais référence projet |
 | D-20 | **CLI scaffold = sample stabilisé** — template embarqué |
 | D-21 | **Docs = APIs stables uniquement** — pas de doc sur du WIP |
+| D-22 | **6 locales obligatoires** — toute donnée traduite doit avoir en/es/fr/de/it/ja. Jamais moins. |
 
 ---
 
@@ -163,7 +164,7 @@ Superpowers → EXÉCUTION : TDD, implémentation, vérification
 ## 9. COMMANDES UTILES
 
 ```bash
-dotnet build PokemonSDK.sln
+dotnet build PokemonSDK.slnx
 dotnet test tests/ --collect:"XPlat Code Coverage"
 dotnet ef migrations add InitialCreate --project src/SDK.Data --startup-project src/SDK.MonoGame
 dotnet ef database update --project src/SDK.Data --startup-project src/SDK.MonoGame
@@ -188,9 +189,28 @@ git checkout dev && git pull && git checkout -b feature/nom-feature
 | `.claude/CICD.md` | GitHub Actions workflows (ci, dev, staging, prod, publish) |
 | `ROADMAP.md` | Phases 1→11, waves, critères de succès |
 | `REQUIREMENTS.md` | 34 requirements, traceability complète |
-| `PROJECT.md` | Vision, contraintes, 21 décisions clés |
+| `PROJECT.md` | Vision, contraintes, 22 décisions clés |
 | `STATE.md` | État courant (géré par PAUL) |
 
 ---
 
 *Généré 2026-06-01 — .NET 10 fresh start*
+
+## Skill routing
+
+When the user's request matches an available skill, invoke it via the Skill tool. When in doubt, invoke the skill.
+
+Key routing rules:
+- Product ideas/brainstorming → invoke /office-hours
+- Strategy/scope → invoke /plan-ceo-review
+- Architecture → invoke /plan-eng-review
+- Design system/plan review → invoke /design-consultation or /plan-design-review
+- Full review pipeline → invoke /autoplan
+- Bugs/errors → invoke /investigate
+- QA/testing site behavior → invoke /qa or /qa-only
+- Code review/diff check → invoke /review
+- Visual polish → invoke /design-review
+- Ship/deploy/PR → invoke /ship or /land-and-deploy
+- Save progress → invoke /context-save
+- Resume context → invoke /context-restore
+- Author a backlog-ready spec/issue → invoke /spec

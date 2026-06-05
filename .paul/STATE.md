@@ -1,0 +1,133 @@
+# Project State
+
+## Project Reference
+
+See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
+
+**Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
+
+**Current focus:** v0.1 — Phase 4 (Scripting + Progression) — prêt à planifier
+
+## Current Position
+
+Milestone: v0.1 Proof of Concept
+Phase: 4 of 4 (Scripting + Progression) — Not started
+Plan: À planifier
+Status: Phase 3 complète — prêt pour `/paul:plan` Phase 4
+Last activity: 2026-06-05 — Phase 3 World Foundation complète (4/4 plans)
+
+Progress:
+
+- Milestone v0.1: [█████████░] ~80%
+- Phase 1: [██████████] 100% ✅
+- Phase 2: [██████████] 100% ✅
+- Phase 3: [██████████] 100% ✅
+- Phase 4: [░░░░░░░░░░] 0% (0/3 plans)
+
+## Loop Position
+
+Current loop state:
+
+```text
+PLAN ──▶ APPLY ──▶ UNIFY
+  ✓        ✓        ✓     [Phase 3 fermée — prêt pour Phase 4]
+```
+
+## Accumulated Context
+
+### Decisions
+
+Architecture figée D-01→D-22 — voir CLAUDE.md section 8.
+
+Clés pour Phase 1 :
+
+- D-01 : .NET 10 — `net10.0` dans tous les .csproj
+- D-03 : EF Core 10 — jamais Dapper seul
+- D-07 : Table `translations` centrale — jamais colonnes `name_fr`, `name_en` sur les entités
+- D-09 : `generation` INT NOT NULL sur toutes entités concernées
+
+Décisions émergentes (Plan 01-01) :
+
+- `.slnx` format : .NET 10 `dotnet new sln` crée `PokemonSDK.slnx` (XML, sans GUID). Toutes commandes build utilisent `.slnx`.
+- `PokemonType` nommé avec préfixe — évite conflit `System.Type`
+- CoreDependencyTests path traversal : 5× `..` depuis `AppContext.BaseDirectory` → root projet
+- `TypeEffectiveness` clé composite `(AttackerTypeId, DefenderTypeId, Generation)` — un couple de types peut changer entre générations
+
+Décisions émergentes (Plan 01-02) :
+
+- EF Core 10 crée `__EFMigrationsLock` en plus de `__EFMigrationsHistory` — 8 tables au total (6 entités + 2 system)
+- `data/PokemonSDK.db` créé dans `src/SDK.Data/data/` via design-time factory (cwd = répertoire projet, pas racine repo) — comportement attendu
+- `Microsoft.EntityFrameworkCore.Design` PrivateAssets auto-configuré par `dotnet add package`
+- Pattern IDesignTimeDbContextFactory établi dans `SDK.Data/DesignTime/` — réutilisable Plans 03-01, 04-02
+- Pattern SqliteTestFixture :memory: établi — réutilisable pour tous les tests Data futurs
+
+Décisions émergentes (SDK.Tools) :
+
+- `SDK.Tools` default db-path = `src/SDK.Data/data/PokemonSDK.db` (relatif repo root) — jamais `data/PokemonSDK.db` qui pointe ailleurs. Toujours lancer depuis la racine du repo.
+
+Décisions émergentes (Plan 03-01) :
+
+- EF migrations `--startup-project src/SDK.Data` jusqu'à Plan 03-03 (SDK.MonoGame absent) — pattern établi
+- `EncounterZone.SpeciesId` FK direct (une row par espèce/zone) — modèle table de rencontre simple
+- `EntityType = "Move"` / `"Ability"` en PascalCase — cohérent avec `"PokemonType"` / `"PokemonSpecies"`
+
+Décisions émergentes (Plan 03-02) :
+
+- `IGameClock` séparé de `IRealTimeClock` — deux contrats distincts : real-time (Gen 2) vs game-time configurable
+- `GameTimeClock.Speed` = game-minutes par real-second — `Speed=1f/60f` (1:1), `Speed=1f` (1s=1 min game), `Speed=60f` (1s=1h game)
+- `RealTimeClock.MapHour(int hour)` internal static — partagé avec `GameTimeClock` pour éviter duplication du switch
+- `IGameClock.SetGameTime(TimeSpan)` — contrat save/load, Plan 04-03 (ISaveSystem) persistera `GameElapsed`
+- Pokégear (Phase 5+) configure `Speed` via DI — `IGameClock` injecté dans le service Pokégear
+
+Décisions émergentes (Plan 03-03) :
+
+- `WorldSystem.Update(delta)` appelle `_clock.Update(delta)` en interne — HeadlessRunner et Game1 n'appellent que `world.Update()`, pas clock directement
+- `NullInputProvider` enregistré via DI (`IInputProvider`) quand `--headless` — même interface, zéro branchement conditionnel dans PlayerSystem
+- `MonoGame.Extended` absent du projet — compat avec MonoGame 3.8.4.1 non vérifiée. TilemapRenderer stub jusqu'à Phase 5+
+- `MS.DI 10.0.8` minimum — EF Core 10.0.8 impose cette contrainte transitive (NU1605 si inférieur)
+- Shaders `.fx` hors `Content.mgcb` — compilation MGCB déférée Phase 7 DX ; null-safe via try/catch dans RenderPipeline
+
+Décisions émergentes (Plan 03-04) :
+
+- `EncounterZone` dans `SDK.Core.Entities` (pas `SDK.Data.Models`) — SDK.Data/Models/ n'existe pas
+- `<Using Include="Xunit" />` requis explicitement dans tout projet test — ImplicitUsings n'inclut pas Xunit
+- Test project référence `SDK.MonoGame` + `SDK.Core` explicite — pas de ref SDK.Data si pas d'accès DB direct
+- `continue-on-error: true` sur step headless CI — DB absente en CI, xUnit Moq-based = vraie gate qualité
+
+Décisions émergentes (Phase 2) :
+
+- D-11 : Sleep/Freeze ne sautent pas les tours — correction critique validée, testée
+- `BattleConfig` n'a pas de `AccuracyEnabled` — déterminisme via `move.Accuracy=100` dans les tests
+- STAB (×1.5) calculé dans `BattleEngine.ApplyMove`, passé comme argument `typeMultiplier` à `IDamageFormula.Calculate`
+- `BattleResult` : propriétés `PlayerWon`, `TurnsElapsed`, `EndReason`
+- Immunité type (typeChart retourne 0.0m) court-circuite `formula.Calculate` — jamais appelé
+- Gen1DamageFormula utilise `defender.SpecialAttack` pour D (pas de SpDef en Gen1) — StandardDamageFormula utilise `defender.SpecialDefense`
+- `BattleEngine.MaxTurns = 200` — timeout → `EndReason = "MaxTurns"`, `PlayerWon = false`
+- Pattern Moq Callback pour capturer les arguments passés aux interfaces (vérification STAB)
+- `BattleTestHelpers` factory établi — réutilisable Phase 5 (plugins)
+
+### Deferred Issues
+
+| Issue | Origin | Revisit | Status |
+|-------|--------|---------|--------|
+| Vérifier compat MonoGame.DesktopGL / .NET 10 | Init | Avant Phase 3 | ✅ MonoGame 3.8.4.1 compile sur net10.0 (smoke 2026-06-01). Template `dotnet new mgdesktopgl` non testé. |
+| Vérifier compat MoonSharp 2.0.0 / .NET 10 | Init | Avant Phase 4 | 🔲 |
+| Créer compte NuGet + réserver PokéForge.SDK | Init | Avant Phase 8 | 🔲 |
+| FluentAssertions v8 licence Xceed (commercial) | Plan 01-01 | Avant Phase 8 | ⚠️ OK open-source/non-commercial. Envisager pin v7.x (Apache 2.0) si SDK distribué commercialement. |
+| Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedMoveTranslations (15×6=90 rows), BattleTranslationsD22Tests passe. |
+| Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedAbilityTranslations (6×6=36 rows), BattleTranslationsD22Tests passe. |
+
+### Blockers/Concerns
+
+None.
+
+## Session Continuity
+
+Last session: 2026-06-05
+Stopped at: Phase 3 World Foundation complète — 4/4 plans UNIFY fermés
+Next action: `/paul:plan` — Phase 4 Scripting + Progression
+Resume file: `.paul/ROADMAP.md`
+
+---
+
+*STATE.md — Updated after every significant action*
