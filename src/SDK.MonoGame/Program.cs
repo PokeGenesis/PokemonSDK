@@ -7,6 +7,7 @@ using SDK.Data.Services;
 using SDK.MonoGame;
 using SDK.MonoGame.Input;
 using SDK.MonoGame.World;
+using SDK.Scripting.Engine;
 
 var isHeadless = args.Contains("--headless");
 int headlessFrames = 60;
@@ -22,6 +23,9 @@ services.AddSingleton<IWeatherSystem, WeatherSystem>();
 services.AddScoped<IEncounterSystem, EncounterSystem>();
 services.AddSingleton<WorldSystem>();
 services.AddSingleton<PlayerSystem>();
+
+services.AddSingleton<Func<IScriptEngine>>(_ => () => new LuaScriptEngine());
+services.AddSingleton<ISaveSystem, SaveSystem>();
 
 if (isHeadless)
     services.AddSingleton<IInputProvider, NullInputProvider>();

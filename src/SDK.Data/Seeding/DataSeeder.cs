@@ -11,6 +11,7 @@ public static class DataSeeder
         SeedSpecies(ctx);
         SeedSpeciesTranslations(ctx);
         BattleDataSeeder.SeedAll(ctx);
+        ProgressionDataSeeder.SeedAll(ctx);
     }
 
     public static void SeedTypes(PokemonDbContext ctx)
