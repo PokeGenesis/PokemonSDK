@@ -11,10 +11,10 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 4 of 4 (Scripting + Progression) — Not started
-Plan: À planifier
-Status: Phase 3 complète — prêt pour `/paul:plan` Phase 4
-Last activity: 2026-06-05 — Phase 3 World Foundation complète (4/4 plans)
+Phase: 4 of 4 (Scripting + Progression) — Planning
+Plan: 04-01 exécuté
+Status: APPLY complet — prêt pour UNIFY
+Last activity: 2026-06-05 — Plan 04-01 APPLY (IScriptEngine + LuaScriptEngine + GameState + 5 tests)
 
 Progress:
 
@@ -30,7 +30,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Phase 3 fermée — prêt pour Phase 4]
+  ✓        ✓        ○     [Plan 04-01 APPLY complet]
 ```
 
 ## Accumulated Context
@@ -117,6 +117,19 @@ Décisions émergentes (Phase 2) :
 | Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedMoveTranslations (15×6=90 rows), BattleTranslationsD22Tests passe. |
 | Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedAbilityTranslations (6×6=36 rows), BattleTranslationsD22Tests passe. |
 
+### Pre-plan audit findings (pour plans 04-02 et 04-03)
+
+Plan 04-02 (à rédiger) — ajouts obligatoires :
+
+- D-09 : `Generation` INT NOT NULL sur entités `Trainer` et `Badge` (génération-spécifiques)
+- D-22 : `SeedBadgeTranslations` dans seeder — 8 badges Gen1 × 6 locales = 48 rows min (en/es/fr/de/it/ja)
+- `EntityType = "Badge"` en PascalCase (cohérent avec "Move" / "Ability")
+
+Plan 04-03 (à rédiger) — ajouts obligatoires :
+
+- Cherry-pick `98c3299` en début de tâche Game1 (CodeQL fixes absents du branch — `_graphics` readonly, HeadlessRunner unused clock, RenderPipeline readonly+catch, WorldSystem LINQ Any)
+- D-06 explicite : `SDK.MonoGame.csproj` NE référence PAS `SDK.Scripting` — injection via `Func<IScriptEngine>` dans Program.cs uniquement
+
 ### Blockers/Concerns
 
 None.
@@ -124,9 +137,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-05
-Stopped at: Phase 3 World Foundation complète — 4/4 plans UNIFY fermés
-Next action: `/paul:plan` — Phase 4 Scripting + Progression
-Resume file: `.paul/ROADMAP.md`
+Stopped at: Plan 04-01 créé — IScriptEngine + LuaScriptEngine + GameState
+Next action: Approuver et lancer `/paul:apply 04-01`
+Resume file: `.paul/phases/04-scripting-progression/04-01-PLAN.md`
 
 ---
 
