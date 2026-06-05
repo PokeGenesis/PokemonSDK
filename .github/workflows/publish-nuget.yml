@@ -33,9 +33,15 @@ jobs:
           # TODO: Phase 5 — dotnet pack src/SDK.Plugins.Turbo
 
       - name: Push vers NuGet.org
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
+          if [ -z "$NUGET_API_KEY" ]; then
+            echo "NUGET_API_KEY non configuré — push ignoré (Phase 8 DX-03)"
+            exit 0
+          fi
           dotnet nuget push ./nupkg/*.nupkg \
-            --api-key ${{ secrets.NUGET_API_KEY }} \
+            --api-key "$NUGET_API_KEY" \
             --source https://api.nuget.org/v3/index.json \
             --skip-duplicate
 
