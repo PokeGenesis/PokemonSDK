@@ -6,22 +6,23 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 3 (World Foundation) — Plan 03-04 créé, en attente APPLY
+**Current focus:** v0.1 — Phase 4 (Scripting + Progression) — prêt à planifier
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 3 of 4 (World Foundation) — In progress (3/4 plans)
-Plan: 03-04 PLAN créé, en attente APPLY
-Status: PLAN créé — prêt pour APPLY
-Last activity: 2026-06-05 — Plan 03-04 PLAN créé — HeadlessSmokeTester + CI
+Phase: 4 of 4 (Scripting + Progression) — Not started
+Plan: À planifier
+Status: Phase 3 complète — prêt pour `/paul:plan` Phase 4
+Last activity: 2026-06-05 — Phase 3 World Foundation complète (4/4 plans)
 
 Progress:
 
-- Milestone v0.1: [███████░░░] ~72%
+- Milestone v0.1: [█████████░] ~80%
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
-- Phase 3: [███████░░░] 75% (3/4 plans)
+- Phase 3: [██████████] 100% ✅
+- Phase 4: [░░░░░░░░░░] 0% (0/3 plans)
 
 ## Loop Position
 
@@ -29,7 +30,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ○        ○     [Plan 03-04 créé — prêt pour APPLY]
+  ✓        ✓        ✓     [Phase 3 fermée — prêt pour Phase 4]
 ```
 
 ## Accumulated Context
@@ -82,9 +83,16 @@ Décisions émergentes (Plan 03-03) :
 
 - `WorldSystem.Update(delta)` appelle `_clock.Update(delta)` en interne — HeadlessRunner et Game1 n'appellent que `world.Update()`, pas clock directement
 - `NullInputProvider` enregistré via DI (`IInputProvider`) quand `--headless` — même interface, zéro branchement conditionnel dans PlayerSystem
-- `MonoGame.Extended` absent du projet — compat avec MonoGame 3.8.4.1 non vérifiée. TilemapRenderer stub jusqu'à Plan 03-04
+- `MonoGame.Extended` absent du projet — compat avec MonoGame 3.8.4.1 non vérifiée. TilemapRenderer stub jusqu'à Phase 5+
 - `MS.DI 10.0.8` minimum — EF Core 10.0.8 impose cette contrainte transitive (NU1605 si inférieur)
-- Shaders `.fx` hors `Content.mgcb` — compilation MGCB déférée Plan 03-04 CI ; null-safe via try/catch dans RenderPipeline
+- Shaders `.fx` hors `Content.mgcb` — compilation MGCB déférée Phase 7 DX ; null-safe via try/catch dans RenderPipeline
+
+Décisions émergentes (Plan 03-04) :
+
+- `EncounterZone` dans `SDK.Core.Entities` (pas `SDK.Data.Models`) — SDK.Data/Models/ n'existe pas
+- `<Using Include="Xunit" />` requis explicitement dans tout projet test — ImplicitUsings n'inclut pas Xunit
+- Test project référence `SDK.MonoGame` + `SDK.Core` explicite — pas de ref SDK.Data si pas d'accès DB direct
+- `continue-on-error: true` sur step headless CI — DB absente en CI, xUnit Moq-based = vraie gate qualité
 
 Décisions émergentes (Phase 2) :
 
@@ -116,9 +124,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-05
-Stopped at: Plan 03-04 PLAN créé — HeadlessSmokeTester + CI activation
-Next action: `/paul:apply 03-04` — `.paul/phases/03-world-foundation/03-04-PLAN.md`
-Resume file: `.paul/phases/03-world-foundation/03-04-PLAN.md`
+Stopped at: Phase 3 World Foundation complète — 4/4 plans UNIFY fermés
+Next action: `/paul:plan` — Phase 4 Scripting + Progression
+Resume file: `.paul/ROADMAP.md`
 
 ---
 

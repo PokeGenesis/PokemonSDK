@@ -14,8 +14,8 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 |-----------|-------|
 | Type | Application |
 | Version | 0.0.0 |
-| Status | Phase 2 complete — Phase 3 (World Foundation) ready |
-| Last Updated | 2026-06-04 — Phase 2 shipped |
+| Status | Phase 3 complete — Phase 4 (Scripting + Progression) ready |
+| Last Updated | 2026-06-05 — Phase 3 shipped |
 
 ## Requirements
 
@@ -40,13 +40,16 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 - BATTLE-03 — IDifficultyMode × 2 (StoryDifficultyMode, HardDifficultyMode) — *2026-06-04*
 - BATTLE-07 — BattleConfig (génération, crit, difficulté) — *2026-06-04*
 
+### Shipped in Phase 3 ✅
+- MAP-01 — RenderPipeline HD 480×270 → xBR ×4 → 1920×1080 (D-14, D-15) — *2026-06-05*
+- MAP-03 — Jour/nuit — DayNight tint via RenderPipeline 3-pass — *2026-06-05*
+- PLAT-02 — CI Windows + Linux — matrix ubuntu-latest + windows-latest activé — *2026-06-05*
+
 ### Validated (À implémenter .NET 10)
+- MAP-02 — Tilemap overworld (TilemapRenderer stub — Phase 5+)
 - SCRIPT-01→03 (MoonSharp, badges, save)
 
 ### Active (v0.1)
-- Phase 1 : SDK.Core + SDK.Data
-- Phase 2 : Battle Engine Core
-- Phase 3 : World Foundation
 - Phase 4 : Scripting + Progression
 
 ### Out of Scope
