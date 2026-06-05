@@ -6,23 +6,23 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 4 (Scripting + Progression) — Plan 04-03 créé, en attente d'APPLY
+**Current focus:** v0.1 — Phase 4 complète ✅ — Prêt pour Phase 5 (Plugins + Characters)
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 4 of 4 (Scripting + Progression) — In Progress
-Plan: 04-03 créé, en attente d'approbation et APPLY
-Status: PLAN créé, ready for APPLY
-Last activity: 2026-06-05 — Plan 04-03 PLAN créé (SaveSystem + DialogueBox + Game1 wiring + cherry-pick 98c3299)
+Phase: 4 of 4 (Scripting + Progression) — COMPLETE ✅
+Plan: 04-03 UNIFY complet
+Status: Phase 4 complète — 97 tests, SCRIPT-01→03 satisfaits
+Last activity: 2026-06-05 — Plan 04-03 APPLY + UNIFY (SaveSystem + DialogueBox + Game1 wiring + cherry-pick 98c3299)
 
 Progress:
 
-- Milestone v0.1: [█████████░] ~90%
+- Milestone v0.1: [█████████░] ~95%
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
 - Phase 3: [██████████] 100% ✅
-- Phase 4: [████████░░] ~75% (2/3 plans complets, plan 3 en cours)
+- Phase 4: [██████████] 100% ✅
 
 ## Loop Position
 
@@ -30,7 +30,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ○        ○     [Plan 04-03 créé, en attente d'APPLY]
+  ✓        ✓        ✓     [Plan 04-03 complet — Phase 4 bouclée]
 ```
 
 ## Accumulated Context
@@ -147,9 +147,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-05
-Stopped at: Plan 04-03 PLAN créé — SaveSystem + DialogueBox + Game1 wiring + cherry-pick 98c3299
-Next action: `/paul:apply 04-03`
-Resume file: `.paul/phases/04-scripting-progression/04-03-PLAN.md`
+Stopped at: Plan 04-03 UNIFY complet — Phase 4 Scripting + Progression bouclée (97 tests)
+Next action: `/paul:plan 05` (Phase 5 — Plugins + Characters)
+Resume file: `.paul/phases/04-scripting-progression/04-03-SUMMARY.md`
 
 ---
 
