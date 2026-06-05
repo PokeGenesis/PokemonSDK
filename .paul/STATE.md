@@ -12,9 +12,9 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 Milestone: v0.1 Proof of Concept
 Phase: 3 of 4 (World Foundation) — In progress (2/4 plans)
-Plan: 03-03 PLAN créé — prêt pour APPLY
-Status: PLAN créé — prêt pour /paul:apply
-Last activity: 2026-06-05 — Plan 03-03 PLAN créé
+Plan: 03-03 APPLY complet (UNIFY en attente)
+Status: APPLY complet — prêt pour UNIFY
+Last activity: 2026-06-05 — Plan 03-03 APPLY — 74/74 tests verts, 16 fichiers
 
 Progress:
 
@@ -29,7 +29,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ○        ○     [Plan 03-03 créé — prêt pour APPLY]
+  ✓        ✓        ○     [Plan 03-03 APPLY complet — prêt pour UNIFY]
 ```
 
 ## Accumulated Context
