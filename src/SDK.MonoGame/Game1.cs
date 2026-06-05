@@ -11,12 +11,14 @@ using SDK.MonoGame.World;
 public class Game1 : Game
 {
     private readonly IServiceProvider _services;
-    private GraphicsDeviceManager _graphics;
+    private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch            _spriteBatch = null!;
     private RenderPipeline         _renderPipeline = null!;
     private WorldSystem            _world = null!;
     private PlayerSystem           _player = null!;
     private KeyboardInputProvider  _keyboard = null!;
+    private ISaveSystem            _saveSystem = null!;
+    private Func<IScriptEngine>    _scriptEngineFactory = null!;
 
     public Game1(IServiceProvider services)
     {
@@ -36,6 +38,8 @@ public class Game1 : Game
         _world   = _services.GetRequiredService<WorldSystem>();
         _player  = _services.GetRequiredService<PlayerSystem>();
         _keyboard = (KeyboardInputProvider)_services.GetRequiredService<IInputProvider>();
+        _saveSystem           = _services.GetRequiredService<ISaveSystem>();
+        _scriptEngineFactory  = _services.GetRequiredService<Func<IScriptEngine>>();
         base.Initialize();
     }
 

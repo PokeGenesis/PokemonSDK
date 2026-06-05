@@ -12,5 +12,6 @@
     <Project Path="tests/SDK.Core.Tests/SDK.Core.Tests.csproj" />
     <Project Path="tests/SDK.Data.Tests/SDK.Data.Tests.csproj" />
     <Project Path="tests/SDK.MonoGame.Tests/SDK.MonoGame.Tests.csproj" />
+    <Project Path="tests/SDK.Scripting.Tests/SDK.Scripting.Tests.csproj" />
   </Folder>
 </Solution>

@@ -6,23 +6,23 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 4 (Scripting + Progression) — prêt à planifier
+**Current focus:** v0.1 — Phase 4 complète ✅ — Prêt pour Phase 5 (Plugins + Characters)
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 4 of 4 (Scripting + Progression) — Not started
-Plan: À planifier
-Status: Phase 3 complète — prêt pour `/paul:plan` Phase 4
-Last activity: 2026-06-05 — Phase 3 World Foundation complète (4/4 plans)
+Phase: 4 of 4 (Scripting + Progression) — COMPLETE ✅
+Plan: 04-03 UNIFY complet
+Status: Phase 4 complète — 97 tests, SCRIPT-01→03 satisfaits
+Last activity: 2026-06-05 — Plan 04-03 APPLY + UNIFY (SaveSystem + DialogueBox + Game1 wiring + cherry-pick 98c3299)
 
 Progress:
 
-- Milestone v0.1: [█████████░] ~80%
+- Milestone v0.1: [█████████░] ~95%
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
 - Phase 3: [██████████] 100% ✅
-- Phase 4: [░░░░░░░░░░] 0% (0/3 plans)
+- Phase 4: [██████████] 100% ✅
 
 ## Loop Position
 
@@ -30,7 +30,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Phase 3 fermée — prêt pour Phase 4]
+  ✓        ✓        ✓     [Plan 04-03 complet — Phase 4 bouclée]
 ```
 
 ## Accumulated Context
@@ -106,16 +106,39 @@ Décisions émergentes (Phase 2) :
 - Pattern Moq Callback pour capturer les arguments passés aux interfaces (vérification STAB)
 - `BattleTestHelpers` factory établi — réutilisable Phase 5 (plugins)
 
+Décisions émergentes (Plan 04-01) :
+
+- D-04 confirmé : Preset_SoftSandbox — os est nil dans Lua, os.exit(0) lève ScriptRuntimeException
+- D-12 confirmé : GameState.Flags = Dictionary<string,JsonElement> via System.Text.Json BCL
+- WithFlag retourne new GameState (record with-expression) — GetFlag<T> retourne default si clé absente
+- UserData.RegisterType(api.GetType()) avant Globals[] — MoonSharp exige enregistrement explicite des types CLR
+
+Décisions émergentes (Plan 04-02) :
+
+- `BadgeApi` accumule mutations via copy-on-write sur `GameState` — pattern identique à BattleState (D-05)
+- `NpcInteractionRunner.Run()` static : crée BadgeApi, RegisterApi("badges"), Execute, retourne api.GetState()
+- `EntityType = "Badge"` (PascalCase) confirmé — cohérent avec "Move" / "Ability"
+- D-09 confirmé sur Trainer + Badge — `Generation` NOT NULL dans migration `20260605201847_AddProgressionData`
+- `SDK.Scripting.Bindings/` namespace établi — répertoire dédié aux bindings Lua, séparé de Engine/
+
 ### Deferred Issues
 
 | Issue | Origin | Revisit | Status |
 |-------|--------|---------|--------|
 | Vérifier compat MonoGame.DesktopGL / .NET 10 | Init | Avant Phase 3 | ✅ MonoGame 3.8.4.1 compile sur net10.0 (smoke 2026-06-01). Template `dotnet new mgdesktopgl` non testé. |
-| Vérifier compat MoonSharp 2.0.0 / .NET 10 | Init | Avant Phase 4 | 🔲 |
+| Vérifier compat MoonSharp 2.0.0 / .NET 10 | Init | Avant Phase 4 | ✅ MoonSharp 2.0.0 compatible .NET 10 — NuGet restore propre, build 0 warnings. |
 | Créer compte NuGet + réserver PokéForge.SDK | Init | Avant Phase 8 | 🔲 |
 | FluentAssertions v8 licence Xceed (commercial) | Plan 01-01 | Avant Phase 8 | ⚠️ OK open-source/non-commercial. Envisager pin v7.x (Apache 2.0) si SDK distribué commercialement. |
 | Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedMoveTranslations (15×6=90 rows), BattleTranslationsD22Tests passe. |
 | Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedAbilityTranslations (6×6=36 rows), BattleTranslationsD22Tests passe. |
+
+Décisions émergentes (Plan 04-03) :
+
+- D-06 résolu : SDK.MonoGame.csproj PEUT référencer SDK.Scripting (cf. CLAUDE.md arch section 3 : `SDK.MonoGame ← ... + SDK.Scripting (via Func factory)`) — la contrainte est que Game1.cs n'utilise JAMAIS LuaScriptEngine directement
+- `Func<IScriptEngine>` factory enregistrée dans Program.cs uniquement — Game1 reçoit la factory via DI, appelle `_scriptEngineFactory()` pour créer un engine par interaction
+- `SaveSystem` va dans `SDK.Core.Services/` (System.Text.Json BCL only — zéro NuGet ajouté à SDK.Core.csproj)
+- `DialogueBox.Draw()` stub no-op — SpriteFont/MGCB déféré Phase 7 DX
+- `gym_brock.lua` contenu minimal : `badges:AwardBadge('boulder')` uniquement (pas de `dialogue:` — MoonSharp lèverait exception sur nil en SoftSandbox)
 
 ### Blockers/Concerns
 
@@ -124,9 +147,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-05
-Stopped at: Phase 3 World Foundation complète — 4/4 plans UNIFY fermés
-Next action: `/paul:plan` — Phase 4 Scripting + Progression
-Resume file: `.paul/ROADMAP.md`
+Stopped at: Plan 04-03 UNIFY complet — Phase 4 Scripting + Progression bouclée (97 tests)
+Next action: `/paul:plan 05` (Phase 5 — Plugins + Characters)
+Resume file: `.paul/phases/04-scripting-progression/04-03-SUMMARY.md`
 
 ---
 

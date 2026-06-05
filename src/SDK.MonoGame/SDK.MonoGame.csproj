@@ -18,5 +18,6 @@
     <ProjectReference Include="..\SDK.Core\SDK.Core.csproj" />
     <ProjectReference Include="..\SDK.Data\SDK.Data.csproj" />
     <ProjectReference Include="..\SDK.Battle\SDK.Battle.csproj" />
+    <ProjectReference Include="..\SDK.Scripting\SDK.Scripting.csproj" />
   </ItemGroup>
 </Project>
