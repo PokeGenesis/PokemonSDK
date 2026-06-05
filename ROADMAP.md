@@ -44,7 +44,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 - Wave 3: DbContextExtensions (GetByGeneration/GetTranslations) + DataSeeder + seed command CLI
 - Wave 4: End-to-end SDK test + PLAT-01/03 cross-target scan
 
-**Status:** 🔲 Not started (À recréer depuis .NET 8 → .NET 10)
+**Status:** ✅ Complet (Phase 1 — 2026-06-05)
 
 ---
 
@@ -69,7 +69,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 **Correction critique (D-11):** Sleep/Freeze ne sautent PAS les tours — validé ancienne base.
 
-**Status:** 🔲 Not started (À recréer depuis .NET 8 → .NET 10)
+**Status:** ✅ Complet (Phase 2 — 2026-06-05)
 
 ---
 
@@ -93,7 +93,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 - Wave 3: Game1 + WorldSystem + PlayerSystem + TransitionSystem + .tmx zones + RenderPipeline (xBR shader) + overlays jour/nuit
 - Wave 4: HeadlessSmokeTester + CI GitHub Actions matrix (ubuntu-latest + windows-latest)
 
-**Status:** 🔲 Not started
+**Status:** ✅ Complet (Phase 3 — 2026-06-05)
 
 ---
 
@@ -115,7 +115,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 - Wave 2: Migration 004 (trainers/trainer_pokemon/badges) + seed gym_leader_1 + Lua badge/flag API + OnNpcInteraction
 - Wave 3: ISaveSystem + SaveSystem JSON + DialogueBox UI + scripts Lua prod + Game1 wiring + auto-save
 
-**Status:** 🔲 Not started (À recréer depuis .NET 8 → .NET 10)
+**Status:** ✅ Complet (Phase 4 — 2026-06-05) — 97 tests
 
 > **🏁 TAG v0.1** — release GitHub avec binaires Windows + Linux après Phase 4 validée
 
@@ -292,10 +292,10 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 | Phase | Description | Plans | Status | Horizon |
 |-------|-------------|-------|--------|---------|
-| 1 | SDK.Core + SDK.Data | 4 | 🔲 Not started | v0.1 |
-| 2 | Battle Engine Core | 4 | 🔲 Not started | v0.1 |
-| 3 | World Foundation | 4 | 🔲 Not started | v0.1 |
-| 4 | Scripting + Progression | 3 | 🔲 Not started | v0.1 |
+| 1 | SDK.Core + SDK.Data | 4 | ✅ Complet | v0.1 |
+| 2 | Battle Engine Core | 4 | ✅ Complet | v0.1 |
+| 3 | World Foundation | 4 | ✅ Complet | v0.1 |
+| 4 | Scripting + Progression | 3 | ✅ Complet — 97 tests | v0.1 |
 | 5 | Plugins + Characters | TBD | 🔲 Not started | v1.0 |
 | 7 | Developer Experience | 4 | 🔲 Not started | v1.0 |
 | 8 | NuGet Distribution | 4 | 🔲 Not started | v1.0 |
@@ -305,4 +305,4 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 | 11 | Documentation | 4 | 🔲 Post-v1.0 | v2.0 |
 
 ---
-*Last updated: 2026-06-01 — Restructuré en 3 horizons v0.1/v1.0/v2.0. Phases 7→11 ajoutées (DX, NuGet, Sample, CLI, Docs).*
+*Last updated: 2026-06-05 — Phases 1-4 marquées Complet. Tag v0.1 posé.*

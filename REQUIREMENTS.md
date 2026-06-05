@@ -1,7 +1,7 @@
 # Requirements: PokemonSDK
 
 **Defined:** 2026-05-24
-**Last updated:** 2026-06-01 — DX-01→06 ajoutés, BATTLE-04/05/06 renommés Plugin, horizons v0.1/v1.0/v2.0
+**Last updated:** 2026-06-05 — v0.1 requirements marqués ✅ (Phases 1-4 complètes, 97 tests)
 **Core Value:** Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de combat, une base de données Pokémon multilingue et un système de quêtes fonctionnel — sans réimplémenter les règles de base.
 
 ---
@@ -20,7 +20,7 @@
 ### PLAT — Plateforme & Cross-Platform
 
 - [x] **PLAT-01**: Le SDK cible .NET 10 LTS avec MonoGame.Framework.DesktopGL (OpenGL) — architecture cross-platform Windows + Linux + macOS dès v1
-- [ ] **PLAT-02**: Les builds sont vérifiés sur Windows et Linux (CI matrix GitHub Actions)
+- [x] **PLAT-02**: Les builds sont vérifiés sur Windows et Linux (CI matrix GitHub Actions)
 - [x] **PLAT-03**: Les chemins de fichiers et accès SQLite sont cross-platform — pas de chemins Windows codés en dur
 
 ### BATTLE — Moteur de combat
@@ -35,15 +35,15 @@
 
 ### MAP — Rendu & Monde
 
-- [ ] **MAP-01**: Le renderer MonoGame affiche en résolution interne 480×270 upscalée ×4 → 1920×1080 via shader xBR. Sprites 96×96 combat, 48×48 overworld, tiles 16×16
-- [ ] **MAP-02**: Le joueur peut se déplacer sur la carte et déclencher des rencontres sauvages selon les tables de rencontre par zone (heure + météo)
-- [ ] **MAP-03**: Le cycle jour/nuit et la météo dynamique sont fonctionnels (tint shader DayNight, configurable temps réel PC ou horloge interne)
+- [x] **MAP-01**: Le renderer MonoGame affiche en résolution interne 480×270 upscalée ×4 → 1920×1080 via shader xBR. Sprites 96×96 combat, 48×48 overworld, tiles 16×16
+- [x] **MAP-02**: Le joueur peut se déplacer sur la carte et déclencher des rencontres sauvages selon les tables de rencontre par zone (heure + météo)
+- [x] **MAP-03**: Le cycle jour/nuit et la météo dynamique sont fonctionnels (tint shader DayNight, configurable temps réel PC ou horloge interne)
 
 ### SCRIPT — Scripting & Progression
 
-- [ ] **SCRIPT-01**: Le moteur Lua MoonSharp est intégré en sandbox sécurisé (Preset_SoftSandbox + allowlist explicite) pour les événements et quêtes scriptables
-- [ ] **SCRIPT-02**: Le système de badges track la progression du joueur : une arène par type Pokémon, validation de badge requise pour progresser
-- [ ] **SCRIPT-03**: La sauvegarde automatique locale persiste l'état complet du jeu (position, équipe, badges, flags, inventaire)
+- [x] **SCRIPT-01**: Le moteur Lua MoonSharp est intégré en sandbox sécurisé (Preset_SoftSandbox + allowlist explicite) pour les événements et quêtes scriptables
+- [x] **SCRIPT-02**: Le système de badges track la progression du joueur : une arène par type Pokémon, validation de badge requise pour progresser
+- [x] **SCRIPT-03**: La sauvegarde automatique locale persiste l'état complet du jeu (position, équipe, badges, flags, inventaire)
 
 ### CHAR — Personnages & Narrative
 
@@ -117,25 +117,25 @@ Déférés — prévus mais hors scope v1.
 
 | Requirement | Horizon | Phase | Status |
 |-------------|---------|-------|--------|
-| DATA-01 | v0.1 | Phase 1 | 🔲 À recréer (.NET 10) |
-| DATA-02 | v0.1 | Phase 1 | 🔲 À recréer |
-| DATA-03 | v0.1 | Phase 1 | 🔲 À recréer |
-| DATA-04 | v0.1 | Phase 1 | 🔲 À recréer |
-| DATA-05 | v0.1 | Phase 1 | 🔲 À recréer |
-| DATA-06 | v0.1 | Phase 1 | 🔲 À recréer |
-| PLAT-01 | v0.1 | Phase 1 | 🔲 À recréer |
-| PLAT-03 | v0.1 | Phase 1 | 🔲 À recréer |
-| BATTLE-01 | v0.1 | Phase 2 | 🔲 À recréer |
-| BATTLE-02 | v0.1 | Phase 2 | 🔲 À recréer |
-| BATTLE-03 | v0.1 | Phase 2 | 🔲 À recréer |
-| BATTLE-07 | v0.1 | Phase 2 | 🔲 À recréer |
-| MAP-01 | v0.1 | Phase 3 | 🔲 Not started |
-| MAP-02 | v0.1 | Phase 3 | 🔲 Not started |
-| MAP-03 | v0.1 | Phase 3 | 🔲 Not started |
-| PLAT-02 | v0.1 | Phase 3 | 🔲 Not started |
-| SCRIPT-01 | v0.1 | Phase 4 | 🔲 À recréer |
-| SCRIPT-02 | v0.1 | Phase 4 | 🔲 À recréer |
-| SCRIPT-03 | v0.1 | Phase 4 | 🔲 À recréer |
+| DATA-01 | v0.1 | Phase 1 | ✅ |
+| DATA-02 | v0.1 | Phase 1 | ✅ |
+| DATA-03 | v0.1 | Phase 1 | ✅ |
+| DATA-04 | v0.1 | Phase 1 | ✅ |
+| DATA-05 | v0.1 | Phase 1 | ✅ |
+| DATA-06 | v0.1 | Phase 1 | ✅ |
+| PLAT-01 | v0.1 | Phase 1 | ✅ |
+| PLAT-03 | v0.1 | Phase 1 | ✅ |
+| BATTLE-01 | v0.1 | Phase 2 | ✅ |
+| BATTLE-02 | v0.1 | Phase 2 | ✅ |
+| BATTLE-03 | v0.1 | Phase 2 | ✅ |
+| BATTLE-07 | v0.1 | Phase 2 | ✅ |
+| MAP-01 | v0.1 | Phase 3 | ✅ RenderPipeline xBR (Phase 3) |
+| MAP-02 | v0.1 | Phase 3 | ✅ PlayerSystem + EncounterSystem (Phase 3) |
+| MAP-03 | v0.1 | Phase 3 | ✅ IGameClock + WeatherSystem (Phase 3) |
+| PLAT-02 | v0.1 | Phase 3 | ✅ CI matrix ubuntu + windows |
+| SCRIPT-01 | v0.1 | Phase 4 | ✅ LuaScriptEngine SoftSandbox (Phase 4) |
+| SCRIPT-02 | v0.1 | Phase 4 | ✅ BadgeApi + NpcInteractionRunner (Phase 4) |
+| SCRIPT-03 | v0.1 | Phase 4 | ✅ SaveSystem JSON (Phase 4) |
 | BATTLE-04 | v1.0 | Phase 5 | 🔲 Not started |
 | BATTLE-05 | v1.0 | Phase 5 | 🔲 Not started |
 | BATTLE-06 | v1.0 | Phase 5 | 🔲 Not started |
