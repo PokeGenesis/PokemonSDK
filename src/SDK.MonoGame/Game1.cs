@@ -11,7 +11,7 @@ using SDK.MonoGame.World;
 public class Game1 : Game
 {
     private readonly IServiceProvider _services;
-    private GraphicsDeviceManager _graphics;
+    private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch            _spriteBatch = null!;
     private RenderPipeline         _renderPipeline = null!;
     private WorldSystem            _world = null!;

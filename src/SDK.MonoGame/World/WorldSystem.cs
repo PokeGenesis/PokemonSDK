@@ -29,11 +29,6 @@ public class WorldSystem
     public bool CheckWildEncounter()
     {
         var zones = _encounters.GetZonesByIdentifier(CurrentZoneId, CurrentGen);
-        foreach (var zone in zones)
-        {
-            if ((float)zone.SpawnRate > Random.Shared.NextSingle() * 0.5f)
-                return true;
-        }
-        return false;
+        return zones.Any(zone => (float)zone.SpawnRate > Random.Shared.NextSingle() * 0.5f);
     }
 }
