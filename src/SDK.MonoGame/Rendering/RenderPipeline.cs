@@ -8,8 +8,8 @@ using SDK.Core.Enums;
 public class RenderPipeline
 {
     private readonly bool _headless;
-    private RenderTarget2D? _internalTarget;
-    private Effect?         _xbrEffect;
+    private readonly RenderTarget2D? _internalTarget;
+    private readonly Effect?         _xbrEffect;
     private Rectangle       _fullscreenRect;
 
     private static readonly Dictionary<TimeOfDay, Color> DayNightTints = new()
@@ -29,7 +29,8 @@ public class RenderPipeline
         _fullscreenRect = new Rectangle(0, 0, 1920, 1080);
 
         try { _xbrEffect = content.Load<Effect>("Shaders/xBR"); }
-        catch { /* shader pas encore compilé MGCB — PointClamp fallback */ }
+        catch (ContentLoadException) { /* shader pas encore compilé MGCB — PointClamp fallback */ }
+        catch (System.IO.FileNotFoundException) { /* fichier .xnb absent — PointClamp fallback */ }
     }
 
     public void BeginScene(GraphicsDevice gd)
