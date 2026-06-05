@@ -144,6 +144,15 @@ Décisions émergentes (Plan 04-03) :
 
 None.
 
+### Erreurs opérationnelles (NE PLUS FAIRE)
+
+| # | Erreur | Fix |
+| --- | ------ | --- |
+| E-01 | `gh pr merge --delete-branch` sur PR dont source = `dev`/`staging`/`main` → branche permanente supprimée | `--delete-branch` UNIQUEMENT sur `feature/*`, `fix/*`, `hotfix/*`. Jamais sur branches permanentes. |
+| E-02 | GitHub API `git/refs` POST avec SHA court (7 chars) → 422 "At least 40 characters are required" | Toujours `git rev-parse origin/branche` pour SHA complet 40 chars avant appel API. |
+| E-03 | YAML `if: env.NUGET_API_KEY != ''` ne lit pas les secrets du bloc `env:` du même step | Guard de secret DANS le `run:` shell : `if [ -z "$NUGET_API_KEY" ]; then exit 0; fi` |
+| E-04 | Squash merge feature→dev→staging→main crée divergence historique (commit absent de la branche cible) → PR CONFLICTING | Après tout squash merge sur main, sync immédiat : `main → staging → dev`. Ne jamais laisser stagner. |
+
 ## Session Continuity
 
 Last session: 2026-06-05
