@@ -8,7 +8,7 @@
 
 **v0.1 Proof of Concept** (v0.1.0)
 Status: In progress
-Phases: 2 of 4 complete
+Phases: 3 of 4 complete
 
 ## Phases
 
@@ -16,7 +16,7 @@ Phases: 2 of 4 complete
 |-------|---------------|-------|-------------|-----------|
 | 1     | SDK.Core + SDK.Data     | 4     | ✅ Complete | 2026-06-02 |
 | 2     | Battle Engine Core      | 4     | ✅ Complete | 2026-06-04 |
-| 3     | World Foundation        | 4     | Not started | -         |
+| 3     | World Foundation        | 4     | ✅ Complete | 2026-06-05 |
 | 4     | Scripting + Progression | 3     | Not started | -         |
 | 5     | Plugins + Characters    | TBD   | Not started | -         |
 | 7     | Developer Experience    | 4     | Not started | -         |
@@ -65,10 +65,10 @@ Phases: 2 of 4 complete
 
 **Plans:**
 
-- [ ] 03-01: Migration 003 (encounter_zones) + SDK.Core world primitives
-- [ ] 03-02: EncounterSystem + RealTimeClock + WeatherSystem + tests
-- [ ] 03-03: Game1 + WorldSystem + PlayerSystem + RenderPipeline (xBR) + day/night
-- [ ] 03-04: HeadlessSmokeTester + CI GitHub Actions matrix (ubuntu + windows)
+- [x] 03-01: Migration 003 (encounter_zones) + SDK.Core world primitives ← *Done 2026-06-04*
+- [x] 03-02: EncounterSystem + RealTimeClock + WeatherSystem + tests ← *Done 2026-06-04*
+- [x] 03-03: Game1 + WorldSystem + PlayerSystem + RenderPipeline (xBR) + day/night ← *Done 2026-06-05*
+- [x] 03-04: HeadlessSmokeTester + CI GitHub Actions matrix (ubuntu + windows) ← *Done 2026-06-05*
 
 ### Phase 4: Scripting + Progression
 

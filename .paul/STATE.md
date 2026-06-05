@@ -6,22 +6,23 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 3 (World Foundation) — Phases 1 & 2 complètes, prêt à planifier
+**Current focus:** v0.1 — Phase 4 (Scripting + Progression) — prêt à planifier
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
-Phase: 3 of 4 (World Foundation) — Ready to plan
-Plan: Not started
-Status: Phase 2 complète — prêt pour Phase 3
-Last activity: 2026-06-04 — Phase 2 UNIFY+TRANSITION — 47/47 tests, Phase 2 100%
+Phase: 4 of 4 (Scripting + Progression) — Not started
+Plan: À planifier
+Status: Phase 3 complète — prêt pour `/paul:plan` Phase 4
+Last activity: 2026-06-05 — Phase 3 World Foundation complète (4/4 plans)
 
 Progress:
 
-- Milestone v0.1: [██████░░░░] ~55%
+- Milestone v0.1: [█████████░] ~80%
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
-- Phase 3: [░░░░░░░░░░] 0% (not started)
+- Phase 3: [██████████] 100% ✅
+- Phase 4: [░░░░░░░░░░] 0% (0/3 plans)
 
 ## Loop Position
 
@@ -29,7 +30,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Plan 02-04 fermé — Phase 2 complète — prêt pour Phase 3]
+  ✓        ✓        ✓     [Phase 3 fermée — prêt pour Phase 4]
 ```
 
 ## Accumulated Context
@@ -64,6 +65,35 @@ Décisions émergentes (SDK.Tools) :
 
 - `SDK.Tools` default db-path = `src/SDK.Data/data/PokemonSDK.db` (relatif repo root) — jamais `data/PokemonSDK.db` qui pointe ailleurs. Toujours lancer depuis la racine du repo.
 
+Décisions émergentes (Plan 03-01) :
+
+- EF migrations `--startup-project src/SDK.Data` jusqu'à Plan 03-03 (SDK.MonoGame absent) — pattern établi
+- `EncounterZone.SpeciesId` FK direct (une row par espèce/zone) — modèle table de rencontre simple
+- `EntityType = "Move"` / `"Ability"` en PascalCase — cohérent avec `"PokemonType"` / `"PokemonSpecies"`
+
+Décisions émergentes (Plan 03-02) :
+
+- `IGameClock` séparé de `IRealTimeClock` — deux contrats distincts : real-time (Gen 2) vs game-time configurable
+- `GameTimeClock.Speed` = game-minutes par real-second — `Speed=1f/60f` (1:1), `Speed=1f` (1s=1 min game), `Speed=60f` (1s=1h game)
+- `RealTimeClock.MapHour(int hour)` internal static — partagé avec `GameTimeClock` pour éviter duplication du switch
+- `IGameClock.SetGameTime(TimeSpan)` — contrat save/load, Plan 04-03 (ISaveSystem) persistera `GameElapsed`
+- Pokégear (Phase 5+) configure `Speed` via DI — `IGameClock` injecté dans le service Pokégear
+
+Décisions émergentes (Plan 03-03) :
+
+- `WorldSystem.Update(delta)` appelle `_clock.Update(delta)` en interne — HeadlessRunner et Game1 n'appellent que `world.Update()`, pas clock directement
+- `NullInputProvider` enregistré via DI (`IInputProvider`) quand `--headless` — même interface, zéro branchement conditionnel dans PlayerSystem
+- `MonoGame.Extended` absent du projet — compat avec MonoGame 3.8.4.1 non vérifiée. TilemapRenderer stub jusqu'à Phase 5+
+- `MS.DI 10.0.8` minimum — EF Core 10.0.8 impose cette contrainte transitive (NU1605 si inférieur)
+- Shaders `.fx` hors `Content.mgcb` — compilation MGCB déférée Phase 7 DX ; null-safe via try/catch dans RenderPipeline
+
+Décisions émergentes (Plan 03-04) :
+
+- `EncounterZone` dans `SDK.Core.Entities` (pas `SDK.Data.Models`) — SDK.Data/Models/ n'existe pas
+- `<Using Include="Xunit" />` requis explicitement dans tout projet test — ImplicitUsings n'inclut pas Xunit
+- Test project référence `SDK.MonoGame` + `SDK.Core` explicite — pas de ref SDK.Data si pas d'accès DB direct
+- `continue-on-error: true` sur step headless CI — DB absente en CI, xUnit Moq-based = vraie gate qualité
+
 Décisions émergentes (Phase 2) :
 
 - D-11 : Sleep/Freeze ne sautent pas les tours — correction critique validée, testée
@@ -84,8 +114,8 @@ Décisions émergentes (Phase 2) :
 | Vérifier compat MoonSharp 2.0.0 / .NET 10 | Init | Avant Phase 4 | 🔲 |
 | Créer compte NuGet + réserver PokéForge.SDK | Init | Avant Phase 8 | 🔲 |
 | FluentAssertions v8 licence Xceed (commercial) | Plan 01-01 | Avant Phase 8 | ⚠️ OK open-source/non-commercial. Envisager pin v7.x (Apache 2.0) si SDK distribué commercialement. |
-| Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | 🔲 BattleDataSeeder ne seed pas les noms de capacités en 6 locales. Ajouter `SeedMoveTranslations` (en/es/fr/de/it/ja) dans plan 03-01 avec la migration 003. |
-| Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | 🔲 BattleDataSeeder ne seed pas les noms de talents en 6 locales. Ajouter `SeedAbilityTranslations` (en/es/fr/de/it/ja) dans plan 03-01 avec la migration 003. |
+| Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedMoveTranslations (15×6=90 rows), BattleTranslationsD22Tests passe. |
+| Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedAbilityTranslations (6×6=36 rows), BattleTranslationsD22Tests passe. |
 
 ### Blockers/Concerns
 
@@ -93,9 +123,9 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-04
-Stopped at: Phase 2 complète — SDK.Battle.Tests (30 tests), 47/47 solution verts, transition Phase 3 prête
-Next action: `/paul:plan 03-01` — Migration 003 + SDK.Core world primitives
+Last session: 2026-06-05
+Stopped at: Phase 3 World Foundation complète — 4/4 plans UNIFY fermés
+Next action: `/paul:plan` — Phase 4 Scripting + Progression
 Resume file: `.paul/ROADMAP.md`
 
 ---
