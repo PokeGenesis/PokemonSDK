@@ -10,6 +10,8 @@ public static class BattleDataSeeder
         SeedTypeEffectiveness(ctx);
         SeedMoves(ctx);
         SeedAbilities(ctx);
+        SeedMoveTranslations(ctx);
+        SeedAbilityTranslations(ctx);
     }
 
     public static void SeedTypeEffectiveness(PokemonDbContext ctx)
@@ -104,6 +106,67 @@ public static class BattleDataSeeder
             new Ability { Id = 5, Identifier = "intimidate", Generation = 3 },
             new Ability { Id = 6, Identifier = "keen-eye",   Generation = 3 }
         );
+        ctx.SaveChanges();
+    }
+
+    public static void SeedMoveTranslations(PokemonDbContext ctx)
+    {
+        if (ctx.Translations.Any(t => t.EntityType == "Move")) return;
+
+        var data = new (int id, string en, string es, string fr, string de, string it, string ja)[]
+        {
+            ( 1, "Tackle",        "Placaje",        "Charge",          "Tackle",           "Azione",           "たいあたり"),
+            ( 2, "Growl",         "Gruñido",        "Rugissement",     "Knurren",          "Ruggito",          "なきごえ"),
+            ( 3, "Scratch",       "Arañazo",        "Griffe",          "Kratzer",          "Graffio",          "ひっかく"),
+            ( 4, "Tail Whip",     "Látigo",         "Fouet Queue",     "Rutenschlag",      "Colpocoda",        "しっぽをふる"),
+            ( 5, "Thunder Shock", "Impactrueno",    "Éclair",          "Donnerschock",     "Tuonoshock",       "でんきショック"),
+            ( 6, "Ember",         "Ascuas",         "Flammèche",       "Glut",             "Brace",            "ひのこ"),
+            ( 7, "Water Gun",     "Pistola Agua",   "Pistolet à O",    "Wasserkanone",     "Pistolacqua",      "みずでっぽう"),
+            ( 8, "Vine Whip",     "Látigo Cepa",    "Fouet Lianes",    "Rankenhieb",       "Frustafoglie",     "つるのむち"),
+            ( 9, "Flamethrower",  "Lanzallamas",    "Lance-Flammes",   "Flammenwerfer",    "Lanciafiamme",     "かえんほうしゃ"),
+            (10, "Thunderbolt",   "Rayo",           "Tonnerre",        "Donnern",          "Fulmine",          "10まんボルト"),
+            (11, "Surf",          "Surf",           "Surf",            "Surfer",           "Surf",             "なみのり"),
+            (12, "Solar Beam",    "Rayo Solar",     "Laser Solaire",   "Solarstrahl",      "Solarraggio",      "ソーラービーム"),
+            (13, "Hyper Beam",    "Hiperrayo",      "Ultralaser",      "Hyperstrahl",      "Iperfascio",       "はかいこうせん"),
+            (14, "Swords Dance",  "Danza Espada",   "Danse-Lames",     "Klingenwind",      "Danzascude",       "つるぎのまい"),
+            (15, "Quick Attack",  "Ataque Rápido",  "Vive-Attaque",    "Ruckzuckhieb",     "Mossodivolo",      "でんこうせっか"),
+        };
+
+        foreach (var (id, en, es, fr, de, it, ja) in data)
+        {
+            foreach (var (locale, value) in new[] { ("en", en), ("es", es), ("fr", fr), ("de", de), ("it", it), ("ja", ja) })
+                ctx.Translations.Add(new Translation
+                {
+                    EntityType = "Move", EntityId = id,
+                    Locale = locale, Field = "name", Value = value
+                });
+        }
+        ctx.SaveChanges();
+    }
+
+    public static void SeedAbilityTranslations(PokemonDbContext ctx)
+    {
+        if (ctx.Translations.Any(t => t.EntityType == "Ability")) return;
+
+        var data = new (int id, string en, string es, string fr, string de, string it, string ja)[]
+        {
+            (1, "Overgrow",   "Espesura",   "Engrais",    "Dickicht",    "Frondoverde",  "しんりょく"),
+            (2, "Blaze",      "Mar Llamas", "Brasier",    "Blaze",       "Folgorante",   "もうか"),
+            (3, "Torrent",    "Torrente",   "Torrent",    "Sturzbach",   "Torrente",     "げきりゅう"),
+            (4, "Static",     "Estática",   "Statik",     "Statik",      "Statica",      "せいでんき"),
+            (5, "Intimidate", "Intimidación","Intimidation","Einschüchtern","Intimidazione","いかく"),
+            (6, "Keen Eye",   "Ojo Lince",  "Regard Vif", "Adlerauge",   "Occhivivi",   "するどいめ"),
+        };
+
+        foreach (var (id, en, es, fr, de, it, ja) in data)
+        {
+            foreach (var (locale, value) in new[] { ("en", en), ("es", es), ("fr", fr), ("de", de), ("it", it), ("ja", ja) })
+                ctx.Translations.Add(new Translation
+                {
+                    EntityType = "Ability", EntityId = id,
+                    Locale = locale, Field = "name", Value = value
+                });
+        }
         ctx.SaveChanges();
     }
 }

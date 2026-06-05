@@ -16,6 +16,7 @@ public class PokemonDbContext : DbContext
     public DbSet<Move> Moves => Set<Move>();
     public DbSet<Ability> Abilities => Set<Ability>();
     public DbSet<Learnset> Learnsets => Set<Learnset>();
+    public DbSet<EncounterZone> EncounterZones => Set<EncounterZone>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         => modelBuilder.ApplyConfigurationsFromAssembly(typeof(PokemonDbContext).Assembly);

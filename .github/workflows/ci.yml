@@ -9,6 +9,7 @@ on:
 jobs:
   build-and-test:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
@@ -37,7 +38,8 @@ jobs:
       # - name: Validate sprites
       #   run: dotnet run --project src/SDK.Tools -- asset-validate
 
-      # TODO: Phase 3 — activer quand SDK.MonoGame créé
-      # - name: Headless smoke test
-      #   if: matrix.os == 'ubuntu-latest'
-      #   run: dotnet run --project src/SDK.MonoGame -- --headless
+      - name: Headless smoke test (SDK.MonoGame --headless)
+        if: matrix.os == 'ubuntu-latest'
+        run: dotnet run --project src/SDK.MonoGame --configuration Release -- --headless --max-frames=10
+        working-directory: ${{ github.workspace }}
+        continue-on-error: true
