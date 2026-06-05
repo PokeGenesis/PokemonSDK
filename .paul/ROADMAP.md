@@ -67,7 +67,7 @@ Phases: 2 of 4 complete
 
 - [ ] 03-01: Migration 003 (encounter_zones) + SDK.Core world primitives
 - [ ] 03-02: EncounterSystem + RealTimeClock + WeatherSystem + tests
-- [ ] 03-03: Game1 + WorldSystem + PlayerSystem + RenderPipeline (xBR) + day/night
+- [ ] 03-03: Game1 + WorldSystem + PlayerSystem + RenderPipeline (xBR) + day/night ← *Planning*
 - [ ] 03-04: HeadlessSmokeTester + CI GitHub Actions matrix (ubuntu + windows)
 
 ### Phase 4: Scripting + Progression

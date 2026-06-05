@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 3 (World Foundation) — Plan 03-02 complet, 2/4 plans
+**Current focus:** v0.1 — Phase 3 (World Foundation) — Plan 03-03 créé, en attente APPLY
 
 ## Current Position
 
 Milestone: v0.1 Proof of Concept
 Phase: 3 of 4 (World Foundation) — In progress (2/4 plans)
-Plan: 03-02 complet (UNIFY ✓) — prêt pour Plan 03-03
-Status: Boucle fermée — prêt pour /paul:plan 03-03
-Last activity: 2026-06-04 — Plan 03-02 UNIFY — 74/74 tests verts, loop fermée
+Plan: 03-03 PLAN créé — prêt pour APPLY
+Status: PLAN créé — prêt pour /paul:apply
+Last activity: 2026-06-05 — Plan 03-03 PLAN créé
 
 Progress:
 
@@ -29,7 +29,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop 03-02 fermée — prêt pour Plan 03-03]
+  ✓        ○        ○     [Plan 03-03 créé — prêt pour APPLY]
 ```
 
 ## Accumulated Context
@@ -107,10 +107,10 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-04
-Stopped at: Plan 03-02 UNIFY complet — boucle fermée
-Next action: `/paul:plan 03-03` — Game1 + WorldSystem + RenderPipeline + SDK.MonoGame
-Resume file: `.paul/phases/03-world-foundation/03-02-SUMMARY.md`
+Last session: 2026-06-05
+Stopped at: Plan 03-03 PLAN créé — SDK.MonoGame scaffold + Game1 + RenderPipeline + WorldSystem
+Next action: `/paul:apply` — `.paul/phases/03-world-foundation/03-03-PLAN.md`
+Resume file: `.paul/phases/03-world-foundation/03-03-PLAN.md`
 
 ---
 
