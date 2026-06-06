@@ -1,0 +1,6 @@
+{
+  "sprites_root": "assets/sprites",
+  "output_dir": "Content/atlas",
+  "db_path": "src/SDK.Data/data/PokemonSDK.db",
+  "include_views": ["front", "back", "overworld", "portrait", "icon"]
+}
