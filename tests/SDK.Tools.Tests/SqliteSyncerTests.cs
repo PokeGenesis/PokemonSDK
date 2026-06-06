@@ -1,6 +1,7 @@
 namespace SDK.Tools.Tests;
 
 using FluentAssertions;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using SDK.Data;
 using SDK.Tools.Atlas;
@@ -22,12 +23,11 @@ public sealed class SqliteSyncerTests
     // SqliteSyncer prend un dbPath — pour les tests :memory:, on passe via une fixture légère
     private sealed class InMemorySyncer : IDisposable
     {
-        private readonly PokemonDbContext _ctx;
         private readonly string _tmpDb;
 
         public InMemorySyncer()
         {
-            _tmpDb = Path.Combine(Path.GetTempPath(), $"synctest_{Guid.NewGuid():N}.db");
+            _tmpDb = Path.Join(Path.GetTempPath(), $"synctest_{Guid.NewGuid():N}.db");
         }
 
         public SqliteSyncer Syncer => new(_tmpDb);
@@ -45,6 +45,9 @@ public sealed class SqliteSyncerTests
 
         public void Dispose()
         {
+            // Windows : SQLite connection pool garde les handles ouverts après Dispose()
+            // ClearAllPools() libère toutes les connexions poolées avant de supprimer le fichier
+            SqliteConnection.ClearAllPools();
             if (File.Exists(_tmpDb)) File.Delete(_tmpDb);
         }
     }
