@@ -24,8 +24,11 @@ public class Game1 : Game
     private ISaveSystem            _saveSystem = null!;
     private Func<IScriptEngine>    _scriptEngineFactory = null!;
     private LuaErrorOverlay        _luaErrorOverlay = new();
+    private SpriteFont?            _font;
+    private Microsoft.Xna.Framework.Input.KeyboardState _prevKeyState;
 #if DEBUG
     private LuaHotReloader?        _hotReloader;
+    private LuaConsole             _luaConsole = new();
 #endif
 
     public Game1(IServiceProvider services)
@@ -53,6 +56,7 @@ public class Game1 : Game
         _hotReloader = new LuaHotReloader("Content/Scripts", hotReloadEngine);
         _hotReloader.OnReloadError += (path, msg) =>
             _luaErrorOverlay.SetError($"{System.IO.Path.GetFileName(path)}: {msg}");
+        Window.TextInput += (sender, e) => { if (_luaConsole.IsOpen) _luaConsole.Append(e.Character); };
 #endif
         base.Initialize();
     }
@@ -61,6 +65,9 @@ public class Game1 : Game
     {
         _spriteBatch    = new SpriteBatch(GraphicsDevice);
         _renderPipeline = new RenderPipeline(GraphicsDevice, Content, isHeadless: false);
+        try { _font = Content.Load<SpriteFont>("Fonts/DefaultFont"); }
+        catch (Microsoft.Xna.Framework.Content.ContentLoadException) { }
+        catch (System.IO.FileNotFoundException) { }
     }
 
     protected override void Update(GameTime gameTime)
@@ -68,6 +75,22 @@ public class Game1 : Game
         _keyboard.Update();
         _world.Update(gameTime.ElapsedGameTime);
         _player.Update();
+#if DEBUG
+        var ks = Microsoft.Xna.Framework.Input.Keyboard.GetState();
+        if (ks.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.OemTilde)
+            && !_prevKeyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.OemTilde))
+            _luaConsole.Toggle();
+        if (_luaConsole.IsOpen)
+        {
+            if (ks.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Back)
+                && !_prevKeyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Back))
+                _luaConsole.Backspace();
+            if (ks.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter)
+                && !_prevKeyState.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Enter))
+                _luaConsole.Submit(_scriptEngineFactory());
+        }
+        _prevKeyState = ks;
+#endif
         base.Update(gameTime);
     }
 
@@ -78,7 +101,8 @@ public class Game1 : Game
         // Plan 03-04+ : TilemapRenderer + PlayerSystem sprite
         _renderPipeline.EndScene(_spriteBatch, clock.GetTimeOfDay());
 #if DEBUG
-        _luaErrorOverlay.Draw();
+        _luaErrorOverlay.Draw(_spriteBatch, _font);
+        _luaConsole.Draw(_spriteBatch, _font);
 #endif
         base.Draw(gameTime);
     }

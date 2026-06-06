@@ -1,5 +1,8 @@
 namespace SDK.MonoGame.UI;
 
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+
 public class DialogueBox
 {
     public bool IsOpen { get; private set; }
@@ -16,6 +19,11 @@ public class DialogueBox
         IsOpen = false;
     }
 
-    // Draw stub — SpriteFont/MGCB compilation déférée Phase 7 DX
-    public void Draw() { }
+    public void Draw(SpriteBatch sb, SpriteFont? font)
+    {
+        if (!IsOpen || font is null) return;
+        sb.Begin();
+        sb.DrawString(font, CurrentText, new Vector2(20, 1048), Color.White);
+        sb.End();
+    }
 }
