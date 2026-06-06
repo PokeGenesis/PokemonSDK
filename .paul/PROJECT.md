@@ -14,8 +14,8 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 |-----------|-------|
 | Type | Application |
 | Version | 0.0.0 |
-| Status | Phase 3 complete — Phase 4 (Scripting + Progression) ready |
-| Last Updated | 2026-06-05 — Phase 3 shipped |
+| Status | Phase 5 complete — Phase 7 (Developer Experience) ready (v1.0) |
+| Last Updated | 2026-06-06 — Phase 5 shipped |
 
 ## Requirements
 
@@ -45,12 +45,22 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 - MAP-03 — Jour/nuit — DayNight tint via RenderPipeline 3-pass — *2026-06-05*
 - PLAT-02 — CI Windows + Linux — matrix ubuntu-latest + windows-latest activé — *2026-06-05*
 
-### Validated (À implémenter .NET 10)
-- MAP-02 — Tilemap overworld (TilemapRenderer stub — Phase 5+)
-- SCRIPT-01→03 (MoonSharp, badges, save)
+### Shipped in Phase 4 ✅
+- SCRIPT-01 — SDK.Scripting: IScriptEngine + LuaScriptEngine SoftSandbox + GameState + coroutines — *2026-06-05*
+- SCRIPT-02 — Migration 004 (trainers/badges) + Lua badge/flag API + OnNpcInteraction — *2026-06-05*
+- SCRIPT-03 — ISaveSystem + SaveSystem JSON + DialogueBox + scripts prod + Game1 wiring — *2026-06-05*
 
-### Active (v0.1)
-- Phase 4 : Scripting + Progression
+### Shipped in Phase 5 ✅
+- BATTLE-04 — NuzlockePlugin (IBattlePlugin, permadeath, catch-first-only) — *2026-06-06*
+- BATTLE-05 — RandomizerPlugin (species randomization seed-déterministe) — *2026-06-06*
+- BATTLE-06 — TurboPlugin (IsActive, TextSpeedMultiplier float.MaxValue) — *2026-06-06*
+- CHAR-01 — Character + VillainGroup + VillainMember entities, Migration AddCharacterData, CharacterDataSeeder D-22 — *2026-06-06*
+
+### Validated (À implémenter .NET 10)
+- MAP-02 — Tilemap overworld (TilemapRenderer stub — Phase 7 DX)
+
+### Active (v1.0)
+- Phase 7 : Developer Experience (asset pipeline, hot reload Lua, SpriteValidator)
 
 ### Out of Scope
 - Connexion online / trades réseau
@@ -82,8 +92,11 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 |--------|--------|---------|--------|
 | Phase 1 complete | dotnet ef + requêtes génération/translations OK | 12/12 tests verts | ✅ Complete |
 | Phase 2 complete | Combat 1v1 headless de start à KO | 47/47 tests verts | ✅ Complete |
-| v0.1 | Joueur sur map, combat, badge, save/load | Not started | Not started |
-| v1.0 | dotnet add package PokéForge.SDK fonctionnel | Not started | Not started |
+| Phase 3 complete | Joueur sur tilemap, rencontre, CI matrix | 97/97 tests verts | ✅ Complete |
+| Phase 4 complete | Lua sandbox, badges, save/load | 97/97 tests verts | ✅ Complete |
+| v0.1 | Joueur sur map, combat, badge, save/load | 97 tests + Phase 5 done | ✅ Complete |
+| Phase 5 complete | 3 plugins + 3 entités Character, D-22 | 126/126 tests verts | ✅ Complete |
+| v1.0 | dotnet add package PokéForge.SDK fonctionnel | Phases 7+8+9 restantes | In Progress |
 
 ## Tech Stack
 
@@ -101,5 +114,5 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | JSON | System.Text.Json | Intégré .NET 10 |
 
 ---
-*Created: 2026-06-01 | Last updated: 2026-06-04 after Phase 2*
+*Created: 2026-06-01 | Last updated: 2026-06-06 after Phase 5*
 *Full context: PROJECT.md | REQUIREMENTS.md | .claude/ARCHITECTURE.md | CLAUDE.md*
