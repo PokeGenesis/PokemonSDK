@@ -4,11 +4,16 @@
 
 3 horizons : moteur core jouable (v0.1) → SDK distribuable NuGet (v1.0) → CLI + docs + features avancées (v2.0).
 
+## Completed Milestone
+
+**v0.1 Proof of Concept** (v0.1.0) — ✅ Complete 2026-06-05
+Phases: 4 of 4 complete (Phases 1→4)
+
 ## Current Milestone
 
-**v0.1 Proof of Concept** (v0.1.0)
+**v1.0 SDK Distribuable** (v1.0.0)
 Status: In progress
-Phases: 3 of 4 complete
+Phases: 1 of 4 complete (Phase 5 ✅ — Phases 7, 8, 9 restantes)
 
 ## Phases
 
@@ -17,8 +22,8 @@ Phases: 3 of 4 complete
 | 1     | SDK.Core + SDK.Data     | 4     | ✅ Complete | 2026-06-02 |
 | 2     | Battle Engine Core      | 4     | ✅ Complete | 2026-06-04 |
 | 3     | World Foundation        | 4     | ✅ Complete | 2026-06-05 |
-| 4     | Scripting + Progression | 3     | Not started | -         |
-| 5     | Plugins + Characters    | TBD   | Not started | -         |
+| 4     | Scripting + Progression | 3     | ✅ Complete | 2026-06-05 |
+| 5     | Plugins + Characters    | 3     | ✅ Complete | 2026-06-06 |
 | 7     | Developer Experience    | 4     | Not started | -         |
 | 8     | NuGet Distribution      | 4     | Not started | -         |
 | 9     | Sample Project          | 4     | Not started | -         |
@@ -79,11 +84,23 @@ Phases: 3 of 4 complete
 
 **Plans:**
 
-- [ ] 04-01: SDK.Scripting (IScriptEngine + LuaScriptEngine SoftSandbox + GameState + coroutines)
-- [ ] 04-02: Migration 004 (trainers/badges) + Lua badge/flag API + OnNpcInteraction
-- [ ] 04-03: ISaveSystem + SaveSystem JSON + DialogueBox + scripts prod + Game1 wiring
+- [x] 04-01: SDK.Scripting (IScriptEngine + LuaScriptEngine SoftSandbox + GameState + coroutines) ← *Done 2026-06-05*
+- [x] 04-02: Migration 004 (trainers/badges) + Lua badge/flag API + OnNpcInteraction ← *Done 2026-06-05*
+- [x] 04-03: ISaveSystem + SaveSystem JSON + DialogueBox + scripts prod + Game1 wiring ← *Done 2026-06-05*
+
+### Phase 5: Plugins + Characters
+
+**Goal:** 3 plugins IBattlePlugin (Nuzlocke, Randomizer, Turbo) + entités Character/VillainGroup/VillainMember avec D-22 multilingue.
+**Depends on:** Phase 4
+**Requirements:** BATTLE-04→06, CHAR-01
+
+**Plans:**
+
+- [x] 05-01: IPlugin base + multi-surface PluginRegistry + IBattlePlugin interface ← *Done 2026-06-06*
+- [x] 05-02: NuzlockePlugin + RandomizerPlugin + TurboPlugin (src/plugins/) ← *Done 2026-06-06*
+- [x] 05-03: Character + VillainGroup + VillainMember + Migration AddCharacterData + D-22 seeding ← *Done 2026-06-06*
 
 ---
 
-*Roadmap created: 2026-06-01*
+*Roadmap created: 2026-06-01 | Last updated: 2026-06-06 after Phase 5*
 *Full details: ROADMAP.md (root)*

@@ -19,6 +19,9 @@ public class PokemonDbContext : DbContext
     public DbSet<EncounterZone> EncounterZones => Set<EncounterZone>();
     public DbSet<Trainer> Trainers => Set<Trainer>();
     public DbSet<Badge> Badges => Set<Badge>();
+    public DbSet<Character> Characters => Set<Character>();
+    public DbSet<VillainGroup> VillainGroups => Set<VillainGroup>();
+    public DbSet<VillainMember> VillainMembers => Set<VillainMember>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         => modelBuilder.ApplyConfigurationsFromAssembly(typeof(PokemonDbContext).Assembly);

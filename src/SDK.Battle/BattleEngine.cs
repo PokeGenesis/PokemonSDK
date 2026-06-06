@@ -2,6 +2,7 @@ namespace SDK.Battle;
 
 using SDK.Battle.Difficulty;
 using SDK.Battle.Formulas;
+using SDK.Battle.Plugins;
 using SDK.Core.Enums;
 using SDK.Core.Interfaces;
 using SDK.Core.ValueObjects;
@@ -14,17 +15,20 @@ public sealed class BattleEngine : IBattleEngine
     private readonly IDifficultyMode _playerStrategy;
     private readonly IDifficultyMode _opponentStrategy;
     private readonly ITypeChart _typeChart;
+    private readonly PluginRegistry _plugins;
 
     public BattleEngine(
         IDamageFormula formula,
         IDifficultyMode playerStrategy,
         IDifficultyMode opponentStrategy,
-        ITypeChart typeChart)
+        ITypeChart typeChart,
+        PluginRegistry? plugins = null)
     {
         _formula = formula;
         _playerStrategy = playerStrategy;
         _opponentStrategy = opponentStrategy;
         _typeChart = typeChart;
+        _plugins = plugins ?? new PluginRegistry();
     }
 
     public BattleResult RunBattle(BattleRequest request)
@@ -37,15 +41,32 @@ public sealed class BattleEngine : IBattleEngine
             request.Config,
             Array.Empty<string>());
 
+        _plugins.NotifyBattleStart(state);
+
         while (state.Turn < MaxTurns)
         {
             if (state.Player.CurrentHp <= 0)
-                return new BattleResult(false, state.Turn);
+            {
+                _plugins.NotifyFainted(state, state.Player);
+                var result = new BattleResult(false, state.Turn);
+                _plugins.NotifyBattleEnd(state, result);
+                return result;
+            }
             if (state.Opponent.CurrentHp <= 0)
-                return new BattleResult(true, state.Turn);
+            {
+                _plugins.NotifyFainted(state, state.Opponent);
+                var result = new BattleResult(true, state.Turn);
+                _plugins.NotifyBattleEnd(state, result);
+                return result;
+            }
+
+            _plugins.NotifyTurnStart(state);
 
             var playerMove = _playerStrategy.SelectMove(state.Player, state.Opponent, state.Config);
             var opponentMove = _opponentStrategy.SelectMove(state.Opponent, state.Player, state.Config);
+
+            state = _plugins.ApplyBeforeMove(state, new BattleAction(playerMove.MoveId, true));
+            state = _plugins.ApplyBeforeMove(state, new BattleAction(opponentMove.MoveId, false));
 
             bool playerFirst = state.Player.Speed > state.Opponent.Speed
                 || (state.Player.Speed == state.Opponent.Speed && Random.Shared.Next(2) == 0);
@@ -64,9 +85,12 @@ public sealed class BattleEngine : IBattleEngine
             }
 
             state = state with { Turn = state.Turn + 1 };
+            _plugins.NotifyTurnEnd(state);
         }
 
-        return new BattleResult(false, MaxTurns, "MaxTurns");
+        var maxResult = new BattleResult(false, MaxTurns, "MaxTurns");
+        _plugins.NotifyBattleEnd(state, maxResult);
+        return maxResult;
     }
 
     private BattleState ApplyMove(BattleState state, bool isPlayer, BattleMove move)
@@ -89,8 +113,13 @@ public sealed class BattleEngine : IBattleEngine
         if (typeMultiplier == 0m)
             return state;
 
-        var result = _formula.Calculate(attacker, defender, move, typeMultiplier, state.Config);
-        var newDefender = defender with { CurrentHp = Math.Max(0, defender.CurrentHp - result.Damage) };
+        var damageResult = _formula.Calculate(attacker, defender, move, typeMultiplier, state.Config);
+        state = _plugins.ApplyBeforeDamage(state, damageResult);
+
+        var newDefender = (isPlayer ? state.Opponent : state.Player) with
+        {
+            CurrentHp = Math.Max(0, (isPlayer ? state.Opponent : state.Player).CurrentHp - damageResult.Damage)
+        };
 
         return isPlayer
             ? state with { Opponent = newDefender }

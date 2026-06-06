@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SDK.Battle.Plugins;
 using SDK.Core.Interfaces;
 using SDK.Core.Services;
 using SDK.Data;
@@ -31,6 +32,12 @@ if (isHeadless)
     services.AddSingleton<IInputProvider, NullInputProvider>();
 else
     services.AddSingleton<IInputProvider, KeyboardInputProvider>();
+
+// Plugin system — D-13 : Nuzlocke/Randomizer/Turbo = plugins activables via PluginRegistry
+var pluginRegistry = new PluginRegistry();
+// Pour activer Nuzlocke : pluginRegistry.Register(new NuzlockePlugin((key, val) => { /* persister dans GameState */ }));
+// Pour activer Turbo    : pluginRegistry.Register(new TurboPlugin());
+services.AddSingleton(pluginRegistry);
 
 var sp = services.BuildServiceProvider();
 
