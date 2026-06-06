@@ -185,7 +185,7 @@ public class SpriteValidatorTests : IDisposable
 
     public void Dispose()
     {
-        foreach (var f in _tempFiles)
-            if (File.Exists(f)) File.Delete(f);
+        foreach (var f in _tempFiles.Where(File.Exists))
+            File.Delete(f);
     }
 }

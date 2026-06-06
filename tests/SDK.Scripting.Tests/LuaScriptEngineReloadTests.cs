@@ -6,7 +6,7 @@ namespace SDK.Scripting.Tests;
 
 public class LuaScriptEngineReloadTests : IDisposable
 {
-    private readonly string _tempDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+    private readonly string _tempDir = Path.Join(Path.GetTempPath(), Guid.NewGuid().ToString());
 
     public LuaScriptEngineReloadTests() => Directory.CreateDirectory(_tempDir);
 
@@ -14,7 +14,8 @@ public class LuaScriptEngineReloadTests : IDisposable
 
     private string WriteLua(string name, string content)
     {
-        var path = Path.Combine(_tempDir, name);
+        if (Path.IsPathRooted(name)) throw new ArgumentException("name must be relative", nameof(name));
+        var path = Path.Join(_tempDir, name);
         File.WriteAllText(path, content);
         return path;
     }
@@ -31,18 +32,18 @@ public class LuaScriptEngineReloadTests : IDisposable
 
         // nouveau contexte chargé
         engine.Evaluate<double>("return y").Should().Be(99);
-        // x absent du nouveau contexte — MoonSharp retourne nil (conversion throws ou retourne 0)
+        // x absent du nouveau contexte — vérification par exception (nil → throw en MoonSharp)
         bool xIsGone = false;
-        try   { xIsGone = engine.Evaluate<double>("return x") != 42; }
+        try   { engine.Evaluate<double>("return x"); }
         catch { xIsGone = true; }
-        xIsGone.Should().BeTrue("x ne doit plus avoir la valeur de l'ancien contexte");
+        xIsGone.Should().BeTrue("x ne doit plus exister dans le nouveau contexte SoftSandbox");
     }
 
     [Fact]
     public void Reload_NonExistentPath_Throws()
     {
         var engine = new LuaScriptEngine();
-        var act = () => engine.Reload(Path.Combine(_tempDir, "doesnt_exist.lua"));
+        var act = () => engine.Reload(Path.Join(_tempDir, "doesnt_exist.lua"));
         act.Should().Throw<Exception>();
     }
 }

@@ -12,7 +12,7 @@ public sealed class AtlasPackerTests : IDisposable
 
     public AtlasPackerTests()
     {
-        _tempDir = Path.Combine(Path.GetTempPath(), $"atlastest_{Guid.NewGuid():N}");
+        _tempDir = Path.Join(Path.GetTempPath(), $"atlastest_{Guid.NewGuid():N}");
         Directory.CreateDirectory(_tempDir);
     }
 

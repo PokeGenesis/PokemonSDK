@@ -58,10 +58,10 @@ public sealed class AtlasPacker
             result.Add(new AtlasEntry(assetKey, view, x, y, w, h));
         }
 
-        atlas.SaveAsPng(Path.Combine(outputDir, "atlas.png"));
+        atlas.SaveAsPng(Path.Join(outputDir, "atlas.png"));
 
         var json = JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText(Path.Combine(outputDir, "atlas-manifest.json"), json);
+        File.WriteAllText(Path.Join(outputDir, "atlas-manifest.json"), json);
 
         return result;
     }
