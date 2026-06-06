@@ -6,23 +6,26 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v0.1 — Phase 4 complète ✅ — Prêt pour Phase 5 (Plugins + Characters)
+**Current focus:** v1.0 — Phase 7 prochaine (Developer Experience) — Phase 5 ✅ complète
 
 ## Current Position
 
-Milestone: v0.1 Proof of Concept
-Phase: 4 of 4 (Scripting + Progression) — COMPLETE ✅
-Plan: 04-03 UNIFY complet
-Status: Phase 4 complète — 97 tests, SCRIPT-01→03 satisfaits
-Last activity: 2026-06-05 — Plan 04-03 APPLY + UNIFY (SaveSystem + DialogueBox + Game1 wiring + cherry-pick 98c3299)
+Milestone: v1.0 SDK Distribuable
+Phase: 7 of 11 (Developer Experience) — Not started
+Plan: Not started
+Status: Ready to plan Phase 7
+Last activity: 2026-06-06 — Phase 5 complète (05-01 ✅ 05-02 ✅ 05-03 ✅) — 126 tests verts — D-22 Characters résolu
 
 Progress:
 
-- Milestone v0.1: [█████████░] ~95%
+- Milestone v0.1: [██████████] 100% ✅ (Phases 1→4 complètes, 2026-06-05)
+- Milestone v1.0: [██░░░░░░░░] ~25% (Phase 5 ✅ — Phases 7, 8, 9 restantes)
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
 - Phase 3: [██████████] 100% ✅
 - Phase 4: [██████████] 100% ✅
+- Phase 5: [██████████] 100% ✅ (05-01 ✅ 05-02 ✅ 05-03 ✅)
+- Phase 7: [░░░░░░░░░░] 0% (prochaine)
 
 ## Loop Position
 
@@ -30,7 +33,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Plan 04-03 complet — Phase 4 bouclée]
+  ✓        ✓        ✓     [Phase 5 complète — 126 tests verts — prêt pour Phase 7]
 ```
 
 ## Accumulated Context
@@ -131,6 +134,23 @@ Décisions émergentes (Plan 04-02) :
 | FluentAssertions v8 licence Xceed (commercial) | Plan 01-01 | Avant Phase 8 | ⚠️ OK open-source/non-commercial. Envisager pin v7.x (Apache 2.0) si SDK distribué commercialement. |
 | Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedMoveTranslations (15×6=90 rows), BattleTranslationsD22Tests passe. |
 | Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedAbilityTranslations (6×6=36 rows), BattleTranslationsD22Tests passe. |
+| D-22 Characters (Plan 05-03) — noms à translater | Phase 5 | Plan 05-03 | ✅ Résolu — CharacterDataSeeder (5×6=30 rows Character + 1×6=6 rows VillainGroup), CharacterTranslationsD22Tests 3/3 verts. |
+
+Décisions émergentes (Plan 05-03 — characters) :
+
+- `TurboPlugin.TextSpeedMultiplier` exposé comme property float — renderers lisent IsActive + TextSpeedMultiplier, logique interne zéro
+- `VillainMemberConfiguration` minimal (table + HasKey) — FK déjà déclarés dans CharacterConfiguration et VillainGroupConfiguration
+- `Character.Role` = string libre — pas d'enum SDK.Core pour éviter breaking changes futurs
+- EntityType "Character" / "VillainGroup" PascalCase — cohérent avec Badge, Move, Ability
+
+Décisions émergentes (Plan 05-02 — plugins structure) :
+
+- `src/plugins/` sous-dossier physique pour tous les `SDK.Plugins.*` — convention définitive à partir de 2026-06-06
+- Prochain plugin → `src/plugins/SDK.Plugins.{Nom}/` + tests dans `tests/SDK.Plugins.{Nom}.Tests/` (flat)
+- csproj plugin : refs SDK.Core/SDK.Battle avec `../../` (deux niveaux depuis `src/plugins/SDK.Plugins.X/`)
+- csproj test plugin : refs `../../src/plugins/SDK.Plugins.{Nom}/`
+- slnx : dossier solution `/src/` contient `src/plugins/SDK.Plugins.*/` (pas de dossier solution séparé)
+- Performance : aucun impact. Runtime coût = plugins Register()-és uniquement, pas plugins installés/existants.
 
 Décisions émergentes (Plan 04-03) :
 
@@ -155,10 +175,10 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-05
-Stopped at: Plan 04-03 UNIFY complet — Phase 4 Scripting + Progression bouclée (97 tests)
-Next action: `/paul:plan 05` (Phase 5 — Plugins + Characters)
-Resume file: `.paul/phases/04-scripting-progression/04-03-SUMMARY.md`
+Last session: 2026-06-06
+Stopped at: Phase 5 complète (UNIFY fermé) — 126 tests verts — prêt pour Phase 7
+Next action: `/paul:plan 07` pour Phase 7 Developer Experience
+Resume file: `.paul/ROADMAP.md`
 
 ---
 
