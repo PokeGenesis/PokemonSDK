@@ -24,7 +24,7 @@ Phases: 1 of 4 complete (Phase 5 ✅ — Phases 7, 8, 9 restantes)
 | 3     | World Foundation        | 4     | ✅ Complete | 2026-06-05 |
 | 4     | Scripting + Progression | 3     | ✅ Complete | 2026-06-05 |
 | 5     | Plugins + Characters    | 3     | ✅ Complete | 2026-06-06 |
-| 7     | Developer Experience    | 4     | Not started | -         |
+| 7     | Developer Experience    | 4     | ✅ Complete | 2026-06-06 |
 | 8     | NuGet Distribution      | 4     | Not started | -         |
 | 9     | Sample Project          | 4     | Not started | -         |
 | 6     | Advanced Systems        | TBD   | Not started | -         |
@@ -102,5 +102,18 @@ Phases: 1 of 4 complete (Phase 5 ✅ — Phases 7, 8, 9 restantes)
 
 ---
 
-*Roadmap created: 2026-06-01 | Last updated: 2026-06-06 after Phase 5*
+*Roadmap created: 2026-06-01 | Last updated: 2026-06-06 — Phase 7 Developer Experience Complete*
 *Full details: ROADMAP.md (root)*
+
+### Phase 7: Developer Experience
+
+**Goal:** Asset pipeline automatique (SpriteValidator + AtlasPacker + SqliteSyncer) + hot reload Lua (<500ms) + LuaConsole REPL ingame. DX-01 + DX-02.
+**Depends on:** Phase 5
+**Requirements:** DX-01, DX-02
+
+**Plans:**
+
+- [x] 07-01: SpriteValidator + SpriteScanner + CLI asset-validate ← *Done 2026-06-06*
+- [x] 07-02: AtlasPacker + SqliteSyncer + CLI asset-sync + import.json ← *Done 2026-06-06*
+- [x] 07-03: LuaHotReloader (#if DEBUG) + LuaErrorOverlay + IScriptEngine.Reload ← *Done 2026-06-06*
+- [x] 07-04: LuaConsole REPL (toggle ~) + MGCB DefaultFont.xnb + Draw() réels ← *Done 2026-06-06*

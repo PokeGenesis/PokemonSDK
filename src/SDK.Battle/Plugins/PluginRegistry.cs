@@ -60,17 +60,19 @@ public sealed class PluginRegistry
     // Chain state — null retour d'un plugin = pas de modif, passe au suivant
     public BattleState ApplyBeforeMove(BattleState state, BattleAction action)
     {
-        foreach (var plugin in _battlePlugins)
-            if (plugin.OnBeforeMove(state, action) is { } next)
-                state = next;
+        foreach (var next in _battlePlugins
+            .Select(p => p.OnBeforeMove(state, action))
+            .Where(n => n is not null))
+            state = next!;
         return state;
     }
 
     public BattleState ApplyBeforeDamage(BattleState state, DamageResult damage)
     {
-        foreach (var plugin in _battlePlugins)
-            if (plugin.OnBeforeDamage(state, damage) is { } next)
-                state = next;
+        foreach (var next in _battlePlugins
+            .Select(p => p.OnBeforeDamage(state, damage))
+            .Where(n => n is not null))
+            state = next!;
         return state;
     }
 }

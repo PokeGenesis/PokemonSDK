@@ -11,3 +11,28 @@
 #-------------------------------- References --------------------------------#
 
 #---------------------------------- Content ---------------------------------#
+
+# Shaders xBR.fx + DayNight.fx : compilation HLSL requiert Wine (fxc.exe).
+# Enregistrés ici pour CI Windows. Sur Linux/WSL2 sans Wine : commentés.
+# RenderPipeline charge les Effect null-safe (PointClamp fallback si .xnb absent).
+#
+# Pour activer sur Linux : sudo apt-get install wine && décommenter les blocs ci-dessous.
+#
+# #begin ../Rendering/Shaders/xBR.fx
+# /importer:EffectImporter
+# /processor:EffectProcessor
+# /processorParam:DebugMode=Auto
+# /build:../Rendering/Shaders/xBR.fx;Shaders/xBR
+#
+# #begin ../Rendering/Shaders/DayNight.fx
+# /importer:EffectImporter
+# /processor:EffectProcessor
+# /processorParam:DebugMode=Auto
+# /build:../Rendering/Shaders/DayNight.fx;Shaders/DayNight
+
+#begin Fonts/DefaultFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/DefaultFont.spritefont

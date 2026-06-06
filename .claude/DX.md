@@ -2,20 +2,32 @@
 
 ## Asset Pipeline (Phase 7 — DX-01)
 
-### Convention de nommage obligatoire (D-16)
+### Convention de nommage obligatoire (D-16 + D-23)
 
 ```
 {dexid5}_{identifier}_{view}.png
+Views : front | back | overworld | portrait | icon
+
+Tailles figées (D-23) :
+  front     → 96×96    (384×384 affiché ×4)  combat ennemi
+  back      → 96×96    (384×384 affiché ×4)  combat joueur
+  overworld → 48×48    (192×192 affiché ×4)  map + followers
+  portrait  → 128×128  (512×512 affiché ×4)  gym leaders, légendaires
+  icon      → 32×32    (128×128 affiché ×4)  party, PC box, Pokédex
 
 Exemples :
-00025_pikachu_front.png        ← 96×96  sprite combat face
-00025_pikachu_back.png         ← 96×96  sprite combat dos
-00025_pikachu_overworld.png    ← 48×48  overworld
-00025_alola_front.png          ← 96×96  forme régionale
-00006_charizard_mega_x_front.png ← 96×96 mega forme
-00130_gyarados_portrait.png    ← 128×128 portrait gym leader
-route_01.png                   ← tileset 16×16 (pas de dexid)
+00025_pikachu_front.png              ← 96×96   combat face
+00025_pikachu_back.png               ← 96×96   combat dos
+00025_pikachu_overworld.png          ← 48×48   overworld + follower
+00025_pikachu_icon.png               ← 32×32   party / PC box
+00025_pikachu_shiny_front.png        ← 96×96   shiny (identifier=pikachu_shiny)
+00025_pikachu_shiny_icon.png         ← 32×32   shiny icon
+00006_charizard_mega_x_front.png     ← 96×96   mega forme
+00130_gyarados_portrait.png          ← 128×128 portrait gym leader
+route_01.png                         ← WARN    tileset sans dexid
 ```
+
+Regex D-16 : `^(\d{5})_([a-z0-9_]+)_(front|back|overworld|portrait|icon)\.png$`
 
 ### Structure du dossier assets attendue
 
@@ -25,26 +37,46 @@ assets/sprites/
 │   ├── 00025_pikachu_front.png      ← 96×96
 │   ├── 00025_pikachu_back.png       ← 96×96
 │   ├── 00025_pikachu_overworld.png  ← 48×48
-│   └── 00025_alola_front.png        ← 96×96
+│   ├── 00025_pikachu_icon.png       ← 32×32
+│   └── 00025_pikachu_shiny_front.png ← 96×96
 ├── tiles/
 │   ├── route_01.png                 ← tileset 16×16
 │   └── cave_01.png
 └── portraits/
     └── gym_leader_01.png            ← 128×128
+assets/sounds/
+└── cries/
+    ├── 00025_pikachu.ogg            ← OGG q8 mono 22050Hz
+    ├── 00006_charizard.ogg
+    └── 00006_charizard_mega_x.ogg
 ```
 
 ### SpriteValidator — règles bloquantes vs warnings
 
 ```
 ERROR (bloque l'import, exit code 1 en CI) :
-  - Taille incorrecte   : front/back 64×64 au lieu de 96×96
-  - Canal alpha absent  : PNG sans transparence
-  - Fichier corrompu    : PNG non lisible
+  - Taille incorrecte   : front/back ≠ 96×96, overworld ≠ 48×48, portrait ≠ 128×128, icon ≠ 32×32
+  - Canal alpha absent  : PNG sans transparence (color type ≠ 4 ou 6)
+  - Fichier corrompu    : PNG non lisible / signature invalide
 
 WARNING (import mais signalé dans import.json) :
   - Nommage non conforme : pikachu_25_front.png au lieu de 00025_pikachu_front.png
   - Sprite dupliqué      : même asset_key deux fois (dernier gagne)
-  - Taille inattendue    : 64×64 pour un overworld (attendu 48×48)
+```
+
+### Audio — Cries (D-24)
+
+```
+Format    : OGG Vorbis q8, mono, 22050Hz
+Nommage   : {dexid5}_{identifier}.ogg
+Dossier   : assets/sounds/cries/
+
+00025_pikachu.ogg
+00006_charizard.ogg
+00006_charizard_mega_x.ogg     ← forme spéciale
+00351_castform_rainy.ogg       ← forme météo
+Shinies → MÊME cry (pas de fichier séparé)
+Musique BGM + SFX → Phase 6+, format non encore décidé
 ```
 
 ### Flux complet `pokeforge asset-sync`
