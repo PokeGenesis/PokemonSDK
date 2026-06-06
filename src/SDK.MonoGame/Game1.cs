@@ -6,7 +6,11 @@ using Microsoft.Xna.Framework.Graphics;
 using SDK.Core.Interfaces;
 using SDK.MonoGame.Input;
 using SDK.MonoGame.Rendering;
+using SDK.MonoGame.UI;
 using SDK.MonoGame.World;
+#if DEBUG
+using SDK.Scripting.HotReload;
+#endif
 
 public class Game1 : Game
 {
@@ -19,6 +23,10 @@ public class Game1 : Game
     private KeyboardInputProvider  _keyboard = null!;
     private ISaveSystem            _saveSystem = null!;
     private Func<IScriptEngine>    _scriptEngineFactory = null!;
+    private LuaErrorOverlay        _luaErrorOverlay = new();
+#if DEBUG
+    private LuaHotReloader?        _hotReloader;
+#endif
 
     public Game1(IServiceProvider services)
     {
@@ -40,6 +48,12 @@ public class Game1 : Game
         _keyboard = (KeyboardInputProvider)_services.GetRequiredService<IInputProvider>();
         _saveSystem           = _services.GetRequiredService<ISaveSystem>();
         _scriptEngineFactory  = _services.GetRequiredService<Func<IScriptEngine>>();
+#if DEBUG
+        var hotReloadEngine = _scriptEngineFactory();
+        _hotReloader = new LuaHotReloader("Content/Scripts", hotReloadEngine);
+        _hotReloader.OnReloadError += (path, msg) =>
+            _luaErrorOverlay.SetError($"{System.IO.Path.GetFileName(path)}: {msg}");
+#endif
         base.Initialize();
     }
 
@@ -63,6 +77,17 @@ public class Game1 : Game
         _renderPipeline.BeginScene(GraphicsDevice);
         // Plan 03-04+ : TilemapRenderer + PlayerSystem sprite
         _renderPipeline.EndScene(_spriteBatch, clock.GetTimeOfDay());
+#if DEBUG
+        _luaErrorOverlay.Draw();
+#endif
         base.Draw(gameTime);
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+#if DEBUG
+        _hotReloader?.Dispose();
+#endif
+        base.Dispose(disposing);
     }
 }

@@ -6,4 +6,5 @@ public interface IScriptEngine
     T? Evaluate<T>(string luaExpression);
     void RegisterApi(string name, object api);
     void LoadFile(string path);
+    void Reload(string path);
 }

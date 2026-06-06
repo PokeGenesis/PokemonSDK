@@ -11,21 +11,21 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 ## Current Position
 
 Milestone: v1.0 SDK Distribuable
-Phase: 7 of 11 (Developer Experience) — Not started
-Plan: Not started
-Status: Ready to plan Phase 7
-Last activity: 2026-06-06 — Phase 5 complète (05-01 ✅ 05-02 ✅ 05-03 ✅) — 126 tests verts — D-22 Characters résolu
+Phase: 7 of 11 (Developer Experience) — In Progress
+Plan: 07-03 créé, en attente d'approbation
+Status: PLAN créé — prêt pour APPLY
+Last activity: 2026-06-06 — Plan 07-03 PLAN (LuaHotReloader + LuaErrorOverlay + IScriptEngine.Reload)
 
 Progress:
 
 - Milestone v0.1: [██████████] 100% ✅ (Phases 1→4 complètes, 2026-06-05)
-- Milestone v1.0: [██░░░░░░░░] ~25% (Phase 5 ✅ — Phases 7, 8, 9 restantes)
+- Milestone v1.0: [██░░░░░░░░] ~25% (Phase 5 ✅ — Phase 7 en cours — Phases 8, 9 restantes)
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
 - Phase 3: [██████████] 100% ✅
 - Phase 4: [██████████] 100% ✅
 - Phase 5: [██████████] 100% ✅ (05-01 ✅ 05-02 ✅ 05-03 ✅)
-- Phase 7: [░░░░░░░░░░] 0% (prochaine)
+- Phase 7: [████░░░░░░] 50% (07-01 ✅ 07-02 ✅ — 07-03, 07-04 restants)
 
 ## Loop Position
 
@@ -33,7 +33,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Phase 5 complète — 126 tests verts — prêt pour Phase 7]
+  ✓        ○        ○     [Plan 07-03 créé, en attente d'approbation]
 ```
 
 ## Accumulated Context
@@ -135,6 +135,7 @@ Décisions émergentes (Plan 04-02) :
 | Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedMoveTranslations (15×6=90 rows), BattleTranslationsD22Tests passe. |
 | Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedAbilityTranslations (6×6=36 rows), BattleTranslationsD22Tests passe. |
 | D-22 Characters (Plan 05-03) — noms à translater | Phase 5 | Plan 05-03 | ✅ Résolu — CharacterDataSeeder (5×6=30 rows Character + 1×6=6 rows VillainGroup), CharacterTranslationsD22Tests 3/3 verts. |
+| SixLabors.ImageSharp 2.1.9 CVEs (GHSA-2cmq-823j-5qj8 high + GHSA-rxmq-m78w-7wmc moderate) | Plan 07-02 | Avant Phase 8 NuGet | 🔲 Outil interne, input trusted, risque faible. Envisager 3.x Community License avant distribution. |
 
 Décisions émergentes (Plan 05-03 — characters) :
 
@@ -151,6 +152,14 @@ Décisions émergentes (Plan 05-02 — plugins structure) :
 - csproj test plugin : refs `../../src/plugins/SDK.Plugins.{Nom}/`
 - slnx : dossier solution `/src/` contient `src/plugins/SDK.Plugins.*/` (pas de dossier solution séparé)
 - Performance : aucun impact. Runtime coût = plugins Register()-és uniquement, pas plugins installés/existants.
+
+Décisions émergentes (Plan 07-02 — atlas pipeline) :
+
+- `SixLabors.ImageSharp 2.1.9` (Apache 2.0) dans SDK.Tools — v4.0.0 impose licence commerciale au MSBuild build. D-25 confirmé.
+- EF migrations : `--startup-project src/SDK.Data` définitif — SDK.MonoGame manque EF Design package (PrivateAssets="all" non transitif)
+- `AtlasPacker` tests : vrais PNG via `new Image<Rgba32>(w,h).SaveAsPng` — `Image.Load()` valide format complet (headers synthétiques 26 bytes invalides)
+- `SqliteSyncer` test fixture : temp file `.db` (pas `:memory:`) — constructeur prend `dbPath` string, pas DbContext injectable directement
+- CLI pipeline `asset-sync` : filter ERROR → pack OK+WARN → sync. Exit code 1 si au moins 1 ERROR.
 
 Décisions émergentes (Plan 04-03) :
 
@@ -176,9 +185,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-06
-Stopped at: Phase 5 complète (UNIFY fermé) — 126 tests verts — prêt pour Phase 7
-Next action: `/paul:plan 07` pour Phase 7 Developer Experience
-Resume file: `.paul/ROADMAP.md`
+Stopped at: Plan 07-03 PLAN créé
+Next action: Approuver le plan puis `/paul:apply 07-03`
+Resume file: `.paul/phases/07-developer-experience/07-03-PLAN.md`
 
 ---
 

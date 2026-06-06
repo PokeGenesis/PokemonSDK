@@ -5,7 +5,7 @@ using SDK.Core.Interfaces;
 
 public class LuaScriptEngine : IScriptEngine
 {
-    private readonly Script _script;
+    private Script _script;
 
     public LuaScriptEngine()
     {
@@ -30,4 +30,11 @@ public class LuaScriptEngine : IScriptEngine
 
     public void LoadFile(string path)
         => _script.DoFile(path);
+
+    public void Reload(string path)
+    {
+        // D-04 : Preset_SoftSandbox inchangé — contexte réinitialisé proprement
+        _script = new Script(CoreModules.Preset_SoftSandbox);
+        _script.DoFile(path);
+    }
 }
