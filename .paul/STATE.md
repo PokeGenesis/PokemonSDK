@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v1.0 — Phase 7 prochaine (Developer Experience) — Phase 5 ✅ complète
+**Current focus:** v1.0 — Phase 8 NuGet Distribution — Phase 7 ✅ complète
 
 ## Current Position
 
 Milestone: v1.0 SDK Distribuable
-Phase: 7 of 11 (Developer Experience) — In Progress
-Plan: 07-03 créé, en attente d'approbation
-Status: PLAN créé — prêt pour APPLY
-Last activity: 2026-06-06 — Plan 07-03 PLAN (LuaHotReloader + LuaErrorOverlay + IScriptEngine.Reload)
+Phase: 7 of 11 (Developer Experience) — Complete ✅
+Plan: Complete (07-01 ✅ 07-02 ✅ 07-03 ✅ 07-04 ✅)
+Status: Phase 7 fermée — prêt pour Phase 8
+Last activity: 2026-06-06 — Phase 7 complète (DX-01 asset pipeline + DX-02 hot reload + LuaConsole REPL + MGCB font) — 166 tests verts
 
 Progress:
 
@@ -25,7 +25,7 @@ Progress:
 - Phase 3: [██████████] 100% ✅
 - Phase 4: [██████████] 100% ✅
 - Phase 5: [██████████] 100% ✅ (05-01 ✅ 05-02 ✅ 05-03 ✅)
-- Phase 7: [████░░░░░░] 50% (07-01 ✅ 07-02 ✅ — 07-03, 07-04 restants)
+- Phase 7: [██████████] 100% ✅ (07-01 ✅ 07-02 ✅ 07-03 ✅ 07-04 ✅)
 
 ## Loop Position
 
@@ -33,7 +33,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ○        ○     [Plan 07-03 créé, en attente d'approbation]
+  ✓        ✓        ✓     [Phase 7 complète — 166 tests verts — prêt pour Phase 8]
 ```
 
 ## Accumulated Context
@@ -161,6 +161,15 @@ Décisions émergentes (Plan 07-02 — atlas pipeline) :
 - `SqliteSyncer` test fixture : temp file `.db` (pas `:memory:`) — constructeur prend `dbPath` string, pas DbContext injectable directement
 - CLI pipeline `asset-sync` : filter ERROR → pack OK+WARN → sync. Exit code 1 si au moins 1 ERROR.
 
+Décisions émergentes (Plan 07-04 — LuaConsole + MGCB) :
+
+- `DefaultFont.spritefont` : DejaVu Sans Mono 16pt — installée nativement sur Ubuntu/Debian, CI headless sans setup TTF supplémentaire
+- Shaders xBR.fx + DayNight.fx commentés dans `Content.mgcb` — MGFXC requiert wine64, Ubuntu 24.04 t64 transition casse les dépendances apt ; PointClamp fallback actif
+- `dotnet-mgcb 3.8.4.1` pinned dans `.config/dotnet-tools.json` — `dotnet tool restore` avant build CI
+- `LuaConsole` uniquement `#if DEBUG` — toggle tilde, buffer TextInput, history circulaire, Draw SpriteBatch overlay
+- `Game1` fields : `_defaultFont SpriteFont`, `_prevKeyState KeyboardState`, `_luaConsole LuaConsole` (DEBUG only)
+- `Draw()` réels : LuaErrorOverlay + DialogueBox + LuaConsole via SpriteBatch — tous les stubs no-op remplacés
+
 Décisions émergentes (Plan 04-03) :
 
 - D-06 résolu : SDK.MonoGame.csproj PEUT référencer SDK.Scripting (cf. CLAUDE.md arch section 3 : `SDK.MonoGame ← ... + SDK.Scripting (via Func factory)`) — la contrainte est que Game1.cs n'utilise JAMAIS LuaScriptEngine directement
@@ -185,9 +194,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-06
-Stopped at: Plan 07-03 PLAN créé
-Next action: Approuver le plan puis `/paul:apply 07-03`
-Resume file: `.paul/phases/07-developer-experience/07-03-PLAN.md`
+Stopped at: Phase 7 complète (UNIFY 07-04 fermé) — 166 tests verts — staging sync requis
+Next action: `/paul:plan 08` pour Phase 8 NuGet Distribution
+Resume file: `.paul/phases/07-developer-experience/07-04-SUMMARY.md`
 
 ---
 
