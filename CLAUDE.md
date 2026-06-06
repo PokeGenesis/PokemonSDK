@@ -136,6 +136,9 @@ v2.0 → + Phases 6+10+11 (post v1.0)  CLI + docs + features avancées
 | D-20 | **CLI scaffold = sample stabilisé** — template embarqué |
 | D-21 | **Docs = APIs stables uniquement** — pas de doc sur du WIP |
 | D-22 | **6 locales obligatoires** — toute donnée traduite doit avoir en/es/fr/de/it/ja. Jamais moins. |
+| D-23 | **Sprite `icon` = 32×32** — 5e view D-16 (party, PC box, Pokédex). Regex : `(front\|back\|overworld\|portrait\|icon)` |
+| D-24 | **Cries = OGG Vorbis q8 mono 22050Hz** — `{dexid5}_{identifier}.ogg` dans `assets/sounds/cries/`. Shinies = même cry. |
+| D-25 | **SixLabors.ImageSharp dans SDK.Tools** — atlas PNG lossless (plan 07-02). Jamais System.Drawing.Common. |
 
 ---
 
