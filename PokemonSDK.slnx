@@ -5,6 +5,9 @@
     <Project Path="src/SDK.Data/SDK.Data.csproj" />
     <Project Path="src/SDK.MonoGame/SDK.MonoGame.csproj" />
     <Project Path="src/SDK.Scripting/SDK.Scripting.csproj" />
+    <Project Path="src/plugins/SDK.Plugins.Nuzlocke/SDK.Plugins.Nuzlocke.csproj" />
+    <Project Path="src/plugins/SDK.Plugins.Randomizer/SDK.Plugins.Randomizer.csproj" />
+    <Project Path="src/plugins/SDK.Plugins.Turbo/SDK.Plugins.Turbo.csproj" />
     <Project Path="src/SDK.Tools/SDK.Tools.csproj" />
   </Folder>
   <Folder Name="/tests/">
@@ -12,6 +15,8 @@
     <Project Path="tests/SDK.Core.Tests/SDK.Core.Tests.csproj" />
     <Project Path="tests/SDK.Data.Tests/SDK.Data.Tests.csproj" />
     <Project Path="tests/SDK.MonoGame.Tests/SDK.MonoGame.Tests.csproj" />
+    <Project Path="tests/SDK.Plugins.Nuzlocke.Tests/SDK.Plugins.Nuzlocke.Tests.csproj" />
+    <Project Path="tests/SDK.Plugins.Randomizer.Tests/SDK.Plugins.Randomizer.Tests.csproj" />
     <Project Path="tests/SDK.Scripting.Tests/SDK.Scripting.Tests.csproj" />
   </Folder>
 </Solution>
