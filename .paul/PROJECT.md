@@ -13,9 +13,9 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | Attribute | Value |
 |-----------|-------|
 | Type | Application |
-| Version | 0.0.0 |
-| Status | Phase 5 complete — Phase 7 (Developer Experience) ready (v1.0) |
-| Last Updated | 2026-06-06 — Phase 5 shipped |
+| Version | 0.1.0 (packages publiables) |
+| Status | Phase 8 complete — Phase 9 (Sample Project) next (v1.0) |
+| Last Updated | 2026-06-07 — Phase 8 NuGet Distribution shipped |
 
 ## Requirements
 
@@ -59,8 +59,15 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 ### Validated (À implémenter .NET 10)
 - MAP-02 — Tilemap overworld (TilemapRenderer stub — Phase 7 DX)
 
+### Shipped in Phase 7 ✅
+- DX-01 — SpriteValidator + AtlasPacker + SqliteSyncer + CLI asset-validate/asset-sync — *2026-06-06*
+- DX-02 — LuaHotReloader (#if DEBUG) + LuaErrorOverlay + LuaConsole REPL (toggle ~) + MGCB DefaultFont.xnb — *2026-06-06*
+
+### Shipped in Phase 8 ✅
+- DX-03 — 7 packages PokeForge.SDK.* v0.1.0 publiables NuGet.org — métadonnées, licences, publish-nuget.yml CI/CD, smoke test consumer D-19 — *2026-06-07*
+
 ### Active (v1.0)
-- Phase 7 : Developer Experience (asset pipeline, hot reload Lua, SpriteValidator)
+- Phase 9 : Sample Project (DX-04 — projet consommateur via NuGet, template scaffold)
 
 ### Out of Scope
 - Connexion online / trades réseau
@@ -96,7 +103,9 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | Phase 4 complete | Lua sandbox, badges, save/load | 97/97 tests verts | ✅ Complete |
 | v0.1 | Joueur sur map, combat, badge, save/load | 97 tests + Phase 5 done | ✅ Complete |
 | Phase 5 complete | 3 plugins + 3 entités Character, D-22 | 126/126 tests verts | ✅ Complete |
-| v1.0 | dotnet add package PokéForge.SDK fonctionnel | Phases 7+8+9 restantes | In Progress |
+| Phase 7 complete | Asset pipeline + hot reload + REPL | 166 tests verts | ✅ Complete |
+| Phase 8 complete | 7 packages PokeForge.SDK.* publiables NuGet | 7 smoke tests verts, publish-nuget.yml prêt | ✅ Complete |
+| v1.0 | dotnet add package PokeForge.SDK fonctionnel | Phase 9 (sample) restante | In Progress |
 
 ## Tech Stack
 
@@ -114,5 +123,5 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | JSON | System.Text.Json | Intégré .NET 10 |
 
 ---
-*Created: 2026-06-01 | Last updated: 2026-06-06 after Phase 5*
+*Created: 2026-06-01 | Last updated: 2026-06-07 after Phase 8*
 *Full context: PROJECT.md | REQUIREMENTS.md | .claude/ARCHITECTURE.md | CLAUDE.md*

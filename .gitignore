@@ -22,3 +22,12 @@ packages/
 # Logs
 *.log
 nupkg/
+.gstack/
+
+# SixLabors license file — ne jamais committer
+**/sixlabors.lic
+sixlabors.lic
+
+# Windows alternate data stream metadata (WSL2/NTFS)
+*:Zone.Identifier
+nupkg-local/
