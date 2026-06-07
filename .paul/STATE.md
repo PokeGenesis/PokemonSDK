@@ -6,20 +6,20 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v1.0 — Phase 9 Sample Project — APPLY 09-04 complet, en attente UNIFY
+**Current focus:** v1.0 — Phase 9 Sample Project COMPLÈTE ✅ — prêt pour transition Phase 10 CLI
 
 ## Current Position
 
 Milestone: v1.0 SDK Distribuable
-Phase: 9 of 11 (Sample Project)
-Plan: 09-04 APPLY complet — SDK.Battle + Scripting + ISaveSystem + README
-Status: APPLY complet, prêt pour UNIFY
-Last activity: 2026-06-07 — Plan 09-04 APPLY complet (commit b9a2990)
+Phase: 9 of 11 (Sample Project) — COMPLÈTE ✅
+Plan: 09-04 UNIFY complet — Phase 9 fermée
+Status: Phase 9 complète, prêt pour Phase 10 (CLI pokeforge)
+Last activity: 2026-06-07 — Plan 09-04 UNIFY complet (loop fermé)
 
 Progress:
 
 - Milestone v0.1: [██████████] 100% ✅ (Phases 1→4 complètes, 2026-06-05)
-- Milestone v1.0: [██████░░░░] ~50% (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 restante)
+- Milestone v1.0: [████████░░] ~75% (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 ✅)
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
 - Phase 3: [██████████] 100% ✅
@@ -27,7 +27,7 @@ Progress:
 - Phase 5: [██████████] 100% ✅ (05-01 ✅ 05-02 ✅ 05-03 ✅)
 - Phase 7: [██████████] 100% ✅ (07-01 ✅ 07-02 ✅ 07-03 ✅ 07-04 ✅)
 - Phase 8: [██████████] 100% ✅ (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
-- Phase 9: [██████░░░░] 75% — 09-01 ✅ 09-02 ✅ 09-03 ✅ (09-04 restant)
+- Phase 9: [██████████] 100% ✅ (09-01 ✅ 09-02 ✅ 09-03 ✅ 09-04 ✅)
 
 ## Loop Position
 
@@ -35,11 +35,11 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ○     [Plan 09-04 APPLY complet, en attente UNIFY]
+  ✓        ✓        ✓     [Loop 09-04 fermé — Phase 9 complète]
 ```
 
 Phase 8 progress: 4/4 plans complets (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
-Phase 9 progress: 3/4 plans complets (09-01 ✅ 09-02 ✅ 09-03 ✅ — 09-04 restant)
+Phase 9 progress: 4/4 plans complets (09-01 ✅ 09-02 ✅ 09-03 ✅ 09-04 ✅)
 
 ## Accumulated Context
 
@@ -204,9 +204,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-07
-Stopped at: Phase 9 — Plan 09-04 APPLY complet (commit b9a2990)
-Next action: `/paul:unify 09-04`
-Resume file: `.paul/phases/09-sample-project/09-04-PLAN.md`
+Stopped at: Phase 9 COMPLÈTE — Plan 09-04 UNIFY fermé — Milestone v1.0 ~75%
+Next action: TAG v1.0 + squash merge `feature/phase9-sample-project` → dev → staging → main (E-04 sync cascade)
+Resume file: `.paul/phases/09-sample-project/09-04-SUMMARY.md`
 
 ---
 
