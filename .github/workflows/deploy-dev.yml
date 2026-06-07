@@ -18,6 +18,8 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Build Release
+        env:
+          SixLaborsLicenseKey: ${{ secrets.SIXLABORS_LICENSE_KEY }}
         run: dotnet build PokemonSDK.slnx --configuration Release
 
       - name: Run all tests (bloquant)
@@ -28,6 +30,7 @@ jobs:
         run: |
           dotnet publish src/SDK.Tools/SDK.Tools.csproj \
             --configuration Release \
+            --no-build \
             --output ./publish/dev
 
       - name: Upload artifact DEV

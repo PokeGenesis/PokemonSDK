@@ -8,4 +8,13 @@
     <ProjectReference Include="..\..\SDK.Core\SDK.Core.csproj" />
     <ProjectReference Include="..\..\SDK.Battle\SDK.Battle.csproj" />
   </ItemGroup>
+
+  <PropertyGroup>
+    <PackageId>PokeForge.SDK.Plugins.Randomizer</PackageId>
+    <Version>0.1.0</Version>
+    <Description>Plugin Randomizer pour PokemonSDK. Implémente IBattlePlugin : randomisation des espèces seed-déterministe.</Description>
+    <PackageTags>pokemon;fan-game;randomizer;plugin;dotnet;sdk</PackageTags>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
 </Project>

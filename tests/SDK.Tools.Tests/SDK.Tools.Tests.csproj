@@ -15,7 +15,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-    <PackageReference Include="FluentAssertions" Version="8.4.0" />
+    <PackageReference Include="FluentAssertions" Version="8.10.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\SDK.Tools\SDK.Tools.csproj" />

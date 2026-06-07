@@ -2,7 +2,7 @@ name: Publish NuGet
 
 on:
   push:
-    tags: ['v*']
+    tags: ['v*.*.*']
 
 jobs:
   publish:
@@ -16,28 +16,36 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: Restore tools (MGCB)
+        run: dotnet tool restore
+
+      - name: Restore packages
+        run: dotnet restore PokemonSDK.slnx
+
       - name: Build Release
-        run: dotnet build PokemonSDK.slnx --configuration Release
+        env:
+          SixLaborsLicenseKey: ${{ secrets.SIXLABORS_LICENSE_KEY }}
+        run: |
+          dotnet build PokemonSDK.slnx \
+            --configuration Release \
+            --no-restore
 
       - name: Run all tests
         run: dotnet test PokemonSDK.slnx --configuration Release --no-build
 
-      - name: Pack packages disponibles
+      - name: Pack 7 packages PokeForge.SDK.*
         run: |
-          dotnet pack src/SDK.Core --configuration Release -o ./nupkg
-          dotnet pack src/SDK.Data --configuration Release -o ./nupkg
-          # TODO: Phase 2 — dotnet pack src/SDK.Battle
-          # TODO: Phase 4 — dotnet pack src/SDK.Scripting
-          # TODO: Phase 5 — dotnet pack src/SDK.Plugins.Nuzlocke
-          # TODO: Phase 5 — dotnet pack src/SDK.Plugins.Randomizer
-          # TODO: Phase 5 — dotnet pack src/SDK.Plugins.Turbo
+          dotnet pack PokemonSDK.slnx \
+            --configuration Release \
+            --no-build \
+            -o ./nupkg
 
       - name: Push vers NuGet.org
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
           if [ -z "$NUGET_API_KEY" ]; then
-            echo "NUGET_API_KEY non configuré — push ignoré (Phase 8 DX-03)"
+            echo "NUGET_API_KEY non configuré — push ignoré"
             exit 0
           fi
           dotnet nuget push ./nupkg/*.nupkg \

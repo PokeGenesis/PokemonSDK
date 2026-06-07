@@ -26,6 +26,8 @@ jobs:
         run: dotnet restore PokemonSDK.slnx
 
       - name: Build
+        env:
+          SixLaborsLicenseKey: ${{ secrets.SIXLABORS_LICENSE_KEY }}
         run: dotnet build PokemonSDK.slnx --no-restore --configuration Release
 
       - name: Test + Coverage

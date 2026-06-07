@@ -13,7 +13,7 @@ Phases: 4 of 4 complete (Phases 1→4)
 
 **v1.0 SDK Distribuable** (v1.0.0)
 Status: In progress
-Phases: 1 of 4 complete (Phase 5 ✅ — Phases 7, 8, 9 restantes)
+Phases: 3 of 4 complete (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 restante)
 
 ## Phases
 
@@ -25,7 +25,7 @@ Phases: 1 of 4 complete (Phase 5 ✅ — Phases 7, 8, 9 restantes)
 | 4     | Scripting + Progression | 3     | ✅ Complete | 2026-06-05 |
 | 5     | Plugins + Characters    | 3     | ✅ Complete | 2026-06-06 |
 | 7     | Developer Experience    | 4     | ✅ Complete | 2026-06-06 |
-| 8     | NuGet Distribution      | 4     | Not started | -         |
+| 8     | NuGet Distribution      | 4     | ✅ Complete | 2026-06-07 |
 | 9     | Sample Project          | 4     | Not started | -         |
 | 6     | Advanced Systems        | TBD   | Not started | -         |
 | 10    | CLI pokeforge           | 4     | Not started | -         |
@@ -102,7 +102,7 @@ Phases: 1 of 4 complete (Phase 5 ✅ — Phases 7, 8, 9 restantes)
 
 ---
 
-*Roadmap created: 2026-06-01 | Last updated: 2026-06-06 — Phase 7 Developer Experience Complete*
+*Roadmap created: 2026-06-01 | Last updated: 2026-06-07 — Phase 8 NuGet Distribution Complete*
 *Full details: ROADMAP.md (root)*
 
 ### Phase 7: Developer Experience
@@ -117,3 +117,16 @@ Phases: 1 of 4 complete (Phase 5 ✅ — Phases 7, 8, 9 restantes)
 - [x] 07-02: AtlasPacker + SqliteSyncer + CLI asset-sync + import.json ← *Done 2026-06-06*
 - [x] 07-03: LuaHotReloader (#if DEBUG) + LuaErrorOverlay + IScriptEngine.Reload ← *Done 2026-06-06*
 - [x] 07-04: LuaConsole REPL (toggle ~) + MGCB DefaultFont.xnb + Draw() réels ← *Done 2026-06-06*
+
+### Phase 8: NuGet Distribution
+
+**Goal:** 7 packages PokeForge.SDK.* publiables sur NuGet.org v0.1.0 — métadonnées, licences, CI/CD, smoke test consumer.
+**Depends on:** Phase 7
+**Requirements:** DX-03
+
+**Plans:**
+
+- [x] 08-01: NuGet metadata (PackageId, Description, Authors, Icon, README, RepositoryUrl) ← *Done 2026-06-07*
+- [x] 08-02: Licence/CVE cleanup — SixLabors.ImageSharp 4.0.0 + sixlabors.lic + FA v8 open-source ← *Done 2026-06-07*
+- [x] 08-03: publish-nuget.yml CI/CD — pack + push 7 packages sur NuGet.org (secrets NUGET_API_KEY + SIXLABORS_LICENSE_KEY) ← *Done 2026-06-07*
+- [x] 08-04: NuGetConsumerSmokeTest — 7 typeof() verts depuis feed local, D-19 validé ← *Done 2026-06-07*
