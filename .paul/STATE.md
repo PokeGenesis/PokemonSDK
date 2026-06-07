@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v1.0 — Phase 8 NuGet Distribution — Plan 08-02 à démarrer
+**Current focus:** v1.0 — Phase 8 NuGet Distribution — Plan 08-02 ✅ — 08-03 à planifier
 
 ## Current Position
 
 Milestone: v1.0 SDK Distribuable
 Phase: 8 of 11 (NuGet Distribution)
-Plan: 08-01 ✅ — prêt pour 08-02 (Licence/CVE cleanup)
-Status: UNIFY ✓ — loop 08-01 fermé
-Last activity: 2026-06-07 — Plan 08-01 UNIFY complet — 7 .nupkg + Directory.Build.props + README bilingue
+Plan: 08-02 — Licence/CVE cleanup ✅ COMPLET
+Status: UNIFY ✓ — prêt pour /paul:plan 08-03
+Last activity: 2026-06-07 — Plan 08-02 UNIFY fermé
 
 Progress:
 
@@ -26,7 +26,7 @@ Progress:
 - Phase 4: [██████████] 100% ✅
 - Phase 5: [██████████] 100% ✅ (05-01 ✅ 05-02 ✅ 05-03 ✅)
 - Phase 7: [██████████] 100% ✅ (07-01 ✅ 07-02 ✅ 07-03 ✅ 07-04 ✅)
-- Phase 8: [██░░░░░░░░] ~25% (08-01 ✅ — 08-02, 08-03, 08-04 restants)
+- Phase 8: [████░░░░░░] ~50% (08-01 ✅ 08-02 ✅ — 08-03, 08-04 restants)
 
 ## Loop Position
 
@@ -34,10 +34,10 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [08-01 — NuGet metadata + Directory.Build.props + README]
+  ✓        ✓        ✓     [08-02 — Licence/CVE cleanup — COMPLET]
 ```
 
-Phase 8 progress: 1/4 plans complets
+Phase 8 progress: 2/4 plans complets (08-01 ✅ 08-02 ✅ — 08-03, 08-04 restants)
 
 ## Accumulated Context
 
@@ -134,11 +134,11 @@ Décisions émergentes (Plan 04-02) :
 | Vérifier compat MonoGame.DesktopGL / .NET 10 | Init | Avant Phase 3 | ✅ MonoGame 3.8.4.1 compile sur net10.0 (smoke 2026-06-01). Template `dotnet new mgdesktopgl` non testé. |
 | Vérifier compat MoonSharp 2.0.0 / .NET 10 | Init | Avant Phase 4 | ✅ MoonSharp 2.0.0 compatible .NET 10 — NuGet restore propre, build 0 warnings. |
 | Créer compte NuGet + réserver PokéForge.SDK | Init | Avant Phase 8 | 🔲 |
-| FluentAssertions v8 licence Xceed (commercial) | Plan 01-01 | Avant Phase 8 | ⚠️ OK open-source/non-commercial. Envisager pin v7.x (Apache 2.0) si SDK distribué commercialement. |
+| FluentAssertions v8 licence Xceed (commercial) | Plan 01-01 | Avant Phase 8 | ✅ Résolu — FA v8 gratuit pour open-source MIT. v8.10.0 standardisé sur 8/8 projets tests. FA test-only, ne transite pas vers les consumers NuGet. |
 | Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedMoveTranslations (15×6=90 rows), BattleTranslationsD22Tests passe. |
 | Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedAbilityTranslations (6×6=36 rows), BattleTranslationsD22Tests passe. |
 | D-22 Characters (Plan 05-03) — noms à translater | Phase 5 | Plan 05-03 | ✅ Résolu — CharacterDataSeeder (5×6=30 rows Character + 1×6=6 rows VillainGroup), CharacterTranslationsD22Tests 3/3 verts. |
-| SixLabors.ImageSharp 2.1.9 CVEs (GHSA-2cmq-823j-5qj8 high + GHSA-rxmq-m78w-7wmc moderate) | Plan 07-02 | Avant Phase 8 NuGet | 🔲 Outil interne, input trusted, risque faible. Envisager 3.x Community License avant distribution. |
+| SixLabors.ImageSharp 2.1.9 CVEs (GHSA-2cmq-823j-5qj8 high + GHSA-rxmq-m78w-7wmc moderate) | Plan 07-02 | Avant Phase 8 NuGet | ✅ Résolu — ImageSharp 4.0.0 + sixlabors.lic (gitignored). 0 CVE HIGH/MODERATE sur tous les projets. |
 
 Décisions émergentes (Plan 05-03 — characters) :
 
@@ -156,9 +156,14 @@ Décisions émergentes (Plan 05-02 — plugins structure) :
 - slnx : dossier solution `/src/` contient `src/plugins/SDK.Plugins.*/` (pas de dossier solution séparé)
 - Performance : aucun impact. Runtime coût = plugins Register()-és uniquement, pas plugins installés/existants.
 
+Décisions émergentes (Plan 08-02 — licence/CVE) :
+
+- SixLabors.ImageSharp 4.0.0 retenu — Six Labors Split License gratuite open-source MIT. `sixlabors.lic` dans `src/SDK.Tools/` (gitignored). Contributeurs : demander clé sur `https://licensing.sixlabors.com/`. CI : secret `SIXLABORS_LICENSE_KEY` + `-p:SixLaborsLicenseKey="$SIXLABORS_LICENSE_KEY"`. CVEs GHSA-2cmq-823j-5qj8 (HIGH) + GHSA-rxmq-m78w-7wmc (MODERATE) résolus. D-25 mis à jour.
+- FluentAssertions v8.10.0 retenu — Xceed License gratuite pour projets open-source MIT. Test-only, 0 impact consommateurs NuGet. Standardisé sur 8/8 projets tests.
+
 Décisions émergentes (Plan 07-02 — atlas pipeline) :
 
-- `SixLabors.ImageSharp 2.1.9` (Apache 2.0) dans SDK.Tools — v4.0.0 impose licence commerciale au MSBuild build. D-25 confirmé.
+- `SixLabors.ImageSharp 2.1.9` (Apache 2.0) dans SDK.Tools — v4.0.0 impose licence au MSBuild build (résolue en 08-02 via sixlabors.lic). D-25 confirmé.
 - EF migrations : `--startup-project src/SDK.Data` définitif — SDK.MonoGame manque EF Design package (PrivateAssets="all" non transitif)
 - `AtlasPacker` tests : vrais PNG via `new Image<Rgba32>(w,h).SaveAsPng` — `Image.Load()` valide format complet (headers synthétiques 26 bytes invalides)
 - `SqliteSyncer` test fixture : temp file `.db` (pas `:memory:`) — constructeur prend `dbPath` string, pas DbContext injectable directement
@@ -197,9 +202,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-07
-Stopped at: UNIFY 08-01 complet — loop fermé, commit feat(phase8-08-01)
-Next action: `/paul:plan 08` pour planifier 08-02 (Licence/CVE cleanup — ImageSharp 3.x + FluentAssertions v7.x)
-Resume file: `.paul/phases/08-nuget-distribution/08-01-SUMMARY.md`
+Stopped at: Plan 08-02 UNIFY ✓ — boucle fermée, commit effectué
+Next action: `/paul:plan 08-03` pour planifier publish-nuget.yml (workflow CI NuGet)
+Resume file: `.paul/phases/08-nuget-distribution/08-02-SUMMARY.md`
 
 ---
 
