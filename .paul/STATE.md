@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v1.0 — Phase 8 NuGet Distribution — Plan 08-03 APPLY ✓ — prêt pour UNIFY
+**Current focus:** v1.0 — Phase 8 NuGet Distribution — Plan 08-03 UNIFY ✓ — prêt pour 08-04
 
 ## Current Position
 
 Milestone: v1.0 SDK Distribuable
 Phase: 8 of 11 (NuGet Distribution)
 Plan: 08-03 — CI/CD publish-nuget.yml + ci.yml corrigés, secrets GitHub configurés
-Status: APPLY ✓ — prêt pour /paul:unify 08-03
-Last activity: 2026-06-07 — Plan 08-03 APPLY complété
+Status: UNIFY ✓ — loop 08-03 fermé
+Last activity: 2026-06-07 — Plan 08-03 UNIFY complété
 
 Progress:
 
@@ -34,7 +34,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ○     [08-03 — publish-nuget.yml + ci.yml + PackageIcon + secrets GitHub]
+  ✓        ✓        ✓     [08-03 — publish-nuget.yml + ci.yml + PackageIcon + secrets GitHub]
 ```
 
 Phase 8 progress: 3/4 plans complets (08-01 ✅ 08-02 ✅ 08-03 ✅ — 08-04 restant)
@@ -202,9 +202,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-07
-Stopped at: Plan 08-03 APPLY complété — workflows + secrets configurés
-Next action: `/paul:unify 08-03` puis `/paul:plan 08-04`
-Resume file: `.paul/phases/08-nuget-distribution/08-03-PLAN.md`
+Stopped at: Plan 08-03 UNIFY fermé — loop complet
+Next action: `/paul:plan 08-04` — smoke test local NuGet feed
+Resume file: `.paul/phases/08-nuget-distribution/08-03-SUMMARY.md`
 
 ---
 
