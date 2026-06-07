@@ -19,9 +19,9 @@ jobs:
 
       - name: Build + Test (filet de sécurité final)
         env:
-          SIXLABORS_LICENSE_KEY: ${{ secrets.SIXLABORS_LICENSE_KEY }}
+          SixLaborsLicenseKey: ${{ secrets.SIXLABORS_LICENSE_KEY }}
         run: |
-          dotnet build PokemonSDK.slnx --configuration Release -p:SixLaborsLicenseKey="$SIXLABORS_LICENSE_KEY"
+          dotnet build PokemonSDK.slnx --configuration Release
           dotnet test PokemonSDK.slnx --configuration Release --no-build
 
       # TODO: Phase 3 — remplacer par SDK.MonoGame quand disponible
