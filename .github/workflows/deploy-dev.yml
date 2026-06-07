@@ -30,6 +30,7 @@ jobs:
         run: |
           dotnet publish src/SDK.Tools/SDK.Tools.csproj \
             --configuration Release \
+            --no-build \
             --output ./publish/dev
 
       - name: Upload artifact DEV

@@ -29,6 +29,7 @@ jobs:
         run: |
           dotnet publish src/SDK.Tools/SDK.Tools.csproj \
             --configuration Release \
+            --no-build \
             --output ./publish/prod
 
       # TODO: Phase 8 — activer pour les releases NuGet officielles
