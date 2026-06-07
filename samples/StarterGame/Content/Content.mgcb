@@ -35,3 +35,6 @@
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Music/bgm.ogg
+
+#begin Scripts/npc_dialogue.lua
+/copy:Scripts/npc_dialogue.lua

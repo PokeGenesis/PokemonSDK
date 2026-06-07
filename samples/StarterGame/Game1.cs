@@ -2,6 +2,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using SDK.Core.Interfaces;
+using SDK.Core.Services;
+using SDK.Scripting.Engine;
 using StarterGame.Scenes;
 using StarterGame.World;
 
@@ -11,6 +14,8 @@ public class Game1 : Game
 {
     private readonly GraphicsDeviceManager _graphics;
     private readonly bool _headless;
+    private readonly ISaveSystem _saveSystem = new SaveSystem();
+    private readonly LuaScriptEngine _scriptEngine = new LuaScriptEngine();
     private SpriteBatch _spriteBatch = null!;
     private OverworldScene _scene = null!;
 
@@ -40,7 +45,7 @@ public class Game1 : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        _scene = new OverworldScene(GraphicsDevice);
+        _scene = new OverworldScene(GraphicsDevice, _saveSystem, _scriptEngine);
         _scene.LoadContent(Content);
 
         if (!_headless)
