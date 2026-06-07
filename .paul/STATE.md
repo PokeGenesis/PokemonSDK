@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v1.0 — Phase 9 Sample Project — prêt pour PLAN 09-04
+**Current focus:** v1.0 — Phase 9 Sample Project — PLAN 09-04 créé, en attente APPLY
 
 ## Current Position
 
 Milestone: v1.0 SDK Distribuable
 Phase: 9 of 11 (Sample Project)
-Plan: 09-03 UNIFY complet — overworld Kenney CC0 + TilemapData + OverworldScene + Game1.cs
-Status: UNIFY complet — prêt pour PLAN 09-04
-Last activity: 2026-06-07 — Plan 09-03 UNIFY
+Plan: 09-04 créé — SDK.Battle + Scripting + ISaveSystem + README
+Status: PLAN créé, prêt pour APPLY
+Last activity: 2026-06-07 — Plan 09-04 créé
 
 Progress:
 
@@ -35,7 +35,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop 09-03 complet — prêt pour /paul:plan 09-04]
+  ✓        ○        ○     [Plan 09-04 créé, en attente APPLY]
 ```
 
 Phase 8 progress: 4/4 plans complets (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
@@ -204,9 +204,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-07
-Stopped at: Phase 9 — Plan 09-03 UNIFY complet (overworld CC0 Kenney + TilemapData + OverworldScene + BGM)
-Next action: `/paul:plan 09-04`
-Resume file: `.paul/phases/09-sample-project/09-03-SUMMARY.md`
+Stopped at: Phase 9 — Plan 09-04 créé (SDK.Battle + Scripting + ISaveSystem + README)
+Next action: `/paul:apply 09-04`
+Resume file: `.paul/phases/09-sample-project/09-04-PLAN.md`
 
 ---
 
