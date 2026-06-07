@@ -4,16 +4,19 @@
 
 3 horizons : moteur core jouable (v0.1) → SDK distribuable NuGet (v1.0) → CLI + docs + features avancées (v2.0).
 
-## Completed Milestone
+## Completed Milestones
 
 **v0.1 Proof of Concept** (v0.1.0) — ✅ Complete 2026-06-05
 Phases: 4 of 4 complete (Phases 1→4)
 
-## Current Milestone
+**v1.0 SDK Distribuable** (v1.0.0) — ✅ Complete 2026-06-07
+Phases: 4 of 4 complete (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 ✅)
 
-**v1.0 SDK Distribuable** (v1.0.0)
-Status: In progress
-Phases: 3 of 4 complete (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 restante)
+## Next Milestone
+
+**v2.0 CLI + Docs + Advanced Systems** (v2.0.0)
+Status: Not started
+Phases: 0 of 3 (Phase 6 — Phase 10 — Phase 11)
 
 ## Phases
 
@@ -26,7 +29,7 @@ Phases: 3 of 4 complete (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9
 | 5     | Plugins + Characters    | 3     | ✅ Complete | 2026-06-06 |
 | 7     | Developer Experience    | 4     | ✅ Complete | 2026-06-06 |
 | 8     | NuGet Distribution      | 4     | ✅ Complete | 2026-06-07 |
-| 9     | Sample Project          | 4     | Not started | -         |
+| 9     | Sample Project          | 4     | ✅ Complete | 2026-06-07 |
 | 6     | Advanced Systems        | TBD   | Not started | -         |
 | 10    | CLI pokeforge           | 4     | Not started | -         |
 | 11    | Documentation           | 4     | Not started | -         |
@@ -100,9 +103,23 @@ Phases: 3 of 4 complete (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9
 - [x] 05-02: NuzlockePlugin + RandomizerPlugin + TurboPlugin (src/plugins/) ← *Done 2026-06-06*
 - [x] 05-03: Character + VillainGroup + VillainMember + Migration AddCharacterData + D-22 seeding ← *Done 2026-06-06*
 
+
+### Phase 9: Sample Project
+
+**Goal:** StarterGame NuGet-only (D-19) — BattleEngine 1v1 headless, NuzlockePlugin, Lua badge, ISaveSystem F5/F9. DX-04.
+**Depends on:** Phase 8
+**Requirements:** DX-04
+
+**Plans:**
+
+- [x] 09-01: PokeForge.SDK meta-package v0.1.0 (7 packages) ← *Done 2026-06-07*
+- [x] 09-02: StarterGame scaffold NuGet-only consumer (D-19) ← *Done 2026-06-07*
+- [x] 09-03: StarterGame Wave 2 — overworld CC0 Kenney + tilemap + joueur + BGM ← *Done 2026-06-07*
+- [x] 09-04: StarterGame Wave 3 — SDK.Battle + Scripting + ISaveSystem intégrés ← *Done 2026-06-07*
+
 ---
 
-*Roadmap created: 2026-06-01 | Last updated: 2026-06-07 — Phase 8 NuGet Distribution Complete*
+*Roadmap created: 2026-06-01 | Last updated: 2026-06-07 — Phase 9 Sample Project Complete — v1.0 Milestone COMPLETE*
 *Full details: ROADMAP.md (root)*
 
 ### Phase 7: Developer Experience

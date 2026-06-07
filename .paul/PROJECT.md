@@ -66,8 +66,12 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 ### Shipped in Phase 8 ✅
 - DX-03 — 7 packages PokeForge.SDK.* v0.1.0 publiables NuGet.org — métadonnées, licences, publish-nuget.yml CI/CD, smoke test consumer D-19 — *2026-06-07*
 
-### Active (v1.0)
-- Phase 9 : Sample Project (DX-04 — projet consommateur via NuGet, template scaffold)
+### Shipped in Phase 9 ✅
+- DX-04 — StarterGame : BattleEngine 1v1 + NuzlockePlugin + Lua badge + ISaveSystem F5/F9 — demo jouable NuGet-only (D-19) — *2026-06-07*
+
+### Active (v2.0)
+- Phase 10 : CLI pokeforge (scaffold sample depuis template embarqué — D-20)
+- Phase 11 : Documentation (APIs stables uniquement — D-21)
 
 ### Out of Scope
 - Connexion online / trades réseau
@@ -123,5 +127,5 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | JSON | System.Text.Json | Intégré .NET 10 |
 
 ---
-*Created: 2026-06-01 | Last updated: 2026-06-07 after Phase 8*
+*Created: 2026-06-01 | Last updated: 2026-06-07 after Phase 9 — v1.0 Milestone Complete*
 *Full context: PROJECT.md | REQUIREMENTS.md | .claude/ARCHITECTURE.md | CLAUDE.md*
