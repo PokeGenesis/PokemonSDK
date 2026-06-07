@@ -25,8 +25,8 @@ public class Game1 : Game
     private Func<IScriptEngine>    _scriptEngineFactory = null!;
     private LuaErrorOverlay        _luaErrorOverlay = new();
     private SpriteFont?            _font;
-    private Microsoft.Xna.Framework.Input.KeyboardState _prevKeyState;
 #if DEBUG
+    private Microsoft.Xna.Framework.Input.KeyboardState _prevKeyState;
     private LuaHotReloader?        _hotReloader;
     private LuaConsole             _luaConsole = new();
 #endif
