@@ -33,7 +33,7 @@ jobs:
       - name: Run all tests
         run: dotnet test PokemonSDK.slnx --configuration Release --no-build
 
-      - name: Pack 7 packages PokeForge.SDK.*
+      - name: Pack packages PokeForge.SDK.*
         run: |
           dotnet pack PokemonSDK.slnx \
             --configuration Release \
