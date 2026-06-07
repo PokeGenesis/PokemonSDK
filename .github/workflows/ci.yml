@@ -26,7 +26,9 @@ jobs:
         run: dotnet restore PokemonSDK.slnx
 
       - name: Build
-        run: dotnet build PokemonSDK.slnx --no-restore --configuration Release
+        env:
+          SIXLABORS_LICENSE_KEY: ${{ secrets.SIXLABORS_LICENSE_KEY }}
+        run: dotnet build PokemonSDK.slnx --no-restore --configuration Release -p:SixLaborsLicenseKey="$SIXLABORS_LICENSE_KEY"
 
       - name: Test + Coverage
         run: dotnet test PokemonSDK.slnx --no-build --configuration Release --collect:"XPlat Code Coverage" --logger "console;verbosity=normal"

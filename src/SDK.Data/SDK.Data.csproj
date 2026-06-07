@@ -19,4 +19,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>PokeForge.SDK.Data</PackageId>
+    <Version>0.1.0</Version>
+    <Description>EF Core 10 + SQLite pour PokemonSDK. Schéma 9 générations, migrations, table translations centrale (D-22 : 6 locales).</Description>
+    <PackageTags>pokemon;fan-game;efcore;sqlite;database;dotnet;sdk</PackageTags>
+    <IsPackable>true</IsPackable>
+  </PropertyGroup>
+
 </Project>
