@@ -6,26 +6,27 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v1.0 — Phase 8 NuGet Distribution — Phase 7 ✅ complète
+**Current focus:** v1.0 — Phase 8 NuGet Distribution — Plan 08-02 à démarrer
 
 ## Current Position
 
 Milestone: v1.0 SDK Distribuable
-Phase: 7 of 11 (Developer Experience) — Complete ✅
-Plan: Complete (07-01 ✅ 07-02 ✅ 07-03 ✅ 07-04 ✅)
-Status: Phase 7 fermée — prêt pour Phase 8
-Last activity: 2026-06-06 — Phase 7 complète (DX-01 asset pipeline + DX-02 hot reload + LuaConsole REPL + MGCB font) — 166 tests verts
+Phase: 8 of 11 (NuGet Distribution)
+Plan: 08-01 ✅ — prêt pour 08-02 (Licence/CVE cleanup)
+Status: UNIFY ✓ — loop 08-01 fermé
+Last activity: 2026-06-07 — Plan 08-01 UNIFY complet — 7 .nupkg + Directory.Build.props + README bilingue
 
 Progress:
 
 - Milestone v0.1: [██████████] 100% ✅ (Phases 1→4 complètes, 2026-06-05)
-- Milestone v1.0: [██░░░░░░░░] ~25% (Phase 5 ✅ — Phase 7 en cours — Phases 8, 9 restantes)
+- Milestone v1.0: [███░░░░░░░] ~30% (Phase 5 ✅ — Phase 7 ✅ — Phase 8 en cours — Phase 9 restante)
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
 - Phase 3: [██████████] 100% ✅
 - Phase 4: [██████████] 100% ✅
 - Phase 5: [██████████] 100% ✅ (05-01 ✅ 05-02 ✅ 05-03 ✅)
 - Phase 7: [██████████] 100% ✅ (07-01 ✅ 07-02 ✅ 07-03 ✅ 07-04 ✅)
+- Phase 8: [██░░░░░░░░] ~25% (08-01 ✅ — 08-02, 08-03, 08-04 restants)
 
 ## Loop Position
 
@@ -33,8 +34,10 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Phase 7 complète — 166 tests verts — prêt pour Phase 8]
+  ✓        ✓        ✓     [08-01 — NuGet metadata + Directory.Build.props + README]
 ```
+
+Phase 8 progress: 1/4 plans complets
 
 ## Accumulated Context
 
@@ -193,10 +196,10 @@ None.
 
 ## Session Continuity
 
-Last session: 2026-06-06
-Stopped at: Phase 7 complète (UNIFY 07-04 fermé) — 166 tests verts — staging sync requis
-Next action: `/paul:plan 08` pour Phase 8 NuGet Distribution
-Resume file: `.paul/phases/07-developer-experience/07-04-SUMMARY.md`
+Last session: 2026-06-07
+Stopped at: UNIFY 08-01 complet — loop fermé, commit feat(phase8-08-01)
+Next action: `/paul:plan 08` pour planifier 08-02 (Licence/CVE cleanup — ImageSharp 3.x + FluentAssertions v7.x)
+Resume file: `.paul/phases/08-nuget-distribution/08-01-SUMMARY.md`
 
 ---
 

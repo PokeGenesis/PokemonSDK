@@ -1,0 +1,25 @@
+<Project>
+
+  <PropertyGroup>
+    <!-- Identité package — partagée par tous les packages NuGet -->
+    <Authors>PokeGenesis</Authors>
+    <Copyright>Copyright © 2026 PokeGenesis</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/PokeGenesis/PokemonSDK</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/PokeGenesis/PokemonSDK</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    <!-- Par défaut : rien n'est packable.
+         Les 7 projets SDK déclarent explicitement <IsPackable>true</IsPackable>. -->
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <!-- Bundler README.md (racine repo) dans chaque package NuGet -->
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+    <None Include="$(MSBuildThisFileDirectory)README.md"
+          Pack="true"
+          PackagePath="\" />
+  </ItemGroup>
+
+</Project>
