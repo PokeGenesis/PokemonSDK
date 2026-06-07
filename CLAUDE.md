@@ -66,45 +66,70 @@ SDK.MonoGame  ← SDK.Core + MonoGame + SDK.Battle + SDK.Scripting (via Func fac
 
 | ID | Description | Statut |
 |----|-------------|--------|
-| DATA-01→06 | Solution, SQLite 9 gens, formes, migrations, filtre, translations | ✅ À recréer |
-| PLAT-01,03 | .NET 10 + DesktopGL cross-platform, chemins | ✅ À recréer |
-| PLAT-02 | Builds Windows + Linux CI | 🔲 Phase 3 |
-| BATTLE-01→03,07 | Combat 1v1, formules, IA, config | ✅ À recréer |
-| BATTLE-04→06 | Plugins Nuzlocke / Randomizer / Turbo | 🔲 Phase 5 |
-| MAP-01→03 | Renderer HD, overworld, jour/nuit | 🔲 Phase 3 |
-| SCRIPT-01→03 | Lua sandbox, badges, save | ✅ À recréer |
-| CHAR-01→03 | Personnages, rivaux, antagonistes | 🔲 Phase 5 |
-| ADV-01→02 | Pokégear, objets terrain | 🔲 Phase 5 |
+| DATA-01→06 | Solution, SQLite 9 gens, formes, migrations, filtre, translations | ✅ Phase 1 |
+| PLAT-01,03 | .NET 10 + DesktopGL cross-platform, chemins | ✅ Phase 1 |
+| PLAT-02 | Builds Windows + Linux CI | ✅ Phase 3 |
+| BATTLE-01→03,07 | Combat 1v1, formules, IA, config | ✅ Phase 2 |
+| MAP-01→03 | Renderer HD, overworld, jour/nuit | ✅ Phase 3 |
+| SCRIPT-01→03 | Lua sandbox, badges, save | ✅ Phase 4 |
+| BATTLE-04→06 | Plugins Nuzlocke / Randomizer / Turbo | ✅ Phase 5 |
+| CHAR-01→03 | Personnages, rivaux, antagonistes | ✅ Phase 5 |
+| ADV-01→02 | Pokégear, objets terrain | ✅ Phase 5 |
+| DX-01→02 | Asset pipeline, hot reload Lua | ✅ Phase 7 |
+| DX-03→04 | NuGet publish, Sample project | ✅ Phase 8-9 |
 | ADV-03→04 | TTS, Fakemons | 🔲 Phase 6 |
-| DX-01→02 | Asset pipeline, hot reload Lua | 🔲 Phase 7 |
-| DX-03→04 | NuGet publish, Sample project | 🔲 Phase 8-9 |
 | DX-05→06 | CLI pokeforge, Docs | 🔲 Phase 10-11 |
+| BTLUI-01 | BattleScene UI — HP bars, sprites, move menu | 🔲 Phase 12 |
+| BTLUI-02 | EXP + Level-up + Évolution | 🔲 Phase 13 |
+| BTLUI-03 | Items en combat + Bag + PokéMart | 🔲 Phase 14 |
+| UI-01→03 | PartyScene, PCScene, PokédexScene | 🔲 Phase 15 |
+| QUEST-01→02 | QuestPlugin chaînable Lua + tracker UI | 🔲 Phase 16 |
+| DATA-07 | Import PokeAPI 1010 Pokémon réels | 🔲 Phase 17 |
+| SFX-01 | Audio complet — cries + SFX UI | 🔲 Phase 18 |
+| MOD-01→03 | Méga / Z-moves / Dynamax plugins | 🔲 Phase 19 |
+| DUNGEON-01→02 | DungeonPlugin — BSP floors + IDungeonMode | 🔲 Phase 20 |
+| STREAM-01→02 | StreamerPlugin — Twitch/YouTube + HUD overlay | 🔲 Phase 21 |
+| NET-01 | SDK.Network — combat online + trade + GTS | 🔲 Phase 22 |
 
 → Référence complète : `REQUIREMENTS.md`
 
 ---
 
-## 6. ROADMAP — 3 HORIZONS
+## 6. ROADMAP — 6 HORIZONS
 
 ```
-v0.1 → Phases 1+2+3+4   (~3-4 mois)  Moteur core jouable
-v1.0 → + Phases 5+7+8+9 (~3-4 mois)  SDK distribuable NuGet
-v2.0 → + Phases 6+10+11 (post v1.0)  CLI + docs + features avancées
+v0.1 → Phases 1+2+3+4       ✅ Moteur core jouable
+v1.0 → + Phases 5+7+8+9     ✅ SDK distribuable NuGet
+v2.0 → + Phases 6+10+11     🔲 CLI + docs + features avancées
+v3.0 → + Phases 12→17       🔲 Gameplay complet jouable
+v4.0 → + Phases 18→21       🔲 Extensions + plugins avancés
+v5.0 → + Phase 22           🔲 Réseau en ligne
 ```
 
-| Phase | Description | Horizon |
-|-------|-------------|---------|
-| 1 | SDK.Core + SDK.Data | v0.1 |
-| 2 | Battle Engine Core | v0.1 |
-| 3 | World Foundation | v0.1 |
-| 4 | Scripting + Progression | v0.1 🏁 |
-| 5 | Plugins + Characters | v1.0 |
-| 7 | Developer Experience | v1.0 |
-| 8 | NuGet Distribution | v1.0 |
-| 9 | Sample Project | v1.0 🏁 |
-| 6 | Advanced Systems | v2.0 |
-| 10 | CLI `pokeforge` | v2.0 |
-| 11 | Documentation | v2.0 🏁 |
+| Phase | Description | Horizon | Statut |
+|-------|-------------|---------|--------|
+| 1 | SDK.Core + SDK.Data | v0.1 | ✅ |
+| 2 | Battle Engine Core | v0.1 | ✅ |
+| 3 | World Foundation | v0.1 | ✅ |
+| 4 | Scripting + Progression | v0.1 🏁 | ✅ |
+| 5 | Plugins + Characters | v1.0 | ✅ |
+| 7 | Developer Experience | v1.0 | ✅ |
+| 8 | NuGet Distribution | v1.0 | ✅ |
+| 9 | Sample Project | v1.0 🏁 | ✅ |
+| 6 | Advanced Systems | v2.0 | 🔲 |
+| 10 | CLI `pokeforge` | v2.0 | 🔲 |
+| 11 | Documentation | v2.0 🏁 | 🔲 |
+| 12 | BattleScene UI | v3.0 | 🔲 |
+| 13 | EXP + Level-up + Évolution | v3.0 | 🔲 |
+| 14 | Items + Bag + Shop | v3.0 | 🔲 |
+| 15 | Party + PC + Pokédex UI | v3.0 | 🔲 |
+| 16 | QuestPlugin | v3.0 | 🔲 |
+| 17 | Real Data Pipeline (PokeAPI) | v3.0 🏁 | 🔲 |
+| 18 | Audio complet (SFX + cries) | v4.0 | 🔲 |
+| 19 | Mécaniques modernes (Méga/Z/Dynamax) | v4.0 | 🔲 |
+| 20 | DungeonPlugin (Mystery Dungeon) | v4.0 | 🔲 |
+| 21 | StreamerPlugin (Twitch/YouTube) | v4.0 🏁 | 🔲 |
+| 22 | SDK.Network (combat online + trade) | v5.0 🏁 | 🔲 |
 
 → Détails waves + critères de succès : `ROADMAP.md`
 

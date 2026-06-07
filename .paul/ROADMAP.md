@@ -18,6 +18,20 @@ Phases: 4 of 4 complete (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9
 Status: Not started
 Phases: 0 of 3 (Phase 6 — Phase 10 — Phase 11)
 
+## Future Milestones
+
+**v3.0 Gameplay Complet** (v3.0.0)
+Status: Not started
+Phases: 0 of 6 (Phase 12 — Phase 13 — Phase 14 — Phase 15 — Phase 16 — Phase 17)
+
+**v4.0 Extensions** (v4.0.0)
+Status: Not started
+Phases: 0 of 4 (Phase 18 — Phase 19 — Phase 20 — Phase 21)
+
+**v5.0 En ligne** (v5.0.0)
+Status: Not started
+Phases: 0 of 1 (Phase 22)
+
 ## Phases
 
 | Phase | Name          | Plans | Status      | Completed |
@@ -33,6 +47,17 @@ Phases: 0 of 3 (Phase 6 — Phase 10 — Phase 11)
 | 6     | Advanced Systems        | TBD   | Not started | -         |
 | 10    | CLI pokeforge           | 4     | Not started | -         |
 | 11    | Documentation           | 4     | Not started | -         |
+| 12    | BattleScene UI          | TBD   | Not started | -         |
+| 13    | EXP + Level-up + Évol.  | TBD   | Not started | -         |
+| 14    | Items + Bag + Shop      | TBD   | Not started | -         |
+| 15    | Party + PC + Pokédex UI | TBD   | Not started | -         |
+| 16    | QuestPlugin             | TBD   | Not started | -         |
+| 17    | Real Data Pipeline      | TBD   | Not started | -         |
+| 18    | Audio complet           | TBD   | Not started | -         |
+| 19    | Mécaniques modernes     | TBD   | Not started | -         |
+| 20    | DungeonPlugin           | TBD   | Not started | -         |
+| 21    | StreamerPlugin          | TBD   | Not started | -         |
+| 22    | SDK.Network             | TBD   | Not started | -         |
 
 ## Phase Details
 
@@ -103,7 +128,6 @@ Phases: 0 of 3 (Phase 6 — Phase 10 — Phase 11)
 - [x] 05-02: NuzlockePlugin + RandomizerPlugin + TurboPlugin (src/plugins/) ← *Done 2026-06-06*
 - [x] 05-03: Character + VillainGroup + VillainMember + Migration AddCharacterData + D-22 seeding ← *Done 2026-06-06*
 
-
 ### Phase 9: Sample Project
 
 **Goal:** StarterGame NuGet-only (D-19) — BattleEngine 1v1 headless, NuzlockePlugin, Lua badge, ISaveSystem F5/F9. DX-04.
@@ -119,7 +143,7 @@ Phases: 0 of 3 (Phase 6 — Phase 10 — Phase 11)
 
 ---
 
-*Roadmap created: 2026-06-01 | Last updated: 2026-06-07 — Phase 9 Sample Project Complete — v1.0 Milestone COMPLETE*
+*Roadmap created: 2026-06-01 | Last updated: 2026-06-07 — Phases 12→22 ajoutées (v3.0→v5.0). 22 phases total. v1.0 Milestone COMPLETE*
 *Full details: ROADMAP.md (root)*
 
 ### Phase 7: Developer Experience

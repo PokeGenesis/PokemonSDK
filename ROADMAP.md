@@ -6,11 +6,14 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 ## Timeline
 
-| Horizon | Phases | Durée estimée | Résultat |
-|---------|--------|---------------|---------|
-| **v0.1** "Proof of Concept" | 1 + 2 + 3 + 4 | ~3-4 mois | Moteur core jouable, release GitHub |
-| **v1.0** "Release" | 5 + 7 + 8 + 9 | ~3-4 mois de plus | SDK distribuable via NuGet, maker peut créer son jeu |
-| **v2.0** "Incontournable" | 6 + 10 + 11 | Après feedback v1.0 | CLI + docs + features avancées |
+| Horizon | Phases | Résultat |
+|---------|--------|---------|
+| **v0.1** "Proof of Concept" | 1 + 2 + 3 + 4 | Moteur core jouable, release GitHub ✅ |
+| **v1.0** "Release" | 5 + 7 + 8 + 9 | SDK distribuable via NuGet ✅ |
+| **v2.0** "Incontournable" | 6 + 10 + 11 | CLI + docs + features avancées |
+| **v3.0** "Gameplay Complet" | 12 + 13 + 14 + 15 + 16 + 17 | BattleScene visuelle + Items + EXP + Quêtes + vraies données |
+| **v4.0** "Extensions" | 18 + 19 + 20 + 21 | Audio complet + Méca modernes + Donjon + Streamer |
+| **v5.0** "En ligne" | 22 | Combat online + trade + GTS |
 
 ## Phase Numbering
 
@@ -288,21 +291,267 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 ---
 
-## Progress
+## HORIZON 4 — v3.0 "Gameplay Complet"
 
-| Phase | Description | Plans | Status | Horizon |
-|-------|-------------|-------|--------|---------|
-| 1 | SDK.Core + SDK.Data | 4 | ✅ Complet | v0.1 |
-| 2 | Battle Engine Core | 4 | ✅ Complet | v0.1 |
-| 3 | World Foundation | 4 | ✅ Complet | v0.1 |
-| 4 | Scripting + Progression | 3 | ✅ Complet — 97 tests | v0.1 |
-| 5 | Plugins + Characters | TBD | 🔲 Not started | v1.0 |
-| 7 | Developer Experience | 4 | 🔲 Not started | v1.0 |
-| 8 | NuGet Distribution | 4 | 🔲 Not started | v1.0 |
-| 9 | Sample Project | 4 | 🔲 Not started | v1.0 |
-| 6 | Advanced Systems | TBD | 🔲 Post-v1.0 | v2.0 |
-| 10 | CLI `pokeforge` | 4 | 🔲 Post-v1.0 | v2.0 |
-| 11 | Documentation | 4 | 🔲 Post-v1.0 | v2.0 |
+> Un maker peut livrer un fan-game complet : combats visuels, EXP/évolution, items, UI complète, quêtes Lua, 1010 Pokémon réels.
+
+### Phase 12: BattleScene UI
+
+**Goal**: Combat 1v1 visuel complet — HP bars, sprites, move menu, statuts, transitions.
+**Depends on**: Phase 11 (v2.0 stable)
+**Requirements**: BTLUI-01
+**Priorité**: 🔴 CRITIQUE — sans ça le SDK reste headless-only
+
+**Success Criteria:**
+1. BattleScene affiche HP bars style GBA/DS, nom + niveau, PP display
+2. Sprites front (ennemi 96×96) + back (joueur 96×96) renderisés en RenderPipeline xBR
+3. Move selection menu 4 capacités avec PP + type color
+4. Statuts visuels (brûlure/gel/sommeil/paralysie/confusion) affichés via icône + tint
+5. Transition overworld→BattleScene + retour avec effet wipe animé
+
+**Plans:** TBD (estimé 4→6 plans — plus grande phase du SDK)
+
+**Status:** 🔲 Post-v2.0
 
 ---
-*Last updated: 2026-06-05 — Phases 1-4 marquées Complet. Tag v0.1 posé.*
+
+### Phase 13: EXP + Level-up + Évolution
+
+**Goal**: La progression Pokémon est complète — gain EXP, montée de niveau, évolution avec animation.
+**Depends on**: Phase 12
+**Requirements**: BTLUI-02
+**Priorité**: 🔴 CRITIQUE — core gameplay loop
+
+**Success Criteria:**
+1. Gain EXP post-combat (formule Gen configurable) avec barre EXP animée
+2. Écran level-up : stats actuelles + delta (+ATK, +DEF, …) affiché
+3. Pokémon apprend nouvelle capacité si disponible au niveau atteint
+4. Trigger évolution (niveau/pierre/échange/bonheur) + animation cross-fade sprites
+5. Évolution annulable par le joueur (touche B ou Échap)
+
+**Plans:** TBD
+
+**Status:** 🔲 Post-v2.0
+
+---
+
+### Phase 14: Items + Bag + Shop
+
+**Goal**: Système d'objets complet — inventaire, usage en combat, PokéMart scriptable.
+**Depends on**: Phase 12
+**Requirements**: BTLUI-03
+**Priorité**: 🟠 HAUTE
+
+**Success Criteria:**
+1. `ItemRegistry` définit effets (PotionItem, PokeballItem, TmItem…) dans SDK.Core
+2. `BagScene` catégorisée navigable (Poké Balls / Soins / CTs / Objets tenus)
+3. Sélection item depuis BattleScene menu → effet appliqué sur Pokémon cible
+4. `PokéMart` NPC scriptable Lua (`shop:open({items})`) avec achat/vente
+5. Inventaire persisté dans SaveSystem JSON (SCRIPT-03 étendu)
+
+**Plans:** TBD
+
+**Status:** 🔲 Post-v2.0
+
+---
+
+### Phase 15: Party + PC + Pokédex UI
+
+**Goal**: Scènes UI de gestion Pokémon complètes accessible depuis le menu principal.
+**Depends on**: Phase 13
+**Requirements**: UI-01, UI-02, UI-03
+**Priorité**: 🟠 HAUTE
+
+**Success Criteria:**
+1. `PartyScene` — 6 slots, HP bar + statut, réorganisation drag-style, accès depuis menu
+2. `PCScene` — boîtes défilables, dépôt/retrait, renommage Pokémon
+3. `PokédexScene` — entrée numéro dex, nom/description D-22, sprites front/back/shiny, stats + types
+4. Navigation fluide entre scènes sans freeze (D-14 résolution tenue)
+
+**Plans:** TBD
+
+**Status:** 🔲 Post-v2.0
+
+---
+
+### Phase 16: QuestPlugin
+
+**Goal**: Système de quêtes principales et secondaires scriptables Lua, avec tracker UI ingame.
+**Depends on**: Phase 4 (GameState + Lua), Phase 15 (UI framework)
+**Requirements**: QUEST-01, QUEST-02
+**Priorité**: 🟠 HAUTE — différenciation forte vs PSDK
+
+**Success Criteria:**
+1. `SDK.Plugins.Quests` — `quest:start(id)`, `quest:update(id, key, val)`, `quest:complete(id)` fonctionnels depuis Lua
+2. Quêtes stockées dans `GameState.Flags`, persistées via SaveSystem
+3. Récompenses distribuées automatiquement à `quest:complete` (items/badges/EXP configurables)
+4. Quest tracker UI (journal) — liste actives + complètes, objectifs multilingues D-22
+5. `QuestPlugin` registrable via `PluginRegistry` (D-13 pattern)
+
+**Plans:** TBD
+
+**Status:** 🔲 Post-v2.0
+
+---
+
+### Phase 17: Real Data Pipeline (PokeAPI)
+
+**Goal**: 1010 Pokémon réels + moves + abilities importés en SQLite via `pokeforge import`.
+**Depends on**: Phase 10 (CLI `pokeforge`)
+**Requirements**: DATA-07
+**Priorité**: 🟡 NORMAL (données fictives fonctionnent pour dev)
+
+**Success Criteria:**
+1. `pokeforge import --source pokeapi` ingère 1010 espèces + moves + abilities + types
+2. Génération correcte mappée par espèce (Gen 1 = 1→151, …, Gen 9 = 906→1010)
+3. D-22 : 6 locales (en/es/fr/de/it/ja) importées depuis PokeAPI `language` endpoints
+4. Import idempotent — re-run = no-op si données inchangées
+5. Durée import < 10 min sur connexion standard (pagination + cache local)
+
+**Plans:** TBD
+
+**Status:** 🔲 Post-v2.0
+
+> **🏁 TAG v3.0** — Premier fan-game complet possible avec le SDK seul
+
+---
+
+## HORIZON 5 — v4.0 "Extensions"
+
+> Plugins avancés qui différencient PokéForge de tout concurrent — Mode Donjon, audio pro, mécaniques modernes, overlay streamer.
+
+### Phase 18: Audio Complet
+
+**Goal**: SFX complet — cries en combat, sons UI, SoundManager non-bloquant.
+**Depends on**: Phase 12
+**Requirements**: SFX-01
+**Priorité**: 🟡 NORMAL
+
+**Success Criteria:**
+1. Cries OGG (D-24) joués au début de chaque combat + victoire KO
+2. SFX UI : sélection menu / damage hit / statut appliqué
+3. `SoundManager` thread audio séparé — zéro freeze game loop pendant lecture
+4. Volume configurable ingame, persist dans save
+
+**Plans:** TBD
+
+**Status:** 🔲 Post-v3.0
+
+---
+
+### Phase 19: Mécaniques Modernes (Mega / Z-moves / Dynamax)
+
+**Goal**: 3 plugins mécaniques modernes activables via IBattlePlugin + PluginRegistry.
+**Depends on**: Phase 12
+**Requirements**: MOD-01, MOD-02, MOD-03
+**Priorité**: 🟡 NORMAL
+
+**Success Criteria:**
+1. `MegaPlugin` — Méga-Évolution si Méga-Pierre tenue, boost stats + changement type, cooldown 1/combat
+2. `ZMovePlugin` — Z-Crystal consommée, override dégâts (formule officielle), Z-Status appliqués
+3. `DynamaxPlugin` — Dynamax 3 tours, HP×2, G-Capacités remplacent moveset
+4. BattleState immuable respecté dans les 3 plugins (D-05)
+5. Chaque plugin activable indépendamment via `PluginRegistry`
+
+**Plans:** TBD
+
+**Status:** 🔲 Post-v3.0
+
+---
+
+### Phase 20: DungeonPlugin (Mystery Dungeon)
+
+**Goal**: Mode donjon procédural complet — floors BSP, mouvement 1-step-1-tour, battle resolver dédié.
+**Depends on**: Phase 3 (WorldSystem), Phase 12 (BattleScene)
+**Requirements**: DUNGEON-01, DUNGEON-02
+**Priorité**: 🟢 EXTENSION — game mode distinct
+
+**Success Criteria:**
+1. `IDungeonMode` override `WorldSystem` — mouvement 1 step = 1 tour (pas de déplacement libre)
+2. `DungeonFloorGenerator` — algo BSP + corridors, seed reproductible, salles + spawns
+3. `IDungeonBattleResolver` — résolution combat simplifié en donjon (pas BattleEngine standard)
+4. Système faim — compteur décroissant par step, KO si faim = 0
+5. Boss de floor + escalier vers étage suivant + items au sol ramassables
+
+**Plans:** TBD (estimé 4→6 plans)
+
+**Status:** 🔲 Post-v3.0
+
+---
+
+### Phase 21: StreamerPlugin (Twitch/YouTube)
+
+**Goal**: Plugin overlay streamer — équipe active visible + titre stream auto-mis-à-jour.
+**Depends on**: Phase 15 (PartyScene data)
+**Requirements**: STREAM-01, STREAM-02
+**Priorité**: 🟢 EXTENSION — différenciation unique
+
+**Success Criteria:**
+1. `SDK.Plugins.Streamer` lit équipe active depuis `GameState` (6 Pokémon, noms, niveaux)
+2. Push titre Twitch via Helix API `PATCH /channels` avec nom jeu + équipe
+3. Push titre YouTube via `videos.update` (Data API v3)
+4. `StreamerConfig { TwitchClientId, TwitchToken, YouTubeToken, GameTitle }` injecté par consumer — zéro credentials hardcodés
+5. HUD overlay SDK.MonoGame — 6 sprites `icon` 32×32 (D-23) + nom jeu, coin configurable, toggle touche paramétrable
+
+**Plans:** TBD (estimé 2 plans)
+
+**Status:** 🔲 Post-v3.0
+
+> **🏁 TAG v4.0** — PokéForge avec plugins uniques dans l'écosystème fan-game
+
+---
+
+## HORIZON 6 — v5.0 "En ligne"
+
+> Combat online, trade, GTS — infrastructure réseau pour communautés actives.
+
+### Phase 22: SDK.Network
+
+**Goal**: Combat en ligne tour-par-tour, trade bilatéral, GTS minimal.
+**Depends on**: Phase 12 (BattleScene), Phase 15 (Party data)
+**Requirements**: NET-01
+**Priorité**: 🟢 LONG TERME
+
+**Success Criteria:**
+1. `SDK.Network` — WebSocket server/client pour combat 1v1 tour-par-tour en ligne
+2. Trade bilatéral authentifié — échange Pokémon confirmé des deux côtés avant swap
+3. GTS minimal — dépôt Pokémon avec critères recherche + retrait si offre matchée
+4. Zéro couplage SDK.Network avec SDK.MonoGame — couche transport pure
+
+**Plans:** TBD
+
+**Status:** 🔲 Post-v4.0
+
+> **🏁 TAG v5.0** — PokéForge en ligne
+
+---
+
+## Progress
+
+| Phase | Description | Horizon | Status |
+|-------|-------------|---------|--------|
+| 1 | SDK.Core + SDK.Data | v0.1 | ✅ Complet 2026-06-02 |
+| 2 | Battle Engine Core | v0.1 | ✅ Complet 2026-06-04 |
+| 3 | World Foundation | v0.1 | ✅ Complet 2026-06-05 |
+| 4 | Scripting + Progression | v0.1 | ✅ Complet 2026-06-05 — 97 tests |
+| 5 | Plugins + Characters | v1.0 | ✅ Complet 2026-06-06 |
+| 7 | Developer Experience | v1.0 | ✅ Complet 2026-06-06 |
+| 8 | NuGet Distribution | v1.0 | ✅ Complet 2026-06-07 |
+| 9 | Sample Project | v1.0 | ✅ Complet 2026-06-07 |
+| 6 | Advanced Systems | v2.0 | 🔲 Post-v1.0 |
+| 10 | CLI `pokeforge` | v2.0 | 🔲 Post-v1.0 |
+| 11 | Documentation | v2.0 | 🔲 Post-v1.0 |
+| 12 | BattleScene UI | v3.0 | 🔲 Post-v2.0 |
+| 13 | EXP + Level-up + Évolution | v3.0 | 🔲 Post-v2.0 |
+| 14 | Items + Bag + Shop | v3.0 | 🔲 Post-v2.0 |
+| 15 | Party + PC + Pokédex UI | v3.0 | 🔲 Post-v2.0 |
+| 16 | QuestPlugin | v3.0 | 🔲 Post-v2.0 |
+| 17 | Real Data Pipeline (PokeAPI) | v3.0 | 🔲 Post-v2.0 |
+| 18 | Audio complet (SFX + cries) | v4.0 | 🔲 Post-v3.0 |
+| 19 | Mécaniques modernes (Méga/Z/Dynamax) | v4.0 | 🔲 Post-v3.0 |
+| 20 | DungeonPlugin (Mystery Dungeon) | v4.0 | 🔲 Post-v3.0 |
+| 21 | StreamerPlugin (Twitch/YouTube) | v4.0 | 🔲 Post-v3.0 |
+| 22 | SDK.Network (combat online + trade) | v5.0 | 🔲 Post-v4.0 |
+
+---
+*Last updated: 2026-06-07 — Phases 12→22 ajoutées (v3.0 Gameplay Complet + v4.0 Extensions + v5.0 Réseau). 22 phases total.*
