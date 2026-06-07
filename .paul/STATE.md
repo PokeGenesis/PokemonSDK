@@ -6,27 +6,28 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v1.0 — Phase 8 NuGet Distribution — Plan 08-03 UNIFY ✓ — prêt pour 08-04
+**Current focus:** v1.0 — Phase 9 Sample Project — prêt pour PLAN
 
 ## Current Position
 
 Milestone: v1.0 SDK Distribuable
-Phase: 8 of 11 (NuGet Distribution)
-Plan: 08-03 — CI/CD publish-nuget.yml + ci.yml corrigés, secrets GitHub configurés
-Status: UNIFY ✓ — loop 08-03 fermé
-Last activity: 2026-06-07 — Plan 08-03 UNIFY complété
+Phase: 9 of 11 (Sample Project)
+Plan: Pas encore démarré
+Status: Ready to plan
+Last activity: 2026-06-07 — Phase 8 NuGet Distribution complète (4/4 plans ✅)
 
 Progress:
 
 - Milestone v0.1: [██████████] 100% ✅ (Phases 1→4 complètes, 2026-06-05)
-- Milestone v1.0: [███░░░░░░░] ~30% (Phase 5 ✅ — Phase 7 ✅ — Phase 8 en cours — Phase 9 restante)
+- Milestone v1.0: [██████░░░░] ~50% (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 restante)
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
 - Phase 3: [██████████] 100% ✅
 - Phase 4: [██████████] 100% ✅
 - Phase 5: [██████████] 100% ✅ (05-01 ✅ 05-02 ✅ 05-03 ✅)
 - Phase 7: [██████████] 100% ✅ (07-01 ✅ 07-02 ✅ 07-03 ✅ 07-04 ✅)
-- Phase 8: [██████░░░░] ~75% (08-01 ✅ 08-02 ✅ 08-03 ✅ — 08-04 restant)
+- Phase 8: [██████████] 100% ✅ (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
+- Phase 9: [░░░░░░░░░░] 0% — prêt à démarrer
 
 ## Loop Position
 
@@ -34,10 +35,10 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [08-03 — publish-nuget.yml + ci.yml + PackageIcon + secrets GitHub]
+  ✓        ✓        ✓     [Loop complete — Phase 8 fermée, prêt pour Phase 9]
 ```
 
-Phase 8 progress: 3/4 plans complets (08-01 ✅ 08-02 ✅ 08-03 ✅ — 08-04 restant)
+Phase 8 progress: 4/4 plans complets (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
 
 ## Accumulated Context
 
@@ -202,9 +203,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-07
-Stopped at: Plan 08-03 UNIFY fermé — loop complet
-Next action: `/paul:plan 08-04` — smoke test local NuGet feed
-Resume file: `.paul/phases/08-nuget-distribution/08-03-SUMMARY.md`
+Stopped at: Phase 8 NuGet Distribution complète — 08-04 loop fermée (PLAN ✓ APPLY ✓ UNIFY ✓)
+Next action: `/paul:plan` pour Phase 9 Sample Project (DX-04)
+Resume file: `.paul/phases/08-nuget-distribution/08-04-SUMMARY.md`
 
 ---
 
