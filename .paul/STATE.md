@@ -12,9 +12,9 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 Milestone: v1.0 SDK Distribuable
 Phase: 9 of 11 (Sample Project)
-Plan: 09-03 créé, en attente d'approbation
-Status: PLAN créé, prêt pour APPLY
-Last activity: 2026-06-07 — Plan 09-03 créé (overworld CC0 + tilemap + joueur)
+Plan: 09-03 APPLY complet — overworld Kenney CC0 + TilemapData + OverworldScene + Game1.cs
+Status: APPLY complet, prêt pour UNIFY
+Last activity: 2026-06-07 — Plan 09-03 APPLY (SHA ff8e09b)
 
 Progress:
 
@@ -35,7 +35,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ○        ○     [Plan 09-03 créé, en attente d'approbation]
+  ✓        ✓        ○     [Plan 09-03 APPLY complet — prêt pour UNIFY]
 ```
 
 Phase 8 progress: 4/4 plans complets (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
@@ -204,7 +204,7 @@ None.
 
 Last session: 2026-06-07
 Stopped at: Phase 9 — Plan 09-03 créé (overworld CC0 Kenney + TilemapData + OverworldScene + BGM)
-Next action: Approuver le plan puis `/paul:apply 09-03`
+Next action: `/paul:unify 09-03`
 Resume file: `.paul/phases/09-sample-project/09-03-PLAN.md`
 
 ---
