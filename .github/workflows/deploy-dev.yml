@@ -18,7 +18,9 @@ jobs:
           dotnet-version: '10.0.x'
 
       - name: Build Release
-        run: dotnet build PokemonSDK.slnx --configuration Release
+        env:
+          SIXLABORS_LICENSE_KEY: ${{ secrets.SIXLABORS_LICENSE_KEY }}
+        run: dotnet build PokemonSDK.slnx --configuration Release -p:SixLaborsLicenseKey="$SIXLABORS_LICENSE_KEY"
 
       - name: Run all tests (bloquant)
         run: dotnet test PokemonSDK.slnx --configuration Release --no-build
