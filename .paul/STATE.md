@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v1.0 — Phase 8 NuGet Distribution — Plan 08-02 ✅ — 08-03 à planifier
+**Current focus:** v1.0 — Phase 8 NuGet Distribution — Plan 08-03 APPLY ✓ — prêt pour UNIFY
 
 ## Current Position
 
 Milestone: v1.0 SDK Distribuable
 Phase: 8 of 11 (NuGet Distribution)
-Plan: 08-02 — Licence/CVE cleanup ✅ COMPLET
-Status: UNIFY ✓ — prêt pour /paul:plan 08-03
-Last activity: 2026-06-07 — Plan 08-02 UNIFY fermé
+Plan: 08-03 — CI/CD publish-nuget.yml + ci.yml corrigés, secrets GitHub configurés
+Status: APPLY ✓ — prêt pour /paul:unify 08-03
+Last activity: 2026-06-07 — Plan 08-03 APPLY complété
 
 Progress:
 
@@ -26,7 +26,7 @@ Progress:
 - Phase 4: [██████████] 100% ✅
 - Phase 5: [██████████] 100% ✅ (05-01 ✅ 05-02 ✅ 05-03 ✅)
 - Phase 7: [██████████] 100% ✅ (07-01 ✅ 07-02 ✅ 07-03 ✅ 07-04 ✅)
-- Phase 8: [████░░░░░░] ~50% (08-01 ✅ 08-02 ✅ — 08-03, 08-04 restants)
+- Phase 8: [██████░░░░] ~75% (08-01 ✅ 08-02 ✅ 08-03 ✅ — 08-04 restant)
 
 ## Loop Position
 
@@ -34,10 +34,10 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [08-02 — Licence/CVE cleanup — COMPLET]
+  ✓        ✓        ○     [08-03 — publish-nuget.yml + ci.yml + PackageIcon + secrets GitHub]
 ```
 
-Phase 8 progress: 2/4 plans complets (08-01 ✅ 08-02 ✅ — 08-03, 08-04 restants)
+Phase 8 progress: 3/4 plans complets (08-01 ✅ 08-02 ✅ 08-03 ✅ — 08-04 restant)
 
 ## Accumulated Context
 
@@ -133,7 +133,7 @@ Décisions émergentes (Plan 04-02) :
 |-------|--------|---------|--------|
 | Vérifier compat MonoGame.DesktopGL / .NET 10 | Init | Avant Phase 3 | ✅ MonoGame 3.8.4.1 compile sur net10.0 (smoke 2026-06-01). Template `dotnet new mgdesktopgl` non testé. |
 | Vérifier compat MoonSharp 2.0.0 / .NET 10 | Init | Avant Phase 4 | ✅ MoonSharp 2.0.0 compatible .NET 10 — NuGet restore propre, build 0 warnings. |
-| Créer compte NuGet + réserver PokéForge.SDK | Init | Avant Phase 8 | 🔲 |
+| Créer compte NuGet + réserver PokéForge.SDK | Init | Avant Phase 8 | ✅ Org PokeGenesis créée, API key configurée, demande namespace envoyée par mail. |
 | FluentAssertions v8 licence Xceed (commercial) | Plan 01-01 | Avant Phase 8 | ✅ Résolu — FA v8 gratuit pour open-source MIT. v8.10.0 standardisé sur 8/8 projets tests. FA test-only, ne transite pas vers les consumers NuGet. |
 | Translations Move manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedMoveTranslations (15×6=90 rows), BattleTranslationsD22Tests passe. |
 | Translations Ability manquantes (D-22) | Phase 2 | Plan 03-01 | ✅ Résolu — SeedAbilityTranslations (6×6=36 rows), BattleTranslationsD22Tests passe. |
@@ -202,9 +202,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-07
-Stopped at: Plan 08-02 UNIFY ✓ — boucle fermée, commit effectué
-Next action: `/paul:plan 08-03` pour planifier publish-nuget.yml (workflow CI NuGet)
-Resume file: `.paul/phases/08-nuget-distribution/08-02-SUMMARY.md`
+Stopped at: Plan 08-03 APPLY complété — workflows + secrets configurés
+Next action: `/paul:unify 08-03` puis `/paul:plan 08-04`
+Resume file: `.paul/phases/08-nuget-distribution/08-03-PLAN.md`
 
 ---
 
