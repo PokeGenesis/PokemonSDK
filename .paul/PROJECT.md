@@ -13,7 +13,7 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | Attribute | Value |
 |-----------|-------|
 | Type | Application |
-| Version | 0.1.0 (packages publiables) |
+| Version | 1.0.0 (milestone complet) |
 | Status | Phase 8 complete — Phase 9 (Sample Project) next (v1.0) |
 | Last Updated | 2026-06-07 — Phase 8 NuGet Distribution shipped |
 
@@ -66,8 +66,12 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 ### Shipped in Phase 8 ✅
 - DX-03 — 7 packages PokeForge.SDK.* v0.1.0 publiables NuGet.org — métadonnées, licences, publish-nuget.yml CI/CD, smoke test consumer D-19 — *2026-06-07*
 
-### Active (v1.0)
-- Phase 9 : Sample Project (DX-04 — projet consommateur via NuGet, template scaffold)
+### Shipped in Phase 9 ✅
+- DX-04 — StarterGame : BattleEngine 1v1 + NuzlockePlugin + Lua badge + ISaveSystem F5/F9 — demo jouable NuGet-only (D-19) — *2026-06-07*
+
+### Active (v2.0)
+- Phase 10 : CLI pokeforge (scaffold sample depuis template embarqué — D-20)
+- Phase 11 : Documentation (APIs stables uniquement — D-21)
 
 ### Out of Scope
 - Connexion online / trades réseau
@@ -105,7 +109,7 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | Phase 5 complete | 3 plugins + 3 entités Character, D-22 | 126/126 tests verts | ✅ Complete |
 | Phase 7 complete | Asset pipeline + hot reload + REPL | 166 tests verts | ✅ Complete |
 | Phase 8 complete | 7 packages PokeForge.SDK.* publiables NuGet | 7 smoke tests verts, publish-nuget.yml prêt | ✅ Complete |
-| v1.0 | dotnet add package PokeForge.SDK fonctionnel | Phase 9 (sample) restante | In Progress |
+| v1.0 | dotnet add package PokeForge.SDK fonctionnel | StarterGame demo NuGet-only 09-04 ✅ | ✅ Complete 2026-06-07 |
 
 ## Tech Stack
 
@@ -123,5 +127,5 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | JSON | System.Text.Json | Intégré .NET 10 |
 
 ---
-*Created: 2026-06-01 | Last updated: 2026-06-07 after Phase 8*
+*Created: 2026-06-01 | Last updated: 2026-06-07 after Phase 9 — v1.0 Milestone Complete*
 *Full context: PROJECT.md | REQUIREMENTS.md | .claude/ARCHITECTURE.md | CLAUDE.md*
