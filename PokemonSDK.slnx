@@ -18,6 +18,7 @@
     <Project Path="tests/SDK.MonoGame.Tests/SDK.MonoGame.Tests.csproj" />
     <Project Path="tests/SDK.Plugins.Nuzlocke.Tests/SDK.Plugins.Nuzlocke.Tests.csproj" />
     <Project Path="tests/SDK.Plugins.Randomizer.Tests/SDK.Plugins.Randomizer.Tests.csproj" />
+    <Project Path="tests/SDK.Plugins.Turbo.Tests/SDK.Plugins.Turbo.Tests.csproj" />
     <Project Path="tests/SDK.Scripting.Tests/SDK.Scripting.Tests.csproj" />
     <Project Path="tests/SDK.Tools.Tests/SDK.Tools.Tests.csproj" />
   </Folder>
