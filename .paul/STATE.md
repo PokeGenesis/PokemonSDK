@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v1.0 — Phase 9 Sample Project — PLAN 09-04 créé, en attente APPLY
+**Current focus:** v1.0 — Phase 9 Sample Project — APPLY 09-04 complet, en attente UNIFY
 
 ## Current Position
 
 Milestone: v1.0 SDK Distribuable
 Phase: 9 of 11 (Sample Project)
-Plan: 09-04 créé — SDK.Battle + Scripting + ISaveSystem + README
-Status: PLAN créé, prêt pour APPLY
-Last activity: 2026-06-07 — Plan 09-04 créé
+Plan: 09-04 APPLY complet — SDK.Battle + Scripting + ISaveSystem + README
+Status: APPLY complet, prêt pour UNIFY
+Last activity: 2026-06-07 — Plan 09-04 APPLY complet (commit b9a2990)
 
 Progress:
 
@@ -35,7 +35,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ○        ○     [Plan 09-04 créé, en attente APPLY]
+  ✓        ✓        ○     [Plan 09-04 APPLY complet, en attente UNIFY]
 ```
 
 Phase 8 progress: 4/4 plans complets (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
@@ -204,8 +204,8 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-07
-Stopped at: Phase 9 — Plan 09-04 créé (SDK.Battle + Scripting + ISaveSystem + README)
-Next action: `/paul:apply 09-04`
+Stopped at: Phase 9 — Plan 09-04 APPLY complet (commit b9a2990)
+Next action: `/paul:unify 09-04`
 Resume file: `.paul/phases/09-sample-project/09-04-PLAN.md`
 
 ---
