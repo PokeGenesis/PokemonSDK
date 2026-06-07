@@ -12,9 +12,9 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 Milestone: v1.0 SDK Distribuable
 Phase: 9 of 11 (Sample Project)
-Plan: 09-02 APPLY complet
-Status: APPLY terminé, prêt pour UNIFY
-Last activity: 2026-06-07 — Plan 09-02 APPLY complet (samples/StarterGame/ scaffold, build 0 erreur, headless exit 0)
+Plan: 09-02 UNIFY complet
+Status: Loop fermé, prêt pour PLAN 09-03
+Last activity: 2026-06-07 — Plan 09-02 UNIFY complet (09-02-SUMMARY.md créé)
 
 Progress:
 
@@ -27,7 +27,7 @@ Progress:
 - Phase 5: [██████████] 100% ✅ (05-01 ✅ 05-02 ✅ 05-03 ✅)
 - Phase 7: [██████████] 100% ✅ (07-01 ✅ 07-02 ✅ 07-03 ✅ 07-04 ✅)
 - Phase 8: [██████████] 100% ✅ (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
-- Phase 9: [██░░░░░░░░] 25% — 09-01 ✅ (09-02 → 09-04 restants)
+- Phase 9: [████░░░░░░] 50% — 09-01 ✅ 09-02 ✅ (09-03 → 09-04 restants)
 
 ## Loop Position
 
@@ -35,7 +35,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ○     [Plan 09-02 APPLY complet]
+  ✓        ✓        ✓     [Loop 09-02 fermé — prêt pour 09-03]
 ```
 
 Phase 8 progress: 4/4 plans complets (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
@@ -203,9 +203,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-07
-Stopped at: Phase 9 — Plan 09-02 APPLY complet (samples/StarterGame/ scaffold NuGet-only, build 0 erreur, headless exit 0)
-Next action: `/paul:unify 09-02`
-Resume file: `.paul/phases/09-sample-project/09-02-PLAN.md`
+Stopped at: Phase 9 — Plan 09-02 UNIFY complet (09-02-SUMMARY.md créé, loop fermé)
+Next action: `/paul:plan 09-03`
+Resume file: `.paul/phases/09-sample-project/09-02-SUMMARY.md`
 
 ---
 
