@@ -9,6 +9,7 @@
     <Project Path="src/plugins/SDK.Plugins.Randomizer/SDK.Plugins.Randomizer.csproj" />
     <Project Path="src/plugins/SDK.Plugins.Turbo/SDK.Plugins.Turbo.csproj" />
     <Project Path="src/SDK.Tools/SDK.Tools.csproj" />
+    <Project Path="src/SDK.Bundle/SDK.Bundle.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/SDK.Battle.Tests/SDK.Battle.Tests.csproj" />

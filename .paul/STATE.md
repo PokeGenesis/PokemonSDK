@@ -12,9 +12,9 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 Milestone: v1.0 SDK Distribuable
 Phase: 9 of 11 (Sample Project)
-Plan: Pas encore démarré
-Status: Ready to plan
-Last activity: 2026-06-07 — Phase 8 NuGet Distribution complète (4/4 plans ✅)
+Plan: 09-01 APPLY complet, en attente UNIFY
+Status: APPLY complet, prêt pour UNIFY
+Last activity: 2026-06-07 — Plan 09-01 APPLY complet (SDK.Bundle créé, slnx + publish-nuget.yml mis à jour)
 
 Progress:
 
@@ -35,7 +35,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complete — Phase 8 fermée, prêt pour Phase 9]
+  ✓        ✓        ○     [Plan 09-01 exécuté, en attente UNIFY]
 ```
 
 Phase 8 progress: 4/4 plans complets (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
@@ -203,9 +203,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-07
-Stopped at: Phase 8 NuGet Distribution complète — 08-04 loop fermée (PLAN ✓ APPLY ✓ UNIFY ✓)
-Next action: `/paul:plan` pour Phase 9 Sample Project (DX-04)
-Resume file: `.paul/phases/08-nuget-distribution/08-04-SUMMARY.md`
+Stopped at: Phase 9 — Plan 09-01 APPLY complet (SDK.Bundle meta-package créé, 156 tests verts)
+Next action: `/paul:unify 09-01`
+Resume file: `.paul/phases/09-sample-project/09-01-PLAN.md`
 
 ---
 
