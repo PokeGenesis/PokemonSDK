@@ -6,20 +6,20 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v1.0 — Phase 9 Sample Project — prêt pour PLAN
+**Current focus:** MILESTONE v1.0 COMPLET ✅ — prêt pour TAG v1.0 + squash merge + démarrage v2.0 Phase 10
 
 ## Current Position
 
-Milestone: v1.0 SDK Distribuable
-Phase: 9 of 11 (Sample Project)
-Plan: Pas encore démarré
-Status: Ready to plan
-Last activity: 2026-06-07 — Phase 8 NuGet Distribution complète (4/4 plans ✅)
+Milestone: v1.0 SDK Distribuable — COMPLET ✅
+Phase: Milestone v1.0 COMPLETE — prochain : v2.0 Phase 10 (CLI pokeforge)
+Plan: —
+Status: Milestone v1.0 SDK Distribuable complet (Phases 5+7+8+9 ✅)
+Last activity: 2026-06-07 — Phase 9 UNIFY 09-04 — Milestone v1.0 fermé
 
 Progress:
 
 - Milestone v0.1: [██████████] 100% ✅ (Phases 1→4 complètes, 2026-06-05)
-- Milestone v1.0: [██████░░░░] ~50% (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 restante)
+- Milestone v1.0: [██████████] 100% ✅ (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 ✅)
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
 - Phase 3: [██████████] 100% ✅
@@ -27,7 +27,7 @@ Progress:
 - Phase 5: [██████████] 100% ✅ (05-01 ✅ 05-02 ✅ 05-03 ✅)
 - Phase 7: [██████████] 100% ✅ (07-01 ✅ 07-02 ✅ 07-03 ✅ 07-04 ✅)
 - Phase 8: [██████████] 100% ✅ (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
-- Phase 9: [░░░░░░░░░░] 0% — prêt à démarrer
+- Phase 9: [██████████] 100% ✅ (09-01 ✅ 09-02 ✅ 09-03 ✅ 09-04 ✅)
 
 ## Loop Position
 
@@ -35,10 +35,11 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complete — Phase 8 fermée, prêt pour Phase 9]
+  ✓        ✓        ✓     [Loop 09-04 fermé — Phase 9 complète]
 ```
 
 Phase 8 progress: 4/4 plans complets (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
+Phase 9 progress: 4/4 plans complets (09-01 ✅ 09-02 ✅ 09-03 ✅ 09-04 ✅)
 
 ## Accumulated Context
 
@@ -203,9 +204,9 @@ None.
 ## Session Continuity
 
 Last session: 2026-06-07
-Stopped at: Phase 8 NuGet Distribution complète — 08-04 loop fermée (PLAN ✓ APPLY ✓ UNIFY ✓)
-Next action: `/paul:plan` pour Phase 9 Sample Project (DX-04)
-Resume file: `.paul/phases/08-nuget-distribution/08-04-SUMMARY.md`
+Stopped at: Milestone v1.0 COMPLET — Phase 9 UNIFY fermé (commit 91dbed6)
+Next action: TAG v1.0 + squash merge `feature/phase9-sample-project` → dev → staging → main (E-04), puis /paul:plan pour Phase 10 CLI
+Resume file: `.paul/ROADMAP.md`
 
 ---
 
