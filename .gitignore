@@ -30,3 +30,4 @@ sixlabors.lic
 
 # Windows alternate data stream metadata (WSL2/NTFS)
 *:Zone.Identifier
+nupkg-local/
