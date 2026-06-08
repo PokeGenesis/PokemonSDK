@@ -2,33 +2,33 @@
 
 ## Overview
 
-3 horizons : moteur core jouable (v0.1) → SDK distribuable NuGet (v1.0) → CLI + docs + features avancées (v2.0).
+6 horizons : v0.1 (moteur core) → v0.2 (SDK NuGet) → v0.3 (CLI + docs) → v1.0 (moteur complet) → v1.x (plugin era) → v2.0 (réseau).
 
 ## Completed Milestones
 
 **v0.1 Proof of Concept** (v0.1.0) — ✅ Complete 2026-06-05
 Phases: 4 of 4 complete (Phases 1→4)
 
-**v1.0 SDK Distribuable** (v1.0.0) — ✅ Complete 2026-06-07
+**v0.2 SDK Distribuable** (v0.2.0) — ✅ Complete 2026-06-07
 Phases: 4 of 4 complete (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 ✅)
 
 ## Next Milestone
 
-**v2.0 CLI + Docs + Advanced Systems** (v2.0.0)
+**v0.3 CLI + Docs + Advanced Systems** (v0.3.0)
 Status: Not started
 Phases: 0 of 3 (Phase 6 — Phase 10 — Phase 11)
 
 ## Future Milestones
 
-**v3.0 Gameplay Complet** (v3.0.0)
+**v1.0 Moteur Complet** (v1.0.0)
 Status: Not started
 Phases: 0 of 6 (Phase 12 — Phase 13 — Phase 14 — Phase 15 — Phase 16 — Phase 17)
 
-**v4.0 Extensions** (v4.0.0)
+**v1.x Plugin Era** (v1.1.0 → v1.4.0+)
 Status: Not started
-Phases: 0 of 4 (Phase 18 — Phase 19 — Phase 20 — Phase 21)
+Phases: 0 of 4+ (Phase 18 v1.1 — Phase 19 v1.2 — Phase 20 v1.3 — Phase 21 v1.4 — futurs plugins v1.5+)
 
-**v5.0 En ligne** (v5.0.0)
+**v2.0 En ligne** (v2.0.0)
 Status: Not started
 Phases: 0 of 1 (Phase 22)
 
@@ -143,7 +143,7 @@ Phases: 0 of 1 (Phase 22)
 
 ---
 
-*Roadmap created: 2026-06-01 | Last updated: 2026-06-07 — Phases 12→22 ajoutées (v3.0→v5.0). 22 phases total. v1.0 Milestone COMPLETE*
+*Roadmap created: 2026-06-01 | Last updated: 2026-06-08 — Versioning révisé : v0.2/v0.3/v1.0/v1.x/v2.0. v1.0 = moteur complet. v0.2 Milestone COMPLETE*
 *Full details: ROADMAP.md (root)*
 
 ### Phase 7: Developer Experience

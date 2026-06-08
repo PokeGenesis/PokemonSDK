@@ -99,11 +99,11 @@ SDK.MonoGame  ← SDK.Core + MonoGame + SDK.Battle + SDK.Scripting (via Func fac
 
 ```
 v0.1 → Phases 1+2+3+4       ✅ Moteur core jouable
-v1.0 → + Phases 5+7+8+9     ✅ SDK distribuable NuGet
-v2.0 → + Phases 6+10+11     🔲 CLI + docs + features avancées
-v3.0 → + Phases 12→17       🔲 Gameplay complet jouable
-v4.0 → + Phases 18→21       🔲 Extensions + plugins avancés
-v5.0 → + Phase 22           🔲 Réseau en ligne
+v0.2 → + Phases 5+7+8+9     ✅ SDK distribuable NuGet
+v0.3 → + Phases 6+10+11     🔲 CLI + docs + features avancées
+v1.0 → + Phases 12→17       🔲 Moteur jouable complet (vraie v1.0)
+v1.x → + Phases 18→21+      🔲 Plugin Era (v1.1 Audio → v1.4 Streamer → v1.5+)
+v2.0 → + Phase 22           🔲 Réseau en ligne
 ```
 
 | Phase | Description | Horizon | Statut |
@@ -112,24 +112,24 @@ v5.0 → + Phase 22           🔲 Réseau en ligne
 | 2 | Battle Engine Core | v0.1 | ✅ |
 | 3 | World Foundation | v0.1 | ✅ |
 | 4 | Scripting + Progression | v0.1 🏁 | ✅ |
-| 5 | Plugins + Characters | v1.0 | ✅ |
-| 7 | Developer Experience | v1.0 | ✅ |
-| 8 | NuGet Distribution | v1.0 | ✅ |
-| 9 | Sample Project | v1.0 🏁 | ✅ |
-| 6 | Advanced Systems | v2.0 | 🔲 |
-| 10 | CLI `pokeforge` | v2.0 | 🔲 |
-| 11 | Documentation | v2.0 🏁 | 🔲 |
-| 12 | BattleScene UI | v3.0 | 🔲 |
-| 13 | EXP + Level-up + Évolution | v3.0 | 🔲 |
-| 14 | Items + Bag + Shop | v3.0 | 🔲 |
-| 15 | Party + PC + Pokédex UI | v3.0 | 🔲 |
-| 16 | QuestPlugin | v3.0 | 🔲 |
-| 17 | Real Data Pipeline (PokeAPI) | v3.0 🏁 | 🔲 |
-| 18 | Audio complet (SFX + cries) | v4.0 | 🔲 |
-| 19 | Mécaniques modernes (Méga/Z/Dynamax) | v4.0 | 🔲 |
-| 20 | DungeonPlugin (Mystery Dungeon) | v4.0 | 🔲 |
-| 21 | StreamerPlugin (Twitch/YouTube) | v4.0 🏁 | 🔲 |
-| 22 | SDK.Network (combat online + trade) | v5.0 🏁 | 🔲 |
+| 5 | Plugins + Characters | v0.2 | ✅ |
+| 7 | Developer Experience | v0.2 | ✅ |
+| 8 | NuGet Distribution | v0.2 | ✅ |
+| 9 | Sample Project | v0.2 🏁 | ✅ |
+| 6 | Advanced Systems | v0.3 | 🔲 |
+| 10 | CLI `pokeforge` | v0.3 | 🔲 |
+| 11 | Documentation | v0.3 🏁 | 🔲 |
+| 12 | BattleScene UI | v1.0 | 🔲 |
+| 13 | EXP + Level-up + Évolution | v1.0 | 🔲 |
+| 14 | Items + Bag + Shop | v1.0 | 🔲 |
+| 15 | Party + PC + Pokédex UI | v1.0 | 🔲 |
+| 16 | QuestPlugin | v1.0 | 🔲 |
+| 17 | Real Data Pipeline (PokeAPI) | v1.0 🏁 | 🔲 |
+| 18 | Audio complet (SFX + cries) | v1.1 | 🔲 |
+| 19 | Mécaniques modernes (Méga/Z/Dynamax) | v1.2 | 🔲 |
+| 20 | DungeonPlugin (Mystery Dungeon) | v1.3 | 🔲 |
+| 21 | StreamerPlugin (Twitch/YouTube) | v1.4 🏁 | 🔲 |
+| 22 | SDK.Network (combat online + trade) | v2.0 🏁 | 🔲 |
 
 → Détails waves + critères de succès : `ROADMAP.md`
 
@@ -156,7 +156,7 @@ v5.0 → + Phase 22           🔲 Réseau en ligne
 | D-15 | **xBR shader d'upscaling** — intégré dans RenderPipeline |
 | D-16 | **Nommage sprites : `{dexid5}_{identifier}_{view}.png`** — convention stricte |
 | D-17 | **SDK.Tools sans MonoGame** — tourne en CI headless |
-| D-18 | **NuGet SemVer strict** — pas de breaking change sans bump majeur |
+| D-18 | **NuGet SemVer X.Y.Z** — X = couche fondamentale/breaking (ex: réseau = v2.0), Y = feature/plugin non-breaking (v0.2→v0.3→v1.x), Z = patch/hotfix. Jamais de breaking change sans bump X. |
 | D-19 | **Sample consomme via NuGet** — jamais référence projet |
 | D-20 | **CLI scaffold = sample stabilisé** — template embarqué |
 | D-21 | **Docs = APIs stables uniquement** — pas de doc sur du WIP |

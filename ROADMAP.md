@@ -2,24 +2,24 @@
 
 ## Overview
 
-PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonctionnel à un SDK communautaire incontournable. La logique est simple : faire tourner quelque chose rapidement (v0.1), le rendre distribuable et utilisable par des makers externes (v1.0), puis le polisher jusqu'à devenir la référence de l'écosystème (v2.0).
+PokemonSDK est construit en **6 horizons** qui mènent d'un moteur core fonctionnel à un moteur fan-game complet. La logique : moteur core (v0.1) → SDK NuGet installable (v0.2) → CLI + docs (v0.3) → moteur jouable complet (v1.0 — première vraie release) → plugins avancés (v1.x) → réseau (v2.0).
 
 ## Timeline
 
 | Horizon | Phases | Résultat |
 |---------|--------|---------|
 | **v0.1** "Proof of Concept" | 1 + 2 + 3 + 4 | Moteur core jouable, release GitHub ✅ |
-| **v1.0** "Release" | 5 + 7 + 8 + 9 | SDK distribuable via NuGet ✅ |
-| **v2.0** "Incontournable" | 6 + 10 + 11 | CLI + docs + features avancées |
-| **v3.0** "Gameplay Complet" | 12 + 13 + 14 + 15 + 16 + 17 | BattleScene visuelle + Items + EXP + Quêtes + vraies données |
-| **v4.0** "Extensions" | 18 + 19 + 20 + 21 | Audio complet + Méca modernes + Donjon + Streamer |
-| **v5.0** "En ligne" | 22 | Combat online + trade + GTS |
+| **v0.2** "SDK Distribuable" | 5 + 7 + 8 + 9 | SDK distribuable via NuGet ✅ |
+| **v0.3** "Incontournable" | 6 + 10 + 11 | CLI + docs + features avancées |
+| **v1.0** "Moteur Complet" | 12 + 13 + 14 + 15 + 16 + 17 | BattleScene visuelle + Items + EXP + Quêtes + vraies données |
+| **v1.x** "Plugin Era" | 18 + 19 + 20 + 21 | Audio complet + Méca modernes + Donjon + Streamer |
+| **v2.0** "En ligne" | 22 | Combat online + trade + GTS |
 
 ## Phase Numbering
 
 - Integer phases (1, 2, 3…): Planned milestone work
-- Phases suivent l'ordre des horizons : 1→4 (v0.1), puis 5+7+8+9 (v1.0), puis 6+10+11 (v2.0)
-- Phase 6 délibérément après Phase 9 : features avancées validées par le feedback communauté v1.0
+- Phases suivent l'ordre des horizons : 1→4 (v0.1), puis 5+7+8+9 (v0.2), puis 6+10+11 (v0.3)
+- Phase 6 délibérément après Phase 9 : features avancées validées par le feedback communauté v0.2
 
 ---
 
@@ -124,7 +124,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 ---
 
-## HORIZON 2 — v1.0 "Release"
+## HORIZON 2 — v0.2 "SDK Distribuable"
 
 > Un maker externe peut créer son fan-game sans cloner le repo, sans comprendre l'architecture interne, sans fournir ses assets dès le premier jour.
 
@@ -216,14 +216,14 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 - Wave 3: Combat intégré — rencontre sauvage, 1v1 complet, fuite, KO, XP, commenté
 - Wave 4: Progression + plugin — gym leader scriptable, badge, NuzlockePlugin activable, save/load
 
-> **🏁 TAG v1.0** — release GitHub majeure après Phase 9 validée. Annonce communautaire (Reddit PokéCommunity, Eevee Expo, Discord)
+> **🏁 TAG v0.2** — release GitHub majeure après Phase 9 validée. Annonce communautaire (Reddit PokéCommunity, Eevee Expo, Discord)
 
 ---
 
-## HORIZON 3 — v2.0 "Incontournable"
+## HORIZON 3 — v0.3 "Incontournable"
 
 > PokéForge est la référence — installable en 30 secondes, documenté, avec des features que personne d'autre n'a.
-> **Planifier après retours communauté v1.0 — ne pas coder avant.**
+> **Planifier après retours communauté v0.2 — ne pas coder avant.**
 
 ### Phase 6: Advanced Systems
 
@@ -238,9 +238,9 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 3. Export Fakemon → row complète `pokemon_species` + `pokemon_forms` en SQLite
 4. Binaires Windows + Linux passent smoke test complet (launch → DB → combat headless → exit 0)
 
-**Plans:** TBD — à définir après retours communauté v1.0.
+**Plans:** TBD — à définir après retours communauté v0.2.
 
-**Status:** 🔲 Post-v1.0
+**Status:** 🔲 Post-v0.2
 
 ---
 
@@ -262,7 +262,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 - Wave 3: Commande `build` multi-plateforme (windows-x64, linux-x64) + commande `doctor`
 - Wave 4: Publication NuGet tool + `pokeforge` disponible globalement
 
-**Status:** 🔲 Post-v1.0
+**Status:** 🔲 Post-v0.2
 
 ---
 
@@ -285,13 +285,13 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 - Wave 3: Guides système (Battle Engine, Lua Scripting, Asset Pipeline, Plugins, Rendering HD)
 - Wave 4: API reference auto-générée (`docfx`) + guide "créer son plugin" + guides migration Essentials/PSDK
 
-> **🏁 TAG v2.0** — PokéForge est l'incontournable
+> **🏁 TAG v0.3** — PokéForge est l'incontournable
 
-**Status:** 🔲 Post-v1.0
+**Status:** 🔲 Post-v0.2
 
 ---
 
-## HORIZON 4 — v3.0 "Gameplay Complet"
+## HORIZON 4 — v1.0 "Moteur Complet"
 
 > Un maker peut livrer un fan-game complet : combats visuels, EXP/évolution, items, UI complète, quêtes Lua, 1010 Pokémon réels.
 
@@ -311,7 +311,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 **Plans:** TBD (estimé 4→6 plans — plus grande phase du SDK)
 
-**Status:** 🔲 Post-v2.0
+**Status:** 🔲 Post-v0.3
 
 ---
 
@@ -331,7 +331,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 **Plans:** TBD
 
-**Status:** 🔲 Post-v2.0
+**Status:** 🔲 Post-v0.3
 
 ---
 
@@ -351,7 +351,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 **Plans:** TBD
 
-**Status:** 🔲 Post-v2.0
+**Status:** 🔲 Post-v0.3
 
 ---
 
@@ -370,7 +370,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 **Plans:** TBD
 
-**Status:** 🔲 Post-v2.0
+**Status:** 🔲 Post-v0.3
 
 ---
 
@@ -390,7 +390,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 **Plans:** TBD
 
-**Status:** 🔲 Post-v2.0
+**Status:** 🔲 Post-v0.3
 
 ---
 
@@ -410,13 +410,13 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 **Plans:** TBD
 
-**Status:** 🔲 Post-v2.0
+**Status:** 🔲 Post-v0.3
 
-> **🏁 TAG v3.0** — Premier fan-game complet possible avec le SDK seul
+> **🏁 TAG v1.0** — Premier fan-game complet possible avec le SDK seul
 
 ---
 
-## HORIZON 5 — v4.0 "Extensions"
+## HORIZON 5 — v1.x "Plugin Era"
 
 > Plugins avancés qui différencient PokéForge de tout concurrent — Mode Donjon, audio pro, mécaniques modernes, overlay streamer.
 
@@ -435,7 +435,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 **Plans:** TBD
 
-**Status:** 🔲 Post-v3.0
+**Status:** 🔲 Post-v1.0
 
 ---
 
@@ -455,7 +455,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 **Plans:** TBD
 
-**Status:** 🔲 Post-v3.0
+**Status:** 🔲 Post-v1.0
 
 ---
 
@@ -475,7 +475,7 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 **Plans:** TBD (estimé 4→6 plans)
 
-**Status:** 🔲 Post-v3.0
+**Status:** 🔲 Post-v1.0
 
 ---
 
@@ -495,13 +495,13 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 **Plans:** TBD (estimé 2 plans)
 
-**Status:** 🔲 Post-v3.0
+**Status:** 🔲 Post-v1.0
 
-> **🏁 TAG v4.0** — PokéForge avec plugins uniques dans l'écosystème fan-game
+> **🏁 TAG v1.4** — PokéForge avec plugins uniques dans l'écosystème fan-game
 
 ---
 
-## HORIZON 6 — v5.0 "En ligne"
+## HORIZON 6 — v2.0 "En ligne"
 
 > Combat online, trade, GTS — infrastructure réseau pour communautés actives.
 
@@ -520,9 +520,9 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 
 **Plans:** TBD
 
-**Status:** 🔲 Post-v4.0
+**Status:** 🔲 Post-v1.4
 
-> **🏁 TAG v5.0** — PokéForge en ligne
+> **🏁 TAG v2.0** — PokéForge en ligne
 
 ---
 
@@ -534,24 +534,24 @@ PokemonSDK est construit en **3 horizons** qui mènent d'un moteur core fonction
 | 2 | Battle Engine Core | v0.1 | ✅ Complet 2026-06-04 |
 | 3 | World Foundation | v0.1 | ✅ Complet 2026-06-05 |
 | 4 | Scripting + Progression | v0.1 | ✅ Complet 2026-06-05 — 97 tests |
-| 5 | Plugins + Characters | v1.0 | ✅ Complet 2026-06-06 |
-| 7 | Developer Experience | v1.0 | ✅ Complet 2026-06-06 |
-| 8 | NuGet Distribution | v1.0 | ✅ Complet 2026-06-07 |
-| 9 | Sample Project | v1.0 | ✅ Complet 2026-06-07 |
-| 6 | Advanced Systems | v2.0 | 🔲 Post-v1.0 |
-| 10 | CLI `pokeforge` | v2.0 | 🔲 Post-v1.0 |
-| 11 | Documentation | v2.0 | 🔲 Post-v1.0 |
-| 12 | BattleScene UI | v3.0 | 🔲 Post-v2.0 |
-| 13 | EXP + Level-up + Évolution | v3.0 | 🔲 Post-v2.0 |
-| 14 | Items + Bag + Shop | v3.0 | 🔲 Post-v2.0 |
-| 15 | Party + PC + Pokédex UI | v3.0 | 🔲 Post-v2.0 |
-| 16 | QuestPlugin | v3.0 | 🔲 Post-v2.0 |
-| 17 | Real Data Pipeline (PokeAPI) | v3.0 | 🔲 Post-v2.0 |
-| 18 | Audio complet (SFX + cries) | v4.0 | 🔲 Post-v3.0 |
-| 19 | Mécaniques modernes (Méga/Z/Dynamax) | v4.0 | 🔲 Post-v3.0 |
-| 20 | DungeonPlugin (Mystery Dungeon) | v4.0 | 🔲 Post-v3.0 |
-| 21 | StreamerPlugin (Twitch/YouTube) | v4.0 | 🔲 Post-v3.0 |
-| 22 | SDK.Network (combat online + trade) | v5.0 | 🔲 Post-v4.0 |
+| 5 | Plugins + Characters | v0.2 | ✅ Complet 2026-06-06 |
+| 7 | Developer Experience | v0.2 | ✅ Complet 2026-06-06 |
+| 8 | NuGet Distribution | v0.2 | ✅ Complet 2026-06-07 |
+| 9 | Sample Project | v0.2 | ✅ Complet 2026-06-07 |
+| 6 | Advanced Systems | v0.3 | 🔲 Post-v0.2 |
+| 10 | CLI `pokeforge` | v0.3 | 🔲 Post-v0.2 |
+| 11 | Documentation | v0.3 | 🔲 Post-v0.2 |
+| 12 | BattleScene UI | v1.0 | 🔲 Post-v0.3 |
+| 13 | EXP + Level-up + Évolution | v1.0 | 🔲 Post-v0.3 |
+| 14 | Items + Bag + Shop | v1.0 | 🔲 Post-v0.3 |
+| 15 | Party + PC + Pokédex UI | v1.0 | 🔲 Post-v0.3 |
+| 16 | QuestPlugin | v1.0 | 🔲 Post-v0.3 |
+| 17 | Real Data Pipeline (PokeAPI) | v1.0 | 🔲 Post-v0.3 |
+| 18 | Audio complet (SFX + cries) | v1.1 | 🔲 Post-v1.0 |
+| 19 | Mécaniques modernes (Méga/Z/Dynamax) | v1.2 | 🔲 Post-v1.0 |
+| 20 | DungeonPlugin (Mystery Dungeon) | v1.3 | 🔲 Post-v1.0 |
+| 21 | StreamerPlugin (Twitch/YouTube) | v1.4 | 🔲 Post-v1.0 |
+| 22 | SDK.Network (combat online + trade) | v2.0 | 🔲 Post-v1.4 |
 
 ---
-*Last updated: 2026-06-07 — Phases 12→22 ajoutées (v3.0 Gameplay Complet + v4.0 Extensions + v5.0 Réseau). 22 phases total.*
+*Last updated: 2026-06-08 — Versioning révisé : v0.2/v0.3/v1.0/v1.x/v2.0. v1.0 = moteur jouable complet (vraie release). v1.x = plugin era. 22 phases total.*
