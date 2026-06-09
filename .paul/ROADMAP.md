@@ -15,8 +15,8 @@ Phases: 4 of 4 complete (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9
 ## Next Milestone
 
 **v0.3 CLI + Docs + Advanced Systems** (v0.3.0)
-Status: Not started
-Phases: 0 of 3 (Phase 6 — Phase 10 — Phase 11)
+Status: In progress
+Phases: 1 of 3 complete (Phase 6 — Phase 10 ✅ — Phase 11)
 
 ## Future Milestones
 
@@ -45,7 +45,7 @@ Phases: 0 of 1 (Phase 22)
 | 8     | NuGet Distribution      | 4     | ✅ Complete | 2026-06-07 |
 | 9     | Sample Project          | 4     | ✅ Complete | 2026-06-07 |
 | 6     | Advanced Systems        | TBD   | Not started | -         |
-| 10    | CLI pokeforge           | 4     | Not started | -         |
+| 10    | CLI pokeforge           | 3     | ✅ Complete | 2026-06-09 |
 | 11    | Documentation           | 4     | Not started | -         |
 | 12    | BattleScene UI          | TBD   | Not started | -         |
 | 13    | EXP + Level-up + Évol.  | TBD   | Not started | -         |
@@ -143,7 +143,21 @@ Phases: 0 of 1 (Phase 22)
 
 ---
 
-*Roadmap created: 2026-06-01 | Last updated: 2026-06-08 — Versioning révisé : v0.2/v0.3/v1.0/v1.x/v2.0. v1.0 = moteur complet. v0.2 Milestone COMPLETE*
+### Phase 10: CLI pokeforge
+
+**Goal:** `pokeforge new mon-jeu` → `dotnet run` en 30 secondes. CLI global tool `PokeForge.CLI` publié sur NuGet.org. Commandes : `new`, `asset-sync`, `seed`, `doctor`.
+**Depends on:** Phase 9 (StarterGame stabilisé — D-20)
+**Requirements:** DX-05
+
+**Plans:**
+
+- [x] 10-01: SDK.Cli (PackAsTool) + System.CommandLine + commande `new` + zip template StarterGame ← *Done 2026-06-09*
+- [x] 10-02: `asset-sync` + `seed` (délèguent à SDK.Tools via ProjectReference) ← *Done 2026-06-09*
+- [x] 10-03: `doctor` (checklist headless D-17) + publication NuGet tool + CI publish-cli.yml ← *Done 2026-06-09*
+
+---
+
+*Roadmap created: 2026-06-01 | Last updated: 2026-06-09 — Phase 10 CLI pokeforge ✅ Complete. v0.3: 1/3 phases done.*
 *Full details: ROADMAP.md (root)*
 
 ### Phase 7: Developer Experience
