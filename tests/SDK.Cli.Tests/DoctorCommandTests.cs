@@ -37,14 +37,13 @@ public class DoctorCommandTests : IDisposable
         var dbPath     = Path.Combine(_tempDir, "absent.db");
         Directory.CreateDirectory(spritesDir);
 
-        var json = $$$"""
-            {
-              "sprites_root": "{{{spritesDir}}}",
-              "output_dir":   "{{{_tempDir}}}",
-              "db_path":      "{{{dbPath}}}",
-              "include_views": ["front"]
-            }
-            """;
+        var json = System.Text.Json.JsonSerializer.Serialize(new
+        {
+            sprites_root  = spritesDir,
+            output_dir    = _tempDir,
+            db_path       = dbPath,
+            include_views = new[] { "front" }
+        });
         File.WriteAllText(configPath, json);
 
         DoctorCommand.Execute(configPath).Should().Be(0);
@@ -59,14 +58,13 @@ public class DoctorCommandTests : IDisposable
         Directory.CreateDirectory(spritesDir);
         File.WriteAllBytes(dbPath, []);
 
-        var json = $$$"""
-            {
-              "sprites_root": "{{{spritesDir}}}",
-              "output_dir":   "{{{_tempDir}}}",
-              "db_path":      "{{{dbPath}}}",
-              "include_views": ["front"]
-            }
-            """;
+        var json = System.Text.Json.JsonSerializer.Serialize(new
+        {
+            sprites_root  = spritesDir,
+            output_dir    = _tempDir,
+            db_path       = dbPath,
+            include_views = new[] { "front" }
+        });
         File.WriteAllText(configPath, json);
 
         DoctorCommand.Execute(configPath).Should().Be(0);
