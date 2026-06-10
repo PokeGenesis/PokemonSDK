@@ -1,11 +1,12 @@
-name: Publish NuGet
+name: Publish CLI Tool
 
 on:
   push:
-    tags: ['v*.*.*']
+    tags: ['cli-v*.*.*']
+  workflow_dispatch:
 
 jobs:
-  publish:
+  publish-cli:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,15 +31,15 @@ jobs:
             --configuration Release \
             --no-restore
 
-      - name: Run all tests
-        run: dotnet test PokemonSDK.slnx --configuration Release --no-build
+      - name: Run CLI tests
+        run: dotnet test tests/SDK.Cli.Tests/ --configuration Release --no-build
 
-      - name: Pack packages PokeForge.SDK.*
+      - name: Pack PokeForge.CLI
         run: |
-          dotnet pack PokemonSDK.slnx \
+          dotnet pack src/SDK.Cli/SDK.Cli.csproj \
             --configuration Release \
             --no-build \
-            -o ./nupkg
+            -o ./cli-nupkg
 
       - name: Push vers NuGet.org
         env:
@@ -48,13 +49,13 @@ jobs:
             echo "NUGET_API_KEY non configuré — push ignoré"
             exit 0
           fi
-          dotnet nuget push ./nupkg/*.nupkg \
+          dotnet nuget push ./cli-nupkg/*.nupkg \
             --api-key "$NUGET_API_KEY" \
             --source https://api.nuget.org/v3/index.json \
             --skip-duplicate
 
-      - name: Upload nupkg artifacts
+      - name: Upload CLI artifact
         uses: actions/upload-artifact@v6
         with:
-          name: nuget-packages-${{ github.ref_name }}
-          path: ./nupkg
+          name: cli-tool-${{ github.ref_name }}
+          path: ./cli-nupkg

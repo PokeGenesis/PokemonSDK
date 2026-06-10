@@ -6,20 +6,21 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** v1.0 — Phase 9 Sample Project — prêt pour PLAN
+**Current focus:** Phase 10 CLI pokeforge ✅ COMPLET — v0.3 milestone 1/3 phases done — prêt pour Phase 6 ou Phase 11
 
 ## Current Position
 
-Milestone: v1.0 SDK Distribuable
-Phase: 9 of 11 (Sample Project)
-Plan: Pas encore démarré
-Status: Ready to plan
-Last activity: 2026-06-07 — Phase 8 NuGet Distribution complète (4/4 plans ✅)
+Milestone: v0.3 CLI + Docs + Advanced Systems — In progress (1/3 phases)
+Phase: 10 (CLI pokeforge) — ✅ Complete (3/3 plans complets)
+Plan: Not started (Phase 11 ou Phase 6 — à choisir)
+Status: Ready to plan next phase
+Last activity: 2026-06-09 — Phase 10 complete — `pokeforge new|asset-sync|seed|doctor` opérationnel
 
 Progress:
 
 - Milestone v0.1: [██████████] 100% ✅ (Phases 1→4 complètes, 2026-06-05)
-- Milestone v1.0: [██████░░░░] ~50% (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 restante)
+- Milestone v0.2: [██████████] 100% ✅ (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 ✅)
+- Milestone v0.3: [███░░░░░░░] 33% (Phase 10 ✅)
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
 - Phase 3: [██████████] 100% ✅
@@ -27,7 +28,8 @@ Progress:
 - Phase 5: [██████████] 100% ✅ (05-01 ✅ 05-02 ✅ 05-03 ✅)
 - Phase 7: [██████████] 100% ✅ (07-01 ✅ 07-02 ✅ 07-03 ✅ 07-04 ✅)
 - Phase 8: [██████████] 100% ✅ (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
-- Phase 9: [░░░░░░░░░░] 0% — prêt à démarrer
+- Phase 9: [██████████] 100% ✅ (09-01 ✅ 09-02 ✅ 09-03 ✅ 09-04 ✅)
+- Phase 10: [██████████] 100% ✅ (10-01 ✅ 10-02 ✅ 10-03 ✅)
 
 ## Loop Position
 
@@ -35,10 +37,10 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop complete — Phase 8 fermée, prêt pour Phase 9]
+  ✓        ✓        ✓     [Phase 10 complete — ready for next PLAN]
 ```
 
-Phase 8 progress: 4/4 plans complets (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
+Phase 10 progress: 3/3 plans complets (10-01 ✅ 10-02 ✅ 10-03 ✅)
 
 ## Accumulated Context
 
@@ -200,12 +202,19 @@ None.
 | E-03 | YAML `if: env.NUGET_API_KEY != ''` ne lit pas les secrets du bloc `env:` du même step | Guard de secret DANS le `run:` shell : `if [ -z "$NUGET_API_KEY" ]; then exit 0; fi` |
 | E-04 | Squash merge feature→dev→staging→main crée divergence historique (commit absent de la branche cible) → PR CONFLICTING | Après tout squash merge sur main, sync immédiat : `main → staging → dev`. Ne jamais laisser stagner. |
 
+Décisions émergentes (Phase 10) :
+
+- `<IsPackable>true</IsPackable>` obligatoire sur tout `OutputType=Exe` ciblant `net10.0` avec `PackAsTool=true` — `.NET 10.0.108` force `IsPackable=false` sinon (`dotnet pack` exit 0 sans produire de .nupkg)
+- `<PackageType Include="DotnetTool" />` ItemGroup redondant — `PackAsTool=true` l'insère automatiquement
+- `<PackageReadmeFile>` seul suffit pour inclure README dans le nupkg — un `<None Include>` explicit duplique → NU5118
+- Suite tests CLI : 13 (10 existants + 3 DoctorCommand), pas 11 comme estimé dans le plan
+
 ## Session Continuity
 
-Last session: 2026-06-07
-Stopped at: Phase 8 NuGet Distribution complète — 08-04 loop fermée (PLAN ✓ APPLY ✓ UNIFY ✓)
-Next action: `/paul:plan` pour Phase 9 Sample Project (DX-04)
-Resume file: `.paul/phases/08-nuget-distribution/08-04-SUMMARY.md`
+Last session: 2026-06-09
+Stopped at: Phase 10 complete — transition UNIFY exécutée
+Next action: /paul:plan pour Phase 11 (Documentation) ou Phase 6 (Advanced Systems)
+Resume file: `.paul/ROADMAP.md`
 
 ---
 
