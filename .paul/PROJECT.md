@@ -13,9 +13,9 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | Attribute | Value |
 |-----------|-------|
 | Type | Application |
-| Version | 0.1.0 (packages publiables) |
-| Status | Phase 8 complete — Phase 9 (Sample Project) next (v1.0) |
-| Last Updated | 2026-06-07 — Phase 8 NuGet Distribution shipped |
+| Version | 0.3.0 (in progress) |
+| Status | Phase 10 complete — Phase 6 (Advanced Systems) ou Phase 11 (Documentation) next (v0.3) |
+| Last Updated | 2026-06-09 — Phase 10 CLI pokeforge shipped |
 
 ## Requirements
 
@@ -66,8 +66,15 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 ### Shipped in Phase 8 ✅
 - DX-03 — 7 packages PokeForge.SDK.* v0.1.0 publiables NuGet.org — métadonnées, licences, publish-nuget.yml CI/CD, smoke test consumer D-19 — *2026-06-07*
 
-### Active (v1.0)
-- Phase 9 : Sample Project (DX-04 — projet consommateur via NuGet, template scaffold)
+### Shipped in Phase 9 ✅
+- DX-04 — StarterGame : BattleEngine 1v1 + NuzlockePlugin + Lua badge + ISaveSystem F5/F9 — demo jouable NuGet-only (D-19) — *2026-06-07*
+
+### Shipped in Phase 10 ✅
+- DX-05 — `PokeForge.CLI` global tool v0.1.0 : `pokeforge new` (scaffold StarterGame template), `asset-sync` (validate+pack+sync), `seed` (populate SQLite), `doctor` (health check headless D-17) — publish-cli.yml prêt pour tag `cli-v*.*.*` — *2026-06-09*
+
+### Active (v0.3)
+- Phase 6 : Advanced Systems (TTS, Fakemons — ADV-03→04)
+- Phase 11 : Documentation (APIs stables uniquement — D-21)
 
 ### Out of Scope
 - Connexion online / trades réseau
@@ -105,7 +112,8 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | Phase 5 complete | 3 plugins + 3 entités Character, D-22 | 126/126 tests verts | ✅ Complete |
 | Phase 7 complete | Asset pipeline + hot reload + REPL | 166 tests verts | ✅ Complete |
 | Phase 8 complete | 7 packages PokeForge.SDK.* publiables NuGet | 7 smoke tests verts, publish-nuget.yml prêt | ✅ Complete |
-| v1.0 | dotnet add package PokeForge.SDK fonctionnel | Phase 9 (sample) restante | In Progress |
+| v1.0 | dotnet add package PokeForge.SDK fonctionnel | StarterGame demo NuGet-only 09-04 ✅ | ✅ Complete 2026-06-07 |
+| Phase 10 complete | `pokeforge new\|asset-sync\|seed\|doctor` CLI global tool | 13/13 tests verts, PokeForge.CLI.0.1.0.nupkg valide | ✅ Complete 2026-06-09 |
 
 ## Tech Stack
 
@@ -123,5 +131,5 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | JSON | System.Text.Json | Intégré .NET 10 |
 
 ---
-*Created: 2026-06-01 | Last updated: 2026-06-07 after Phase 8*
+*Created: 2026-06-01 | Last updated: 2026-06-09 after Phase 10 — CLI pokeforge shipped*
 *Full context: PROJECT.md | REQUIREMENTS.md | .claude/ARCHITECTURE.md | CLAUDE.md*
