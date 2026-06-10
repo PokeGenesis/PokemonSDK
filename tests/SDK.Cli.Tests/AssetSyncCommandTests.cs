@@ -38,14 +38,13 @@ public class AssetSyncCommandTests : IDisposable
         var dbPath     = Path.Combine(_tempDir, "test.db");
         Directory.CreateDirectory(spritesDir);
 
-        var json = $$$"""
-            {
-              "sprites_root": "{{{spritesDir}}}",
-              "output_dir":   "{{{outDir}}}",
-              "db_path":      "{{{dbPath}}}",
-              "include_views": ["front"]
-            }
-            """;
+        var json = System.Text.Json.JsonSerializer.Serialize(new
+        {
+            sprites_root  = spritesDir,
+            output_dir    = outDir,
+            db_path       = dbPath,
+            include_views = new[] { "front" }
+        });
         File.WriteAllText(configPath, json);
 
         AssetSyncCommand.Execute(configPath).Should().Be(0);
