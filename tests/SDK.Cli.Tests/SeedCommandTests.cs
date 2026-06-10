@@ -20,7 +20,10 @@ public class SeedCommandTests : IDisposable
     {
         Directory.SetCurrentDirectory(_originalDir);
         if (Directory.Exists(_tempDir))
-            Directory.Delete(_tempDir, recursive: true);
+        {
+            try { Directory.Delete(_tempDir, recursive: true); }
+            catch (IOException) { /* Windows: SQLite may hold file lock after Migrate() */ }
+        }
     }
 
     [Fact]
