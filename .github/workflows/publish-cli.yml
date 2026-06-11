@@ -1,0 +1,61 @@
+name: Publish CLI Tool
+
+on:
+  push:
+    tags: ['cli-v*.*.*']
+  workflow_dispatch:
+
+jobs:
+  publish-cli:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore tools (MGCB)
+        run: dotnet tool restore
+
+      - name: Restore packages
+        run: dotnet restore PokemonSDK.slnx
+
+      - name: Build Release
+        env:
+          SixLaborsLicenseKey: ${{ secrets.SIXLABORS_LICENSE_KEY }}
+        run: |
+          dotnet build PokemonSDK.slnx \
+            --configuration Release \
+            --no-restore
+
+      - name: Run CLI tests
+        run: dotnet test tests/SDK.Cli.Tests/ --configuration Release --no-build
+
+      - name: Pack PokeForge.CLI
+        run: |
+          dotnet pack src/SDK.Cli/SDK.Cli.csproj \
+            --configuration Release \
+            --no-build \
+            -o ./cli-nupkg
+
+      - name: Push vers NuGet.org
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+        run: |
+          if [ -z "$NUGET_API_KEY" ]; then
+            echo "NUGET_API_KEY non configuré — push ignoré"
+            exit 0
+          fi
+          dotnet nuget push ./cli-nupkg/*.nupkg \
+            --api-key "$NUGET_API_KEY" \
+            --source https://api.nuget.org/v3/index.json \
+            --skip-duplicate
+
+      - name: Upload CLI artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: cli-tool-${{ github.ref_name }}
+          path: ./cli-nupkg

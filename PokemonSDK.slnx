@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/SDK.Battle/SDK.Battle.csproj" />
+    <Project Path="src/SDK.Cli/SDK.Cli.csproj" />
     <Project Path="src/SDK.Core/SDK.Core.csproj" />
     <Project Path="src/SDK.Data/SDK.Data.csproj" />
     <Project Path="src/SDK.MonoGame/SDK.MonoGame.csproj" />
@@ -13,6 +14,7 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/SDK.Battle.Tests/SDK.Battle.Tests.csproj" />
+    <Project Path="tests/SDK.Cli.Tests/SDK.Cli.Tests.csproj" />
     <Project Path="tests/SDK.Core.Tests/SDK.Core.Tests.csproj" />
     <Project Path="tests/SDK.Data.Tests/SDK.Data.Tests.csproj" />
     <Project Path="tests/SDK.MonoGame.Tests/SDK.MonoGame.Tests.csproj" />

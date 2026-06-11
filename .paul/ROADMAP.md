@@ -2,21 +2,35 @@
 
 ## Overview
 
-3 horizons : moteur core jouable (v0.1) → SDK distribuable NuGet (v1.0) → CLI + docs + features avancées (v2.0).
+6 horizons : v0.1 (moteur core) → v0.2 (SDK NuGet) → v0.3 (CLI + docs) → v1.0 (moteur complet) → v1.x (plugin era) → v2.0 (réseau).
 
 ## Completed Milestones
 
 **v0.1 Proof of Concept** (v0.1.0) — ✅ Complete 2026-06-05
 Phases: 4 of 4 complete (Phases 1→4)
 
-**v1.0 SDK Distribuable** (v1.0.0) — ✅ Complete 2026-06-07
+**v0.2 SDK Distribuable** (v0.2.0) — ✅ Complete 2026-06-07
 Phases: 4 of 4 complete (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 ✅)
 
 ## Next Milestone
 
-**v2.0 CLI + Docs + Advanced Systems** (v2.0.0)
+**v0.3 CLI + Docs + Advanced Systems** (v0.3.0)
+Status: In progress
+Phases: 1 of 3 complete (Phase 6 — Phase 10 ✅ — Phase 11)
+
+## Future Milestones
+
+**v1.0 Moteur Complet** (v1.0.0)
 Status: Not started
-Phases: 0 of 3 (Phase 6 — Phase 10 — Phase 11)
+Phases: 0 of 6 (Phase 12 — Phase 13 — Phase 14 — Phase 15 — Phase 16 — Phase 17)
+
+**v1.x Plugin Era** (v1.1.0 → v1.4.0+)
+Status: Not started
+Phases: 0 of 4+ (Phase 18 v1.1 — Phase 19 v1.2 — Phase 20 v1.3 — Phase 21 v1.4 — futurs plugins v1.5+)
+
+**v2.0 En ligne** (v2.0.0)
+Status: Not started
+Phases: 0 of 1 (Phase 22)
 
 ## Phases
 
@@ -31,8 +45,19 @@ Phases: 0 of 3 (Phase 6 — Phase 10 — Phase 11)
 | 8     | NuGet Distribution      | 4     | ✅ Complete | 2026-06-07 |
 | 9     | Sample Project          | 4     | ✅ Complete | 2026-06-07 |
 | 6     | Advanced Systems        | TBD   | Not started | -         |
-| 10    | CLI pokeforge           | 4     | Not started | -         |
+| 10    | CLI pokeforge           | 3     | ✅ Complete | 2026-06-09 |
 | 11    | Documentation           | 4     | Not started | -         |
+| 12    | BattleScene UI          | TBD   | Not started | -         |
+| 13    | EXP + Level-up + Évol.  | TBD   | Not started | -         |
+| 14    | Items + Bag + Shop      | TBD   | Not started | -         |
+| 15    | Party + PC + Pokédex UI | TBD   | Not started | -         |
+| 16    | QuestPlugin             | TBD   | Not started | -         |
+| 17    | Real Data Pipeline      | TBD   | Not started | -         |
+| 18    | Audio complet           | TBD   | Not started | -         |
+| 19    | Mécaniques modernes     | TBD   | Not started | -         |
+| 20    | DungeonPlugin           | TBD   | Not started | -         |
+| 21    | StreamerPlugin          | TBD   | Not started | -         |
+| 22    | SDK.Network             | TBD   | Not started | -         |
 
 ## Phase Details
 
@@ -103,7 +128,6 @@ Phases: 0 of 3 (Phase 6 — Phase 10 — Phase 11)
 - [x] 05-02: NuzlockePlugin + RandomizerPlugin + TurboPlugin (src/plugins/) ← *Done 2026-06-06*
 - [x] 05-03: Character + VillainGroup + VillainMember + Migration AddCharacterData + D-22 seeding ← *Done 2026-06-06*
 
-
 ### Phase 9: Sample Project
 
 **Goal:** StarterGame NuGet-only (D-19) — BattleEngine 1v1 headless, NuzlockePlugin, Lua badge, ISaveSystem F5/F9. DX-04.
@@ -119,7 +143,21 @@ Phases: 0 of 3 (Phase 6 — Phase 10 — Phase 11)
 
 ---
 
-*Roadmap created: 2026-06-01 | Last updated: 2026-06-07 — Phase 9 Sample Project Complete — v1.0 Milestone COMPLETE*
+### Phase 10: CLI pokeforge
+
+**Goal:** `pokeforge new mon-jeu` → `dotnet run` en 30 secondes. CLI global tool `PokeForge.CLI` publié sur NuGet.org. Commandes : `new`, `asset-sync`, `seed`, `doctor`.
+**Depends on:** Phase 9 (StarterGame stabilisé — D-20)
+**Requirements:** DX-05
+
+**Plans:**
+
+- [x] 10-01: SDK.Cli (PackAsTool) + System.CommandLine + commande `new` + zip template StarterGame ← *Done 2026-06-09*
+- [x] 10-02: `asset-sync` + `seed` (délèguent à SDK.Tools via ProjectReference) ← *Done 2026-06-09*
+- [x] 10-03: `doctor` (checklist headless D-17) + publication NuGet tool + CI publish-cli.yml ← *Done 2026-06-09*
+
+---
+
+*Roadmap created: 2026-06-01 | Last updated: 2026-06-09 — Phase 10 CLI pokeforge ✅ Complete. v0.3: 1/3 phases done.*
 *Full details: ROADMAP.md (root)*
 
 ### Phase 7: Developer Experience
