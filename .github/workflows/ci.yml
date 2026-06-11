@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [dev, staging, main]
   push:
-    branches: [feature/**, bugfix/**]
+    branches: [feature/**, bugfix/**, hotfix/**]
 
 jobs:
   build-and-test:

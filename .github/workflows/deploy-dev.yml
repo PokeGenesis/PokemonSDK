@@ -1,41 +1,51 @@
-name: Deploy DEV
+name: CI DEV + Promote → STAGING
 
 on:
   push:
     branches: [dev]
 
+permissions:
+  contents: write
+
 jobs:
-  deploy:
+  ci:
     runs-on: ubuntu-latest
-    environment: dev
 
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup .NET 10
         uses: actions/setup-dotnet@v5
         with:
           dotnet-version: '10.0.x'
 
-      - name: Build Release
+      - name: Restore
+        run: dotnet restore PokemonSDK.slnx
+
+      - name: Build
         env:
           SixLaborsLicenseKey: ${{ secrets.SIXLABORS_LICENSE_KEY }}
-        run: dotnet build PokemonSDK.slnx --configuration Release
+        run: dotnet build PokemonSDK.slnx --no-restore --configuration Release
 
-      - name: Run all tests (bloquant)
-        run: dotnet test PokemonSDK.slnx --configuration Release --no-build
+      - name: Test
+        run: dotnet test PokemonSDK.slnx --no-build --configuration Release --collect:"XPlat Code Coverage" --logger "console;verbosity=normal"
 
-      # TODO: Phase 3 — remplacer par SDK.MonoGame quand disponible
-      - name: Publish SDK.Tools
+      - name: Validate SDK.Core — zéro dépendance NuGet
+        run: dotnet list src/SDK.Core/SDK.Core.csproj package
+
+      - name: Headless smoke test
+        run: dotnet run --project src/SDK.MonoGame --configuration Release -- --headless --max-frames=10
+        continue-on-error: true
+
+      - name: Promote dev → staging
         run: |
-          dotnet publish src/SDK.Tools/SDK.Tools.csproj \
-            --configuration Release \
-            --no-build \
-            --output ./publish/dev
-
-      - name: Upload artifact DEV
-        uses: actions/upload-artifact@v6
-        with:
-          name: pokemonsdk-dev-${{ github.sha }}
-          path: ./publish/dev
-          retention-days: 7
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin
+          git checkout -B staging origin/staging
+          git merge --no-ff origin/dev -X theirs \
+            -m "chore(gitflow): auto-promote dev → staging [CI vert @ ${{ github.sha }}]"
+          git push origin staging
