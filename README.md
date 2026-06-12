@@ -15,6 +15,7 @@ runtime MonoGame DesktopGL, système de plugins modulaire.
 | `PokeForge.SDK.Plugins.Nuzlocke` | Plugin IBattlePlugin — Nuzlocke (permadeath, catch-first-only) |
 | `PokeForge.SDK.Plugins.Randomizer` | Plugin IBattlePlugin — Randomizer (seed-déterministe) |
 | `PokeForge.SDK.Plugins.Turbo` | Plugin IBattlePlugin — Turbo (TextSpeedMultiplier) |
+| `PokeForge.SDK.Plugins.TTS` | Narration vocale — PiperTTS (cross-platform) + Windows Speech, asynchrone, non-bloquant |
 
 ## Prérequis
 
@@ -36,6 +37,7 @@ Plugins optionnels :
 dotnet add package PokeForge.SDK.Plugins.Nuzlocke
 dotnet add package PokeForge.SDK.Plugins.Randomizer
 dotnet add package PokeForge.SDK.Plugins.Turbo
+dotnet add package PokeForge.SDK.Plugins.TTS
 ```
 
 ## Licence
@@ -61,6 +63,7 @@ MonoGame DesktopGL runtime, modular plugin system.
 | `PokeForge.SDK.Plugins.Nuzlocke` | IBattlePlugin — Nuzlocke (permadeath, catch-first-only) |
 | `PokeForge.SDK.Plugins.Randomizer` | IBattlePlugin — Randomizer (seed-deterministic) |
 | `PokeForge.SDK.Plugins.Turbo` | IBattlePlugin — Turbo (TextSpeedMultiplier) |
+| `PokeForge.SDK.Plugins.TTS` | Voice narration — PiperTTS (cross-platform) + Windows Speech, async, non-blocking |
 
 ## Requirements
 
@@ -82,6 +85,7 @@ Optional plugins:
 dotnet add package PokeForge.SDK.Plugins.Nuzlocke
 dotnet add package PokeForge.SDK.Plugins.Randomizer
 dotnet add package PokeForge.SDK.Plugins.Turbo
+dotnet add package PokeForge.SDK.Plugins.TTS
 ```
 
 ## License

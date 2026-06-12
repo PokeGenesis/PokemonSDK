@@ -9,6 +9,7 @@
     <Project Path="src/plugins/SDK.Plugins.Nuzlocke/SDK.Plugins.Nuzlocke.csproj" />
     <Project Path="src/plugins/SDK.Plugins.Randomizer/SDK.Plugins.Randomizer.csproj" />
     <Project Path="src/plugins/SDK.Plugins.Turbo/SDK.Plugins.Turbo.csproj" />
+    <Project Path="src/plugins/SDK.Plugins.TTS/SDK.Plugins.TTS.csproj" />
     <Project Path="src/SDK.Tools/SDK.Tools.csproj" />
     <Project Path="src/SDK.Bundle/SDK.Bundle.csproj" />
   </Folder>
@@ -23,5 +24,6 @@
     <Project Path="tests/SDK.Plugins.Turbo.Tests/SDK.Plugins.Turbo.Tests.csproj" />
     <Project Path="tests/SDK.Scripting.Tests/SDK.Scripting.Tests.csproj" />
     <Project Path="tests/SDK.Tools.Tests/SDK.Tools.Tests.csproj" />
+    <Project Path="tests/SDK.Plugins.TTS.Tests/SDK.Plugins.TTS.Tests.csproj" />
   </Folder>
 </Solution>
