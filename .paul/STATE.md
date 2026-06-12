@@ -6,30 +6,32 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** Phase 10 CLI pokeforge ✅ COMPLET — v0.3 milestone 1/3 phases done — prêt pour Phase 6 ou Phase 11
+**Current focus:** Phase 11 Documentation — prêt à planifier (Phase 6 Advanced Systems ✅ complet)
 
 ## Current Position
 
-Milestone: v0.3 CLI + Docs + Advanced Systems — In progress (1/3 phases)
-Phase: 10 (CLI pokeforge) — ✅ Complete (3/3 plans complets)
-Plan: Not started (Phase 11 ou Phase 6 — à choisir)
-Status: Ready to plan next phase
-Last activity: 2026-06-09 — Phase 10 complete — `pokeforge new|asset-sync|seed|doctor` opérationnel
+Milestone: v0.3 CLI + Docs + Advanced Systems — In progress (2/3 phases)
+Phase: 11 (Documentation) — Not started
+Plan: Not started
+Status: Ready to plan — run /paul:plan pour Phase 11
+Last activity: 2026-06-12 — Phase 6 complete (ADV-03 TTS + ADV-04 Fakemon, 212/212 tests)
 
 Progress:
 
 - Milestone v0.1: [██████████] 100% ✅ (Phases 1→4 complètes, 2026-06-05)
 - Milestone v0.2: [██████████] 100% ✅ (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 ✅)
-- Milestone v0.3: [███░░░░░░░] 33% (Phase 10 ✅)
+- Milestone v0.3: [██████░░░░] 66% (Phase 6 ✅ — Phase 10 ✅ — Phase 11 next)
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
 - Phase 3: [██████████] 100% ✅
 - Phase 4: [██████████] 100% ✅
 - Phase 5: [██████████] 100% ✅ (05-01 ✅ 05-02 ✅ 05-03 ✅)
+- Phase 6: [██████████] 100% ✅ (06-01 ✅ 06-04 ✅ 06-02 ✅ 06-03 ✅ 06-05 ✅)
 - Phase 7: [██████████] 100% ✅ (07-01 ✅ 07-02 ✅ 07-03 ✅ 07-04 ✅)
 - Phase 8: [██████████] 100% ✅ (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
 - Phase 9: [██████████] 100% ✅ (09-01 ✅ 09-02 ✅ 09-03 ✅ 09-04 ✅)
 - Phase 10: [██████████] 100% ✅ (10-01 ✅ 10-02 ✅ 10-03 ✅)
+- Phase 11: [░░░░░░░░░░] 0% (not started)
 
 ## Loop Position
 
@@ -37,10 +39,10 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Phase 10 complete — ready for next PLAN]
+  ○        ○        ○     [Phase 11 — not started — run /paul:plan]
 ```
 
-Phase 10 progress: 3/3 plans complets (10-01 ✅ 10-02 ✅ 10-03 ✅)
+Phase 6 plans : 06-01 ✅ | 06-04 ✅ | 06-02 ✅ | 06-03 ✅ | 06-05 ✅
 
 ## Accumulated Context
 
@@ -202,6 +204,15 @@ None.
 | E-03 | YAML `if: env.NUGET_API_KEY != ''` ne lit pas les secrets du bloc `env:` du même step | Guard de secret DANS le `run:` shell : `if [ -z "$NUGET_API_KEY" ]; then exit 0; fi` |
 | E-04 | Squash merge feature→dev→staging→main crée divergence historique (commit absent de la branche cible) → PR CONFLICTING | Après tout squash merge sur main, sync immédiat : `main → staging → dev`. Ne jamais laisser stagner. |
 
+Décisions émergentes (Phase 6) :
+
+- `TtsApi` méthodes en minuscules (`speak`, `stop`, `is_speaking`) — MoonSharp mappe les noms C# sensible à la casse vers identifiants Lua ; PascalCase forcerait `sdk.tts.Speak()` en Lua
+- `SdkGlobals public sealed class { public TtsApi tts }` (property minuscule) — seul pattern pour namespaces Lua imbriqués (`sdk.tts.speak()`). Réutilisable : `sdk.items`, `sdk.party` (Phase 14-15)
+- `UserData.RegisterType<TtsApi>()` obligatoire avant `RegisterApi("sdk", SdkGlobals)` — MoonSharp ne réfléchit pas automatiquement les types CLR imbriqués en SoftSandbox
+- `InvocationContext` (`ctx.ParseResult.GetValueForOption`) pour commandes CLI >8 options — `SetHandler` typé limité à 8 paramètres en System.CommandLine 2.0.0-beta4
+- `FakemonPartsCatalog.Scan` filtre par extension `.png` uniquement (pas validation format) — tests peuvent utiliser `new byte[1]` comme fake PNG
+- E-05 : MSB3492 `CoreCompileInputs.cache` stale sur .NET 10.0.108 — fix : `rm obj/Release/net10.0/*.csproj.CoreCompileInputs.cache`
+
 Décisions émergentes (Phase 10) :
 
 - `<IsPackable>true</IsPackable>` obligatoire sur tout `OutputType=Exe` ciblant `net10.0` avec `PackAsTool=true` — `.NET 10.0.108` force `IsPackable=false` sinon (`dotnet pack` exit 0 sans produire de .nupkg)
@@ -211,9 +222,10 @@ Décisions émergentes (Phase 10) :
 
 ## Session Continuity
 
-Last session: 2026-06-09
-Stopped at: Phase 10 complete — transition UNIFY exécutée
-Next action: /paul:plan pour Phase 11 (Documentation) ou Phase 6 (Advanced Systems)
+Last session: 2026-06-12
+Stopped at: Phase 6 ✅ complete — UNIFY ×2 terminés (06-03 + 06-05). Transition vers Phase 11 effectuée.
+Next action: /paul:plan pour Phase 11 (Documentation — APIs stables uniquement, D-21)
+
 Resume file: `.paul/ROADMAP.md`
 
 ---

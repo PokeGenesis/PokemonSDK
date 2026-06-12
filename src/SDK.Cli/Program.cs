@@ -6,4 +6,5 @@ NewCommand.Register(rootCommand);
 AssetSyncCommand.Register(rootCommand);
 SeedCommand.Register(rootCommand);
 DoctorCommand.Register(rootCommand);
+FakemonCommand.Register(rootCommand);
 return await rootCommand.InvokeAsync(args);

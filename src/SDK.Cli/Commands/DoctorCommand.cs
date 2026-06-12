@@ -1,4 +1,5 @@
 using System.CommandLine;
+using System.Diagnostics;
 using System.Text.Json;
 using SDK.Tools.Sync;
 
@@ -62,6 +63,56 @@ public static class DoctorCommand
             Console.ResetColor();
         }
 
+        if (!IsCommandAvailable("piper"))
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("[WARN] piper TTS absent — installez piper depuis https://github.com/rhasspy/piper");
+            Console.ResetColor();
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("[OK]   piper TTS disponible");
+            Console.ResetColor();
+        }
+
+        if (!OperatingSystem.IsWindows())
+        {
+            if (!IsCommandAvailable("aplay"))
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("[WARN] aplay absent — TTS audio silencieux");
+                Console.ResetColor();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("[OK]   aplay disponible");
+                Console.ResetColor();
+            }
+        }
+
         return hasError ? 1 : 0;
+    }
+
+    private static bool IsCommandAvailable(string command)
+    {
+        var checkCmd = OperatingSystem.IsWindows() ? "where" : "which";
+        try
+        {
+            var psi = new ProcessStartInfo(checkCmd, command)
+            {
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                UseShellExecute = false,
+            };
+            using var process = Process.Start(psi);
+            process?.WaitForExit();
+            return process?.ExitCode == 0;
+        }
+        catch
+        {
+            return false;
+        }
     }
 }

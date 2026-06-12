@@ -1,7 +1,7 @@
 # Requirements: PokemonSDK
 
 **Defined:** 2026-05-24
-**Last updated:** 2026-06-05 — v0.1 requirements marqués ✅ (Phases 1-4 complètes, 97 tests)
+**Last updated:** 2026-06-12 — ADV-03 + ADV-04 marqués ✅ (Phase 6 complète : TTS + Fakemons)
 **Core Value:** Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de combat, une base de données Pokémon multilingue et un système de quêtes fonctionnel — sans réimplémenter les règles de base.
 
 ---
@@ -55,8 +55,8 @@
 
 - [ ] **ADV-01**: Le Pokégear intègre lecteur de musique, journal de rencontres et carte du monde navigable
 - [ ] **ADV-02**: Les objets de terrain remplacent les CS/HMs — les actions sur le terrain sont déclenchées par des objets inventaire
-- [ ] **ADV-03**: Le système TTS génère des voix off via synthèse vocale intégrée pour les combats importants et les dialogues clés — asynchrone, non-bloquant
-- [ ] **ADV-04**: Le générateur de Fakemons permet d'assembler des parties 2D, de remapper les palettes par couche et d'exporter le Fakemon vers la base SQLite
+- [x] **ADV-03**: Le système TTS génère des voix off via synthèse vocale intégrée pour les combats importants et les dialogues clés — asynchrone, non-bloquant
+- [x] **ADV-04**: Le générateur de Fakemons permet d'assembler des parties 2D, de remapper les palettes par couche et d'exporter le Fakemon vers la base SQLite
 
 ### DX — Developer Experience
 
@@ -211,8 +211,8 @@ Déférés — prévus mais hors scope v1.
 | DX-02 | v1.0 | Phase 7 | ✅ LuaHotReloader + LuaConsole REPL (Phase 7) |
 | DX-03 | v1.0 | Phase 8 | ✅ 7 packages NuGet publiables (Phase 8) |
 | DX-04 | v1.0 | Phase 9 | ✅ StarterGame NuGet-only (Phase 9) |
-| ADV-03 | v2.0 | Phase 6 | 🔲 Post-v1.0 |
-| ADV-04 | v2.0 | Phase 6 | 🔲 Post-v1.0 |
+| ADV-03 | v0.3 | Phase 6 | ✅ PiperTtsPlugin + WindowsSpeechPlugin + NarrationQueue (Phase 6) |
+| ADV-04 | v0.3 | Phase 6 | ✅ FakemonAssembler + FakemonExporter + FakemonSpecies EF migration (Phase 6) |
 | DX-05 | v2.0 | Phase 10 | 🔲 Post-v1.0 |
 | DX-06 | v2.0 | Phase 11 | 🔲 Post-v1.0 |
 | BTLUI-01 | v3.0 | Phase 12 | 🔲 Post-v2.0 |

@@ -23,6 +23,7 @@ public class PokemonDbContext : DbContext
     public DbSet<VillainGroup> VillainGroups => Set<VillainGroup>();
     public DbSet<VillainMember> VillainMembers => Set<VillainMember>();
     public DbSet<SpriteAtlasEntry> SpriteAtlasEntries => Set<SpriteAtlasEntry>();
+    public DbSet<FakemonSpecies> FakemonSpecies => Set<FakemonSpecies>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
         => modelBuilder.ApplyConfigurationsFromAssembly(typeof(PokemonDbContext).Assembly);
