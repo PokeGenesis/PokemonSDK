@@ -77,7 +77,7 @@ SDK.MonoGame  ← SDK.Core + MonoGame + SDK.Battle + SDK.Scripting (via Func fac
 | ADV-01→02 | Pokégear, objets terrain | ✅ Phase 5 |
 | DX-01→02 | Asset pipeline, hot reload Lua | ✅ Phase 7 |
 | DX-03→04 | NuGet publish, Sample project | ✅ Phase 8-9 |
-| ADV-03→04 | TTS, Fakemons | 🔲 Phase 6 |
+| ADV-03→04 | TTS, Fakemons | ✅ Phase 6 |
 | DX-05→06 | CLI pokeforge, Docs | 🔲 Phase 10-11 |
 | BTLUI-01 | BattleScene UI — HP bars, sprites, move menu | 🔲 Phase 12 |
 | BTLUI-02 | EXP + Level-up + Évolution | 🔲 Phase 13 |
@@ -116,7 +116,7 @@ v2.0 → + Phase 22           🔲 Réseau en ligne
 | 7 | Developer Experience | v0.2 | ✅ |
 | 8 | NuGet Distribution | v0.2 | ✅ |
 | 9 | Sample Project | v0.2 🏁 | ✅ |
-| 6 | Advanced Systems | v0.3 | 🔲 |
+| 6 | Advanced Systems | v0.3 | ✅ |
 | 10 | CLI `pokeforge` | v0.3 | 🔲 |
 | 11 | Documentation | v0.3 🏁 | 🔲 |
 | 12 | BattleScene UI | v1.0 | 🔲 |
