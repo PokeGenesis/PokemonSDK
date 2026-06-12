@@ -25,8 +25,6 @@ public static class NewCommand
         }
 
         var pascalName = ToPascalCase(name);
-        var projectRoot = Path.GetFullPath(name);
-        var rootWithSep = projectRoot + Path.DirectorySeparatorChar;
 
         using var stream = Assembly.GetExecutingAssembly()
             .GetManifestResourceStream("starter-template.zip")!;
@@ -40,27 +38,18 @@ public static class NewCommand
 
         foreach (var entry in archive.Entries)
         {
-            var entryRelative = entry.FullName.Replace('\\', '/').TrimStart('/');
-            var safePath = Path.GetFullPath(Path.Combine(projectRoot, entryRelative));
-            if (!safePath.StartsWith(rootWithSep, StringComparison.Ordinal))
-                continue;
-
             if (entry.FullName.EndsWith('/'))
             {
-                Directory.CreateDirectory(safePath);
+                Directory.CreateDirectory(Path.Combine(name, entry.FullName));
                 continue;
             }
 
-            var destRelative = entryRelative;
+            var destRelative = entry.FullName;
 
             if (Path.GetFileName(destRelative) == "StarterGame.csproj")
-                destRelative = Path.Combine(
-                    Path.GetDirectoryName(destRelative) ?? "",
-                    $"{pascalName}.csproj");
+                destRelative = destRelative.Replace("StarterGame.csproj", $"{pascalName}.csproj");
 
-            var destPath = Path.GetFullPath(Path.Combine(projectRoot, destRelative));
-            if (!destPath.StartsWith(rootWithSep, StringComparison.Ordinal))
-                continue;
+            var destPath = Path.Combine(name, destRelative);
             Directory.CreateDirectory(Path.GetDirectoryName(destPath)!);
 
             var ext = Path.GetExtension(entry.FullName).ToLowerInvariant();
