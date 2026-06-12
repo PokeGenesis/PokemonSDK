@@ -39,7 +39,9 @@ public sealed class WindowsSpeechPlugin : INarrationPlugin, IDisposable
         _cts.Cancel();
     }
 
-    public void Enqueue(string text) => _ = SpeakAsync(text);
+    public void Enqueue(string text) => _ = SpeakAsync(text).ContinueWith(
+        t => Console.Error.WriteLine($"[{EngineName}] TTS error: {t.Exception?.GetBaseException().Message}"),
+        TaskContinuationOptions.OnlyOnFaulted);
 
     public void Dispose()
     {
