@@ -16,7 +16,7 @@ Phases: 4 of 4 complete (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9
 
 **v0.3 CLI + Docs + Advanced Systems** (v0.3.0)
 Status: In progress
-Phases: 1 of 3 complete (Phase 6 — Phase 10 ✅ — Phase 11)
+Phases: 2 of 3 complete (Phase 6 ✅ — Phase 10 ✅ — Phase 11)
 
 ## Future Milestones
 
@@ -44,7 +44,7 @@ Phases: 0 of 1 (Phase 22)
 | 7     | Developer Experience    | 4     | ✅ Complete | 2026-06-06 |
 | 8     | NuGet Distribution      | 4     | ✅ Complete | 2026-06-07 |
 | 9     | Sample Project          | 4     | ✅ Complete | 2026-06-07 |
-| 6     | Advanced Systems        | TBD   | Not started | -         |
+| 6     | Advanced Systems        | 5     | ✅ Complete | 2026-06-12 |
 | 10    | CLI pokeforge           | 3     | ✅ Complete | 2026-06-09 |
 | 11    | Documentation           | 4     | Not started | -         |
 | 12    | BattleScene UI          | TBD   | Not started | -         |
@@ -128,6 +128,22 @@ Phases: 0 of 1 (Phase 22)
 - [x] 05-02: NuzlockePlugin + RandomizerPlugin + TurboPlugin (src/plugins/) ← *Done 2026-06-06*
 - [x] 05-03: Character + VillainGroup + VillainMember + Migration AddCharacterData + D-22 seeding ← *Done 2026-06-06*
 
+### Phase 6: Advanced Systems
+
+**Goal:** TTS narration (INarrationPlugin + PiperNarrationPlugin + Lua binding sdk.tts.*) + Fakemon assembly pipeline (catalog→filter→assemble ImageSharp→export SQLite) + CLI `pokeforge fakemon list-parts/assemble`. ADV-03 + ADV-04.
+**Depends on:** Phase 4 (Scripting), Phase 7 (SDK.Tools ImageSharp), Phase 10 (CLI infrastructure)
+**Requirements:** ADV-03, ADV-04
+
+**Plans:**
+
+- [x] 06-01: FakemonSpecies entity + Migration AddFakemonSpecies + SpriteValidator regex D-16 D-23 ← *Done 2026-06-12*
+- [x] 06-04: INarrationPlugin + SDK.Plugins.TTS (PiperNarrationPlugin — piper + aplay) ← *Done 2026-06-12*
+- [x] 06-02: FakemonAssemblyPipeline (FakemonPartsCatalog + FakemonFilter + FakemonAssembler ImageSharp + FakemonExporter D-22) ← *Done 2026-06-12*
+- [x] 06-03: pokeforge fakemon CLI (list-parts + assemble, InvocationContext pour 10 options) ← *Done 2026-06-12*
+- [x] 06-05: TtsApi MoonSharp binding (sdk.tts.speak/stop/is_speaking) + SdkGlobals pattern + DoctorCommand TTS check ← *Done 2026-06-12*
+
+---
+
 ### Phase 9: Sample Project
 
 **Goal:** StarterGame NuGet-only (D-19) — BattleEngine 1v1 headless, NuzlockePlugin, Lua badge, ISaveSystem F5/F9. DX-04.
@@ -157,7 +173,7 @@ Phases: 0 of 1 (Phase 22)
 
 ---
 
-*Roadmap created: 2026-06-01 | Last updated: 2026-06-09 — Phase 10 CLI pokeforge ✅ Complete. v0.3: 1/3 phases done.*
+*Roadmap created: 2026-06-01 | Last updated: 2026-06-12 — Phase 6 Advanced Systems ✅ Complete. v0.3: 2/3 phases done (Phase 11 Documentation next).*
 *Full details: ROADMAP.md (root)*
 
 ### Phase 7: Developer Experience

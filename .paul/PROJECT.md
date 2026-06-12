@@ -14,8 +14,8 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 |-----------|-------|
 | Type | Application |
 | Version | 0.3.0 (in progress) |
-| Status | Phase 10 complete — Phase 6 (Advanced Systems) ou Phase 11 (Documentation) next (v0.3) |
-| Last Updated | 2026-06-09 — Phase 10 CLI pokeforge shipped |
+| Status | Phase 6 complete — Phase 11 (Documentation) next (v0.3) |
+| Last Updated | 2026-06-12 — Phase 6 Advanced Systems shipped |
 
 ## Requirements
 
@@ -72,8 +72,11 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 ### Shipped in Phase 10 ✅
 - DX-05 — `PokeForge.CLI` global tool v0.1.0 : `pokeforge new` (scaffold StarterGame template), `asset-sync` (validate+pack+sync), `seed` (populate SQLite), `doctor` (health check headless D-17) — publish-cli.yml prêt pour tag `cli-v*.*.*` — *2026-06-09*
 
+### Shipped in Phase 6 ✅
+- ADV-03 — INarrationPlugin + PiperNarrationPlugin (piper + aplay) + TtsApi Lua binding `sdk.tts.speak/stop/is_speaking` + DoctorCommand TTS health check (piper+aplay WARN) — *2026-06-12*
+- ADV-04 — FakemonSpecies entity (Migration AddFakemonSpecies, D-16 D-22) + FakemonAssemblyPipeline (catalog→filter→assemble→export) + `pokeforge fakemon list-parts/assemble` CLI — *2026-06-12*
+
 ### Active (v0.3)
-- Phase 6 : Advanced Systems (TTS, Fakemons — ADV-03→04)
 - Phase 11 : Documentation (APIs stables uniquement — D-21)
 
 ### Out of Scope
@@ -114,6 +117,7 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | Phase 8 complete | 7 packages PokeForge.SDK.* publiables NuGet | 7 smoke tests verts, publish-nuget.yml prêt | ✅ Complete |
 | v1.0 | dotnet add package PokeForge.SDK fonctionnel | StarterGame demo NuGet-only 09-04 ✅ | ✅ Complete 2026-06-07 |
 | Phase 10 complete | `pokeforge new\|asset-sync\|seed\|doctor` CLI global tool | 13/13 tests verts, PokeForge.CLI.0.1.0.nupkg valide | ✅ Complete 2026-06-09 |
+| Phase 6 complete | ADV-03 TTS + ADV-04 Fakemon assembly pipeline + CLI | 212/212 tests verts, `pokeforge fakemon assemble` fonctionnel | ✅ Complete 2026-06-12 |
 
 ## Tech Stack
 
@@ -131,5 +135,5 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | JSON | System.Text.Json | Intégré .NET 10 |
 
 ---
-*Created: 2026-06-01 | Last updated: 2026-06-09 after Phase 10 — CLI pokeforge shipped*
+*Created: 2026-06-01 | Last updated: 2026-06-12 after Phase 6 — ADV-03 TTS + ADV-04 Fakemon assembly shipped*
 *Full context: PROJECT.md | REQUIREMENTS.md | .claude/ARCHITECTURE.md | CLAUDE.md*

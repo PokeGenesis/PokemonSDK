@@ -211,8 +211,8 @@ Déférés — prévus mais hors scope v1.
 | DX-02 | v1.0 | Phase 7 | ✅ LuaHotReloader + LuaConsole REPL (Phase 7) |
 | DX-03 | v1.0 | Phase 8 | ✅ 7 packages NuGet publiables (Phase 8) |
 | DX-04 | v1.0 | Phase 9 | ✅ StarterGame NuGet-only (Phase 9) |
-| ADV-03 | v2.0 | Phase 6 | 🔲 Post-v1.0 |
-| ADV-04 | v2.0 | Phase 6 | 🔲 Post-v1.0 |
+| ADV-03 | v0.3 | Phase 6 | 🔲 v0.3 / Phase 6 |
+| ADV-04 | v0.3 | Phase 6 | 🔲 v0.3 / Phase 6 |
 | DX-05 | v2.0 | Phase 10 | 🔲 Post-v1.0 |
 | DX-06 | v2.0 | Phase 11 | 🔲 Post-v1.0 |
 | BTLUI-01 | v3.0 | Phase 12 | 🔲 Post-v2.0 |
