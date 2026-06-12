@@ -2,6 +2,7 @@ namespace SDK.Plugins.TTS;
 
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Text;
 using SDK.Core.Interfaces;
 
 public sealed class WindowsSpeechPlugin : INarrationPlugin, IDisposable
@@ -17,10 +18,11 @@ public sealed class WindowsSpeechPlugin : INarrationPlugin, IDisposable
     {
         if (!IsSupported) return;
 
-        var safe = text.Replace("'", "''");
+        var script = $"Add-Type -AssemblyName System.speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('{text.Replace("'", "''")}')";
+        var encoded = Convert.ToBase64String(Encoding.Unicode.GetBytes(script));
         var psi = new ProcessStartInfo("powershell.exe")
         {
-            Arguments = $"-NoProfile -Command \"Add-Type -AssemblyName System.speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('{safe}')\"",
+            Arguments = $"-NoProfile -EncodedCommand {encoded}",
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false,
