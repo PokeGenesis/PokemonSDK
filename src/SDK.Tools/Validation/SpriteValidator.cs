@@ -5,7 +5,11 @@ using System.Text.RegularExpressions;
 public sealed class SpriteValidator
 {
     private static readonly Regex D16Pattern =
-        new(@"^(\d{5})_([a-z0-9_]+)_(front|back|overworld|portrait|icon)\.png$",
+        new(@"^(\d{5})_([a-z0-9_-]+)_(front|back|overworld|portrait|icon)\.png$",
+            RegexOptions.Compiled);
+
+    private static readonly Regex FakemonPattern =
+        new(@"^(fk_[a-z0-9-]+)_(front|back|overworld|portrait|icon)\.png$",
             RegexOptions.Compiled);
 
     private static readonly byte[] PngSignature = [137, 80, 78, 71, 13, 10, 26, 10];
@@ -60,8 +64,14 @@ public sealed class SpriteValidator
     private static SpriteEntry ParseEntry(string filePath, string fileName)
     {
         var m = D16Pattern.Match(fileName);
-        if (!m.Success) return new(filePath, fileName, null, null, null);
-        return new(filePath, fileName, m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value);
+        if (m.Success)
+            return new(filePath, fileName, m.Groups[1].Value, m.Groups[2].Value, m.Groups[3].Value);
+
+        var fm = FakemonPattern.Match(fileName);
+        if (fm.Success)
+            return new(filePath, fileName, null, fm.Groups[1].Value, fm.Groups[2].Value);
+
+        return new(filePath, fileName, null, null, null);
     }
 
     private static byte[] ReadPngHeader(string filePath)
