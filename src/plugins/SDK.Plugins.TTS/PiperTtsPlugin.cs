@@ -31,10 +31,10 @@ public sealed class PiperTtsPlugin : INarrationPlugin, IDisposable
 
             using var piperProc = Process.Start(new ProcessStartInfo(_piperPath)
             {
-                Arguments = $"--input \"{inputFile}\" --output_file \"{outputFile}\" --model \"{_voiceModel}\"",
+                UseShellExecute = false,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                UseShellExecute = false
+                ArgumentList = { "--input", inputFile, "--output_file", outputFile, "--model", _voiceModel }
             })!;
             await piperProc.WaitForExitAsync(ct);
             if (piperProc.ExitCode != 0 || !File.Exists(outputFile)) return;
@@ -44,8 +44,8 @@ public sealed class PiperTtsPlugin : INarrationPlugin, IDisposable
 
             _currentProcess = Process.Start(new ProcessStartInfo(player)
             {
-                Arguments = $"\"{outputFile}\"",
-                UseShellExecute = false
+                UseShellExecute = false,
+                ArgumentList = { outputFile }
             });
             if (_currentProcess != null)
                 await _currentProcess.WaitForExitAsync(ct);
@@ -62,7 +62,9 @@ public sealed class PiperTtsPlugin : INarrationPlugin, IDisposable
         try { _currentProcess?.Kill(); } catch { }
     }
 
-    public void Enqueue(string text) => _ = SpeakAsync(text);
+    public void Enqueue(string text) => _ = SpeakAsync(text).ContinueWith(
+        t => Console.Error.WriteLine($"[{EngineName}] TTS error: {t.Exception?.GetBaseException().Message}"),
+        TaskContinuationOptions.OnlyOnFaulted);
 
     public void Dispose()
     {

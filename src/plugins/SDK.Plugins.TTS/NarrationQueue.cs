@@ -37,6 +37,7 @@ public sealed class NarrationQueue : IDisposable
     public void Dispose()
     {
         Stop();
+        try { _processingTask.Wait(TimeSpan.FromSeconds(2)); } catch { }
         _cts.Dispose();
     }
 }

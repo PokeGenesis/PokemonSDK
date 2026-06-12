@@ -16,10 +16,6 @@ public static class FakemonExporter
         if (ctx.FakemonSpecies.Any(f => f.Identifier == opts.Identifier))
             throw new FakemonAssemblyException($"Fakemon '{opts.Identifier}' existe déjà en DB");
 
-        Directory.CreateDirectory(opts.OutputDirectory);
-        var outputPath = Path.Combine(opts.OutputDirectory, $"fk_{opts.Identifier}_front.png");
-        await image.SaveAsPngAsync(outputPath);
-
         var entity = new FakemonSpecies
         {
             Identifier = opts.Identifier,
@@ -33,6 +29,11 @@ public static class FakemonExporter
 
         ctx.FakemonSpecies.Add(entity);
         await ctx.SaveChangesAsync();
+
+        // PNG écrit après l'insert DB — pas de fichier orphelin si l'insert échoue
+        Directory.CreateDirectory(opts.OutputDirectory);
+        var outputPath = Path.Combine(opts.OutputDirectory, $"fk_{opts.Identifier}_front.png");
+        await image.SaveAsPngAsync(outputPath);
 
         Dictionary<string, string>? translationMap = null;
         if (opts.TranslationsJsonPath is not null && File.Exists(opts.TranslationsJsonPath))
