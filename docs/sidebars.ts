@@ -16,6 +16,21 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
+      label: 'Guides',
+      collapsed: false,
+      items: [
+        'guides/index',
+        'guides/battle-engine',
+        'guides/lua-scripting',
+        'guides/plugins',
+        'guides/asset-pipeline',
+        'guides/rendering-hd',
+        'guides/tts-narration',
+        'guides/fakemons',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Packages',
       collapsed: false,
       items: [

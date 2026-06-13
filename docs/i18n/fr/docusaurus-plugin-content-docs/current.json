@@ -1,4 +1,8 @@
 {
+  "sidebar.docsSidebar.category.Guides": {
+    "message": "Guides",
+    "description": "Libellé de la catégorie Guides dans la barre latérale"
+  },
   "sidebar.docsSidebar.category.Tutorial": {
     "message": "Tutoriel",
     "description": "Libellé de la catégorie Tutoriel dans la barre latérale"
