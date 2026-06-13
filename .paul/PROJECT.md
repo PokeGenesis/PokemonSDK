@@ -13,9 +13,9 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | Attribute | Value |
 |-----------|-------|
 | Type | Application |
-| Version | 0.3.0 (in progress) |
-| Status | Phase 6 complete — Phase 11 (Documentation) next (v0.3) |
-| Last Updated | 2026-06-12 — Phase 6 Advanced Systems shipped |
+| Version | 0.3.0 |
+| Status | Phase 11 complete — v0.3 shipped 2026-06-13 |
+| Last Updated | 2026-06-13 — Phase 11 Documentation shipped |
 
 ## Requirements
 
@@ -76,8 +76,11 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 - ADV-03 — INarrationPlugin + PiperNarrationPlugin (piper + aplay) + TtsApi Lua binding `sdk.tts.speak/stop/is_speaking` + DoctorCommand TTS health check (piper+aplay WARN) — *2026-06-12*
 - ADV-04 — FakemonSpecies entity (Migration AddFakemonSpecies, D-16 D-22) + FakemonAssemblyPipeline (catalog→filter→assemble→export) + `pokeforge fakemon list-parts/assemble` CLI — *2026-06-12*
 
-### Active (v0.3)
-- Phase 11 : Documentation (APIs stables uniquement — D-21)
+### Shipped in Phase 11 ✅
+- DX-06 — Docusaurus 3 documentation site EN+FR: Tutorial 30min (4 pages), Guides (8 pages, 7 subsystems), Packages/CLI/Advanced API reference. GitHub Pages CI (pages.yml). — *2026-06-13*
+
+### Active (v1.0)
+- Phase 12 : BattleScene UI (HP bars, sprites, move menu — BTLUI-01)
 
 ### Out of Scope
 - Connexion online / trades réseau
@@ -118,6 +121,8 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | v1.0 | dotnet add package PokeForge.SDK fonctionnel | StarterGame demo NuGet-only 09-04 ✅ | ✅ Complete 2026-06-07 |
 | Phase 10 complete | `pokeforge new\|asset-sync\|seed\|doctor` CLI global tool | 13/13 tests verts, PokeForge.CLI.0.1.0.nupkg valide | ✅ Complete 2026-06-09 |
 | Phase 6 complete | ADV-03 TTS + ADV-04 Fakemon assembly pipeline + CLI | 212/212 tests verts, `pokeforge fakemon assemble` fonctionnel | ✅ Complete 2026-06-12 |
+| Phase 11 complete | Docusaurus docs EN+FR — Tutorial, Guides, Packages, CLI, Advanced | Build exit 0, 0 broken links, PR #27 → staging | ✅ Complete 2026-06-13 |
+| v0.3 | CLI `pokeforge` + Docs Docusaurus + Advanced TTS/Fakemons | Phases 6+10+11 done, PR #27 open | ✅ Complete 2026-06-13 |
 
 ## Tech Stack
 

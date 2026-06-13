@@ -242,3 +242,30 @@ Key routing rules:
 - Save progress → invoke /context-save
 - Resume context → invoke /context-restore
 - Author a backlog-ready spec/issue → invoke /spec
+
+---
+
+## 11. RÈGLES STYLE — DOCUMENTATION MARKDOWN
+
+**Applicables à TOUS les fichiers `.md` présents et futurs.**
+
+### Em dashes INTERDITS ("—" et "—>")
+
+Jamais d'em dash dans la prose, les titres, les tableaux.
+
+| Contexte | Remplacement |
+|----------|--------------|
+| Introduction/définition : `Entité — description` | `:` → `Entité: description` |
+| Continuation de clause : `est sûr — les lignes` | `,` → `est sûr, les lignes` |
+| Parenthèse : `auto — pas besoin de redémarrer` | `(pas besoin de redémarrer)` |
+| Flèche de liste : `**Passe monde** —> tilemap` | `:` → `**Passe monde**: tilemap` |
+
+**Exception unique :** em dash à l'intérieur d'un bloc de code fencé (`` ` `` `` ` `` `` ` ``) représentant du vrai output CLI ou des commentaires C# — à ne pas modifier.
+
+### Variables Docusaurus i18n
+
+`{year}` n'est PAS interpolé dans `footer.json` i18n (Docusaurus remplace la string entière). Utiliser l'année en dur (ex: `2026`). Mettre à jour manuellement chaque année si nécessaire.
+
+### Résumé anti-IA
+
+Écrire sans : em dashes, "simplement", "il convient de noter", tournures passives excessives. Préférer les phrases courtes et directes.

@@ -18,6 +18,8 @@ data/
 *.nupkg
 *.snupkg
 packages/
+# Exception: docs content directory named packages/
+!docs/docs/packages/
 
 # Logs
 *.log

@@ -1,0 +1,14 @@
+{
+  "title": {
+    "message": "PokemonSDK",
+    "description": "Le titre dans la barre de navigation"
+  },
+  "item.label.Docs": {
+    "message": "Documentation",
+    "description": "Élément de navigation avec le libellé Docs"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Élément de navigation avec le libellé GitHub"
+  }
+}
