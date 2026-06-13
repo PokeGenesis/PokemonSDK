@@ -4,7 +4,7 @@ sidebar_position: 8
 
 # PokeForge.SDK.Plugins
 
-Battle plugins — Nuzlocke, Randomizer, and Turbo. All implement `IBattlePlugin` from `SDK.Core`.
+Battle plugins Nuzlocke, Randomizer, and Turbo. All implement `IBattlePlugin` from `SDK.Core`.
 
 ```bash
 dotnet add package PokeForge.SDK.Plugins
@@ -29,7 +29,7 @@ Multiple plugins can be active simultaneously. Events fire in registration order
 
 Enforces Nuzlocke challenge rules:
 
-- A fainted Pokémon is **permanently dead** — removed from the party at `OnFaint`.
+- A fainted Pokémon is **permanently dead** removed from the party at `OnFaint`.
 - Only the **first encounter** per route is catchable (tracked in `GameState.Flags`).
 - If the entire party faints, `OnBattleEnd` sets `GameState.Flags["NUZLOCKE_FAILED"]`.
 

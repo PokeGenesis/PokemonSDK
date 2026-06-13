@@ -29,4 +29,4 @@ SDK.Tools     ← Core + Data + SixLabors.ImageSharp
 SDK.MonoGame  ← Core + MonoGame + Battle + Scripting (via Func factory)
 ```
 
-`SDK.Core` is the only package with zero external dependencies by design — it can be referenced from any project without pulling in a transitive dependency chain.
+`SDK.Core` is the only package with zero external dependencies by design, so it can be referenced from any project without pulling in a transitive dependency chain.

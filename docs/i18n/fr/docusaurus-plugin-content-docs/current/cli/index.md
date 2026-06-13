@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# CLI — pokeforge
+# CLI: pokeforge
 
 `pokeforge` est un outil .NET global pour créer et maintenir des projets PokemonSDK.
 

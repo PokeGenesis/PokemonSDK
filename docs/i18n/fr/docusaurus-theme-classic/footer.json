@@ -24,7 +24,7 @@
     "description": "Libellé du lien dans le pied de page"
   },
   "copyright": {
-    "message": "Copyright © {year} PokeGenesis. Licence MIT.",
+    "message": "Copyright © 2026 PokeGenesis. Licence MIT.",
     "description": "Le copyright du pied de page"
   }
 }

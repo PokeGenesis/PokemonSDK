@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # PokeForge.SDK.Data
 
-EF Core 10 + SQLite data layer — migrations, 9-generation seed data, central translations table.
+EF Core 10 + SQLite data layer migrations, 9-generation seed data, central translations table.
 
 ```bash
 dotnet add package PokeForge.SDK.Data
@@ -45,7 +45,7 @@ dotnet ef database update \
 
 ## Translations
 
-All user-visible text is stored in a central `translations` table — never as columns on entities (no `name_fr` column on `Species`). This lets you add locales without a schema migration.
+All user-visible text is stored in a central `translations` table, never as columns on entities (no `name_fr` column on `Species`). This lets you add locales without a schema migration.
 
 ```csharp
 // Fetch a Pokémon name in French
@@ -61,12 +61,12 @@ Six locales are seeded out-of-the-box: **en, es, fr, de, it, ja**.
 
 ## Seeded data
 
-| Table | Content |
-|-------|---------|
-| `species` | All species, generations 1–9 |
-| `moves` | All moves |
-| `items` | All items |
-| `abilities` | All abilities |
+| Table          | Content                           |
+| -------------- | --------------------------------- |
+| `species`      | All species, generations 1–9      |
+| `moves`        | All moves                         |
+| `items`        | All items                         |
+| `abilities`    | All abilities                     |
 | `translations` | Names + descriptions in 6 locales |
 
 ## Filtering by generation

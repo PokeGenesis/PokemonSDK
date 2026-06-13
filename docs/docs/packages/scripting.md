@@ -12,7 +12,7 @@ dotnet add package PokeForge.SDK.Scripting
 
 ## Lua sandbox
 
-Scripts run inside MoonSharp `Preset_SoftSandbox` — no filesystem access, no network, no OS calls. Standard Lua library is available. C# interop is exposed via whitelisted globals (`game`, `player`).
+Scripts run inside MoonSharp `Preset_SoftSandbox` with no filesystem access, no network, no OS calls. Standard Lua library is available. C# interop is exposed via whitelisted globals (`game`, `player`).
 
 ```lua
 -- Give a badge and save (scripts/boulder_badge.lua)
@@ -80,4 +80,4 @@ var loaded = await saveSystem.LoadAsync("slot1");
 
 ## Hot reload
 
-In non-production builds, `LuaScriptEngine` watches `.lua` files with a `FileSystemWatcher`. Saving a script file re-executes it automatically — no restart needed during development.
+In non-production builds, `LuaScriptEngine` watches `.lua` files with a `FileSystemWatcher`. Saving a script file re-executes it automatically (no restart needed during development).

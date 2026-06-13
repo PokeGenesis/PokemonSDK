@@ -68,7 +68,7 @@ Implement `IDifficultyMode` for custom AI.
 
 ## Status conditions
 
-Sleep and Freeze **do not skip the attacker's turn** — the immobilized Pokémon loses its action for that turn, but the turn counter still advances. This matches later-generation behavior.
+Sleep and Freeze **do not skip the attacker's turn**: the immobilized Pokémon loses its action for that turn, but the turn counter still advances. This matches later-generation behavior.
 
 ```csharp
 var status = state.Combatants[1].StatusCondition;

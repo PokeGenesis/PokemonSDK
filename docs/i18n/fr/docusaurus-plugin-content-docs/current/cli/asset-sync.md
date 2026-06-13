@@ -20,9 +20,9 @@ pokeforge asset-sync [--sprites-dir <chemin>] [--db <chemin>] [--dry-run]
 
 ## Ce que ça fait
 
-1. **Valider** — `SpriteValidator` vérifie chaque PNG dans `--sprites-dir` contre la convention de nommage D-16. Toute violation est affichée et la commande se termine avec le code `1`.
-2. **Packer** — `AtlasPacker` regroupe les sprites valides dans `assets/atlas.png` + `assets/atlas.json`.
-3. **Synchroniser** — `SqliteSyncer` met à jour la table `sprites` avec les coordonnées UV depuis `atlas.json`.
+1. **Valider**: `SpriteValidator` vérifie chaque PNG dans `--sprites-dir` contre la convention de nommage D-16. Toute violation est affichée et la commande se termine avec le code `1`.
+2. **Packer**: `AtlasPacker` regroupe les sprites valides dans `assets/atlas.png` + `assets/atlas.json`.
+3. **Synchroniser**: `SqliteSyncer` met à jour la table `sprites` avec les coordonnées UV depuis `atlas.json`.
 
 ## Convention de nommage
 

@@ -48,4 +48,4 @@ Les entrées Fakemon suivent le même schéma que les espèces normales mais ave
 
 ## Idempotent
 
-Ré-exécuter `seed` sur une base déjà remplie est sans danger — les lignes existantes sont ignorées via `INSERT OR IGNORE`.
+Ré-exécuter `seed` sur une base déjà remplie est sans danger: les lignes existantes sont ignorées via `INSERT OR IGNORE`.

@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # pokeforge fakemon
 
-Gérer les sprites Fakemon — lister les parties disponibles et assembler des sprites composites.
+Gérer les sprites Fakemon: lister les parties disponibles et assembler des sprites composites.
 
 ## list-parts
 

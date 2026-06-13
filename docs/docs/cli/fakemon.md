@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # pokeforge fakemon
 
-Manage Fakemon sprites — list available parts and assemble composite sprites.
+Manage Fakemon sprites: list available parts and assemble composite sprites.
 
 ## list-parts
 

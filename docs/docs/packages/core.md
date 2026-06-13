@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # PokeForge.SDK.Core
 
-Core domain layer — entities, interfaces, and value objects. **Zero external NuGet dependencies.**
+Core domain layer entities, interfaces, and value objects. **Zero external NuGet dependencies.**
 
 ```bash
 dotnet add package PokeForge.SDK.Core
@@ -54,18 +54,18 @@ public interface IBattlePlugin
 
 ## Key entities
 
-| Type | Description |
-|------|-------------|
-| `Species` | Pokémon species — base stats, types, generation |
-| `Move` | Move — power, accuracy, PP, type, category |
-| `Item` | Item — effect type, flags |
-| `TranslationEntry` | Translation row — locale + entity key + value |
+| Type               | Description                                     |
+| ------------------ | ----------------------------------------------- |
+| `Species`          | Pokémon species: base stats, types, generation |
+| `Move`             | Move: power, accuracy, PP, type, category      |
+| `Item`             | Item: effect type, flags                       |
+| `TranslationEntry` | Translation row: locale, entity key, value   |
 
 ## Value objects
 
-| Type | Description |
-|------|-------------|
-| `StatBlock` | Immutable HP/Atk/Def/SpA/SpD/Spe snapshot |
-| `TypeMatchup` | Effectiveness multiplier between two types |
-| `DamageContext` | Input to `IDamageFormula.Calculate` |
-| `DamageResult` | Output — final damage + crit flag + type effectiveness |
+| Type            | Description                                            |
+| --------------- | ------------------------------------------------------ |
+| `StatBlock`     | Immutable HP/Atk/Def/SpA/SpD/Spe snapshot              |
+| `TypeMatchup`   | Effectiveness multiplier between two types             |
+| `DamageContext` | Input to `IDamageFormula.Calculate`                    |
+| `DamageResult`  | Output: final damage, crit flag, type effectiveness |

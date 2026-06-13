@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # PokeForge.SDK.MonoGame
 
-MonoGame DesktopGL runtime — pixel-art HD pipeline, Tiled world maps, day/night shader.
+MonoGame DesktopGL runtime pixel-art HD pipeline, Tiled world maps, day/night shader.
 
 ```bash
 dotnet add package PokeForge.SDK.MonoGame
@@ -60,6 +60,7 @@ public class WorldScene : Scene
 ```
 
 `WorldSystem` handles:
+
 - Tile rendering (multi-layer)
 - Collision layer parsing
 - Object layer (NPC spawns, warp triggers, item pickups)
@@ -74,12 +75,12 @@ DayNightSystem.SetTime(gameState.InGameHour);
 
 The DayNight shader blends overlay tints across four phases:
 
-| Phase | Hours | Tint |
-|-------|-------|------|
-| Dawn | 5–7 | warm orange |
-| Day | 8–17 | neutral |
-| Dusk | 18–20 | amber |
-| Night | 21–4 | deep blue |
+| Phase | Hours | Tint        |
+| ----- | ----- | ----------- |
+| Dawn  | 5–7   | warm orange |
+| Day   | 8–17  | neutral     |
+| Dusk  | 18–20 | amber       |
+| Night | 21–4  | deep blue   |
 
 ## Scripting integration
 
@@ -95,6 +96,6 @@ services.AddSingleton<Func<string, Task>>(sp =>
 
 Each frame runs three ordered passes:
 
-1. **World pass** — tilemaps + sprites → RenderTarget 480×270
-2. **UI pass** — HUD, dialog boxes → same RenderTarget (no scaling artifacts)
-3. **Upscale pass** — xBR ×4 shader → OS backbuffer
+1. **World pass**: tilemaps + sprites → RenderTarget 480×270
+2. **UI pass**: HUD, dialog boxes → same RenderTarget (no scaling artifacts)
+3. **Upscale pass**: xBR ×4 shader → OS backbuffer

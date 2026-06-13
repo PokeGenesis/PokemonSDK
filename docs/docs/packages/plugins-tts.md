@@ -4,7 +4,7 @@ sidebar_position: 9
 
 # PokeForge.SDK.Plugins.TTS
 
-Text-to-speech narration system — `INarrationPlugin` interface, a queued narrator, and two ready-made backends.
+Text-to-speech narration system `INarrationPlugin` interface, a queued narrator, and two ready-made backends.
 
 ```bash
 dotnet add package PokeForge.SDK.Plugins.TTS
@@ -58,7 +58,7 @@ Console.WriteLine(plugin.IsSupported); // false if piper binary not found
 await plugin.SpeakAsync("Pikachu used Thunderbolt!");
 ```
 
-Check availability before use — `IsSupported` returns `false` if the binary is missing.
+Check availability before use `IsSupported` returns `false` if the binary is missing.
 
 ## WindowsSpeechPlugin
 

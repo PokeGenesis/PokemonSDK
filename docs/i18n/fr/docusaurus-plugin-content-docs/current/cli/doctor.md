@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # pokeforge doctor
 
-Commande de diagnostic — vérifie toutes les dépendances runtime et signale ce qui manque.
+Commande de diagnostic qui vérifie toutes les dépendances runtime et signale ce qui manque.
 
 ## Utilisation
 
@@ -39,7 +39,7 @@ pokeforge doctor
 ✓ Base de données  data/PokemonSDK.db — 12 tables, migrations à jour
 ```
 
-Code de sortie `0` si toutes les vérifications passent, `1` si au moins une échoue — utilisable en CI.
+Code de sortie `0` si toutes les vérifications passent, `1` si au moins une échoue, ce qui la rend utilisable en CI.
 
 ## Suggestions de correction
 

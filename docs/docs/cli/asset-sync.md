@@ -20,9 +20,9 @@ pokeforge asset-sync [--sprites-dir <path>] [--db <path>] [--dry-run]
 
 ## What it does
 
-1. **Validate** — `SpriteValidator` checks every PNG in `--sprites-dir` against the D-16 naming convention. Any violation is printed and the command exits with code `1`.
-2. **Pack** — `AtlasPacker` combines valid sprites into `assets/atlas.png` + `assets/atlas.json`.
-3. **Sync** — `SqliteSyncer` updates the `sprites` table with UV coordinates from `atlas.json`.
+1. **Validate**: `SpriteValidator` checks every PNG in `--sprites-dir` against the D-16 naming convention. Any violation is printed and the command exits with code `1`.
+2. **Pack**: `AtlasPacker` combines valid sprites into `assets/atlas.png` + `assets/atlas.json`.
+3. **Sync**: `SqliteSyncer` updates the `sprites` table with UV coordinates from `atlas.json`.
 
 ## Naming convention
 

@@ -7,7 +7,7 @@ const config: Config = {
   tagline: 'Open-source C# / .NET 10 SDK for Pokémon fan-games',
   favicon: 'img/favicon.ico',
   url: 'https://PokeGenesis.github.io',
-  baseUrl: process.env.NODE_ENV === 'production' ? '/PokemonSDK/' : '/',
+  baseUrl: process.env.BASE_URL ?? (process.env.NODE_ENV === 'production' ? '/PokemonSDK/' : '/'),
   organizationName: 'PokeGenesis',
   projectName: 'PokemonSDK',
   trailingSlash: false,

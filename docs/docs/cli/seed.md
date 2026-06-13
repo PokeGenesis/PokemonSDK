@@ -48,4 +48,4 @@ Fakemon entries follow the same schema as regular species but with `id: 0` (auto
 
 ## Idempotent
 
-Re-running `seed` on an already-seeded database is safe — existing rows are skipped via `INSERT OR IGNORE`.
+Re-running `seed` on an already-seeded database is safe: existing rows are skipped via `INSERT OR IGNORE`.

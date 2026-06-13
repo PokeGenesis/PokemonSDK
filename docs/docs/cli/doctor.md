@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # pokeforge doctor
 
-Health-check command — verifies all runtime dependencies and reports what is missing.
+Health-check command verifies all runtime dependencies and reports what is missing.
 
 ## Usage
 
@@ -12,20 +12,20 @@ Health-check command — verifies all runtime dependencies and reports what is m
 pokeforge doctor [--db <path>]
 ```
 
-| Flag | Default | Description |
-|------|---------|-------------|
+| Flag   | Default              | Description                            |
+| ------ | -------------------- | -------------------------------------- |
 | `--db` | `data/PokemonSDK.db` | Path to the SQLite database to inspect |
 
 ## Checks
 
-| Check | What it verifies |
-|-------|-----------------|
-| SDL2 | `libSDL2` shared library present and loadable |
-| OpenAL | `libopenal` shared library present (audio) |
-| Piper | `piper` binary on PATH (TTS narration) |
-| aplay | `aplay` command available (Linux audio playback) |
-| Database | SQLite file exists and all expected tables are present |
-| Migrations | EF Core migrations are applied and up to date |
+| Check      | What it verifies                                       |
+| ---------- | ------------------------------------------------------ |
+| SDL2       | `libSDL2` shared library present and loadable          |
+| OpenAL     | `libopenal` shared library present (audio)             |
+| Piper      | `piper` binary on PATH (TTS narration)                 |
+| aplay      | `aplay` command available (Linux audio playback)       |
+| Database   | SQLite file exists and all expected tables are present |
+| Migrations | EF Core migrations are applied and up to date          |
 
 ## Example output
 
@@ -39,7 +39,7 @@ pokeforge doctor
 ✓ Database      data/PokemonSDK.db — 12 tables, migrations current
 ```
 
-Exit code is `0` if all checks pass, `1` if any check fails — suitable for CI.
+Exit code is `0` if all checks pass, `1` if any check fails, making it suitable for CI.
 
 ## Fix suggestions
 

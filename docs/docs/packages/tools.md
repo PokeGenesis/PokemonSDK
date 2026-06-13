@@ -4,7 +4,7 @@ sidebar_position: 7
 
 # PokeForge.SDK.Tools
 
-Developer tooling — sprite validation, atlas packing, database sync, and the Fakemon assembly pipeline. Runs headless (no MonoGame dependency) so it can execute in CI.
+Developer tooling sprite validation, atlas packing, database sync, and the Fakemon assembly pipeline. Runs headless (no MonoGame dependency) so it can execute in CI.
 
 ```bash
 dotnet add package PokeForge.SDK.Tools
