@@ -15,8 +15,8 @@ Phases: 4 of 4 complete (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9
 ## Next Milestone
 
 **v0.3 CLI + Docs + Advanced Systems** (v0.3.0)
-Status: In progress
-Phases: 2 of 3 complete (Phase 6 ✅ — Phase 10 ✅ — Phase 11)
+Status: Complete 2026-06-13
+Phases: 3 of 3 complete (Phase 6 ✅ — Phase 10 ✅ — Phase 11 ✅)
 
 ## Future Milestones
 
@@ -46,7 +46,7 @@ Phases: 0 of 1 (Phase 22)
 | 9     | Sample Project          | 4     | ✅ Complete | 2026-06-07 |
 | 6     | Advanced Systems        | 5     | ✅ Complete | 2026-06-12 |
 | 10    | CLI pokeforge           | 3     | ✅ Complete | 2026-06-09 |
-| 11    | Documentation           | 4     | Not started | -         |
+| 11    | Documentation           | 4     | ✅ Complete | 2026-06-13 |
 | 12    | BattleScene UI          | TBD   | Not started | -         |
 | 13    | EXP + Level-up + Évol.  | TBD   | Not started | -         |
 | 14    | Items + Bag + Shop      | TBD   | Not started | -         |
@@ -173,7 +173,7 @@ Phases: 0 of 1 (Phase 22)
 
 ---
 
-*Roadmap created: 2026-06-01 | Last updated: 2026-06-12 — Phase 6 Advanced Systems ✅ Complete. v0.3: 2/3 phases done (Phase 11 Documentation next).*
+*Roadmap created: 2026-06-01 | Last updated: 2026-06-13 — Phase 11 Documentation ✅ Complete. v0.3: 3/3 phases done. Milestone v0.3 ✅ Complete.*
 *Full details: ROADMAP.md (root)*
 
 ### Phase 7: Developer Experience

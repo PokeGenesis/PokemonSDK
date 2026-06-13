@@ -6,21 +6,21 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** Phase 11 Documentation — prêt à planifier (Phase 6 Advanced Systems ✅ complet)
+**Current focus:** Phase 11 Documentation ✅ COMPLÈTE — 40+ pages bilingues EN+FR livrées, PR #27 → staging. v0.3 milestone complet. Prochaine étape : v1.0 (Phase 12 BattleScene UI).
 
 ## Current Position
 
-Milestone: v0.3 CLI + Docs + Advanced Systems — In progress (2/3 phases)
-Phase: 11 (Documentation) — Not started
-Plan: Not started
-Status: Ready to plan — run /paul:plan pour Phase 11
-Last activity: 2026-06-12 — Phase 6 complete (ADV-03 TTS + ADV-04 Fakemon, 212/212 tests)
+Milestone: v0.3 CLI + Docs + Advanced Systems — ✅ Complete (3/3 phases)
+Phase: 11 (Documentation) — ✅ Complete
+Plan: 11-01 ✅ | 11-02 ✅ | 11-03 ✅ | 11-04 ✅
+Status: UNIFY complete — Phase 11 closed
+Last activity: 2026-06-13 — Plan 11-04 UNIFY. Phase 11 fermée. v0.3 milestone complet. PR #27 → staging.
 
 Progress:
 
 - Milestone v0.1: [██████████] 100% ✅ (Phases 1→4 complètes, 2026-06-05)
 - Milestone v0.2: [██████████] 100% ✅ (Phase 5 ✅ — Phase 7 ✅ — Phase 8 ✅ — Phase 9 ✅)
-- Milestone v0.3: [██████░░░░] 66% (Phase 6 ✅ — Phase 10 ✅ — Phase 11 next)
+- Milestone v0.3: [██████████] 100% ✅ (Phase 6 ✅ — Phase 10 ✅ — Phase 11 ✅)
 - Phase 1: [██████████] 100% ✅
 - Phase 2: [██████████] 100% ✅
 - Phase 3: [██████████] 100% ✅
@@ -31,7 +31,7 @@ Progress:
 - Phase 8: [██████████] 100% ✅ (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
 - Phase 9: [██████████] 100% ✅ (09-01 ✅ 09-02 ✅ 09-03 ✅ 09-04 ✅)
 - Phase 10: [██████████] 100% ✅ (10-01 ✅ 10-02 ✅ 10-03 ✅)
-- Phase 11: [░░░░░░░░░░] 0% (not started)
+- Phase 11: [██████████] 100% ✅ (11-01 ✅ — 11-02 ✅ — 11-03 ✅ — 11-04 ✅)
 
 ## Loop Position
 
@@ -39,10 +39,11 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ○        ○        ○     [Phase 11 — not started — run /paul:plan]
+  ✓        ✓        ✓     [Phase 11 complete — Loop fermé 2026-06-13]
 ```
 
 Phase 6 plans : 06-01 ✅ | 06-04 ✅ | 06-02 ✅ | 06-03 ✅ | 06-05 ✅
+Phase 11 plans : 11-01 ✅ | 11-02 ✅ | 11-03 ✅ | 11-04 ✅
 
 ## Accumulated Context
 
@@ -222,11 +223,11 @@ Décisions émergentes (Phase 10) :
 
 ## Session Continuity
 
-Last session: 2026-06-12
-Stopped at: Phase 6 ✅ complete — UNIFY ×2 terminés (06-03 + 06-05). Transition vers Phase 11 effectuée.
-Next action: /paul:plan pour Phase 11 (Documentation — APIs stables uniquement, D-21)
+Last session: 2026-06-13
+Stopped at: Phase 11 UNIFY complet. v0.3 milestone fermé. PR #27 feature/phase11-documentation → staging ouvert.
+Next action: Merge PR #27 (staging), puis créer PR staging → main. Ensuite /paul:plan pour Phase 12 (BattleScene UI — v1.0).
 
-Resume file: `.paul/ROADMAP.md`
+Resume file: `.paul/phases/11-documentation/11-04-SUMMARY.md`
 
 ---
 
