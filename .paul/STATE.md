@@ -10,11 +10,11 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 ## Current Position
 
-Milestone: v0.3 CLI + Docs + Advanced Systems — In progress (2/3 phases)
+Milestone: v0.3 CLI + Docs + Advanced Systems — In progress (2.5/3 phases)
 Phase: 11 (Documentation) — In progress
-Plan: 11-01 ✅ | 11-02 ✅ | 11-03 ✅
-Status: UNIFY complet, prêt pour Plan 11-04
-Last activity: 2026-06-13 — Plan 11-03 livré. Guides section (16 pages EN+FR, sidebar Guides, commit 2f10338).
+Plan: 11-01 ✅ | 11-02 ✅ | 11-03 ✅ | 11-04 created, awaiting approval
+Status: PLAN created, ready for APPLY
+Last activity: 2026-06-13 — Plan 11-04 créé. Phase 11 wrap-up: build verify + ROADMAP update + PR.
 
 Progress:
 
@@ -31,7 +31,7 @@ Progress:
 - Phase 8: [██████████] 100% ✅ (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
 - Phase 9: [██████████] 100% ✅ (09-01 ✅ 09-02 ✅ 09-03 ✅ 09-04 ✅)
 - Phase 10: [██████████] 100% ✅ (10-01 ✅ 10-02 ✅ 10-03 ✅)
-- Phase 11: [███████░░░] 75% (11-01 ✅ — 11-02 ✅ — 11-03 ✅)
+- Phase 11: [█████████░] 90% (11-01 ✅ — 11-02 ✅ — 11-03 ✅ — 11-04 planned)
 
 ## Loop Position
 
@@ -39,11 +39,11 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Plan 11-03 complet]
+  ✓        ○        ○     [Plan 11-04 créé, awaiting approval]
 ```
 
 Phase 6 plans : 06-01 ✅ | 06-04 ✅ | 06-02 ✅ | 06-03 ✅ | 06-05 ✅
-Phase 11 plans : 11-01 ✅ | 11-02 ✅ | 11-03 ✅
+Phase 11 plans : 11-01 ✅ | 11-02 ✅ | 11-03 ✅ | 11-04 planned
 
 ## Accumulated Context
 
@@ -224,10 +224,10 @@ Décisions émergentes (Phase 10) :
 ## Session Continuity
 
 Last session: 2026-06-13
-Stopped at: Phase 11 — Plan 11-03 complet. Guides EN+FR livrés, build exit 0. Prêt pour Plan 11-04.
-Next action: /paul:plan 11-04 (API reference ou wrap-up phase 11)
+Stopped at: Plan 11-04 créé — phase wrap-up (build verify + ROADMAP + PR).
+Next action: Review plan, then run /paul:apply .paul/phases/11-documentation/11-04-PLAN.md
 
-Resume file: `.paul/phases/11-documentation/11-02-SUMMARY.md`
+Resume file: `.paul/phases/11-documentation/11-04-PLAN.md`
 
 ---
 
