@@ -5,6 +5,17 @@ const sidebars: SidebarsConfig = {
     'intro',
     {
       type: 'category',
+      label: 'Tutorial',
+      collapsed: false,
+      items: [
+        'tutorial/index',
+        'tutorial/create',
+        'tutorial/battle',
+        'tutorial/lua-badge',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Packages',
       collapsed: false,
       items: [
