@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** Phase 11 Documentation — Plan 11-01 créé, en attente d'APPLY (Wave 1 Docusaurus scaffold + GitHub Pages CI)
+**Current focus:** Phase 11 Documentation — Plan 11-01 TERMINÉ (Wave 1 Docusaurus scaffold + GitHub Pages CI + contenu EN+FR complet)
 
 ## Current Position
 
 Milestone: v0.3 CLI + Docs + Advanced Systems — In progress (2/3 phases)
 Phase: 11 (Documentation) — In progress
-Plan: 11-01 (Wave 1 — Docusaurus scaffold + GitHub Pages CI)
-Status: Plan 11-01 créé — awaiting APPLY
-Last activity: 2026-06-12 — Phase 11 Plan 11-01 créé (Docusaurus + GitHub Pages CI, feature/phase11-documentation)
+Plan: 11-01 ✅ | 11-02 next
+Status: Plan 11-01 UNIFY ✓ — prêt pour Plan 11-02 (Wave 2 Tutorial 30min)
+Last activity: 2026-06-13 — Plan 11-01 terminé (scaffold + EN+FR content + em-dash cleanup + deploy CI)
 
 Progress:
 
@@ -31,7 +31,7 @@ Progress:
 - Phase 8: [██████████] 100% ✅ (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
 - Phase 9: [██████████] 100% ✅ (09-01 ✅ 09-02 ✅ 09-03 ✅ 09-04 ✅)
 - Phase 10: [██████████] 100% ✅ (10-01 ✅ 10-02 ✅ 10-03 ✅)
-- Phase 11: [█░░░░░░░░░] 10% (11-01 PLAN ✓ — awaiting APPLY)
+- Phase 11: [███░░░░░░░] 25% (11-01 ✅ — 11-02 next)
 
 ## Loop Position
 
@@ -39,11 +39,11 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ●        ○        ○     [Phase 11 — Plan 11-01 PLAN ✓ — run /paul:apply]
+  ✓        ✓        ✓     [Loop 11-01 fermé — prêt pour /paul:plan 11-02]
 ```
 
 Phase 6 plans : 06-01 ✅ | 06-04 ✅ | 06-02 ✅ | 06-03 ✅ | 06-05 ✅
-Phase 11 plans : 11-01 PLAN ✓
+Phase 11 plans : 11-01 ✅
 
 ## Accumulated Context
 
@@ -224,10 +224,10 @@ Décisions émergentes (Phase 10) :
 ## Session Continuity
 
 Last session: 2026-06-13
-Stopped at: Phase 11 — Plan 11-01 créé (Docusaurus scaffold + GitHub Pages CI). Branche feature/phase11-documentation créée depuis dev.
-Next action: /paul:apply pour 11-01 (docs/ scaffold + deploy-docs.yml)
+Stopped at: Phase 11 — Plan 11-01 terminé et unifié. Scaffold Docusaurus + EN+FR contenu complet + deploy-docs.yml + em-dash cleanup.
+Next action: /paul:plan 11-02 (Wave 2 — Tutorial 30min step-by-step)
 
-Resume file: `.paul/phases/11-documentation/11-01-PLAN.md`
+Resume file: `.paul/phases/11-documentation/11-01-SUMMARY.md`
 
 ---
 
