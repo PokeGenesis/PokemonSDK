@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** Phase 11 Documentation — Plan 11-01 TERMINÉ (Wave 1 Docusaurus scaffold + GitHub Pages CI + contenu EN+FR complet)
+**Current focus:** Phase 11 Documentation — Plan 11-02 ✅ Tutorial 30min bilingue EN+FR livré. Prochaine étape : Plan 11-03 Guides.
 
 ## Current Position
 
 Milestone: v0.3 CLI + Docs + Advanced Systems — In progress (2/3 phases)
 Phase: 11 (Documentation) — In progress
-Plan: 11-01 ✅ | 11-02 next
-Status: Plan 11-01 UNIFY ✓ — prêt pour Plan 11-02 (Wave 2 Tutorial 30min)
-Last activity: 2026-06-13 — Plan 11-01 terminé (scaffold + EN+FR content + em-dash cleanup + deploy CI)
+Plan: 11-01 ✅ | 11-02 ✅
+Status: UNIFY complet, prêt pour Plan 11-03
+Last activity: 2026-06-13 — Plan 11-02 UNIFY complet. Tutorial 30min (8 pages EN+FR, sidebar, i18n) livré.
 
 Progress:
 
@@ -31,7 +31,7 @@ Progress:
 - Phase 8: [██████████] 100% ✅ (08-01 ✅ 08-02 ✅ 08-03 ✅ 08-04 ✅)
 - Phase 9: [██████████] 100% ✅ (09-01 ✅ 09-02 ✅ 09-03 ✅ 09-04 ✅)
 - Phase 10: [██████████] 100% ✅ (10-01 ✅ 10-02 ✅ 10-03 ✅)
-- Phase 11: [███░░░░░░░] 25% (11-01 ✅ — 11-02 next)
+- Phase 11: [█████░░░░░] 50% (11-01 ✅ — 11-02 ✅)
 
 ## Loop Position
 
@@ -39,11 +39,11 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Loop 11-01 fermé — prêt pour /paul:plan 11-02]
+  ✓        ✓        ✓     [Loop 11-02 complet — prêt pour Plan 11-03]
 ```
 
 Phase 6 plans : 06-01 ✅ | 06-04 ✅ | 06-02 ✅ | 06-03 ✅ | 06-05 ✅
-Phase 11 plans : 11-01 ✅
+Phase 11 plans : 11-01 ✅ | 11-02 ✅
 
 ## Accumulated Context
 
@@ -224,10 +224,10 @@ Décisions émergentes (Phase 10) :
 ## Session Continuity
 
 Last session: 2026-06-13
-Stopped at: Phase 11 — Plan 11-01 terminé et unifié. Scaffold Docusaurus + EN+FR contenu complet + deploy-docs.yml + em-dash cleanup.
-Next action: /paul:plan 11-02 (Wave 2 — Tutorial 30min step-by-step)
+Stopped at: Phase 11 — Plan 11-02 UNIFY complet. Tutorial 30min (8 pages EN+FR, sidebar, i18n) livré. Commit 2f3d1cf.
+Next action: /paul:plan 11-03 — Guides (Battle, Lua, Assets, Plugins, Rendering HD, TTS, Fakemons, CLI)
 
-Resume file: `.paul/phases/11-documentation/11-01-SUMMARY.md`
+Resume file: `.paul/phases/11-documentation/11-02-SUMMARY.md`
 
 ---
 
