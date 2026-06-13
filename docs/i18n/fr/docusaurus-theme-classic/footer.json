@@ -1,0 +1,30 @@
+{
+  "link.title.Docs": {
+    "message": "Documentation",
+    "description": "Titre de colonne du pied de page"
+  },
+  "link.title.Community": {
+    "message": "Communauté",
+    "description": "Titre de colonne du pied de page"
+  },
+  "link.item.label.Getting Started": {
+    "message": "Démarrage rapide",
+    "description": "Libellé du lien dans le pied de page"
+  },
+  "link.item.label.Packages": {
+    "message": "Packages",
+    "description": "Libellé du lien dans le pied de page"
+  },
+  "link.item.label.CLI": {
+    "message": "CLI",
+    "description": "Libellé du lien dans le pied de page"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Libellé du lien dans le pied de page"
+  },
+  "copyright": {
+    "message": "Copyright © 2026 PokeGenesis. Licence MIT.",
+    "description": "Le copyright du pied de page"
+  }
+}
