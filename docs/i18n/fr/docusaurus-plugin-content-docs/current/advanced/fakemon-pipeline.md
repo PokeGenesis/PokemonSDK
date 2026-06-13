@@ -4,9 +4,9 @@ sidebar_position: 3
 
 # FakemonAssemblyPipeline
 
-Assembles composite Fakemon sprites from layered part images. Produces all five views required by the D-16 convention.
+Assemble des sprites Fakemon composites à partir d'images de parties superposées. Produit les cinq vues requises par la convention D-16.
 
-## Constructor
+## Constructeur
 
 ```csharp
 public FakemonAssemblyPipeline(FakemonPartsCatalog catalog)
@@ -23,25 +23,25 @@ public Task<AssemblyResult> AssembleAsync(AssemblyOptions options);
 ```csharp
 public record AssemblyOptions
 {
-    /// Fakemon identifier (kebab-case, e.g. "dragon-electric")
+    /// Identifiant Fakemon (kebab-case, ex. "dragon-electrique")
     public required string Identifier { get; init; }
 
-    /// Part key for the body layer (matched against catalog)
+    /// Clé de partie pour la couche corps (correspondance dans le catalog)
     public required string Body { get; init; }
 
-    /// Part key for the head layer
+    /// Clé de partie pour la couche tête
     public required string Head { get; init; }
 
-    /// Optional part key for the tail layer
+    /// Clé de partie optionnelle pour la couche queue
     public string? Tail { get; init; }
 
-    /// Optional part key for an accessory overlay
+    /// Clé de partie optionnelle pour un accessoire superposé
     public string? Accessory { get; init; }
 
-    /// Target directory for output sprites
+    /// Répertoire de destination pour les sprites de sortie
     public required string OutputDirectory { get; init; }
 
-    /// Views to generate (default: all five)
+    /// Vues à générer (défaut : les cinq)
     public IReadOnlyList<string> Views { get; init; } =
         new[] { "front", "back", "overworld", "portrait", "icon" };
 }
@@ -58,7 +58,7 @@ public record AssemblyResult
 }
 ```
 
-## Example
+## Exemple
 
 ```csharp
 var catalog = new FakemonPartsCatalog("assets/fakemon-parts/");
@@ -66,12 +66,12 @@ var pipeline = new FakemonAssemblyPipeline(catalog);
 
 var result = await pipeline.AssembleAsync(new AssemblyOptions
 {
-    Identifier   = "dragon-electric",
-    Body         = "dragon_base",
-    Head         = "electric_head",
-    Tail         = "spiked_tail",
+    Identifier      = "dragon-electrique",
+    Body            = "dragon_base",
+    Head            = "electric_head",
+    Tail            = "spiked_tail",
     OutputDirectory = "assets/sprites/fakemons/",
-    Views        = new[] { "front", "back", "icon" }
+    Views           = new[] { "front", "back", "icon" }
 });
 
 if (!result.Success)
@@ -79,12 +79,12 @@ if (!result.Success)
         Console.Error.WriteLine(err);
 ```
 
-## Output naming
+## Nommage des fichiers de sortie
 
-Output files follow the D-16 Fakemon convention:
+Les fichiers de sortie suivent la convention Fakemon D-16 :
 
 ```
-fk_{identifier}_{view}.png
+fk_{identifiant}_{vue}.png
 ```
 
-The `icon` view is always resized to **32×32** pixels regardless of source part dimensions.
+La vue `icon` est toujours redimensionnée à **32×32** pixels quelle que soit la dimension des parties sources.

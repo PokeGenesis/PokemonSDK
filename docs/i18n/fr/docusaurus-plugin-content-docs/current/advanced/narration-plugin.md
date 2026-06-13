@@ -4,34 +4,34 @@ sidebar_position: 2
 
 # INarrationPlugin
 
-Interface for custom TTS backends. Implement it to add any speech synthesis engine to PokemonSDK.
+Interface pour les backends TTS personnalisés. Implémentez-la pour ajouter n'importe quel moteur de synthèse vocale à PokemonSDK.
 
 ## Interface
 
 ```csharp
 public interface INarrationPlugin
 {
-    /// Display name of the TTS engine (e.g. "Piper", "Windows Speech")
+    /// Nom d'affichage du moteur TTS (ex. "Piper", "Windows Speech")
     string EngineName { get; }
 
-    /// True if the engine is available on the current platform/machine
+    /// True si le moteur est disponible sur la plateforme/machine actuelle
     bool IsSupported { get; }
 
-    /// True while a SpeakAsync call is in progress
+    /// True pendant qu'un appel SpeakAsync est en cours
     bool IsSpeaking { get; }
 
-    /// Speak text immediately (awaitable)
+    /// Synthétise le texte immédiatement (awaitable)
     Task SpeakAsync(string text, CancellationToken ct = default);
 
-    /// Stop current speech and clear any pending queue
+    /// Arrête la parole en cours et vide toute file d'attente interne
     void Stop();
 
-    /// Add text to the internal playback queue
+    /// Ajoute le texte à la file de lecture interne
     void Enqueue(string text);
 }
 ```
 
-## Implement a custom backend
+## Implémenter un backend personnalisé
 
 ```csharp
 public class EspeakPlugin : INarrationPlugin
@@ -48,23 +48,23 @@ public class EspeakPlugin : INarrationPlugin
         IsSpeaking = false;
     }
 
-    public void Stop() { /* kill process */ }
+    public void Stop() { /* tuer le processus */ }
     public void Enqueue(string text) => SpeakAsync(text).ConfigureAwait(false);
 }
 ```
 
-## Register in DI
+## Enregistrer dans le conteneur DI
 
 ```csharp
 services.AddSingleton<INarrationPlugin, EspeakPlugin>();
 services.AddSingleton<NarrationQueue>();
 ```
 
-## Bundled implementations
+## Implémentations incluses
 
-| Class | Backend | Platform |
-|-------|---------|---------|
-| `PiperNarrationPlugin` | Piper TTS binary | Linux / macOS / Windows |
-| `WindowsSpeechPlugin` | Windows Speech API | Windows only |
+| Classe | Backend | Plateforme |
+|--------|---------|-----------|
+| `PiperNarrationPlugin` | Binaire Piper TTS | Linux / macOS / Windows |
+| `WindowsSpeechPlugin` | API Windows Speech | Windows uniquement |
 
-See [SDK.Plugins.TTS](../packages/plugins-tts) for usage.
+Voir [SDK.Plugins.TTS](../packages/plugins-tts) pour l'utilisation.

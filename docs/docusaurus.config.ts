@@ -4,16 +4,23 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'PokemonSDK',
-  tagline: 'SDK open-source C# / .NET 10 pour fan-games Pokémon',
+  tagline: 'Open-source C# / .NET 10 SDK for Pokémon fan-games',
   favicon: 'img/favicon.ico',
   url: 'https://PokeGenesis.github.io',
-  baseUrl: '/PokemonSDK/',
+  baseUrl: process.env.NODE_ENV === 'production' ? '/PokemonSDK/' : '/',
   organizationName: 'PokeGenesis',
   projectName: 'PokemonSDK',
   trailingSlash: false,
   onBrokenLinks: 'throw',
   markdown: { hooks: { onBrokenMarkdownLinks: 'warn' } },
-  i18n: { defaultLocale: 'en', locales: ['en'] },
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'fr'],
+    localeConfigs: {
+      en: { label: 'English', direction: 'ltr' },
+      fr: { label: 'Français', direction: 'ltr' },
+    },
+  },
   presets: [
     [
       'classic',
@@ -32,6 +39,7 @@ const config: Config = {
       title: 'PokemonSDK',
       items: [
         { type: 'docSidebar', sidebarId: 'docsSidebar', position: 'left', label: 'Docs' },
+        { type: 'localeDropdown', position: 'right' },
         { href: 'https://github.com/PokeGenesis/PokemonSDK', label: 'GitHub', position: 'right' },
       ],
     },
@@ -40,7 +48,11 @@ const config: Config = {
       links: [
         {
           title: 'Docs',
-          items: [{ label: 'Getting Started', to: '/docs/intro' }],
+          items: [
+            { label: 'Getting Started', to: '/docs/intro' },
+            { label: 'Packages', to: '/docs/packages/' },
+            { label: 'CLI', to: '/docs/cli/' },
+          ],
         },
         {
           title: 'Community',

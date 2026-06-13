@@ -1,0 +1,14 @@
+{
+  "sidebar.docsSidebar.category.Packages": {
+    "message": "Packages",
+    "description": "Libellé de la catégorie Packages dans la barre latérale"
+  },
+  "sidebar.docsSidebar.category.CLI pokeforge": {
+    "message": "CLI pokeforge",
+    "description": "Libellé de la catégorie CLI dans la barre latérale"
+  },
+  "sidebar.docsSidebar.category.Advanced APIs": {
+    "message": "API avancées",
+    "description": "Libellé de la catégorie API avancées dans la barre latérale"
+  }
+}
