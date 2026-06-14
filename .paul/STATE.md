@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** Phase 12 BattleScene UI ✅ COMPLÈTE — BTLUI-01 livré. HP bars + MoveMenu + StatusIcon + BattleEnd overlay + log de combat + flux complet overworld→battle→overworld. Prochaine étape : v1.0 Phase 13 (EXP + Level-up + Évolution).
+**Current focus:** Phase 13 EXP + Level-up + Évolution — Plan 13-01 DONE (headless engine + 64 tests). Prochaine étape : Plan 13-02 (ExpBar UI + LevelUpOverlay, SDK.MonoGame).
 
 ## Current Position
 
 Milestone: v1.0 Moteur Complet
-Phase: 12 (BattleScene UI) — COMPLÈTE ✅
-Plan: 12-01 ✅ | 12-02 ✅ | 12-03 ✅ | 12-04 ✅ | 12-05 ✅
-Status: APPLY ✅ UNIFY ✅ — BTLUI-01 DONE. Prochaine phase : 13 (EXP + Level-up + Évolution).
-Last activity: 2026-06-14 — Phase 12 complète. Checkpoint human-verify approuvé. 5 commits Wave 3.
+Phase: 13 (EXP + Level-up + Évolution) — EN COURS
+Plan: 13-01 PLAN ✓ | APPLY ✓ | UNIFY ✓ — Prochaine : 13-02 (ExpBar UI)
+Status: Plan 13-01 fermé — prêt pour Plan 13-02.
+Last activity: 2026-06-14 — Plan 13-01 exécuté + commité (02b20e2). Branch feature/phase13-exp-levelup-evolution.
 
 Progress:
 
@@ -33,6 +33,7 @@ Progress:
 - Phase 10: [██████████] 100% ✅ (10-01 ✅ 10-02 ✅ 10-03 ✅)
 - Phase 11: [██████████] 100% ✅ (11-01 ✅ — 11-02 ✅ — 11-03 ✅ — 11-04 ✅)
 - Phase 12: [██████████] 100% ✅ (12-01 ✅ 12-02 ✅ 12-03 ✅ 12-04 ✅ 12-05 ✅)
+- Phase 13: [███░░░░░░░]  33% (13-01 ✅ | 13-02 … | 13-03 …)
 
 ## Loop Position
 
@@ -40,7 +41,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Phase 12 complète — BTLUI-01 DONE]
+  ✓        ✓        ✓     [Plan 13-01 fermé — EXP headless engine DONE]
 ```
 
 Phase 6 plans : 06-01 ✅ | 06-04 ✅ | 06-02 ✅ | 06-03 ✅ | 06-05 ✅
@@ -226,10 +227,10 @@ Décisions émergentes (Phase 10) :
 ## Session Continuity
 
 Last session: 2026-06-14
-Stopped at: Phase 12 COMPLÈTE. Plan 12-05 APPLY+UNIFY. Checkpoint human-verify approuvé. 5 commits Wave 3 (SHA e2651d4).
-Next action: Merger feature/phase12-battlescene-ui → dev → staging → main (E-04 sync protocol), puis démarrer Phase 13.
+Stopped at: Plan 13-01 APPLY ✓ + UNIFY ✓. Commit 02b20e2. 64/64 tests verts.
+Next action: /paul:plan 13 — Plan 13-02 (ExpBar UI + LevelUpOverlay, SDK.MonoGame).
 
-Resume file: `.paul/phases/12-battlescene-ui/12-01-PLAN.md`
+Resume file: `.paul/phases/13-exp-levelup-evolution/13-01-SUMMARY.md`
 
 ---
 
