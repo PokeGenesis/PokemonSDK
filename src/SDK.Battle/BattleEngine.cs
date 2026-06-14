@@ -16,19 +16,22 @@ public sealed class BattleEngine : IBattleEngine
     private readonly IDifficultyMode _opponentStrategy;
     private readonly ITypeChart _typeChart;
     private readonly PluginRegistry _plugins;
+    private readonly IExpFormula? _expFormula;
 
     public BattleEngine(
         IDamageFormula formula,
         IDifficultyMode playerStrategy,
         IDifficultyMode opponentStrategy,
         ITypeChart typeChart,
-        PluginRegistry? plugins = null)
+        PluginRegistry? plugins = null,
+        IExpFormula? expFormula = null)
     {
         _formula = formula;
         _playerStrategy = playerStrategy;
         _opponentStrategy = opponentStrategy;
         _typeChart = typeChart;
         _plugins = plugins ?? new PluginRegistry();
+        _expFormula = expFormula;
     }
 
     public BattleResult RunBattle(BattleRequest request)
@@ -95,6 +98,9 @@ public sealed class BattleEngine : IBattleEngine
                 state = ApplyMove(state, isPlayer: true, playerMove);
         }
 
+        if (_expFormula != null && state.Opponent.CurrentHp <= 0)
+            state = AwardExp(state);
+
         state = state with { Turn = state.Turn + 1 };
         _plugins.NotifyTurnEnd(state);
         return state;
@@ -102,6 +108,58 @@ public sealed class BattleEngine : IBattleEngine
 
     public BattleMove SelectOpponentMove(BattleState state) =>
         _opponentStrategy.SelectMove(state.Opponent, state.Player, state.Config);
+
+    private BattleState AwardExp(BattleState state)
+    {
+        var formula = _expFormula!;
+        var player = state.Player;
+        var opponent = state.Opponent;
+
+        int gained = formula.CalcExpGain(opponent.BaseExpYield, opponent.Level, false);
+        int newExp = player.CurrentExp + gained;
+
+        var log = state.Log.ToList();
+        log.Add($"{player.Nickname} gained {gained} EXP!");
+
+        int newLevel = player.Level;
+        int atk = player.Attack, def = player.Defense;
+        int spa = player.SpecialAttack, spd = player.SpecialDefense, spe = player.Speed;
+        int maxHp = player.MaxHp;
+
+        while (newLevel < 100 && newExp >= formula.ExpThreshold(newLevel + 1, player.GrowthRate))
+        {
+            int oldLevel = newLevel;
+            newLevel++;
+
+            double scale = (newLevel + 5.0) / (oldLevel + 5.0);
+            atk   = (int)(atk   * scale);
+            def   = (int)(def   * scale);
+            spa   = (int)(spa   * scale);
+            spd   = (int)(spd   * scale);
+            spe   = (int)(spe   * scale);
+            maxHp = (int)(maxHp * scale);
+
+            log.Add($"{player.Nickname} grew to level {newLevel}!");
+
+            if (player.FullLearnset != null)
+                foreach (var (learnLevel, move) in player.FullLearnset)
+                    if (learnLevel == newLevel)
+                        log.Add($"{player.Nickname} learned {move.Identifier}!");
+
+            var updatedPlayer = player with
+            {
+                Level = newLevel, CurrentExp = newExp,
+                Attack = atk, Defense = def,
+                SpecialAttack = spa, SpecialDefense = spd, Speed = spe,
+                MaxHp = maxHp,
+            };
+            _plugins.NotifyLevelUp(updatedPlayer, oldLevel, newLevel);
+            player = updatedPlayer;
+        }
+
+        player = player with { CurrentExp = newExp };
+        return state with { Player = player, Log = log };
+    }
 
     private BattleState ApplyMove(BattleState state, bool isPlayer, BattleMove move)
     {
@@ -132,9 +190,9 @@ public sealed class BattleEngine : IBattleEngine
         state = _plugins.ApplyBeforeDamage(state, damageResult);
 
         if (typeMultiplier > 1.0m)
-            state = AddLog(state, "It's super effective!");
+            state = AddLog(state, "It is super effective!");
         else if (typeMultiplier < 1.0m)
-            state = AddLog(state, "It's not very effective...");
+            state = AddLog(state, "It is not very effective...");
 
         var currentDefender = isPlayer ? state.Opponent : state.Player;
         var newDefender = currentDefender with
