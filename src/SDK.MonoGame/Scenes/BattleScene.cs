@@ -16,7 +16,7 @@ public sealed class BattleScene : IGameScene
     private HpBar? _hpBar;
     private StatusIcon? _statusIcon;
     private MoveMenu? _moveMenu;
-    private BattleEndOverlay _battleEndOverlay = new();
+    private readonly BattleEndOverlay _battleEndOverlay = new();
     private Texture2D? _pixel;
     private SpriteFont? _font;
 
@@ -135,7 +135,7 @@ public sealed class BattleScene : IGameScene
         {
             int lines = Math.Min(_lastLog.Count, 5);
             for (int i = 0; i < lines; i++)
-                sb.DrawString(_font, _lastLog[i], new Vector2(8, 185 + i * 16), Color.White,
+                sb.DrawString(_font, _lastLog[i], new Vector2(8f, 185f + i * 16f), Color.White,
                     0f, Vector2.Zero, 0.55f, SpriteEffects.None, 0f);
             sb.DrawString(_font, "Space", new Vector2(432, 255), Color.DimGray,
                 0f, Vector2.Zero, 0.45f, SpriteEffects.None, 0f);

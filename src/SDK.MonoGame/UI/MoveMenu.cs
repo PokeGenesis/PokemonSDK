@@ -71,7 +71,7 @@ public sealed class MoveMenu
             if (font != null)
             {
                 var label = (i == _cursorIndex ? "> " : "  ") + move.Identifier;
-                sb.DrawString(font, label, new Vector2(origin.X + 2, origin.Y + i * 14 + 1),
+                sb.DrawString(font, label, new Vector2(origin.X + 2f, origin.Y + i * 14f + 1f),
                     Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
             }
         }
