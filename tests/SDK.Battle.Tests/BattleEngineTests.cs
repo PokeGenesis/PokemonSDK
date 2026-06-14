@@ -203,4 +203,118 @@ public class BattleEngineTests
         capturedMultiplier.Should().Be(1.0m,
             "no STAB when move.TypeId differs from attacker.Type1Id");
     }
+
+    // ------------------------------------------------------------------
+    // RunTurn / SelectOpponentMove — Phase 12-01
+    // ------------------------------------------------------------------
+
+    private static BattleState MakeState(BattlePokemon player, BattlePokemon opponent, int turn = 0) =>
+        new BattleState(player, opponent, turn, WeatherType.None,
+            BattleTestHelpers.NoCritConfig(), Array.Empty<string>());
+
+    [Fact]
+    public void RunTurn_ReducesOpponentHp_WhenPlayerMoveHits()
+    {
+        var (formula, playerStrat, opponentStrat, chart) = MakeMocks(damage: 30);
+        var engine = MakeEngine(formula, playerStrat, opponentStrat, chart);
+
+        var player   = BattleTestHelpers.MakePokemon(hp: 100, speed: 200);
+        var opponent = BattleTestHelpers.MakePokemon(hp: 100, speed: 50);
+        var state    = MakeState(player, opponent);
+        var move     = BattleTestHelpers.MakeMove(1, MoveCategory.Physical, accuracy: 100);
+
+        var result = engine.RunTurn(state, move, move);
+
+        result.Opponent.CurrentHp.Should().BeLessThan(100,
+            "player moves first (faster) and deals 30 damage");
+    }
+
+    [Fact]
+    public void RunTurn_IncrementsTurnCounter()
+    {
+        var (formula, playerStrat, opponentStrat, chart) = MakeMocks(damage: 0);
+        var engine = MakeEngine(formula, playerStrat, opponentStrat, chart);
+
+        var player   = BattleTestHelpers.MakePokemon(hp: 100, speed: 100);
+        var opponent = BattleTestHelpers.MakePokemon(hp: 100, speed: 50);
+        var move     = BattleTestHelpers.MakeMove(1, MoveCategory.Physical);
+        var state    = MakeState(player, opponent, turn: 3);
+
+        var result = engine.RunTurn(state, move, move);
+
+        result.Turn.Should().Be(4, "RunTurn must increment Turn by 1");
+    }
+
+    [Fact]
+    public void RunTurn_ReturnsNewState_OriginalTurnUnchanged()
+    {
+        var (formula, playerStrat, opponentStrat, chart) = MakeMocks(damage: 0);
+        var engine = MakeEngine(formula, playerStrat, opponentStrat, chart);
+
+        var player   = BattleTestHelpers.MakePokemon(hp: 100, speed: 100);
+        var opponent = BattleTestHelpers.MakePokemon(hp: 100, speed: 50);
+        var move     = BattleTestHelpers.MakeMove(1, MoveCategory.Physical);
+        var state    = MakeState(player, opponent, turn: 0);
+
+        var result = engine.RunTurn(state, move, move);
+
+        state.Turn.Should().Be(0, "BattleState is immutable — original must not change");
+        result.Turn.Should().Be(1);
+    }
+
+    [Fact]
+    public void RunTurn_PlayerGoesFirst_WhenFaster_OpponentNeverAttacks()
+    {
+        var (formula, playerStrat, opponentStrat, chart) = MakeMocks(damage: 9999);
+        var engine = MakeEngine(formula, playerStrat, opponentStrat, chart);
+
+        var player   = BattleTestHelpers.MakePokemon(hp: 100, speed: 200);
+        var opponent = BattleTestHelpers.MakePokemon(hp: 1,   speed: 50);
+        var move     = BattleTestHelpers.MakeMove(1, MoveCategory.Physical, accuracy: 100);
+        var state    = MakeState(player, opponent);
+
+        var result = engine.RunTurn(state, move, move);
+
+        result.Opponent.CurrentHp.Should().Be(0, "player one-shots opponent going first");
+        result.Player.CurrentHp.Should().Be(100, "opponent is dead before it can attack");
+    }
+
+    [Fact]
+    public void RunTurn_OpponentGoesFirst_WhenFaster_PlayerNeverAttacks()
+    {
+        var (formula, playerStrat, opponentStrat, chart) = MakeMocks(damage: 9999);
+        var engine = MakeEngine(formula, playerStrat, opponentStrat, chart);
+
+        var player   = BattleTestHelpers.MakePokemon(hp: 1,   speed: 50);
+        var opponent = BattleTestHelpers.MakePokemon(hp: 100, speed: 200);
+        var move     = BattleTestHelpers.MakeMove(1, MoveCategory.Physical, accuracy: 100);
+        var state    = MakeState(player, opponent);
+
+        var result = engine.RunTurn(state, move, move);
+
+        result.Player.CurrentHp.Should().Be(0, "opponent one-shots player going first");
+        result.Opponent.CurrentHp.Should().Be(100, "player is dead before it can attack");
+    }
+
+    [Fact]
+    public void SelectOpponentMove_DelegatesToOpponentStrategy()
+    {
+        var move = BattleTestHelpers.MakeMove(1, MoveCategory.Physical);
+        var (formula, playerStrat, opponentStrat, chart) = MakeMocks();
+        opponentStrat.Setup(s => s.SelectMove(
+                It.IsAny<BattlePokemon>(), It.IsAny<BattlePokemon>(), It.IsAny<BattleConfig>()))
+            .Returns(move);
+        var engine = MakeEngine(formula, playerStrat, opponentStrat, chart);
+
+        var player   = BattleTestHelpers.MakePokemon(hp: 100, speed: 100);
+        var opponent = BattleTestHelpers.MakePokemon(hp: 100, speed: 50);
+        var state    = MakeState(player, opponent);
+
+        var result = engine.SelectOpponentMove(state);
+
+        result.Should().Be(move, "SelectOpponentMove must delegate to _opponentStrategy.SelectMove");
+        opponentStrat.Verify(s => s.SelectMove(
+            state.Opponent, state.Player, state.Config), Times.AtLeastOnce);
+    }
+
 }

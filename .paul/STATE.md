@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** Phase 11 Documentation ✅ COMPLÈTE — 40+ pages bilingues EN+FR livrées, PR #27 → staging. v0.3 milestone complet. Prochaine étape : v1.0 (Phase 12 BattleScene UI).
+**Current focus:** Phase 12 BattleScene UI ✅ COMPLÈTE — BTLUI-01 livré. HP bars + MoveMenu + StatusIcon + BattleEnd overlay + log de combat + flux complet overworld→battle→overworld. Prochaine étape : v1.0 Phase 13 (EXP + Level-up + Évolution).
 
 ## Current Position
 
-Milestone: v0.3 CLI + Docs + Advanced Systems — ✅ Complete (3/3 phases)
-Phase: 11 (Documentation) — ✅ Complete
-Plan: 11-01 ✅ | 11-02 ✅ | 11-03 ✅ | 11-04 ✅
-Status: UNIFY complete — Phase 11 closed
-Last activity: 2026-06-13 — Plan 11-04 UNIFY. Phase 11 fermée. v0.3 milestone complet. PR #27 → staging.
+Milestone: v1.0 Moteur Complet
+Phase: 12 (BattleScene UI) — COMPLÈTE ✅
+Plan: 12-01 ✅ | 12-02 ✅ | 12-03 ✅ | 12-04 ✅ | 12-05 ✅
+Status: APPLY ✅ UNIFY ✅ — BTLUI-01 DONE. Prochaine phase : 13 (EXP + Level-up + Évolution).
+Last activity: 2026-06-14 — Phase 12 complète. Checkpoint human-verify approuvé. 5 commits Wave 3.
 
 Progress:
 
@@ -32,6 +32,7 @@ Progress:
 - Phase 9: [██████████] 100% ✅ (09-01 ✅ 09-02 ✅ 09-03 ✅ 09-04 ✅)
 - Phase 10: [██████████] 100% ✅ (10-01 ✅ 10-02 ✅ 10-03 ✅)
 - Phase 11: [██████████] 100% ✅ (11-01 ✅ — 11-02 ✅ — 11-03 ✅ — 11-04 ✅)
+- Phase 12: [██████████] 100% ✅ (12-01 ✅ 12-02 ✅ 12-03 ✅ 12-04 ✅ 12-05 ✅)
 
 ## Loop Position
 
@@ -39,11 +40,12 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Phase 11 complete — Loop fermé 2026-06-13]
+  ✓        ✓        ✓     [Phase 12 complète — BTLUI-01 DONE]
 ```
 
 Phase 6 plans : 06-01 ✅ | 06-04 ✅ | 06-02 ✅ | 06-03 ✅ | 06-05 ✅
 Phase 11 plans : 11-01 ✅ | 11-02 ✅ | 11-03 ✅ | 11-04 ✅
+Phase 12 plans : 12-01 (Wave 1) | 12-02 (Wave 1) | 12-03 (Wave 2) | 12-04 (Wave 2) | 12-05 (Wave 3 + human-verify)
 
 ## Accumulated Context
 
@@ -223,11 +225,11 @@ Décisions émergentes (Phase 10) :
 
 ## Session Continuity
 
-Last session: 2026-06-13
-Stopped at: Phase 11 UNIFY complet. v0.3 milestone fermé. PR #27 feature/phase11-documentation → staging ouvert.
-Next action: Merge PR #27 (staging), puis créer PR staging → main. Ensuite /paul:plan pour Phase 12 (BattleScene UI — v1.0).
+Last session: 2026-06-14
+Stopped at: Phase 12 COMPLÈTE. Plan 12-05 APPLY+UNIFY. Checkpoint human-verify approuvé. 5 commits Wave 3 (SHA e2651d4).
+Next action: Merger feature/phase12-battlescene-ui → dev → staging → main (E-04 sync protocol), puis démarrer Phase 13.
 
-Resume file: `.paul/phases/11-documentation/11-04-SUMMARY.md`
+Resume file: `.paul/phases/12-battlescene-ui/12-01-PLAN.md`
 
 ---
 

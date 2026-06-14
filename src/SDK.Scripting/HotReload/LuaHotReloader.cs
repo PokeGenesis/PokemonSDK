@@ -14,6 +14,7 @@ public sealed class LuaHotReloader : IDisposable
     public LuaHotReloader(string directory, IScriptEngine engine)
     {
         _engine  = engine;
+        Directory.CreateDirectory(directory);
         _watcher = new FileSystemWatcher(directory, "*.lua")
         {
             NotifyFilter          = NotifyFilters.LastWrite,

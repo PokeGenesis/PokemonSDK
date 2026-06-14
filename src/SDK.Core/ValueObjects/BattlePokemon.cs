@@ -1,5 +1,7 @@
 namespace SDK.Core.ValueObjects;
 
+using SDK.Core.Enums;
+
 public sealed record BattlePokemon(
     int SpeciesId,
     string Nickname,
@@ -13,4 +15,5 @@ public sealed record BattlePokemon(
     int Speed,
     int Type1Id,
     int? Type2Id,
-    IReadOnlyList<BattleMove> Moves);
+    IReadOnlyList<BattleMove> Moves,
+    StatusConditionId? Status = null);
