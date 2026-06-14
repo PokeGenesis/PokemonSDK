@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** Phase 13 EXP + Level-up + Évolution — Plan 13-01 DONE (headless engine + 64 tests). Prochaine étape : Plan 13-02 (ExpBar UI + LevelUpOverlay, SDK.MonoGame).
+**Current focus:** Phase 13 EXP + Level-up + Évolution — Plan 13-02 créé (ExpBar UI + LevelUpOverlay + ShowLevelUp phase, SDK.MonoGame). Prêt pour APPLY.
 
 ## Current Position
 
 Milestone: v1.0 Moteur Complet
 Phase: 13 (EXP + Level-up + Évolution) — EN COURS
-Plan: 13-01 PLAN ✓ | APPLY ✓ | UNIFY ✓ — Prochaine : 13-02 (ExpBar UI)
-Status: Plan 13-01 fermé — prêt pour Plan 13-02.
-Last activity: 2026-06-14 — Plan 13-01 exécuté + commité (02b20e2). Branch feature/phase13-exp-levelup-evolution.
+Plan: 13-02 PLAN ✓ — en attente d'approbation pour APPLY
+Status: Plan 13-02 créé, prêt pour APPLY.
+Last activity: 2026-06-14 — Plan 13-02-PLAN.md créé. Branch feature/phase13-exp-levelup-evolution.
 
 Progress:
 
@@ -41,7 +41,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [Plan 13-01 fermé — EXP headless engine DONE]
+  ✓        ○        ○     [Plan 13-02 créé — ExpBar UI + LevelUpOverlay]
 ```
 
 Phase 6 plans : 06-01 ✅ | 06-04 ✅ | 06-02 ✅ | 06-03 ✅ | 06-05 ✅
@@ -227,10 +227,10 @@ Décisions émergentes (Phase 10) :
 ## Session Continuity
 
 Last session: 2026-06-14
-Stopped at: Plan 13-01 APPLY ✓ + UNIFY ✓. Commit 02b20e2. 64/64 tests verts.
-Next action: /paul:plan 13 — Plan 13-02 (ExpBar UI + LevelUpOverlay, SDK.MonoGame).
+Stopped at: Plan 13-02 PLAN ✓ créé. Approuver puis lancer APPLY.
+Next action: /paul:apply .paul/phases/13-exp-levelup-evolution/13-02-PLAN.md
 
-Resume file: `.paul/phases/13-exp-levelup-evolution/13-01-SUMMARY.md`
+Resume file: `.paul/phases/13-exp-levelup-evolution/13-02-PLAN.md`
 
 ---
 

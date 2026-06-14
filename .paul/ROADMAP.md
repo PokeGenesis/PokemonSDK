@@ -22,7 +22,7 @@ Phases: 3 of 3 complete (Phase 6 ✅ — Phase 10 ✅ — Phase 11 ✅)
 
 **v1.0 Moteur Complet** (v1.0.0)
 Status: In progress
-Phases: 0 of 6 (Phase 12 — Phase 13 — Phase 14 — Phase 15 — Phase 16 — Phase 17)
+Phases: 1 of 6 (Phase 12 ✅ — Phase 13 — Phase 14 — Phase 15 — Phase 16 — Phase 17)
 
 **v1.x Plugin Era** (v1.1.0 → v1.4.0+)
 Status: Not started
@@ -47,8 +47,8 @@ Phases: 0 of 1 (Phase 22)
 | 6     | Advanced Systems        | 5     | ✅ Complete | 2026-06-12 |
 | 10    | CLI pokeforge           | 3     | ✅ Complete | 2026-06-09 |
 | 11    | Documentation           | 4     | ✅ Complete | 2026-06-13 |
-| 12    | BattleScene UI          | 5     | Planning    | -         |
-| 13    | EXP + Level-up + Évol.  | TBD   | Not started | -         |
+| 12    | BattleScene UI          | 5     | ✅ Complete | 2026-06-14 |
+| 13    | EXP + Level-up + Évol.  | 3     | Planning    | -         |
 | 14    | Items + Bag + Shop      | TBD   | Not started | -         |
 | 15    | Party + PC + Pokédex UI | TBD   | Not started | -         |
 | 16    | QuestPlugin             | TBD   | Not started | -         |
