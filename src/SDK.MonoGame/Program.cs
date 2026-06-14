@@ -13,12 +13,19 @@ using SDK.MonoGame.Input;
 using SDK.MonoGame.Scenes;
 using SDK.MonoGame.World;
 using SDK.Scripting.Engine;
+using Serilog;
 
 var isHeadless = args.Contains("--headless");
 int headlessFrames = 60;
 var framesArg = Array.Find(args, a => a.StartsWith("--max-frames="));
 if (framesArg is not null && int.TryParse(framesArg.Split('=')[1], out var n))
     headlessFrames = n;
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File("logs/battle-.log", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
 var services = new ServiceCollection();
 services.AddDbContext<PokemonDbContext>(opt =>
@@ -41,6 +48,7 @@ services.AddSingleton<ITypeChart, TypeChart>();
 services.AddSingleton<IDamageFormula, StandardDamageFormula>();
 services.AddSingleton<IDifficultyMode, StoryDifficultyMode>();
 services.AddSingleton<IBattleEngine, BattleEngine>();
+services.AddSingleton<IExpFormula, Gen1ExpFormula>();
 services.AddSingleton<BattleScene>();
 
 // Plugin system — D-13 : Nuzlocke/Randomizer/Turbo = plugins activables via PluginRegistry

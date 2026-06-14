@@ -29,6 +29,7 @@ public sealed class BattleEngineExpTests
         var playerStrat = new Mock<IDifficultyMode>();
         playerStrat.Setup(s => s.SelectMove(It.IsAny<BattlePokemon>(), It.IsAny<BattlePokemon>(), It.IsAny<BattleConfig>()))
             .Returns(move);
+        playerStrat.Setup(s => s.VictoryExpMultiplier).Returns(1.0f);
 
         var opponentStrat = new Mock<IDifficultyMode>();
         opponentStrat.Setup(s => s.SelectMove(It.IsAny<BattlePokemon>(), It.IsAny<BattlePokemon>(), It.IsAny<BattleConfig>()))

@@ -99,7 +99,9 @@ public sealed class BattleEngine : IBattleEngine
         }
 
         if (_expFormula != null && state.Opponent.CurrentHp <= 0)
-            state = AwardExp(state);
+            state = AwardExp(state, _playerStrategy.VictoryExpMultiplier);
+        else if (_expFormula != null && state.Player.CurrentHp <= 0 && _playerStrategy.DefeatExpMultiplier > 0f)
+            state = AwardExp(state, _playerStrategy.DefeatExpMultiplier);
 
         state = state with { Turn = state.Turn + 1 };
         _plugins.NotifyTurnEnd(state);
@@ -109,13 +111,21 @@ public sealed class BattleEngine : IBattleEngine
     public BattleMove SelectOpponentMove(BattleState state) =>
         _opponentStrategy.SelectMove(state.Opponent, state.Player, state.Config);
 
-    private BattleState AwardExp(BattleState state)
+    private BattleState AwardExp(BattleState state, float multiplier = 1.0f)
     {
         var formula = _expFormula!;
         var player = state.Player;
         var opponent = state.Opponent;
 
-        int gained = formula.CalcExpGain(opponent.BaseExpYield, opponent.Level, false);
+        var levelCap = state.Config.GetLevelCap();
+        if (levelCap.HasValue && player.Level >= levelCap.Value)
+        {
+            var capLog = state.Log.ToList();
+            capLog.Add($"EXP bloquée ! (Cap niveau {levelCap.Value} — prochain badge requis)");
+            return state with { Log = capLog };
+        }
+
+        int gained = (int)(formula.CalcExpGain(opponent.BaseExpYield, opponent.Level, false) * multiplier);
         int newExp = player.CurrentExp + gained;
 
         var log = state.Log.ToList();

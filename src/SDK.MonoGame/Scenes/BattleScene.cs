@@ -126,7 +126,13 @@ public sealed class BattleScene : IGameScene
             case BattlePhase.BattleEnd:
                 var ks = Keyboard.GetState();
                 if (ks.IsKeyDown(InputMap.Confirm) && !_prevKs.IsKeyDown(InputMap.Confirm))
+                {
+                    var result = _state!.Player.CurrentHp > 0 ? "Victory" : "Defeat";
+                    Serilog.Log.Information("[BATTLE] {Result} — {Player} Lv{Level} vs {Opponent} Lv{OppLevel}",
+                        result, _state.Player.Nickname, _state.Player.Level,
+                        _state.Opponent.Nickname, _state.Opponent.Level);
                     _game1?.SwitchToScene(_worldScene!);
+                }
                 _prevKs = ks;
                 break;
         }
@@ -147,6 +153,9 @@ public sealed class BattleScene : IGameScene
         // HP bars: opponent top-left, player bottom-right
         _hpBar!.Draw(sb, _state.Opponent.CurrentHp, _state.Opponent.MaxHp,
             new Vector2(10, 12),  140, 8, "FOE", _font);
+        if (_font != null)
+            sb.DrawString(_font, $"Lv.{_state.Opponent.Level}",
+                new Vector2(130f, 1f), Color.White, 0f, Vector2.Zero, 0.45f, SpriteEffects.None, 0f);
         _hpBar.Draw(sb, _state.Player.CurrentHp, _state.Player.MaxHp,
             new Vector2(256, 130), 140, 8, "PLR", _font);
 
@@ -170,8 +179,9 @@ public sealed class BattleScene : IGameScene
         if (_phase == BattlePhase.ShowLog && _font != null)
         {
             int lines = Math.Min(_lastLog.Count, 5);
+            int start = _lastLog.Count - lines;
             for (int i = 0; i < lines; i++)
-                sb.DrawString(_font, _lastLog[i], new Vector2(8f, 185f + i * 16f), Color.White,
+                sb.DrawString(_font, _lastLog[start + i], new Vector2(8f, 185f + i * 16f), Color.White,
                     0f, Vector2.Zero, 0.55f, SpriteEffects.None, 0f);
             sb.DrawString(_font, "Space", new Vector2(432, 255), Color.DimGray,
                 0f, Vector2.Zero, 0.45f, SpriteEffects.None, 0f);
@@ -196,6 +206,7 @@ public sealed class BattleScene : IGameScene
         var opponentMove = _engine.SelectOpponentMove(_state!);
         _state = _engine.RunTurn(_state!, _selectedMove!, opponentMove);
         _lastLog = _state.Log;
+        Serilog.Log.Information("[BATTLE] Turn {Turn}: {Messages}", _state.Turn, string.Join(" | ", _state.Log));
         _leveledUp = _state.Log.Any(m => m.Contains("grew to level"));
         if (_leveledUp)
             _levelUpOverlay!.Trigger(_playerBeforeTurn, _state.Player);

@@ -17,6 +17,47 @@ public class HardDifficultyModeTests
     }
 
     [Fact]
+    public void DefeatExpMultiplier_DefaultIs0Point5()
+    {
+        _mode.DefeatExpMultiplier.Should().Be(0.5f);
+    }
+
+    [Theory]
+    [InlineData(0f, 0f)]
+    [InlineData(0.3f, 0.3f)]
+    [InlineData(1f, 1f)]
+    [InlineData(-0.5f, 0f)]    // clamp min
+    [InlineData(2f, 1f)]       // clamp max
+    public void DefeatExpMultiplier_IsClampedAndConfigurable(float input, float expected)
+    {
+        var mode = new HardDifficultyMode(defeatExpMultiplier: input);
+        mode.DefeatExpMultiplier.Should().Be(expected);
+    }
+
+
+    [Fact]
+    public void VictoryExpMultiplier_DefaultIs1()
+    {
+        _mode.VictoryExpMultiplier.Should().Be(1.0f);
+    }
+
+    [Theory]
+    [InlineData(1.0f, 1.0f)]
+    [InlineData(1.5f, 1.5f)]
+    [InlineData(2.0f, 2.0f)]
+    [InlineData(2.5f, 2.5f)]
+    [InlineData(3.0f, 3.0f)]
+    [InlineData(0.5f, 1.0f)]   // clamp min → 1.0
+    [InlineData(4.0f, 3.0f)]   // clamp max → 3.0
+    [InlineData(1.3f, 1.5f)]   // snap au 0.5 le plus proche
+    [InlineData(1.7f, 1.5f)]   // 1.7*2=3.4, Round=3, 3/2=1.5
+    public void VictoryExpMultiplier_IsSnappedAndClamped(float input, float expected)
+    {
+        var mode = new HardDifficultyMode(victoryExpMultiplier: input);
+        mode.VictoryExpMultiplier.Should().Be(expected);
+    }
+
+    [Fact]
     public void Returns_Highest_Power_Move()
     {
         var moves = new BattleMove[]

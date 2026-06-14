@@ -6,6 +6,8 @@ using SDK.Core.ValueObjects;
 public sealed class StoryDifficultyMode : IDifficultyMode
 {
     public DifficultyMode Mode => DifficultyMode.Story;
+    public float DefeatExpMultiplier => 0.25f;
+    public float VictoryExpMultiplier => 1.0f;
 
     public BattleMove SelectMove(BattlePokemon self, BattlePokemon opponent, BattleConfig config)
     {
