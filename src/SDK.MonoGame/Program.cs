@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SDK.Battle;
+using SDK.Battle.Difficulty;
+using SDK.Battle.Formulas;
 using SDK.Battle.Plugins;
 using SDK.Core.Interfaces;
 using SDK.Core.Services;
@@ -7,6 +10,7 @@ using SDK.Data;
 using SDK.Data.Services;
 using SDK.MonoGame;
 using SDK.MonoGame.Input;
+using SDK.MonoGame.Scenes;
 using SDK.MonoGame.World;
 using SDK.Scripting.Engine;
 
@@ -32,6 +36,12 @@ if (isHeadless)
     services.AddSingleton<IInputProvider, NullInputProvider>();
 else
     services.AddSingleton<IInputProvider, KeyboardInputProvider>();
+
+services.AddSingleton<ITypeChart, TypeChart>();
+services.AddSingleton<IDamageFormula, StandardDamageFormula>();
+services.AddSingleton<IDifficultyMode, StoryDifficultyMode>();
+services.AddSingleton<IBattleEngine, BattleEngine>();
+services.AddSingleton<BattleScene>();
 
 // Plugin system — D-13 : Nuzlocke/Randomizer/Turbo = plugins activables via PluginRegistry
 var pluginRegistry = new PluginRegistry();

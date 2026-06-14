@@ -147,6 +147,7 @@
     "BattlePokemon",
     "BattleEngine",
     "BattleScene",
+    "battlescene",
     "BattleHud",
     "BattleMove",
     "BattleResult",
@@ -224,7 +225,18 @@
     "ExecutingTurn",
     "Animating",
     "StatusDisplay",
-    "TryGetPlayerAction"
+    "TryGetPlayerAction",
+    "snapshotté",
+    "loggue",
+    "loggués",
+    "Xunit",
+    "Xceed",
+    "GHSA",
+    "rxmq",
+    "sixlabors",
+    "SIXLABORS",
+    "Rgba",
+    "MGFXC"
   ],
   "ignorePaths": [
     "node_modules",

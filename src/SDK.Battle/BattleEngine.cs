@@ -60,32 +60,10 @@ public sealed class BattleEngine : IBattleEngine
                 return result;
             }
 
-            _plugins.NotifyTurnStart(state);
-
             var playerMove = _playerStrategy.SelectMove(state.Player, state.Opponent, state.Config);
-            var opponentMove = _opponentStrategy.SelectMove(state.Opponent, state.Player, state.Config);
+            var opponentMove = SelectOpponentMove(state);
 
-            state = _plugins.ApplyBeforeMove(state, new BattleAction(playerMove.MoveId, true));
-            state = _plugins.ApplyBeforeMove(state, new BattleAction(opponentMove.MoveId, false));
-
-            bool playerFirst = state.Player.Speed > state.Opponent.Speed
-                || (state.Player.Speed == state.Opponent.Speed && Random.Shared.Next(2) == 0);
-
-            if (playerFirst)
-            {
-                state = ApplyMove(state, isPlayer: true, playerMove);
-                if (state.Opponent.CurrentHp > 0)
-                    state = ApplyMove(state, isPlayer: false, opponentMove);
-            }
-            else
-            {
-                state = ApplyMove(state, isPlayer: false, opponentMove);
-                if (state.Player.CurrentHp > 0)
-                    state = ApplyMove(state, isPlayer: true, playerMove);
-            }
-
-            state = state with { Turn = state.Turn + 1 };
-            _plugins.NotifyTurnEnd(state);
+            state = RunTurn(state, playerMove, opponentMove);
         }
 
         var maxResult = new BattleResult(false, MaxTurns, "MaxTurns");
@@ -93,13 +71,50 @@ public sealed class BattleEngine : IBattleEngine
         return maxResult;
     }
 
+    public BattleState RunTurn(BattleState state, BattleMove playerMove, BattleMove opponentMove)
+    {
+        state = state with { Log = Array.Empty<string>() };
+        _plugins.NotifyTurnStart(state);
+
+        state = _plugins.ApplyBeforeMove(state, new BattleAction(playerMove.MoveId, true));
+        state = _plugins.ApplyBeforeMove(state, new BattleAction(opponentMove.MoveId, false));
+
+        bool playerFirst = state.Player.Speed > state.Opponent.Speed
+            || (state.Player.Speed == state.Opponent.Speed && Random.Shared.Next(2) == 0);
+
+        if (playerFirst)
+        {
+            state = ApplyMove(state, isPlayer: true, playerMove);
+            if (state.Opponent.CurrentHp > 0)
+                state = ApplyMove(state, isPlayer: false, opponentMove);
+        }
+        else
+        {
+            state = ApplyMove(state, isPlayer: false, opponentMove);
+            if (state.Player.CurrentHp > 0)
+                state = ApplyMove(state, isPlayer: true, playerMove);
+        }
+
+        state = state with { Turn = state.Turn + 1 };
+        _plugins.NotifyTurnEnd(state);
+        return state;
+    }
+
+    public BattleMove SelectOpponentMove(BattleState state) =>
+        _opponentStrategy.SelectMove(state.Opponent, state.Player, state.Config);
+
     private BattleState ApplyMove(BattleState state, bool isPlayer, BattleMove move)
     {
         var attacker = isPlayer ? state.Player : state.Opponent;
         var defender = isPlayer ? state.Opponent : state.Player;
 
+        state = AddLog(state, $"{attacker.Nickname} used {move.Identifier.ToUpperInvariant()}!");
+
         if (Random.Shared.Next(0, 100) >= move.Accuracy)
-            return state;
+            return AddLog(state, "The attack missed!");
+
+        if (move.Category == MoveCategory.Status || move.Power is null)
+            return AddLog(state, $"(stat effects: Phase 13)");
 
         var factor1 = _typeChart.GetFactor(move.TypeId, defender.Type1Id, _formula.Generation);
         var factor2 = defender.Type2Id.HasValue
@@ -111,18 +126,31 @@ public sealed class BattleEngine : IBattleEngine
         var typeMultiplier = factor1 * factor2 * stab;
 
         if (typeMultiplier == 0m)
-            return state;
+            return AddLog(state, "It had no effect...");
 
         var damageResult = _formula.Calculate(attacker, defender, move, typeMultiplier, state.Config);
         state = _plugins.ApplyBeforeDamage(state, damageResult);
 
-        var newDefender = (isPlayer ? state.Opponent : state.Player) with
+        if (typeMultiplier > 1.0m)
+            state = AddLog(state, "It's super effective!");
+        else if (typeMultiplier < 1.0m)
+            state = AddLog(state, "It's not very effective...");
+
+        var currentDefender = isPlayer ? state.Opponent : state.Player;
+        var newDefender = currentDefender with
         {
-            CurrentHp = Math.Max(0, (isPlayer ? state.Opponent : state.Player).CurrentHp - damageResult.Damage)
+            CurrentHp = Math.Max(0, currentDefender.CurrentHp - damageResult.Damage)
         };
+
+        state = AddLog(state, $"{defender.Nickname} took {damageResult.Damage} damage!");
+        if (newDefender.CurrentHp <= 0)
+            state = AddLog(state, $"{defender.Nickname} fainted!");
 
         return isPlayer
             ? state with { Opponent = newDefender }
             : state with { Player = newDefender };
     }
+
+    private static BattleState AddLog(BattleState state, string msg) =>
+        state with { Log = [.. state.Log, msg] };
 }

@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using SDK.Core.Interfaces;
 using SDK.MonoGame.Input;
 using SDK.MonoGame.Rendering;
+using SDK.MonoGame.Scenes;
 using SDK.MonoGame.UI;
 using SDK.MonoGame.World;
 #if DEBUG
@@ -18,13 +19,16 @@ public class Game1 : Game
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch            _spriteBatch = null!;
     private RenderPipeline         _renderPipeline = null!;
-    private WorldSystem            _world = null!;
-    private PlayerSystem           _player = null!;
+    private IGameScene             _currentScene = null!;
+    private IGameScene?            _pendingScene;
+    private BattleScene            _battleScene = null!;
     private KeyboardInputProvider  _keyboard = null!;
     private ISaveSystem            _saveSystem = null!;
     private Func<IScriptEngine>    _scriptEngineFactory = null!;
     private LuaErrorOverlay        _luaErrorOverlay = new();
     private SpriteFont?            _font;
+    private int                    _turboLevel;
+    private Microsoft.Xna.Framework.Input.KeyboardState _prevKsGlobal;
 #if DEBUG
     private Microsoft.Xna.Framework.Input.KeyboardState _prevKeyState;
     private LuaHotReloader?        _hotReloader;
@@ -44,11 +48,18 @@ public class Game1 : Game
         IsMouseVisible = true;
     }
 
+    public void SwitchToScene(IGameScene scene) => _pendingScene = scene;
+
     protected override void Initialize()
     {
-        _world   = _services.GetRequiredService<WorldSystem>();
-        _player  = _services.GetRequiredService<PlayerSystem>();
-        _keyboard = (KeyboardInputProvider)_services.GetRequiredService<IInputProvider>();
+        _battleScene  = _services.GetRequiredService<BattleScene>();
+        var world  = _services.GetRequiredService<WorldSystem>();
+        var player = _services.GetRequiredService<PlayerSystem>();
+        var ws     = new WorldScene(world, player, _battleScene, this);
+        _currentScene = ws;
+        _battleScene.SetContext(ws, this);
+
+        _keyboard             = (KeyboardInputProvider)_services.GetRequiredService<IInputProvider>();
         _saveSystem           = _services.GetRequiredService<ISaveSystem>();
         _scriptEngineFactory  = _services.GetRequiredService<Func<IScriptEngine>>();
 #if DEBUG
@@ -68,13 +79,37 @@ public class Game1 : Game
         try { _font = Content.Load<SpriteFont>("Fonts/DefaultFont"); }
         catch (Microsoft.Xna.Framework.Content.ContentLoadException) { }
         catch (System.IO.FileNotFoundException) { }
+        _battleScene.Initialize(GraphicsDevice, _font);
     }
 
     protected override void Update(GameTime gameTime)
     {
         _keyboard.Update();
-        _world.Update(gameTime.ElapsedGameTime);
-        _player.Update();
+
+        if (_pendingScene is not null)
+        {
+            _currentScene = _pendingScene;
+            _pendingScene = null;
+        }
+
+        _currentScene.Update(gameTime);
+
+        var ksGlobal = Microsoft.Xna.Framework.Input.Keyboard.GetState();
+        if ((ksGlobal.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift)
+             || ksGlobal.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.RightShift))
+            && !_prevKsGlobal.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.LeftShift)
+            && !_prevKsGlobal.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.RightShift))
+        {
+            _turboLevel = (_turboLevel + 1) % 3;
+            TargetElapsedTime = _turboLevel switch
+            {
+                1 => TimeSpan.FromSeconds(1.0 / 120.0),
+                2 => TimeSpan.FromSeconds(1.0 / 180.0),
+                _ => TimeSpan.FromSeconds(1.0 / 60.0),
+            };
+        }
+        _prevKsGlobal = ksGlobal;
+
 #if DEBUG
         var ks = Microsoft.Xna.Framework.Input.Keyboard.GetState();
         if (ks.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.OemTilde)
@@ -98,7 +133,9 @@ public class Game1 : Game
     {
         var clock = _services.GetRequiredService<IGameClock>();
         _renderPipeline.BeginScene(GraphicsDevice);
-        // Plan 03-04+ : TilemapRenderer + PlayerSystem sprite
+        _spriteBatch.Begin(samplerState: Microsoft.Xna.Framework.Graphics.SamplerState.PointClamp);
+        _currentScene.Draw(_spriteBatch, gameTime);
+        _spriteBatch.End();
         _renderPipeline.EndScene(_spriteBatch, clock.GetTimeOfDay());
 #if DEBUG
         _luaErrorOverlay.Draw(_spriteBatch, _font);
