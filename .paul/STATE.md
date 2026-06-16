@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** Phase 13 EXP + Level-up + Évolution — Plan 13-02 créé (ExpBar UI + LevelUpOverlay + ShowLevelUp phase, SDK.MonoGame). Prêt pour APPLY.
+**Current focus:** Phase 13 EXP + Level-up + Évolution — Plan 13-02 UNIFY complet. ExpBar animée + LevelUpOverlay + MoveLearnOverlay + phase ShowLevelUp/ShowMoveLearn livrés. 3 bugs fixes. Prêt pour 13-02b (Phase 12 gaps) ou 13-03 (Evolution).
 
 ## Current Position
 
 Milestone: v1.0 Moteur Complet
 Phase: 13 (EXP + Level-up + Évolution) — EN COURS
-Plan: 13-02 PLAN ✓ — en attente d'approbation pour APPLY
-Status: Plan 13-02 créé, prêt pour APPLY.
-Last activity: 2026-06-14 — Plan 13-02-PLAN.md créé. Branch feature/phase13-exp-levelup-evolution.
+Plan: 13-02 UNIFY ✓ — boucle fermée
+Status: Prêt pour 13-02b (BattleScene Polish — Phase 12 gaps P12-G1..G6) ou 13-03 (Evolution UI).
+Last activity: 2026-06-16 — Plan 13-02 UNIFY complet. 5 commits sur feature/phase13-exp-levelup-evolution.
 
 Progress:
 
@@ -33,7 +33,7 @@ Progress:
 - Phase 10: [██████████] 100% ✅ (10-01 ✅ 10-02 ✅ 10-03 ✅)
 - Phase 11: [██████████] 100% ✅ (11-01 ✅ — 11-02 ✅ — 11-03 ✅ — 11-04 ✅)
 - Phase 12: [██████████] 100% ✅ (12-01 ✅ 12-02 ✅ 12-03 ✅ 12-04 ✅ 12-05 ✅)
-- Phase 13: [███░░░░░░░]  33% (13-01 ✅ | 13-02 … | 13-03 …)
+- Phase 13: [██████░░░░]  66% (13-01 ✅ | 13-02 ✅ | 13-02b … | 13-03 …)
 
 ## Loop Position
 
@@ -41,7 +41,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ○        ○     [Plan 13-02 créé — ExpBar UI + LevelUpOverlay]
+  ✓        ✓        ✓     [Loop 13-02 fermé — Prêt pour 13-02b ou 13-03]
 ```
 
 Phase 6 plans : 06-01 ✅ | 06-04 ✅ | 06-02 ✅ | 06-03 ✅ | 06-05 ✅
@@ -226,11 +226,11 @@ Décisions émergentes (Phase 10) :
 
 ## Session Continuity
 
-Last session: 2026-06-14
-Stopped at: Plan 13-02 PLAN ✓ créé. Approuver puis lancer APPLY.
-Next action: /paul:apply .paul/phases/13-exp-levelup-evolution/13-02-PLAN.md
+Last session: 2026-06-16
+Stopped at: Plan 13-02 UNIFY ✓ complet. ExpBar + LevelUpOverlay + MoveLearnOverlay livrés + 3 bug fixes.
+Next action: /paul:plan 13-02b (BattleScene Polish: P12-G1..G6) ou /paul:plan 13-03 (Evolution UI)
 
-Resume file: `.paul/phases/13-exp-levelup-evolution/13-02-PLAN.md`
+Resume file: `.paul/phases/13-exp-levelup-evolution/13-02-SUMMARY.md`
 
 ---
 
