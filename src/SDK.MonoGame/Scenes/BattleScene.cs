@@ -10,7 +10,7 @@ using SDK.MonoGame.UI;
 
 public sealed class BattleScene : IGameScene
 {
-    private enum BattlePhase { Init, SelectMove, ShowLog, ShowLevelUp, BattleEnd }
+    private enum BattlePhase { Init, SelectMove, ShowLog, ShowLevelUp, ShowMoveLearn, BattleEnd }
 
     private readonly IBattleEngine _engine;
     private readonly IExpFormula? _expFormula;
@@ -20,6 +20,7 @@ public sealed class BattleScene : IGameScene
     private readonly BattleEndOverlay _battleEndOverlay = new();
     private ExpBar? _expBar;
     private LevelUpOverlay? _levelUpOverlay;
+    private MoveLearnOverlay? _moveLearnOverlay;
     private Texture2D? _pixel;
     private SpriteFont? _font;
 
@@ -30,6 +31,9 @@ public sealed class BattleScene : IGameScene
     private KeyboardState _prevKs;
     private bool _leveledUp;
     private BattlePokemon _playerBeforeTurn = default!;
+
+    private Queue<BattleMove>? _pendingMoveQueue;
+    private BattleMove? _currentLearnMove;
 
     private WorldScene? _worldScene;
     private Game1? _game1;
@@ -46,6 +50,7 @@ public sealed class BattleScene : IGameScene
         _statusIcon = new StatusIcon(graphicsDevice);
         _expBar = new ExpBar(graphicsDevice);
         _levelUpOverlay = new LevelUpOverlay();
+        _moveLearnOverlay = new MoveLearnOverlay();
         _pixel = new Texture2D(graphicsDevice, 1, 1);
         _pixel.SetData(new[] { Color.White });
         _font = font;
@@ -76,6 +81,15 @@ public sealed class BattleScene : IGameScene
     {
         if (_state is null) return;
 
+        if (_expFormula != null && _state.Player.Level < 100)
+        {
+            int currentThreshold = _expFormula.ExpThreshold(_state.Player.Level, _state.Player.GrowthRate);
+            int nextThreshold    = _expFormula.ExpThreshold(_state.Player.Level + 1, _state.Player.GrowthRate);
+            int intraExp   = Math.Max(0, _state.Player.CurrentExp - currentThreshold);
+            int intraRange = Math.Max(1, nextThreshold - currentThreshold);
+            _expBar?.Update(gameTime, intraExp, intraRange);
+        }
+
         switch (_phase)
         {
             case BattlePhase.SelectMove:
@@ -102,11 +116,13 @@ public sealed class BattleScene : IGameScene
                         _phase = BattlePhase.ShowLevelUp;
                         _leveledUp = false;
                     }
+                    else if (_pendingMoveQueue?.Count > 0)
+                    {
+                        TriggerNextMoveLearn();
+                    }
                     else
                     {
-                        _phase = (_state.Player.CurrentHp <= 0 || _state.Opponent.CurrentHp <= 0)
-                            ? BattlePhase.BattleEnd
-                            : BattlePhase.SelectMove;
+                        _phase = NextPhaseAfterBattle();
                     }
                 }
                 else
@@ -118,9 +134,24 @@ public sealed class BattleScene : IGameScene
                 _levelUpOverlay!.Update(ksLvl, _prevKs);
                 _prevKs = ksLvl;
                 if (!_levelUpOverlay.IsVisible)
-                    _phase = (_state.Player.CurrentHp <= 0 || _state.Opponent.CurrentHp <= 0)
-                        ? BattlePhase.BattleEnd
-                        : BattlePhase.SelectMove;
+                {
+                    if (_pendingMoveQueue?.Count > 0)
+                        TriggerNextMoveLearn();
+                    else
+                        _phase = NextPhaseAfterBattle();
+                }
+                break;
+
+            case BattlePhase.ShowMoveLearn:
+                var ksMl = Keyboard.GetState();
+                _moveLearnOverlay!.Update(ksMl, _prevKs);
+                _prevKs = ksMl;
+                if (_moveLearnOverlay.DecisionMade)
+                {
+                    ApplyMoveLearnDecision();
+                    _phase = BattlePhase.ShowLog;
+                    _prevKs = Keyboard.GetState();
+                }
                 break;
 
             case BattlePhase.BattleEnd:
@@ -163,11 +194,7 @@ public sealed class BattleScene : IGameScene
         _statusIcon?.Draw(sb, _state.Player.Status,   new Vector2(256, 146), _font);
 
         if (_expFormula != null && _state.Player.Level < 100)
-        {
-            int nextThreshold = _expFormula.ExpThreshold(_state.Player.Level + 1, _state.Player.GrowthRate);
-            _expBar!.Draw(sb, _state.Player.CurrentExp, nextThreshold, _state.Player.Level,
-                new Vector2(256f, 162f), 140, 4, _font);
-        }
+            _expBar!.Draw(sb, _state.Player.Level, new Vector2(256f, 162f), 140, 4, _font);
 
         // UI panel at bottom (y 178–270)
         DrawRect(sb, new Rectangle(0, 178, 480, 1),  new Color(60, 60, 60));
@@ -193,6 +220,12 @@ public sealed class BattleScene : IGameScene
             _levelUpOverlay!.Draw(sb, _pixel!, _font);
         }
 
+        if (_phase == BattlePhase.ShowMoveLearn)
+        {
+            DrawRect(sb, new Rectangle(0, 178, 480, 1), new Color(60, 60, 60));
+            _moveLearnOverlay!.Draw(sb, _pixel!, _font);
+        }
+
         if (_phase == BattlePhase.BattleEnd)
         {
             DrawRect(sb, new Rectangle(0, 178, 480, 92), Color.Black);
@@ -210,9 +243,49 @@ public sealed class BattleScene : IGameScene
         _leveledUp = _state.Log.Any(m => m.Contains("grew to level"));
         if (_leveledUp)
             _levelUpOverlay!.Trigger(_playerBeforeTurn, _state.Player);
+        _pendingMoveQueue = _state.PendingLearnedMoves is { Count: > 0 } p
+            ? new Queue<BattleMove>(p)
+            : null;
         _phase = BattlePhase.ShowLog;
         _prevKs = Keyboard.GetState();
     }
+
+    private void TriggerNextMoveLearn()
+    {
+        _currentLearnMove = _pendingMoveQueue!.Dequeue();
+        _moveLearnOverlay!.Trigger(_state!.Player.Nickname, _currentLearnMove, _state.Player.Moves);
+        _phase = BattlePhase.ShowMoveLearn;
+    }
+
+    private void ApplyMoveLearnDecision()
+    {
+        int idx = _moveLearnOverlay!.ForgottenMoveIndex;
+        var log = _lastLog.ToList();
+        if (idx >= 0 && _currentLearnMove != null)
+        {
+            var oldMoves = _state!.Player.Moves;
+            string forgotten = oldMoves[idx].Identifier;
+            string learned   = _currentLearnMove.Identifier;
+            var newMoves = oldMoves.ToList();
+            newMoves[idx] = _currentLearnMove;
+            _state = _state with { Player = _state.Player with { Moves = newMoves } };
+            _moveMenu = new MoveMenu(_state.Player.Moves, _graphicsDevice!);
+            log.Add($"{_state.Player.Nickname} forgot {forgotten} and learned {learned}!");
+            Serilog.Log.Information("[BATTLE] {Pokemon} forgot {Forgotten} and learned {Learned}",
+                _state.Player.Nickname, forgotten, learned);
+        }
+        else if (_currentLearnMove != null)
+        {
+            log.Add($"{_state!.Player.Nickname} did not learn {_currentLearnMove.Identifier}.");
+        }
+        _lastLog = log;
+        _currentLearnMove = null;
+    }
+
+    private BattlePhase NextPhaseAfterBattle() =>
+        (_state!.Player.CurrentHp <= 0 || _state.Opponent.CurrentHp <= 0)
+            ? BattlePhase.BattleEnd
+            : BattlePhase.SelectMove;
 
     private void DrawRect(SpriteBatch sb, Rectangle rect, Color color) =>
         sb.Draw(_pixel!, rect, color);
