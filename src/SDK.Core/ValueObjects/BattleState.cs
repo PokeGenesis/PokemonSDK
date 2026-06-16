@@ -8,4 +8,5 @@ public sealed record BattleState(
     int Turn,
     WeatherType Weather,
     BattleConfig Config,
-    IReadOnlyList<string> Log);
+    IReadOnlyList<string> Log,
+    IReadOnlyList<BattleMove>? PendingLearnedMoves = null);

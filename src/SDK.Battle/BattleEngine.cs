@@ -121,7 +121,7 @@ public sealed class BattleEngine : IBattleEngine
         if (levelCap.HasValue && player.Level >= levelCap.Value)
         {
             var capLog = state.Log.ToList();
-            capLog.Add($"EXP bloquée ! (Cap niveau {levelCap.Value} — prochain badge requis)");
+            capLog.Add($"EXP blocked! (Level cap {levelCap.Value} - next badge required)");
             return state with { Log = capLog };
         }
 
@@ -135,6 +135,7 @@ public sealed class BattleEngine : IBattleEngine
         int atk = player.Attack, def = player.Defense;
         int spa = player.SpecialAttack, spd = player.SpecialDefense, spe = player.Speed;
         int maxHp = player.MaxHp;
+        var pendingMoves = new List<BattleMove>();
 
         while (newLevel < 100 && newExp >= formula.ExpThreshold(newLevel + 1, player.GrowthRate))
         {
@@ -154,7 +155,18 @@ public sealed class BattleEngine : IBattleEngine
             if (player.FullLearnset != null)
                 foreach (var (learnLevel, move) in player.FullLearnset)
                     if (learnLevel == newLevel)
-                        log.Add($"{player.Nickname} learned {move.Identifier}!");
+                    {
+                        if (player.Moves.Count < 4)
+                        {
+                            player = player with { Moves = player.Moves.Append(move).ToList() };
+                            log.Add($"{player.Nickname} learned {move.Identifier}!");
+                        }
+                        else
+                        {
+                            pendingMoves.Add(move);
+                            log.Add($"{player.Nickname} wants to learn {move.Identifier}!");
+                        }
+                    }
 
             var updatedPlayer = player with
             {
@@ -168,7 +180,12 @@ public sealed class BattleEngine : IBattleEngine
         }
 
         player = player with { CurrentExp = newExp };
-        return state with { Player = player, Log = log };
+        return state with
+        {
+            Player = player,
+            Log = log,
+            PendingLearnedMoves = pendingMoves.Count > 0 ? pendingMoves : Array.Empty<BattleMove>(),
+        };
     }
 
     private BattleState ApplyMove(BattleState state, bool isPlayer, BattleMove move)

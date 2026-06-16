@@ -60,4 +60,40 @@ public sealed class ExpFormulaTests
                     formula.ExpThreshold(level - 1, GrowthRate.MediumFast),
                     $"threshold at level {level} should be > threshold at level {level - 1}");
     }
+
+    // Erratic — valeurs connues (Bulbapedia)
+    [Theory]
+    [InlineData(10,  1800)]    // n<=49: 10^3*(100-10)/50 = 1000*90/50
+    [InlineData(50,  125000)]  // n<=67: 50^3*(150-50)/100 = 125000*100/100
+    [InlineData(100, 600000)]  // n>=98: 100^3*(160-100)/100 = 1000000*60/100
+    public void Gen1_Erratic_MatchesKnownValues(int level, int expected)
+    {
+        var formula = new Gen1ExpFormula();
+        formula.ExpThreshold(level, GrowthRate.Erratic).Should().Be(expected);
+    }
+
+    // Fluctuating — valeurs connues (Bulbapedia)
+    [Theory]
+    [InlineData(10, 540)]     // n<=14: 10^3*((11/3)+24)/50 = 1000*27/50
+    [InlineData(20, 5440)]    // n<=35: 20^3*(20+14)/50 = 8000*34/50
+    [InlineData(50, 142500)]  // n>=36: 50^3*(25+32)/50 = 125000*57/50
+    public void Gen1_Fluctuating_MatchesKnownValues(int level, int expected)
+    {
+        var formula = new Gen1ExpFormula();
+        formula.ExpThreshold(level, GrowthRate.Fluctuating).Should().Be(expected);
+    }
+
+    // Erratic et Fluctuating strictement croissants
+    [Theory]
+    [InlineData(GrowthRate.Erratic)]
+    [InlineData(GrowthRate.Fluctuating)]
+    public void Gen1_ExpThreshold_IsStrictlyIncreasing_ForNewRates(GrowthRate rate)
+    {
+        var formula = new Gen1ExpFormula();
+        for (int level = 2; level <= 99; level++)
+            formula.ExpThreshold(level, rate)
+                .Should().BeGreaterThan(
+                    formula.ExpThreshold(level - 1, rate),
+                    $"{rate} threshold at level {level} should be > level {level - 1}");
+    }
 }
