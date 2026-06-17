@@ -96,4 +96,36 @@ public sealed class ExpFormulaTests
                     formula.ExpThreshold(level - 1, rate),
                     $"{rate} threshold at level {level} should be > level {level - 1}");
     }
+
+    // MediumSlow — formule cubique non-standard (1.2n³ - 15n² + 100n - 140)
+    [Theory]
+    [InlineData(10, GrowthRate.MediumSlow, 560)]   // (int)(1200 - 1500 + 1000 - 140)
+    [InlineData(20, GrowthRate.MediumSlow, 5460)]  // (int)(9600 - 6000 + 2000 - 140)
+    public void Gen1_ExpThreshold_MediumSlow_MatchesFormula(int level, GrowthRate rate, int expected)
+    {
+        var formula = new Gen1ExpFormula();
+        formula.ExpThreshold(level, rate).Should().Be(expected);
+    }
+
+    [Theory]
+    [InlineData(10, GrowthRate.MediumSlow, 560)]
+    [InlineData(20, GrowthRate.MediumSlow, 5460)]
+    public void Gen5_ExpThreshold_MediumSlow_MatchesFormula(int level, GrowthRate rate, int expected)
+    {
+        var formula = new Gen5ExpFormula();
+        formula.ExpThreshold(level, rate).Should().Be(expected);
+    }
+
+    // Gen5 CalcExpGain — vérifie la formule exacte (puissance 1/2.5, non-linéaire)
+    [Theory]
+    [InlineData(64, 25, false)]
+    [InlineData(64, 50, true)]
+    [InlineData(100, 50, false)]
+    public void Gen5_CalcExpGain_MatchesExactFormula(int baseYield, int opponentLevel, bool trainerBattle)
+    {
+        double multiplier = trainerBattle ? 1.5 : 1.0;
+        int expected = (int)(Math.Pow(baseYield * opponentLevel, 1.0 / 2.5) * multiplier / 5.0 + 2);
+        var formula = new Gen5ExpFormula();
+        formula.CalcExpGain(baseYield, opponentLevel, trainerBattle).Should().Be(expected);
+    }
 }

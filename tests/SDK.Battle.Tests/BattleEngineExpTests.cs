@@ -222,4 +222,100 @@ public sealed class BattleEngineExpTests
         result.Player.Level.Should().Be(10);
         result.Player.Attack.Should().Be(48, "Attack scales from 45 at level 9 to 48 at level 10 (scale=15/14)");
     }
+
+    // Test: PendingEvolution défini quand newLevel == EvolvesAtLevel
+    [Fact]
+    public void AwardExp_SetsPendingEvolution_WhenLevelMatchesEvolvesAtLevel()
+    {
+        var (formula, playerStrat, opponentStrat, chart) = MakeMocks(damage: 9999);
+        var expFormula = new Gen1ExpFormula();
+        var engine = new BattleEngine(formula.Object, playerStrat.Object, opponentStrat.Object, chart.Object,
+            expFormula: expFormula);
+
+        // Level 5 → 6 avec Gen1: CalcExpGain(64, 25, false) = 228 >= ExpThreshold(6, MediumFast) = 216
+        var player = new BattlePokemon(1, "Bulbasaur", 5, 45, 45, 49, 49, 45, 65, 100,
+            1, null, new[] { BattleTestHelpers.MakeMove(1, MoveCategory.Physical) },
+            CurrentExp: 0, BaseExpYield: 64, GrowthRate: GrowthRate.MediumFast,
+            EvolvesAtLevel: 6, EvolvesToSpeciesId: 2, EvolvesToName: "Ivysaur");
+        var opponent = new BattlePokemon(2, "Rattata", 25, 1, 100, 30, 30, 30, 30, 64,
+            1, null, new[] { BattleTestHelpers.MakeMove(1, MoveCategory.Physical) },
+            BaseExpYield: 64);
+
+        var state = MakeState(player, opponent);
+        var result = engine.RunTurn(state,
+            BattleTestHelpers.MakeMove(1, MoveCategory.Physical),
+            BattleTestHelpers.MakeMove(1, MoveCategory.Physical));
+
+        result.Player.Level.Should().Be(6, "player should level up from 5 to 6");
+        result.PendingEvolution.Should().NotBeNull("evolution should be pending at level 6");
+        result.PendingEvolution!.OldName.Should().Be("Bulbasaur");
+        result.PendingEvolution.NewName.Should().Be("Ivysaur");
+        result.PendingEvolution.NewSpeciesId.Should().Be(2);
+    }
+
+    // Test: PendingLearnedMoves rempli quand slots pleins (>=4 moves)
+    [Fact]
+    public void AwardExp_SetsPendingLearnedMoves_WhenMoveSlotsAreFull()
+    {
+        var (formula, playerStrat, opponentStrat, chart) = MakeMocks(damage: 9999);
+        var expFormula = new Gen1ExpFormula();
+        var engine = new BattleEngine(formula.Object, playerStrat.Object, opponentStrat.Object, chart.Object,
+            expFormula: expFormula);
+
+        var tackle    = BattleTestHelpers.MakeMove(1, MoveCategory.Physical);
+        var scratch   = BattleTestHelpers.MakeMove(2, MoveCategory.Physical);
+        var growl     = BattleTestHelpers.MakeMove(3, MoveCategory.Status);
+        var vine      = BattleTestHelpers.MakeMove(4, MoveCategory.Physical);
+        var newLearn  = BattleTestHelpers.MakeMove(5, MoveCategory.Special);
+
+        // 4 moves déjà en slot → le move du learnset ira en PendingLearnedMoves
+        var learnset = new List<(int Level, BattleMove Move)> { (10, newLearn) };
+        var player = new BattlePokemon(1, "Pika", 9, 100, 100, 45, 45, 45, 45, 50,
+            1, null, new[] { tackle, scratch, growl, vine },
+            CurrentExp: 900, BaseExpYield: 64, GrowthRate: GrowthRate.MediumFast,
+            FullLearnset: learnset);
+        var opponent = new BattlePokemon(2, "Rattata", 20, 1, 100, 30, 30, 30, 30, 30,
+            1, null, new[] { BattleTestHelpers.MakeMove(1, MoveCategory.Physical) },
+            BaseExpYield: 70);
+
+        var state = MakeState(player, opponent);
+        var result = engine.RunTurn(state,
+            BattleTestHelpers.MakeMove(1, MoveCategory.Physical),
+            BattleTestHelpers.MakeMove(1, MoveCategory.Physical));
+
+        result.Player.Level.Should().Be(10, "player should reach level 10");
+        result.PendingLearnedMoves.Should().HaveCount(1, "one move should be pending (full slots)");
+        result.PendingLearnedMoves[0].Identifier.Should().Be(newLearn.Identifier);
+    }
+
+    // Test: Multi-level-up en un seul tour (boucle while)
+    [Fact]
+    public void AwardExp_MultiLevelUp_InOneTurn()
+    {
+        var (formula, playerStrat, opponentStrat, chart) = MakeMocks(damage: 9999);
+        var expFormula = new Gen1ExpFormula();
+        var engine = new BattleEngine(formula.Object, playerStrat.Object, opponentStrat.Object, chart.Object,
+            expFormula: expFormula);
+
+        // Gen1: CalcExpGain(84, 50, false) = (int)(84*50/7) = 600
+        // MediumFast: seuil 6=216, 7=343, 8=512, 9=729
+        // Depuis niveau 5 avec 0 EXP + 600 → passe niveaux 6, 7, 8 (600 < 729)
+        var player = new BattlePokemon(1, "Pika", 5, 50, 50, 30, 30, 30, 30, 100,
+            1, null, new[] { BattleTestHelpers.MakeMove(1, MoveCategory.Physical) },
+            CurrentExp: 0, GrowthRate: GrowthRate.MediumFast);
+        var opponent = new BattlePokemon(2, "Rattata", 50, 1, 100, 30, 30, 30, 30, 84,
+            1, null, new[] { BattleTestHelpers.MakeMove(1, MoveCategory.Physical) },
+            BaseExpYield: 84);
+
+        var state = MakeState(player, opponent);
+        var result = engine.RunTurn(state,
+            BattleTestHelpers.MakeMove(1, MoveCategory.Physical),
+            BattleTestHelpers.MakeMove(1, MoveCategory.Physical));
+
+        result.Player.Level.Should().Be(8, "600 EXP from level 5 should advance through levels 6, 7, 8");
+        result.Log.Should().Contain(m => m.Contains("level 6"), "log should mention level 6");
+        result.Log.Should().Contain(m => m.Contains("level 7"), "log should mention level 7");
+        result.Log.Should().Contain(m => m.Contains("level 8"), "log should mention level 8");
+        result.Log.Should().NotContain(m => m.Contains("level 9"), "600 EXP < 729 (seuil 9)");
+    }
 }
