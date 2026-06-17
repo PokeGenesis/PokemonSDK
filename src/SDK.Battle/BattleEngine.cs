@@ -137,6 +137,7 @@ public sealed class BattleEngine : IBattleEngine
         int maxHp = player.MaxHp;
         int currentHp = player.CurrentHp;
         var pendingMoves = new List<BattleMove>();
+        EvolutionData? pendingEvolution = null;
 
         while (newLevel < 100 && newExp >= formula.ExpThreshold(newLevel + 1, player.GrowthRate))
         {
@@ -181,6 +182,16 @@ public sealed class BattleEngine : IBattleEngine
             };
             _plugins.NotifyLevelUp(updatedPlayer, oldLevel, newLevel);
             player = updatedPlayer;
+
+            if (player.EvolvesAtLevel.HasValue
+                && newLevel == player.EvolvesAtLevel.Value
+                && player.EvolvesToSpeciesId.HasValue)
+            {
+                pendingEvolution = new EvolutionData(
+                    player.Nickname,
+                    player.EvolvesToName ?? player.Nickname,
+                    player.EvolvesToSpeciesId.Value);
+            }
         }
 
         player = player with { CurrentExp = newExp };
@@ -189,6 +200,7 @@ public sealed class BattleEngine : IBattleEngine
             Player = player,
             Log = log,
             PendingLearnedMoves = pendingMoves.Count > 0 ? pendingMoves : Array.Empty<BattleMove>(),
+            PendingEvolution = pendingEvolution,
         };
     }
 

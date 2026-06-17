@@ -20,4 +20,7 @@ public sealed record BattlePokemon(
     int CurrentExp = 0,
     int BaseExpYield = 64,
     GrowthRate GrowthRate = GrowthRate.MediumFast,
-    IReadOnlyList<(int Level, BattleMove Move)>? FullLearnset = null);
+    IReadOnlyList<(int Level, BattleMove Move)>? FullLearnset = null,
+    int? EvolvesAtLevel = null,
+    int? EvolvesToSpeciesId = null,
+    string? EvolvesToName = null);

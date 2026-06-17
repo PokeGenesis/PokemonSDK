@@ -6,15 +6,15 @@ See: PROJECT.md | REQUIREMENTS.md | ROADMAP.md | .claude/ARCHITECTURE.md
 
 **Core value:** Brancher le SDK → moteur de combat + DB multilingue + quêtes, sans réimplémenter les règles de base.
 
-**Current focus:** Phase 13 EXP + Level-up + Évolution — Plan 13-02b UNIFY complet. Prêt pour 13-02c (HpBar smooth animation P12-G1, FIGHT/RUN menu P12-G5) ou 13-03 (Evolution UI).
+**Current focus:** Phase 14 Items + Bag + Shop (BTLUI-03). Phase 13 clôturée 100%.
 
 ## Current Position
 
 Milestone: v1.0 Moteur Complet
-Phase: 13 (EXP + Level-up + Évolution) — EN COURS
-Plan: 13-02b complet
-Status: UNIFY complet — prêt pour prochain PLAN
-Last activity: 2026-06-17 — Plan 13-02b UNIFY (PP engine + PP display + Nickname HpBar + Weather + ghost-input fix).
+Phase: 14 (Items + Bag + Shop) — Prêt
+Plan: Non démarré
+Status: Prêt pour /paul:plan 14
+Last activity: 2026-06-17 — Phase 13 complete (BTLUI-02 EXP+LevelUp+Évolution).
 
 Progress:
 
@@ -33,7 +33,8 @@ Progress:
 - Phase 10: [██████████] 100% ✅ (10-01 ✅ 10-02 ✅ 10-03 ✅)
 - Phase 11: [██████████] 100% ✅ (11-01 ✅ — 11-02 ✅ — 11-03 ✅ — 11-04 ✅)
 - Phase 12: [██████████] 100% ✅ (12-01 ✅ 12-02 ✅ 12-03 ✅ 12-04 ✅ 12-05 ✅)
-- Phase 13: [████████░░]  75% (13-01 ✅ | 13-02 ✅ | 13-02b ✅ | 13-03 …)
+- Phase 13: [██████████] 100% ✅ (13-01 ✅ | 13-02 ✅ | 13-02b ✅ | 13-02c ✅ | 13-03 ✅)
+- Phase 14: [░░░░░░░░░░]   0% (prêt)
 
 ## Loop Position
 
@@ -41,7 +42,7 @@ Current loop state:
 
 ```text
 PLAN ──▶ APPLY ──▶ UNIFY
-  ✓        ✓        ✓     [13-02b complet — prêt pour prochain PLAN]
+  ✓        ✓        ✓     [Loop complete — Phase 13 clôturée, prêt pour Phase 14]
 ```
 
 Phase 6 plans : 06-01 ✅ | 06-04 ✅ | 06-02 ✅ | 06-03 ✅ | 06-05 ✅
@@ -227,10 +228,10 @@ Décisions émergentes (Phase 10) :
 ## Session Continuity
 
 Last session: 2026-06-17
-Stopped at: Plan 13-02b UNIFY complet — PP engine + PP display + Nickname HpBar + Weather + ghost-input fix. 293/293 tests.
-Next action: /paul:plan 13-02c (HpBar smooth P12-G1 + FIGHT/RUN menu P12-G5) OU /paul:plan 13-03 (Evolution UI)
+Stopped at: Phase 13 clôturée — BTLUI-02 EXP+LevelUp+Évolution 100%
+Next action: `/paul:plan 14` — Items + Bag + Shop (BTLUI-03)
 
-Resume file: `.paul/phases/13-exp-levelup-evolution/13-02b-SUMMARY.md`
+Resume file: `.paul/phases/13-exp-levelup-evolution/13-03-SUMMARY.md`
 
 ---
 

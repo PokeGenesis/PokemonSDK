@@ -9,4 +9,5 @@ public sealed record BattleState(
     WeatherType Weather,
     BattleConfig Config,
     IReadOnlyList<string> Log,
-    IReadOnlyList<BattleMove>? PendingLearnedMoves = null);
+    IReadOnlyList<BattleMove>? PendingLearnedMoves = null,
+    EvolutionData? PendingEvolution = null);

@@ -14,8 +14,8 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 |-----------|-------|
 | Type | Application |
 | Version | 0.3.0 |
-| Status | Phase 11 complete — v0.3 shipped 2026-06-13 |
-| Last Updated | 2026-06-13 — Phase 11 Documentation shipped |
+| Status | Phase 13 complete — BTLUI-02 EXP+LevelUp+Évolution shipped 2026-06-17 |
+| Last Updated | 2026-06-17 — Phase 13 Evolution UI shipped |
 
 ## Requirements
 
@@ -79,8 +79,14 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 ### Shipped in Phase 11 ✅
 - DX-06 — Docusaurus 3 documentation site EN+FR: Tutorial 30min (4 pages), Guides (8 pages, 7 subsystems), Packages/CLI/Advanced API reference. GitHub Pages CI (pages.yml). — *2026-06-13*
 
+### Shipped in Phase 12 ✅
+- BTLUI-01 — BattleScene UI: HP bars (lerp), sprites Pokémon, move menu FIGHT/RUN, flee auto-exit — *2026-06-14*
+
+### Shipped in Phase 13 ✅
+- BTLUI-02 — EXP gain + level-up overlay + move-learn overlay + evolution UI (flash/cancel/confirm) — *2026-06-17*
+
 ### Active (v1.0)
-- Phase 12 : BattleScene UI (HP bars, sprites, move menu — BTLUI-01)
+- Phase 14 : Items + Bag + Shop (BTLUI-03)
 
 ### Out of Scope
 - Connexion online / trades réseau
@@ -140,5 +146,5 @@ Un développeur peut brancher ce SDK et obtenir immédiatement un moteur de comb
 | JSON | System.Text.Json | Intégré .NET 10 |
 
 ---
-*Created: 2026-06-01 | Last updated: 2026-06-12 after Phase 6 — ADV-03 TTS + ADV-04 Fakemon assembly shipped*
+*Created: 2026-06-01 | Last updated: 2026-06-17 after Phase 13 — BTLUI-02 EXP+LevelUp+Évolution shipped*
 *Full context: PROJECT.md | REQUIREMENTS.md | .claude/ARCHITECTURE.md | CLAUDE.md*

@@ -59,6 +59,14 @@ public sealed class WorldScene : IGameScene
         // F5 — Multi level-up (3 niveaux, 2 moves auto-appris)
         if (ks.IsKeyDown(Keys.F5) && !_prevKs.IsKeyDown(Keys.F5))
             StartBattle(ScenarioMultiLevelUp());
+
+        // F6 — HP lerp test : adversaire HP plein, lerp animation visible
+        if (ks.IsKeyDown(Keys.F6) && !_prevKs.IsKeyDown(Keys.F6))
+            StartBattle(ScenarioHpLerp());
+
+        // F7 — Evolution test : BULBASAUR Lv5 → Lv6 avec évolution vers IVYSAUR (annulable par X)
+        if (ks.IsKeyDown(Keys.F7) && !_prevKs.IsKeyDown(Keys.F7))
+            StartBattle(ScenarioEvolution());
 #endif
         _wipe?.Update();
         _prevKs = ks;
@@ -246,6 +254,67 @@ public sealed class WorldScene : IGameScene
             Type1Id: 11, Type2Id: 3,
             Moves: new[] { tackle },
             BaseExpYield: 200);
+
+        return new BattleState(player, opponent, Turn: 0, WeatherType.None,
+            new BattleConfig(), Log: Array.Empty<string>());
+    }
+
+    // F7 : Evolution — BULBASAUR Lv5, 210 EXP (seuil Lv6=216).
+    // CHARMANDER yield=64, Lv5 → gains=45 → total=255 ≥ 216 → Lv6 déclenché.
+    // EvolvesAtLevel=6 → PendingEvolution → EvolutionOverlay flash 2s.
+    // X pendant flash annule (ROADMAP SC5). Space en phase Done confirme.
+    private static BattleState ScenarioEvolution()
+    {
+        var tackle = new BattleMove(1, "tackle", 1, MoveCategory.Physical, 40, 100, 35, 35);
+
+        var player = new BattlePokemon(
+            SpeciesId: 1, Nickname: "BULBASAUR", Level: 5,
+            CurrentHp: 45, MaxHp: 45,
+            Attack: 49, Defense: 49, SpecialAttack: 65, SpecialDefense: 65, Speed: 45,
+            Type1Id: 12, Type2Id: 4,
+            Moves: new[] { tackle },
+            CurrentExp: 210,
+            GrowthRate: GrowthRate.MediumFast,
+            EvolvesAtLevel: 6,
+            EvolvesToSpeciesId: 2,
+            EvolvesToName: "IVYSAUR");
+
+        var opponent = new BattlePokemon(
+            SpeciesId: 4, Nickname: "CHARMANDER", Level: 5,
+            CurrentHp: 1, MaxHp: 39,
+            Attack: 52, Defense: 43, SpecialAttack: 60, SpecialDefense: 50, Speed: 65,
+            Type1Id: 10, Type2Id: null,
+            Moves: new[] { tackle },
+            BaseExpYield: 64);
+
+        return new BattleState(player, opponent, Turn: 0, WeatherType.None,
+            new BattleConfig(), Log: Array.Empty<string>());
+    }
+
+    // F6 : HP lerp visible — adversaire HP plein (50/50), Tackle fait ~12-18 dégâts.
+    // Barre HP adverse glisse visuellement pendant ~0.4s après chaque attaque.
+    private static BattleState ScenarioHpLerp()
+    {
+        var tackle = new BattleMove(1, "tackle", 1, MoveCategory.Physical, 40, 100, 35, 35);
+        var growl  = new BattleMove(2, "growl",  1, MoveCategory.Status,   null, 100, 40, 40);
+
+        var player = new BattlePokemon(
+            SpeciesId: 1, Nickname: "BULBASAUR", Level: 15,
+            CurrentHp: 60, MaxHp: 60,
+            Attack: 60, Defense: 55, SpecialAttack: 65, SpecialDefense: 65, Speed: 45,
+            Type1Id: 12, Type2Id: 4,
+            Moves: new[] { tackle, growl },
+            CurrentExp: 0,
+            GrowthRate: GrowthRate.MediumFast,
+            FullLearnset: Array.Empty<(int, BattleMove)>());
+
+        var opponent = new BattlePokemon(
+            SpeciesId: 16, Nickname: "PIDGEY", Level: 10,
+            CurrentHp: 50, MaxHp: 50,
+            Attack: 45, Defense: 40, SpecialAttack: 35, SpecialDefense: 35, Speed: 56,
+            Type1Id: 1, Type2Id: 3,
+            Moves: new[] { tackle },
+            BaseExpYield: 55);
 
         return new BattleState(player, opponent, Turn: 0, WeatherType.None,
             new BattleConfig(), Log: Array.Empty<string>());

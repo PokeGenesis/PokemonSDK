@@ -11,7 +11,7 @@ using SDK.MonoGame.UI;
 
 public sealed class BattleScene : IGameScene
 {
-    private enum BattlePhase { Init, SelectMove, ShowLog, ShowLevelUp, ShowMoveLearn, BattleEnd }
+    private enum BattlePhase { Init, SelectAction, SelectMove, ShowLog, ShowLevelUp, ShowMoveLearn, ShowEvolution, BattleEnd }
 
     private readonly IBattleEngine _engine;
     private readonly IExpFormula? _expFormula;
@@ -22,6 +22,7 @@ public sealed class BattleScene : IGameScene
     private ExpBar? _expBar;
     private LevelUpOverlay? _levelUpOverlay;
     private MoveLearnOverlay? _moveLearnOverlay;
+    private readonly EvolutionOverlay _evolutionOverlay = new();
     private Texture2D? _pixel;
     private SpriteFont? _font;
 
@@ -38,6 +39,12 @@ public sealed class BattleScene : IGameScene
 
     private WorldScene? _worldScene;
     private Game1? _game1;
+
+    private float _playerDisplayHp;
+    private float _opponentDisplayHp;
+    private int   _actionIndex  = 0;
+    private bool  _playerRanAway = false;
+    private float _fleeTimer = 0f;
 
     public BattleScene(IBattleEngine engine, IExpFormula? expFormula = null)
     {
@@ -69,9 +76,14 @@ public sealed class BattleScene : IGameScene
     public void LoadBattle(BattleState initialState)
     {
         _state = initialState;
-        _phase = BattlePhase.SelectMove;
+        _phase = BattlePhase.SelectAction;
         _selectedMove = null;
         _prevKs = default;
+        _actionIndex = 0;
+        _playerRanAway = false;
+        _fleeTimer = 0f;
+        _playerDisplayHp  = initialState.Player.CurrentHp;
+        _opponentDisplayHp = initialState.Opponent.CurrentHp;
         if (_graphicsDevice != null)
             _moveMenu = new MoveMenu(initialState.Player.Moves, _graphicsDevice);
     }
@@ -91,8 +103,41 @@ public sealed class BattleScene : IGameScene
             _expBar?.Update(gameTime, intraExp, intraRange);
         }
 
+        float lerpSpeed = 8f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+        _playerDisplayHp   = Math.Clamp(MathHelper.Lerp(_playerDisplayHp,   _state.Player.CurrentHp,   lerpSpeed), 0f, _state.Player.MaxHp);
+        _opponentDisplayHp = Math.Clamp(MathHelper.Lerp(_opponentDisplayHp, _state.Opponent.CurrentHp, lerpSpeed), 0f, _state.Opponent.MaxHp);
+        if (_state.Player.CurrentHp   == 0 && _playerDisplayHp   < 0.5f) _playerDisplayHp   = 0f;
+        if (_state.Opponent.CurrentHp == 0 && _opponentDisplayHp < 0.5f) _opponentDisplayHp = 0f;
+
         switch (_phase)
         {
+            case BattlePhase.SelectAction:
+            {
+                var ksAct = Keyboard.GetState();
+                if (ksAct.IsKeyDown(InputMap.NavUp)   && !_prevKs.IsKeyDown(InputMap.NavUp))
+                    _actionIndex = (_actionIndex - 1 + 2) % 2;
+                if (ksAct.IsKeyDown(InputMap.NavDown) && !_prevKs.IsKeyDown(InputMap.NavDown))
+                    _actionIndex = (_actionIndex + 1) % 2;
+                if (ksAct.IsKeyDown(InputMap.Confirm) && !_prevKs.IsKeyDown(InputMap.Confirm))
+                {
+                    if (_actionIndex == 0) // FIGHT
+                    {
+                        _moveMenu = new MoveMenu(_state!.Player.Moves, _graphicsDevice!, Keyboard.GetState());
+                        _phase = BattlePhase.SelectMove;
+                    }
+                    else // RUN
+                    {
+                        _lastLog = new List<string> { "Got away safely!" };
+                        _playerRanAway = true;
+                        _fleeTimer = 5f;
+                        _phase = BattlePhase.ShowLog;
+                        _prevKs = Keyboard.GetState();
+                    }
+                }
+                _prevKs = ksAct;
+                break;
+            }
+
             case BattlePhase.SelectMove:
                 _moveMenu?.Update(Keyboard.GetState());
                 if (_moveMenu?.SelectedMove != null)
@@ -108,6 +153,18 @@ public sealed class BattleScene : IGameScene
                 break;
 
             case BattlePhase.ShowLog:
+                if (_playerRanAway)
+                {
+                    _fleeTimer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    if (_fleeTimer <= 0f)
+                    {
+                        Serilog.Log.Information("[BATTLE] Fled — {Player} Lv{Level} vs {Opponent} Lv{OppLevel}",
+                            _state!.Player.Nickname, _state.Player.Level,
+                            _state.Opponent.Nickname, _state.Opponent.Level);
+                        _game1?.SwitchToScene(_worldScene!);
+                    }
+                    break;
+                }
                 var ksLog = Keyboard.GetState();
                 if (ksLog.IsKeyDown(InputMap.Confirm) && !_prevKs.IsKeyDown(InputMap.Confirm))
                 {
@@ -121,6 +178,8 @@ public sealed class BattleScene : IGameScene
                     {
                         TriggerNextMoveLearn();
                     }
+                    else if (_state!.PendingEvolution != null)
+                        TriggerEvolution();
                     else
                     {
                         _phase = NextPhaseAfterBattle();
@@ -138,6 +197,8 @@ public sealed class BattleScene : IGameScene
                 {
                     if (_pendingMoveQueue?.Count > 0)
                         TriggerNextMoveLearn();
+                    else if (_state!.PendingEvolution != null)
+                        TriggerEvolution();
                     else
                         _phase = NextPhaseAfterBattle();
                 }
@@ -154,6 +215,38 @@ public sealed class BattleScene : IGameScene
                     _prevKs = Keyboard.GetState();
                 }
                 break;
+
+            case BattlePhase.ShowEvolution:
+            {
+                var ksEvo = Keyboard.GetState();
+                _evolutionOverlay.Update(ksEvo, _prevKs, gameTime);
+                _prevKs = ksEvo;
+                if (_evolutionOverlay.IsComplete)
+                {
+                    var evo = _state!.PendingEvolution!;
+                    if (!_evolutionOverlay.WasCancelled)
+                    {
+                        _state = _state with
+                        {
+                            Player = _state.Player with
+                            {
+                                Nickname  = evo.NewName,
+                                SpeciesId = evo.NewSpeciesId
+                            },
+                            PendingEvolution = null
+                        };
+                        Serilog.Log.Information("[BATTLE] Evolution: {Old} → {New} (SpeciesId {Id})",
+                            evo.OldName, evo.NewName, evo.NewSpeciesId);
+                    }
+                    else
+                    {
+                        _state = _state with { PendingEvolution = null };
+                        Serilog.Log.Information("[BATTLE] Evolution cancelled: {Old} stays as-is", evo.OldName);
+                    }
+                    _phase = NextPhaseAfterBattle();
+                }
+                break;
+            }
 
             case BattlePhase.BattleEnd:
                 var ks = Keyboard.GetState();
@@ -183,13 +276,13 @@ public sealed class BattleScene : IGameScene
         DrawRect(sb, new Rectangle(48,  90, 88, 88), Color.DarkGray);  // player sprite
 
         // HP bars: opponent top-left, player bottom-right
-        _hpBar!.Draw(sb, _state.Opponent.CurrentHp, _state.Opponent.MaxHp,
+        _hpBar!.Draw(sb, (int)Math.Ceiling(_opponentDisplayHp), _state.Opponent.MaxHp,
             new Vector2(10, 12),  140, 8,
             _state.Opponent.Nickname[..Math.Min(_state.Opponent.Nickname.Length, 10)], _font);
         if (_font != null)
             sb.DrawString(_font, $"Lv.{_state.Opponent.Level}",
                 new Vector2(130f, 1f), Color.White, 0f, Vector2.Zero, 0.45f, SpriteEffects.None, 0f);
-        _hpBar.Draw(sb, _state.Player.CurrentHp, _state.Player.MaxHp,
+        _hpBar.Draw(sb, (int)Math.Ceiling(_playerDisplayHp), _state.Player.MaxHp,
             new Vector2(256, 130), 140, 8,
             _state.Player.Nickname[..Math.Min(_state.Player.Nickname.Length, 10)], _font);
 
@@ -221,6 +314,14 @@ public sealed class BattleScene : IGameScene
         if (_phase == BattlePhase.SelectMove)
             _moveMenu?.Draw(sb, new Vector2(5, 183), _font);
 
+        if (_phase == BattlePhase.SelectAction && _font != null)
+        {
+            string fightTxt = _actionIndex == 0 ? "> FIGHT" : "  FIGHT";
+            string runTxt   = _actionIndex == 1 ? "> RUN"   : "  RUN";
+            sb.DrawString(_font, fightTxt, new Vector2(8f,  187f), Color.White, 0f, Vector2.Zero, 0.7f, SpriteEffects.None, 0f);
+            sb.DrawString(_font, runTxt,   new Vector2(8f,  207f), Color.White, 0f, Vector2.Zero, 0.7f, SpriteEffects.None, 0f);
+        }
+
         if (_phase == BattlePhase.ShowLog && _font != null)
         {
             int lines = Math.Min(_lastLog.Count, 5);
@@ -244,10 +345,17 @@ public sealed class BattleScene : IGameScene
             _moveLearnOverlay!.Draw(sb, _pixel!, _font);
         }
 
+        if (_phase == BattlePhase.ShowEvolution)
+        {
+            DrawRect(sb, new Rectangle(0, 178, 480, 1), new Color(60, 60, 60));
+            _evolutionOverlay.Draw(sb, _pixel!, _font);
+        }
+
         if (_phase == BattlePhase.BattleEnd)
         {
             DrawRect(sb, new Rectangle(0, 178, 480, 92), Color.Black);
-            _battleEndOverlay.Draw(sb, _state.Player.CurrentHp > 0, _font);
+            if (!_playerRanAway)
+                _battleEndOverlay.Draw(sb, _state.Player.CurrentHp > 0, _font);
         }
     }
 
@@ -268,6 +376,14 @@ public sealed class BattleScene : IGameScene
         var ksNow = Keyboard.GetState();
         _moveMenu = new MoveMenu(_state.Player.Moves, _graphicsDevice!, ksNow);
         _prevKs = ksNow;
+    }
+
+    private void TriggerEvolution()
+    {
+        var evo = _state!.PendingEvolution!;
+        _evolutionOverlay.Trigger(evo.OldName, evo.NewName);
+        _phase = BattlePhase.ShowEvolution;
+        _prevKs = Keyboard.GetState();
     }
 
     private void TriggerNextMoveLearn()
@@ -302,10 +418,12 @@ public sealed class BattleScene : IGameScene
         _currentLearnMove = null;
     }
 
-    private BattlePhase NextPhaseAfterBattle() =>
-        (_state!.Player.CurrentHp <= 0 || _state.Opponent.CurrentHp <= 0)
-            ? BattlePhase.BattleEnd
-            : BattlePhase.SelectMove;
+    private BattlePhase NextPhaseAfterBattle()
+    {
+        if (_state!.Player.CurrentHp <= 0 || _state.Opponent.CurrentHp <= 0)
+            return BattlePhase.BattleEnd;
+        return BattlePhase.SelectAction;
+    }
 
     private void DrawRect(SpriteBatch sb, Rectangle rect, Color color) =>
         sb.Draw(_pixel!, rect, color);
