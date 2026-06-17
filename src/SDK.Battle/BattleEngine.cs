@@ -135,6 +135,7 @@ public sealed class BattleEngine : IBattleEngine
         int atk = player.Attack, def = player.Defense;
         int spa = player.SpecialAttack, spd = player.SpecialDefense, spe = player.Speed;
         int maxHp = player.MaxHp;
+        int currentHp = player.CurrentHp;
         var pendingMoves = new List<BattleMove>();
 
         while (newLevel < 100 && newExp >= formula.ExpThreshold(newLevel + 1, player.GrowthRate))
@@ -148,7 +149,9 @@ public sealed class BattleEngine : IBattleEngine
             spa   = (int)(spa   * scale);
             spd   = (int)(spd   * scale);
             spe   = (int)(spe   * scale);
+            int oldMaxHp = maxHp;
             maxHp = (int)(maxHp * scale);
+            currentHp = Math.Min(currentHp + (maxHp - oldMaxHp), maxHp);
 
             log.Add($"{player.Nickname} grew to level {newLevel}!");
 
@@ -174,6 +177,7 @@ public sealed class BattleEngine : IBattleEngine
                 Attack = atk, Defense = def,
                 SpecialAttack = spa, SpecialDefense = spd, Speed = spe,
                 MaxHp = maxHp,
+                CurrentHp = currentHp,
             };
             _plugins.NotifyLevelUp(updatedPlayer, oldLevel, newLevel);
             player = updatedPlayer;
@@ -194,6 +198,13 @@ public sealed class BattleEngine : IBattleEngine
         var defender = isPlayer ? state.Opponent : state.Player;
 
         state = AddLog(state, $"{attacker.Nickname} used {move.Identifier.ToUpperInvariant()}!");
+
+        var moveList = attacker.Moves.ToList();
+        int ppIdx = moveList.FindIndex(m => m.MoveId == move.MoveId);
+        if (ppIdx >= 0 && moveList[ppIdx].CurrentPP > 0)
+            moveList[ppIdx] = moveList[ppIdx] with { CurrentPP = moveList[ppIdx].CurrentPP - 1 };
+        attacker = attacker with { Moves = moveList };
+        state = isPlayer ? state with { Player = attacker } : state with { Opponent = attacker };
 
         if (Random.Shared.Next(0, 100) >= move.Accuracy)
             return AddLog(state, "The attack missed!");

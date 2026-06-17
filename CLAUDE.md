@@ -90,6 +90,7 @@ SDK.MonoGame  ← SDK.Core + MonoGame + SDK.Battle + SDK.Scripting (via Func fac
 | DUNGEON-01→02 | DungeonPlugin — BSP floors + IDungeonMode | 🔲 Phase 20 |
 | STREAM-01→02 | StreamerPlugin — Twitch/YouTube + HUD overlay | 🔲 Phase 21 |
 | NET-01 | SDK.Network — combat online + trade + GTS | 🔲 Phase 22 |
+| DOUBLE-01 | Double Battles 2v2 — DoubleBattleEngine parallèle (D-26) | 🔲 Phase 23 |
 
 → Référence complète : `REQUIREMENTS.md`
 
@@ -104,6 +105,7 @@ v0.3 → + Phases 6+10+11     🔲 CLI + docs + features avancées
 v1.0 → + Phases 12→17       🔲 Moteur jouable complet (vraie v1.0)
 v1.x → + Phases 18→21+      🔲 Plugin Era (v1.1 Audio → v1.4 Streamer → v1.5+)
 v2.0 → + Phase 22           🔲 Réseau en ligne
+v2.1 → + Phase 23           🔲 Double Battles 2v2
 ```
 
 | Phase | Description | Horizon | Statut |
@@ -130,6 +132,7 @@ v2.0 → + Phase 22           🔲 Réseau en ligne
 | 20 | DungeonPlugin (Mystery Dungeon) | v1.3 | 🔲 |
 | 21 | StreamerPlugin (Twitch/YouTube) | v1.4 🏁 | 🔲 |
 | 22 | SDK.Network (combat online + trade) | v2.0 🏁 | 🔲 |
+| 23 | Double Battles 2v2 | v2.1 🏁 | 🔲 |
 
 → Détails waves + critères de succès : `ROADMAP.md`
 
@@ -164,6 +167,7 @@ v2.0 → + Phase 22           🔲 Réseau en ligne
 | D-23 | **Sprite `icon` = 32×32** — 5e view D-16 (party, PC box, Pokédex). Regex : `(front\|back\|overworld\|portrait\|icon)` |
 | D-24 | **Cries = OGG Vorbis q8 mono 22050Hz** — `{dexid5}_{identifier}.ogg` dans `assets/sounds/cries/`. Shinies = même cry. |
 | D-25 | **SixLabors.ImageSharp dans SDK.Tools** — atlas PNG lossless (plan 07-02). Jamais System.Drawing.Common. |
+| D-26 | **DoubleBattleEngine = architecture parallèle** — `BattleState`/`IBattleEngine` restent 1v1 à jamais. Phase 23 ajoute `DoubleBattleState` + `IDoubleBattleEngine` en types distincts. Prep actuelle: `BattleMode` enum + `BattleConfig.Mode = BattleMode.Single` (additive, zéro breaking). |
 
 ---
 

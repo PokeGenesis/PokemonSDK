@@ -127,7 +127,7 @@ public sealed class LevelCapTests
             BattleTestHelpers.MakeMove(1, MoveCategory.Physical));
 
         result.Player.CurrentExp.Should().Be(0, "EXP bloquée : player Lv.13 >= cap 13 (0 badges)");
-        result.Log.Should().Contain(m => m.Contains("EXP bloquée"), "log doit mentionner le blocage");
+        result.Log.Should().Contain(m => m.Contains("EXP blocked"), "log must mention the cap block");
         result.Log.Should().Contain(m => m.Contains("13"), "log doit indiquer le cap");
     }
 

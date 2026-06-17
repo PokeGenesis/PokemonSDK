@@ -32,6 +32,10 @@ Phases: 0 of 4+ (Phase 18 v1.1 — Phase 19 v1.2 — Phase 20 v1.3 — Phase 21 
 Status: Not started
 Phases: 0 of 1 (Phase 22)
 
+**v2.1 Double Battles** (v2.1.0)
+Status: Not started
+Phases: 0 of 1 (Phase 23)
+
 ## Phases
 
 | Phase | Name          | Plans | Status      | Completed |
@@ -58,6 +62,7 @@ Phases: 0 of 1 (Phase 22)
 | 20    | DungeonPlugin           | TBD   | Not started | -         |
 | 21    | StreamerPlugin          | TBD   | Not started | -         |
 | 22    | SDK.Network             | TBD   | Not started | -         |
+| 23    | Double Battles 2v2      | TBD   | Not started | -         |
 
 ## Phase Details
 
@@ -201,3 +206,19 @@ Phases: 0 of 1 (Phase 22)
 - [x] 08-02: Licence/CVE cleanup — SixLabors.ImageSharp 4.0.0 + sixlabors.lic + FA v8 open-source ← *Done 2026-06-07*
 - [x] 08-03: publish-nuget.yml CI/CD — pack + push 7 packages sur NuGet.org (secrets NUGET_API_KEY + SIXLABORS_LICENSE_KEY) ← *Done 2026-06-07*
 - [x] 08-04: NuGetConsumerSmokeTest — 7 typeof() verts depuis feed local, D-19 validé ← *Done 2026-06-07*
+
+### Phase 23: Double Battles 2v2
+
+**Goal:** Combats 2v2 complets — DoubleBattleEngine parallele, ciblage par slot, moves de zone (spread ×0.75), DoubleBattleScene UI 4 HP bars.
+**Depends on:** Phase 22 (architecture reseau stabilisee) — architecture PARALLELE, pas de modification de BattleState/IBattleEngine (D-26)
+**Requirements:** DOUBLE-01
+
+**Prep deja fait (Phase 13, 2026-06-17):**
+- `BattleMode` enum dans SDK.Core/Enums (Single=0, Double=1)
+- `BattleConfig.Mode = BattleMode.Single` champ additive — tous les appels existants non impactes
+
+**Plans (TBD):**
+- [ ] 23-01: DoubleBattleState + IDoubleBattleEngine + MoveTarget enum
+- [ ] 23-02: DoubleBattleEngine (ciblage, spread ×0.75, ordre vitesse par slot)
+- [ ] 23-03: DoubleBattleScene UI (4 HP bars, cible selection)
+- [ ] 23-04: Tests + scenarios debug F6/F7

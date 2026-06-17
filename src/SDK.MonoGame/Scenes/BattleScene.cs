@@ -3,6 +3,7 @@ namespace SDK.MonoGame.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SDK.Core.Enums;
 using SDK.Core.Interfaces;
 using SDK.Core.ValueObjects;
 using SDK.MonoGame.Input;
@@ -183,18 +184,35 @@ public sealed class BattleScene : IGameScene
 
         // HP bars: opponent top-left, player bottom-right
         _hpBar!.Draw(sb, _state.Opponent.CurrentHp, _state.Opponent.MaxHp,
-            new Vector2(10, 12),  140, 8, "FOE", _font);
+            new Vector2(10, 12),  140, 8,
+            _state.Opponent.Nickname[..Math.Min(_state.Opponent.Nickname.Length, 10)], _font);
         if (_font != null)
             sb.DrawString(_font, $"Lv.{_state.Opponent.Level}",
                 new Vector2(130f, 1f), Color.White, 0f, Vector2.Zero, 0.45f, SpriteEffects.None, 0f);
         _hpBar.Draw(sb, _state.Player.CurrentHp, _state.Player.MaxHp,
-            new Vector2(256, 130), 140, 8, "PLR", _font);
+            new Vector2(256, 130), 140, 8,
+            _state.Player.Nickname[..Math.Min(_state.Player.Nickname.Length, 10)], _font);
 
         _statusIcon?.Draw(sb, _state.Opponent.Status, new Vector2(10,  28), _font);
         _statusIcon?.Draw(sb, _state.Player.Status,   new Vector2(256, 146), _font);
 
         if (_expFormula != null && _state.Player.Level < 100)
             _expBar!.Draw(sb, _state.Player.Level, new Vector2(256f, 162f), 140, 4, _font);
+
+        if (_state.Weather != WeatherType.None && _font != null)
+        {
+            string weatherLabel = _state.Weather switch
+            {
+                WeatherType.Sun  => "SUN",
+                WeatherType.Rain => "RAIN",
+                WeatherType.Sand => "SAND",
+                WeatherType.Hail => "HAIL",
+                _                => ""
+            };
+            if (weatherLabel.Length > 0)
+                sb.DrawString(_font, weatherLabel, new Vector2(220f, 2f), Color.Yellow,
+                    0f, Vector2.Zero, 0.5f, SpriteEffects.None, 0f);
+        }
 
         // UI panel at bottom (y 178–270)
         DrawRect(sb, new Rectangle(0, 178, 480, 1),  new Color(60, 60, 60));
@@ -247,7 +265,9 @@ public sealed class BattleScene : IGameScene
             ? new Queue<BattleMove>(p)
             : null;
         _phase = BattlePhase.ShowLog;
-        _prevKs = Keyboard.GetState();
+        var ksNow = Keyboard.GetState();
+        _moveMenu = new MoveMenu(_state.Player.Moves, _graphicsDevice!, ksNow);
+        _prevKs = ksNow;
     }
 
     private void TriggerNextMoveLearn()
@@ -269,7 +289,7 @@ public sealed class BattleScene : IGameScene
             var newMoves = oldMoves.ToList();
             newMoves[idx] = _currentLearnMove;
             _state = _state with { Player = _state.Player with { Moves = newMoves } };
-            _moveMenu = new MoveMenu(_state.Player.Moves, _graphicsDevice!);
+            _moveMenu = new MoveMenu(_state.Player.Moves, _graphicsDevice!, Keyboard.GetState());
             log.Add($"{_state.Player.Nickname} forgot {forgotten} and learned {learned}!");
             Serilog.Log.Information("[BATTLE] {Pokemon} forgot {Forgotten} and learned {Learned}",
                 _state.Player.Nickname, forgotten, learned);

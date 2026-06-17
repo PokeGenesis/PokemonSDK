@@ -1,12 +1,15 @@
 namespace SDK.Core.ValueObjects;
 
+using SDK.Core.Enums;
+
 public sealed record BattleConfig(
     bool ItemsEnabled = true,
     bool FleeEnabled = true,
     bool WeatherEnabled = false,
     bool CritEnabled = true,
     int PlayerBadges = 0,
-    int[]? LevelCapTable = null)
+    int[]? LevelCapTable = null,
+    BattleMode Mode = BattleMode.Single)
 {
     // Preset BW2 — 8 gyms (index=badges, valeur=cap, 100=pas de cap)
     // 0b→13 · 1b→18 · 2b→24 · 3b→30 · 4b→33 · 5b→39 · 6b→48 · 7b→51 · 8b→58 · post→libre
