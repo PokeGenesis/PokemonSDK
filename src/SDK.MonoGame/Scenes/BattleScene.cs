@@ -79,6 +79,9 @@ public sealed class BattleScene : IGameScene
         _phase = BattlePhase.SelectAction;
         _selectedMove = null;
         _prevKs = default;
+        _pendingMoveQueue = null;
+        _currentLearnMove = null;
+        _leveledUp = false;
         _actionIndex = 0;
         _playerRanAway = false;
         _fleeTimer = 0f;
@@ -168,7 +171,6 @@ public sealed class BattleScene : IGameScene
                 var ksLog = Keyboard.GetState();
                 if (ksLog.IsKeyDown(InputMap.Confirm) && !_prevKs.IsKeyDown(InputMap.Confirm))
                 {
-                    _prevKs = Keyboard.GetState();
                     if (_leveledUp)
                     {
                         _phase = BattlePhase.ShowLevelUp;
@@ -212,7 +214,6 @@ public sealed class BattleScene : IGameScene
                 {
                     ApplyMoveLearnDecision();
                     _phase = BattlePhase.ShowLog;
-                    _prevKs = Keyboard.GetState();
                 }
                 break;
 

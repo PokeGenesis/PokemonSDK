@@ -194,6 +194,8 @@ public sealed class BattleEngine : IBattleEngine
             }
         }
 
+        if (newLevel == 100)
+            newExp = Math.Min(newExp, formula.ExpThreshold(100, player.GrowthRate));
         player = player with { CurrentExp = newExp };
         return state with
         {
@@ -222,7 +224,7 @@ public sealed class BattleEngine : IBattleEngine
             return AddLog(state, "The attack missed!");
 
         if (move.Category == MoveCategory.Status || move.Power is null)
-            return AddLog(state, $"(stat effects: Phase 13)");
+            return state; // TODO (Phase 14+): implement status move effects
 
         var factor1 = _typeChart.GetFactor(move.TypeId, defender.Type1Id, _formula.Generation);
         var factor2 = defender.Type2Id.HasValue
