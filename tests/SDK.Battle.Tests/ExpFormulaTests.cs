@@ -124,7 +124,7 @@ public sealed class ExpFormulaTests
     public void Gen5_CalcExpGain_MatchesExactFormula(int baseYield, int opponentLevel, bool trainerBattle)
     {
         double multiplier = trainerBattle ? 1.5 : 1.0;
-        int expected = (int)(Math.Pow(baseYield * opponentLevel, 1.0 / 2.5) * multiplier / 5.0 + 2);
+        int expected = (int)(Math.Pow((double)baseYield * opponentLevel, 1.0 / 2.5) * multiplier / 5.0 + 2);
         var formula = new Gen5ExpFormula();
         formula.CalcExpGain(baseYield, opponentLevel, trainerBattle).Should().Be(expected);
     }
