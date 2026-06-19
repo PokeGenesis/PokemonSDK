@@ -11,16 +11,20 @@ public sealed class Gen1ExpFormula : IExpFormula
         return (int)(multiplier * baseExpYield * opponentLevel / 7.0);
     }
 
-    public int ExpThreshold(int level, GrowthRate growthRate) => growthRate switch
+    public int ExpThreshold(int level, GrowthRate growthRate)
     {
-        GrowthRate.MediumFast  => (int)Math.Pow(level, 3),
-        GrowthRate.MediumSlow  => (int)(1.2 * Math.Pow(level, 3) - 15 * Math.Pow(level, 2) + 100 * level - 140),
-        GrowthRate.Fast        => (int)(4 * Math.Pow(level, 3) / 5),
-        GrowthRate.Slow        => (int)(5 * Math.Pow(level, 3) / 4),
-        GrowthRate.Erratic     => ErraticThreshold(level),
-        GrowthRate.Fluctuating => FluctuatingThreshold(level),
-        _                      => (int)Math.Pow(level, 3),
-    };
+        if (level < 1) return 0;
+        return growthRate switch
+        {
+            GrowthRate.MediumFast  => (int)Math.Pow(level, 3),
+            GrowthRate.MediumSlow  => (int)(1.2 * Math.Pow(level, 3) - 15 * Math.Pow(level, 2) + 100 * level - 140),
+            GrowthRate.Fast        => (int)(4 * Math.Pow(level, 3) / 5),
+            GrowthRate.Slow        => (int)(5 * Math.Pow(level, 3) / 4),
+            GrowthRate.Erratic     => ErraticThreshold(level),
+            GrowthRate.Fluctuating => FluctuatingThreshold(level),
+            _                      => (int)Math.Pow(level, 3),
+        };
+    }
 
     private static int ErraticThreshold(int n)
     {
