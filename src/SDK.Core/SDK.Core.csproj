@@ -8,7 +8,7 @@
 
   <PropertyGroup>
     <PackageId>PokeForge.SDK.Core</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Description>Modèles domaine, interfaces et value objects pour PokemonSDK. Zéro dépendance NuGet externe — couche fondation du fan-game engine.</Description>
     <PackageTags>pokemon;fan-game;game-engine;rpg;dotnet;sdk</PackageTags>
     <IsPackable>true</IsPackable>

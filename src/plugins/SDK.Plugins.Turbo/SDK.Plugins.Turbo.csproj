@@ -11,7 +11,7 @@
 
   <PropertyGroup>
     <PackageId>PokeForge.SDK.Plugins.Turbo</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Description>Plugin Turbo pour PokemonSDK. Implémente IBattlePlugin : accélération du texte via TextSpeedMultiplier.</Description>
     <PackageTags>pokemon;fan-game;turbo;plugin;dotnet;sdk</PackageTags>
     <IsPackable>true</IsPackable>

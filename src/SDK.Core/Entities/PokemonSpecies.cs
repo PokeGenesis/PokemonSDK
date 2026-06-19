@@ -1,3 +1,5 @@
+using SDK.Core.Enums;
+
 namespace SDK.Core.Entities;
 
 public class PokemonSpecies
@@ -8,4 +10,6 @@ public class PokemonSpecies
     public string? OriginRegion { get; set; }
     public int Type1Id { get; set; }
     public int? Type2Id { get; set; }
+    public int BaseExpYield { get; set; } = 64;
+    public GrowthRate GrowthRate { get; set; } = GrowthRate.MediumFast;
 }

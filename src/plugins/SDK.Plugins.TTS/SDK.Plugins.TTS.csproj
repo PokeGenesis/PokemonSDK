@@ -9,7 +9,7 @@
   </ItemGroup>
   <PropertyGroup>
     <PackageId>PokeForge.SDK.Plugins.TTS</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Description>Plugin TTS (Text-To-Speech) pour PokemonSDK. Narration multi-plateforme : Windows SAPI, Piper TTS, Null fallback.</Description>
     <PackageTags>pokemon;fan-game;tts;narration;plugin;dotnet;sdk</PackageTags>
     <IsPackable>true</IsPackable>
