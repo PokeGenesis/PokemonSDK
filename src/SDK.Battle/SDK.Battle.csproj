@@ -12,7 +12,7 @@
 
   <PropertyGroup>
     <PackageId>PokeForge.SDK.Battle</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Description>Battle engine 1v1 headless pour PokemonSDK. BattleState immuable, IDamageFormula par génération, IDifficultyMode, IBattlePlugin.</Description>
     <PackageTags>pokemon;fan-game;battle-engine;rpg;dotnet;sdk</PackageTags>
     <IsPackable>true</IsPackable>
