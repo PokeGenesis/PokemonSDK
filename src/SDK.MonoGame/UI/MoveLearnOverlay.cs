@@ -17,6 +17,13 @@ public sealed class MoveLearnOverlay
     private IReadOnlyList<BattleMove> _currentMoves = Array.Empty<BattleMove>();
     private int _cursor;
 
+    public void Reset()
+    {
+        DecisionMade = false;
+        IsVisible = false;
+        ForgottenMoveIndex = -1;
+    }
+
     public void Trigger(string nickname, BattleMove newMove, IReadOnlyList<BattleMove> currentMoves)
     {
         _nickname = nickname;

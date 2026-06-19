@@ -82,6 +82,8 @@ public sealed class BattleScene : IGameScene
         _pendingMoveQueue = null;
         _currentLearnMove = null;
         _leveledUp = false;
+        _moveLearnOverlay?.Reset();
+        _evolutionOverlay.Reset();
         _actionIndex = 0;
         _playerRanAway = false;
         _fleeTimer = 0f;

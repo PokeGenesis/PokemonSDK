@@ -20,6 +20,14 @@ public sealed class EvolutionOverlay
     public bool IsComplete   { get; private set; }
     public bool WasCancelled { get; private set; }
 
+    public void Reset()
+    {
+        IsVisible    = false;
+        IsComplete   = false;
+        WasCancelled = false;
+        _flashTimer  = 0f;
+    }
+
     public void Trigger(string oldName, string newName)
     {
         _oldName     = oldName;

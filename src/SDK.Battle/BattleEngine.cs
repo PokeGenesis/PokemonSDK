@@ -139,7 +139,7 @@ public sealed class BattleEngine : IBattleEngine
         var pendingMoves = new List<BattleMove>();
         EvolutionData? pendingEvolution = null;
 
-        while (newLevel < 100 && newExp >= formula.ExpThreshold(newLevel + 1, player.GrowthRate))
+        while (newLevel < 100 && (!levelCap.HasValue || newLevel < levelCap.Value) && newExp >= formula.ExpThreshold(newLevel + 1, player.GrowthRate))
         {
             int oldLevel = newLevel;
             newLevel++;
