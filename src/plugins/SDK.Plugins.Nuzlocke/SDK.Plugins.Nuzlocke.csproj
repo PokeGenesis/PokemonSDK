@@ -11,7 +11,7 @@
 
   <PropertyGroup>
     <PackageId>PokeForge.SDK.Plugins.Nuzlocke</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Description>Plugin Nuzlocke pour PokemonSDK. Implémente IBattlePlugin : permadeath, catch-first-only par zone.</Description>
     <PackageTags>pokemon;fan-game;nuzlocke;plugin;dotnet;sdk</PackageTags>
     <IsPackable>true</IsPackable>

@@ -75,4 +75,9 @@ public sealed class PluginRegistry
             state = next!;
         return state;
     }
+
+    public void NotifyLevelUp(BattlePokemon pokemon, int oldLevel, int newLevel)
+    {
+        foreach (var p in _battlePlugins) p.OnPokemonLevelUp(pokemon, oldLevel, newLevel);
+    }
 }

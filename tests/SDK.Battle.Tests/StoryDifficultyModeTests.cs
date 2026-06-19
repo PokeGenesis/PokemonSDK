@@ -17,6 +17,19 @@ public class StoryDifficultyModeTests
     }
 
     [Fact]
+    public void DefeatExpMultiplier_Is0Point25()
+    {
+        _mode.DefeatExpMultiplier.Should().Be(0.25f);
+    }
+
+
+    [Fact]
+    public void VictoryExpMultiplier_Is1()
+    {
+        _mode.VictoryExpMultiplier.Should().Be(1.0f);
+    }
+
+    [Fact]
     public void Returns_Move_With_PP_When_Available()
     {
         var moves = new BattleMove[]

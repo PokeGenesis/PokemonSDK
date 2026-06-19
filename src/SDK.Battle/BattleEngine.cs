@@ -16,19 +16,22 @@ public sealed class BattleEngine : IBattleEngine
     private readonly IDifficultyMode _opponentStrategy;
     private readonly ITypeChart _typeChart;
     private readonly PluginRegistry _plugins;
+    private readonly IExpFormula? _expFormula;
 
     public BattleEngine(
         IDamageFormula formula,
         IDifficultyMode playerStrategy,
         IDifficultyMode opponentStrategy,
         ITypeChart typeChart,
-        PluginRegistry? plugins = null)
+        PluginRegistry? plugins = null,
+        IExpFormula? expFormula = null)
     {
         _formula = formula;
         _playerStrategy = playerStrategy;
         _opponentStrategy = opponentStrategy;
         _typeChart = typeChart;
         _plugins = plugins ?? new PluginRegistry();
+        _expFormula = expFormula;
     }
 
     public BattleResult RunBattle(BattleRequest request)
@@ -95,6 +98,11 @@ public sealed class BattleEngine : IBattleEngine
                 state = ApplyMove(state, isPlayer: true, playerMove);
         }
 
+        if (_expFormula != null && state.Opponent.CurrentHp <= 0)
+            state = AwardExp(state, _playerStrategy.VictoryExpMultiplier);
+        else if (_expFormula != null && state.Player.CurrentHp <= 0 && _playerStrategy.DefeatExpMultiplier > 0f)
+            state = AwardExp(state, _playerStrategy.DefeatExpMultiplier);
+
         state = state with { Turn = state.Turn + 1 };
         _plugins.NotifyTurnEnd(state);
         return state;
@@ -103,6 +111,101 @@ public sealed class BattleEngine : IBattleEngine
     public BattleMove SelectOpponentMove(BattleState state) =>
         _opponentStrategy.SelectMove(state.Opponent, state.Player, state.Config);
 
+    private BattleState AwardExp(BattleState state, float multiplier = 1.0f)
+    {
+        var formula = _expFormula!;
+        var player = state.Player;
+        var opponent = state.Opponent;
+
+        var levelCap = state.Config.GetLevelCap();
+        if (levelCap.HasValue && player.Level >= levelCap.Value)
+        {
+            var capLog = state.Log.ToList();
+            capLog.Add($"EXP blocked! (Level cap {levelCap.Value} - next badge required)");
+            return state with { Log = capLog };
+        }
+
+        int gained = (int)(formula.CalcExpGain(opponent.BaseExpYield, opponent.Level, false) * multiplier);
+        int newExp = player.CurrentExp + gained;
+
+        var log = state.Log.ToList();
+        log.Add($"{player.Nickname} gained {gained} EXP!");
+
+        int newLevel = player.Level;
+        int atk = player.Attack, def = player.Defense;
+        int spa = player.SpecialAttack, spd = player.SpecialDefense, spe = player.Speed;
+        int maxHp = player.MaxHp;
+        int currentHp = player.CurrentHp;
+        var pendingMoves = new List<BattleMove>();
+        EvolutionData? pendingEvolution = null;
+
+        while (newLevel < 100 && (!levelCap.HasValue || newLevel < levelCap.Value) && newExp >= formula.ExpThreshold(newLevel + 1, player.GrowthRate))
+        {
+            int oldLevel = newLevel;
+            newLevel++;
+
+            double scale = (newLevel + 5.0) / (oldLevel + 5.0);
+            atk   = (int)(atk   * scale);
+            def   = (int)(def   * scale);
+            spa   = (int)(spa   * scale);
+            spd   = (int)(spd   * scale);
+            spe   = (int)(spe   * scale);
+            int oldMaxHp = maxHp;
+            maxHp = (int)(maxHp * scale);
+            currentHp = Math.Min(currentHp + (maxHp - oldMaxHp), maxHp);
+
+            log.Add($"{player.Nickname} grew to level {newLevel}!");
+
+            if (player.FullLearnset != null)
+                foreach (var (learnLevel, move) in player.FullLearnset)
+                    if (learnLevel == newLevel)
+                    {
+                        if (player.Moves.Count < 4)
+                        {
+                            player = player with { Moves = player.Moves.Append(move).ToList() };
+                            log.Add($"{player.Nickname} learned {move.Identifier}!");
+                        }
+                        else
+                        {
+                            pendingMoves.Add(move);
+                            log.Add($"{player.Nickname} wants to learn {move.Identifier}!");
+                        }
+                    }
+
+            var updatedPlayer = player with
+            {
+                Level = newLevel, CurrentExp = newExp,
+                Attack = atk, Defense = def,
+                SpecialAttack = spa, SpecialDefense = spd, Speed = spe,
+                MaxHp = maxHp,
+                CurrentHp = currentHp,
+            };
+            _plugins.NotifyLevelUp(updatedPlayer, oldLevel, newLevel);
+            player = updatedPlayer;
+
+            if (player.EvolvesAtLevel.HasValue
+                && newLevel == player.EvolvesAtLevel.Value
+                && player.EvolvesToSpeciesId.HasValue)
+            {
+                pendingEvolution = new EvolutionData(
+                    player.Nickname,
+                    player.EvolvesToName ?? player.Nickname,
+                    player.EvolvesToSpeciesId.Value);
+            }
+        }
+
+        if (newLevel == 100)
+            newExp = Math.Min(newExp, formula.ExpThreshold(100, player.GrowthRate));
+        player = player with { CurrentExp = newExp };
+        return state with
+        {
+            Player = player,
+            Log = log,
+            PendingLearnedMoves = pendingMoves.Count > 0 ? pendingMoves : Array.Empty<BattleMove>(),
+            PendingEvolution = pendingEvolution,
+        };
+    }
+
     private BattleState ApplyMove(BattleState state, bool isPlayer, BattleMove move)
     {
         var attacker = isPlayer ? state.Player : state.Opponent;
@@ -110,11 +213,18 @@ public sealed class BattleEngine : IBattleEngine
 
         state = AddLog(state, $"{attacker.Nickname} used {move.Identifier.ToUpperInvariant()}!");
 
+        var moveList = attacker.Moves.ToList();
+        int ppIdx = moveList.FindIndex(m => m.MoveId == move.MoveId);
+        if (ppIdx >= 0 && moveList[ppIdx].CurrentPP > 0)
+            moveList[ppIdx] = moveList[ppIdx] with { CurrentPP = moveList[ppIdx].CurrentPP - 1 };
+        attacker = attacker with { Moves = moveList };
+        state = isPlayer ? state with { Player = attacker } : state with { Opponent = attacker };
+
         if (Random.Shared.Next(0, 100) >= move.Accuracy)
             return AddLog(state, "The attack missed!");
 
         if (move.Category == MoveCategory.Status || move.Power is null)
-            return AddLog(state, $"(stat effects: Phase 13)");
+            return state; // TODO (Phase 14+): implement status move effects
 
         var factor1 = _typeChart.GetFactor(move.TypeId, defender.Type1Id, _formula.Generation);
         var factor2 = defender.Type2Id.HasValue
@@ -132,9 +242,9 @@ public sealed class BattleEngine : IBattleEngine
         state = _plugins.ApplyBeforeDamage(state, damageResult);
 
         if (typeMultiplier > 1.0m)
-            state = AddLog(state, "It's super effective!");
+            state = AddLog(state, "It is super effective!");
         else if (typeMultiplier < 1.0m)
-            state = AddLog(state, "It's not very effective...");
+            state = AddLog(state, "It is not very effective...");
 
         var currentDefender = isPlayer ? state.Opponent : state.Player;
         var newDefender = currentDefender with

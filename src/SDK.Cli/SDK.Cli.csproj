@@ -9,7 +9,7 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>pokeforge</ToolCommandName>
     <PackageId>PokeForge.CLI</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Description>CLI tool for PokeForge SDK — scaffold, asset-sync, seed, doctor.</Description>
     <Authors>PokeGenesis</Authors>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

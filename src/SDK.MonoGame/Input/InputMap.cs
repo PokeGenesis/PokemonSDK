@@ -15,5 +15,5 @@ public static class InputMap
     public static readonly Keys Turbo    = Keys.LeftShift;
     public static readonly Keys TurboAlt = Keys.RightShift;
 
-    public static readonly Keys DebugBattle = Keys.X;
+    public static readonly Keys DebugBattle = Keys.F1;
 }
