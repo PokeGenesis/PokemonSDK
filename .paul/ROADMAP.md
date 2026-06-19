@@ -22,7 +22,7 @@ Phases: 3 of 3 complete (Phase 6 ✅ — Phase 10 ✅ — Phase 11 ✅)
 
 **v1.0 Moteur Complet** (v1.0.0)
 Status: In progress
-Phases: 0 of 6 (Phase 12 — Phase 13 — Phase 14 — Phase 15 — Phase 16 — Phase 17)
+Phases: 2 of 6 (Phase 12 ✅ — Phase 13 ✅ — Phase 14 — Phase 15 — Phase 16 — Phase 17)
 
 **v1.x Plugin Era** (v1.1.0 → v1.4.0+)
 Status: Not started
@@ -31,6 +31,10 @@ Phases: 0 of 4+ (Phase 18 v1.1 — Phase 19 v1.2 — Phase 20 v1.3 — Phase 21 
 **v2.0 En ligne** (v2.0.0)
 Status: Not started
 Phases: 0 of 1 (Phase 22)
+
+**v2.1 Double Battles** (v2.1.0)
+Status: Not started
+Phases: 0 of 1 (Phase 23)
 
 ## Phases
 
@@ -47,8 +51,8 @@ Phases: 0 of 1 (Phase 22)
 | 6     | Advanced Systems        | 5     | ✅ Complete | 2026-06-12 |
 | 10    | CLI pokeforge           | 3     | ✅ Complete | 2026-06-09 |
 | 11    | Documentation           | 4     | ✅ Complete | 2026-06-13 |
-| 12    | BattleScene UI          | 5     | Planning    | -         |
-| 13    | EXP + Level-up + Évol.  | TBD   | Not started | -         |
+| 12    | BattleScene UI          | 5     | ✅ Complete | 2026-06-14 |
+| 13    | EXP + Level-up + Évol.  | 5     | ✅ Complete | 2026-06-17 |
 | 14    | Items + Bag + Shop      | TBD   | Not started | -         |
 | 15    | Party + PC + Pokédex UI | TBD   | Not started | -         |
 | 16    | QuestPlugin             | TBD   | Not started | -         |
@@ -58,6 +62,7 @@ Phases: 0 of 1 (Phase 22)
 | 20    | DungeonPlugin           | TBD   | Not started | -         |
 | 21    | StreamerPlugin          | TBD   | Not started | -         |
 | 22    | SDK.Network             | TBD   | Not started | -         |
+| 23    | Double Battles 2v2      | TBD   | Not started | -         |
 
 ## Phase Details
 
@@ -173,7 +178,7 @@ Phases: 0 of 1 (Phase 22)
 
 ---
 
-*Roadmap created: 2026-06-01 | Last updated: 2026-06-13 — Phase 11 Documentation ✅ Complete. v0.3: 3/3 phases done. Milestone v0.3 ✅ Complete.*
+*Roadmap created: 2026-06-01 | Last updated: 2026-06-17 — Phase 13 EXP+LevelUp+Évolution ✅ Complete. v1.0: 2/6 phases done.*
 *Full details: ROADMAP.md (root)*
 
 ### Phase 7: Developer Experience
@@ -201,3 +206,19 @@ Phases: 0 of 1 (Phase 22)
 - [x] 08-02: Licence/CVE cleanup — SixLabors.ImageSharp 4.0.0 + sixlabors.lic + FA v8 open-source ← *Done 2026-06-07*
 - [x] 08-03: publish-nuget.yml CI/CD — pack + push 7 packages sur NuGet.org (secrets NUGET_API_KEY + SIXLABORS_LICENSE_KEY) ← *Done 2026-06-07*
 - [x] 08-04: NuGetConsumerSmokeTest — 7 typeof() verts depuis feed local, D-19 validé ← *Done 2026-06-07*
+
+### Phase 23: Double Battles 2v2
+
+**Goal:** Combats 2v2 complets — DoubleBattleEngine parallele, ciblage par slot, moves de zone (spread ×0.75), DoubleBattleScene UI 4 HP bars.
+**Depends on:** Phase 22 (architecture reseau stabilisee) — architecture PARALLELE, pas de modification de BattleState/IBattleEngine (D-26)
+**Requirements:** DOUBLE-01
+
+**Prep deja fait (Phase 13, 2026-06-17):**
+- `BattleMode` enum dans SDK.Core/Enums (Single=0, Double=1)
+- `BattleConfig.Mode = BattleMode.Single` champ additive — tous les appels existants non impactes
+
+**Plans (TBD):**
+- [ ] 23-01: DoubleBattleState + IDoubleBattleEngine + MoveTarget enum
+- [ ] 23-02: DoubleBattleEngine (ciblage, spread ×0.75, ordre vitesse par slot)
+- [ ] 23-03: DoubleBattleScene UI (4 HP bars, cible selection)
+- [ ] 23-04: Tests + scenarios debug F6/F7

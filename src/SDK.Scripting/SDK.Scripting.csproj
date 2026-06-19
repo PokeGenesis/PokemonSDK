@@ -16,7 +16,7 @@
 
   <PropertyGroup>
     <PackageId>PokeForge.SDK.Scripting</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.2.0</Version>
     <Description>Scripting Lua pour PokemonSDK via MoonSharp Preset_SoftSandbox. GameState, SaveSystem JSON, coroutines, hot reload.</Description>
     <PackageTags>pokemon;fan-game;lua;scripting;moonsharp;dotnet;sdk</PackageTags>
     <IsPackable>true</IsPackable>

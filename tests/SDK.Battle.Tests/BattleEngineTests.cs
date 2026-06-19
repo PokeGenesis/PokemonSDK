@@ -317,4 +317,103 @@ public class BattleEngineTests
             state.Opponent, state.Player, state.Config), Times.AtLeastOnce);
     }
 
+    // ------------------------------------------------------------------
+    // PP deduction + HP restoration — Plan 13-02b
+    // ------------------------------------------------------------------
+
+    [Fact]
+    public void RunTurn_DeductsOnePP_WhenMoveUsed()
+    {
+        var (formula, playerStrat, opponentStrat, chart) = MakeMocks(damage: 30);
+        var engine = MakeEngine(formula, playerStrat, opponentStrat, chart);
+
+        var move = new BattleMove(1, "test-move", 1, MoveCategory.Physical, 40, 100, 35, 35);
+        playerStrat.Setup(s => s.SelectMove(
+                It.IsAny<BattlePokemon>(), It.IsAny<BattlePokemon>(), It.IsAny<BattleConfig>()))
+            .Returns(move);
+
+        var player   = BattleTestHelpers.MakePokemon(hp: 100, speed: 200, moves: new[] { move });
+        var opponent = BattleTestHelpers.MakePokemon(hp: 100, speed: 50);
+        var state    = MakeState(player, opponent);
+
+        var result = engine.RunTurn(state, move, move);
+
+        result.Player.Moves[0].CurrentPP.Should().Be(34, "PP must decrement by 1 after move use");
+    }
+
+    [Fact]
+    public void RunTurn_DoesNotDeductPP_WhenAlreadyZero()
+    {
+        var (formula, playerStrat, opponentStrat, chart) = MakeMocks(damage: 30);
+        var engine = MakeEngine(formula, playerStrat, opponentStrat, chart);
+
+        var move = new BattleMove(1, "test-move", 1, MoveCategory.Physical, 40, 100, 0, 35);
+        playerStrat.Setup(s => s.SelectMove(
+                It.IsAny<BattlePokemon>(), It.IsAny<BattlePokemon>(), It.IsAny<BattleConfig>()))
+            .Returns(move);
+
+        var player   = BattleTestHelpers.MakePokemon(hp: 100, speed: 200, moves: new[] { move });
+        var opponent = BattleTestHelpers.MakePokemon(hp: 100, speed: 50);
+        var state    = MakeState(player, opponent);
+
+        var result = engine.RunTurn(state, move, move);
+
+        result.Player.Moves[0].CurrentPP.Should().Be(0, "PP at zero must not go negative");
+    }
+
+    [Fact]
+    public void AwardExp_RestoresCurrentHpByMaxHpDelta_OnLevelUp()
+    {
+        // Level 7 → 8: scale = (8+5)/(7+5) = 13/12 ≈ 1.0833 → MaxHp: 60 → 65
+        var expFormula = new Mock<IExpFormula>();
+        expFormula.Setup(f => f.CalcExpGain(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<bool>()))
+            .Returns(100);
+        expFormula.Setup(f => f.ExpThreshold(8, GrowthRate.MediumFast)).Returns(50);
+        expFormula.Setup(f => f.ExpThreshold(It.Is<int>(l => l != 8), It.IsAny<GrowthRate>()))
+            .Returns(9999);
+
+        var formula = new Mock<IDamageFormula>();
+        formula.Setup(f => f.Generation).Returns(1);
+        formula.Setup(f => f.Calculate(
+                It.IsAny<BattlePokemon>(), It.IsAny<BattlePokemon>(),
+                It.IsAny<BattleMove>(), It.IsAny<decimal>(), It.IsAny<BattleConfig>()))
+            .Returns(new DamageResult(9999, false, 1.0m));
+
+        var chart = new Mock<ITypeChart>();
+        chart.Setup(t => t.GetFactor(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>()))
+            .Returns(1.0m);
+
+        var move = BattleTestHelpers.MakeMove(1, MoveCategory.Physical, accuracy: 100);
+
+        var playerStrat = new Mock<IDifficultyMode>();
+        playerStrat.Setup(s => s.SelectMove(
+                It.IsAny<BattlePokemon>(), It.IsAny<BattlePokemon>(), It.IsAny<BattleConfig>()))
+            .Returns(move);
+        playerStrat.Setup(s => s.VictoryExpMultiplier).Returns(1.0f);
+
+        var opponentStrat = new Mock<IDifficultyMode>();
+        opponentStrat.Setup(s => s.SelectMove(
+                It.IsAny<BattlePokemon>(), It.IsAny<BattlePokemon>(), It.IsAny<BattleConfig>()))
+            .Returns(move);
+
+        var engine = new BattleEngine(formula.Object, playerStrat.Object, opponentStrat.Object,
+            chart.Object, expFormula: expFormula.Object);
+
+        var player = new BattlePokemon(1, "TestMon", 7,
+            CurrentHp: 45, MaxHp: 60,
+            Attack: 50, Defense: 50, SpecialAttack: 50, SpecialDefense: 50, Speed: 200,
+            Type1Id: 1, Type2Id: null,
+            Moves: new[] { move },
+            CurrentExp: 0);
+        var opponent = BattleTestHelpers.MakePokemon(hp: 1, speed: 50);
+        var state    = MakeState(player, opponent);
+
+        var result = engine.RunTurn(state, move, move);
+
+        result.Player.MaxHp.Should().Be(65, "MaxHp scales from 60 to 65 on level 7→8");
+        result.Player.CurrentHp.Should().Be(50, "CurrentHp restored by delta: 45 + (65-60) = 50");
+        result.Player.CurrentHp.Should().BeLessThanOrEqualTo(result.Player.MaxHp,
+            "CurrentHp must never exceed MaxHp");
+    }
+
 }

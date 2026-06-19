@@ -37,11 +37,12 @@ public sealed class MoveMenu
 
     public BattleMove? SelectedMove { get; private set; }
 
-    public MoveMenu(IReadOnlyList<BattleMove> moves, GraphicsDevice gd)
+    public MoveMenu(IReadOnlyList<BattleMove> moves, GraphicsDevice gd, KeyboardState initialKs = default)
     {
         _moves = moves;
         _pixel = new Texture2D(gd, 1, 1);
         _pixel.SetData(new[] { Color.White });
+        _prevKeyState = initialKs;
     }
 
     public void Update(KeyboardState ks)
@@ -73,6 +74,13 @@ public sealed class MoveMenu
                 var label = (i == _cursorIndex ? "> " : "  ") + move.Identifier;
                 sb.DrawString(font, label, new Vector2(origin.X + 2f, origin.Y + i * 14f + 1f),
                     Color.White, 0f, Vector2.Zero, 0.6f, SpriteEffects.None, 0f);
+
+                var ppColor = move.CurrentPP == 0 ? Color.Red
+                    : move.CurrentPP <= move.MaxPP / 4 ? Color.Yellow
+                    : Color.White;
+                sb.DrawString(font, $"{move.CurrentPP}/{move.MaxPP}",
+                    new Vector2(origin.X + 68f, origin.Y + i * 14f + 1f),
+                    ppColor, 0f, Vector2.Zero, 0.55f, SpriteEffects.None, 0f);
             }
         }
     }
