@@ -24,21 +24,32 @@ runtime MonoGame DesktopGL, système de plugins modulaire.
 
 ## Installation
 
-```bash
+\`\`\`bash
 dotnet add package PokeForge.SDK.Core
 dotnet add package PokeForge.SDK.Data
 dotnet add package PokeForge.SDK.Battle
 dotnet add package PokeForge.SDK.Scripting
-```
+\`\`\`
 
 Plugins optionnels :
 
-```bash
+\`\`\`bash
 dotnet add package PokeForge.SDK.Plugins.Nuzlocke
 dotnet add package PokeForge.SDK.Plugins.Randomizer
 dotnet add package PokeForge.SDK.Plugins.Turbo
 dotnet add package PokeForge.SDK.Plugins.TTS
-```
+\`\`\`
+
+## DataPack
+
+Le DataPack fournit les données de jeu prêtes à l'emploi (Pokémon, moves, types, items) pour 9 générations.
+
+\`\`\`bash
+git clone https://github.com/PokeGenesis/PokemonSDK-DataPack.git
+pokeforge datapack --use ./PokemonSDK-DataPack
+\`\`\`
+
+Le DataPack est optionnel : sans lui, la base SQLite reste vide et les seeds doivent être fournis manuellement.
 
 ## Licence
 
@@ -72,21 +83,32 @@ MonoGame DesktopGL runtime, modular plugin system.
 
 ## Installation
 
-```bash
+\`\`\`bash
 dotnet add package PokeForge.SDK.Core
 dotnet add package PokeForge.SDK.Data
 dotnet add package PokeForge.SDK.Battle
 dotnet add package PokeForge.SDK.Scripting
-```
+\`\`\`
 
 Optional plugins:
 
-```bash
+\`\`\`bash
 dotnet add package PokeForge.SDK.Plugins.Nuzlocke
 dotnet add package PokeForge.SDK.Plugins.Randomizer
 dotnet add package PokeForge.SDK.Plugins.Turbo
 dotnet add package PokeForge.SDK.Plugins.TTS
-```
+\`\`\`
+
+## DataPack
+
+The DataPack provides ready-to-use game data (Pokémon, moves, types, items) for 9 generations.
+
+\`\`\`bash
+git clone https://github.com/PokeGenesis/PokemonSDK-DataPack.git
+pokeforge datapack --use ./PokemonSDK-DataPack
+\`\`\`
+
+The DataPack is optional: without it, the SQLite database remains empty and seeds must be provided manually.
 
 ## License
 

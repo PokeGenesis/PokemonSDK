@@ -15,4 +15,7 @@ public sealed class ImportConfig
 
     [JsonPropertyName("include_views")]
     public string[] IncludeViews { get; set; } = ["front", "back", "overworld", "portrait", "icon"];
+
+    [JsonPropertyName("resize_to_target")]
+    public bool ResizeToTarget { get; set; } = false;
 }
