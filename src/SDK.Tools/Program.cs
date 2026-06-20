@@ -86,6 +86,16 @@ if (args[0] == "asset-sync")
     try { files = scanner.Scan(config.SpritesRoot); }
     catch (DirectoryNotFoundException ex) { Console.Error.WriteLine(ex.Message); return 1; }
 
+    if (config.ResizeToTarget)
+    {
+        var tempDir = Path.Combine(config.OutputDir, ".resize-tmp");
+        var resizer = new SDK.Tools.Validation.SpriteResizer();
+        var fileList = files.ToList();
+        resizer.ResizeAll(fileList, tempDir);
+        files = Directory.EnumerateFiles(tempDir, "*.png");
+        Console.WriteLine($"[RESIZE] {fileList.Count} sprites → {tempDir}");
+    }
+
     var results = validator.ValidateAll(files);
     bool hasError = false;
 

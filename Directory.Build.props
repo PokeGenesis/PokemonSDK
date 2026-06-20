@@ -16,7 +16,15 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <!-- Bundler README.md + icône (racine repo) dans chaque package NuGet -->
+
+  <!-- SQLitePCLRaw.lib.e_sqlite3 2.1.11 est la derniere version disponible (juin 2026).
+       Aucun correctif upstream — suppression ciblee jusqu a publication d une version patchee.
+       Recheck: https://github.com/advisories/GHSA-2m69-gcr7-jv3q -->
+  <ItemGroup>
+    <NuGetAuditSuppress Include="https://github.com/advisories/GHSA-2m69-gcr7-jv3q" />
+  </ItemGroup>
+
+    <!-- Bundler README.md + icône (racine repo) dans chaque package NuGet -->
   <ItemGroup Condition="'$(IsPackable)' == 'true'">
     <None Include="$(MSBuildThisFileDirectory)README.md"
           Pack="true"

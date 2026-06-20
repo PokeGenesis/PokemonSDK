@@ -52,7 +52,9 @@ public sealed class BattleScene : IGameScene
         _expFormula = expFormula;
     }
 
-    public void Initialize(GraphicsDevice graphicsDevice, SpriteFont? font = null)
+    public void Initialize(GraphicsDevice graphicsDevice, SpriteFont? font = null,
+        Texture2D? atlasFront = null, IReadOnlyDictionary<int, Rectangle>? frontRects = null,
+        Texture2D? atlasBack = null, IReadOnlyDictionary<int, Rectangle>? backRects = null)
     {
         _hpBar = new HpBar(graphicsDevice);
         _statusIcon = new StatusIcon(graphicsDevice);
@@ -63,9 +65,19 @@ public sealed class BattleScene : IGameScene
         _pixel.SetData(new[] { Color.White });
         _font = font;
         _graphicsDevice = graphicsDevice;
+        _atlasFront = atlasFront;
+        _frontRects  = frontRects;
+        _atlasBack   = atlasBack;
+        _backRects   = backRects;
     }
 
     private GraphicsDevice? _graphicsDevice;
+    private Texture2D? _atlasFront;
+    private Texture2D? _atlasBack;
+    private IReadOnlyDictionary<int, Rectangle>? _frontRects;
+    private IReadOnlyDictionary<int, Rectangle>? _backRects;
+    private Rectangle? _playerSpriteRect;
+    private Rectangle? _opponentSpriteRect;
 
     public void SetContext(WorldScene worldScene, Game1 game1)
     {
@@ -91,6 +103,8 @@ public sealed class BattleScene : IGameScene
         _opponentDisplayHp = initialState.Opponent.CurrentHp;
         if (_graphicsDevice != null)
             _moveMenu = new MoveMenu(initialState.Player.Moves, _graphicsDevice);
+        _playerSpriteRect   = _backRects?.GetValueOrDefault(initialState.Player.SpeciesId);
+        _opponentSpriteRect = _frontRects?.GetValueOrDefault(initialState.Opponent.SpeciesId);
     }
 
     public void SetPlayerMove(BattleMove move) => _selectedMove = move;
@@ -275,8 +289,16 @@ public sealed class BattleScene : IGameScene
         if (_state is null) return;
 
         // Field: opponent top-right, player bottom-left — no overlap
-        DrawRect(sb, new Rectangle(262, 8,  88, 88), Color.Gray);      // opponent sprite
-        DrawRect(sb, new Rectangle(48,  90, 88, 88), Color.DarkGray);  // player sprite
+        // Opponent sprite — front view, top-right
+        if (_atlasFront != null && _opponentSpriteRect.HasValue)
+            sb.Draw(_atlasFront, new Rectangle(262, 8, 88, 88), _opponentSpriteRect.Value, Color.White);
+        else
+            DrawRect(sb, new Rectangle(262, 8, 88, 88), Color.Gray);
+        // Player sprite — back view, bottom-left
+        if (_atlasBack != null && _playerSpriteRect.HasValue)
+            sb.Draw(_atlasBack, new Rectangle(48, 90, 88, 88), _playerSpriteRect.Value, Color.White);
+        else
+            DrawRect(sb, new Rectangle(48, 90, 88, 88), Color.DarkGray);
 
         // HP bars: opponent top-left, player bottom-right
         _hpBar!.Draw(sb, (int)Math.Ceiling(_opponentDisplayHp), _state.Opponent.MaxHp,
