@@ -3,7 +3,9 @@ namespace SDK.MonoGame;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SDK.Core.Entities;
 using SDK.Core.Interfaces;
+using SDK.Data;
 using SDK.MonoGame.Input;
 using SDK.MonoGame.Rendering;
 using SDK.MonoGame.Scenes;
@@ -79,7 +81,41 @@ public class Game1 : Game
         try { _font = Content.Load<SpriteFont>("Fonts/DefaultFont"); }
         catch (Microsoft.Xna.Framework.Content.ContentLoadException) { }
         catch (System.IO.FileNotFoundException) { }
-        _battleScene.Initialize(GraphicsDevice, _font);
+        // Load sprite atlases for battle scenes (front = opponent, back = player)
+        Texture2D? atlasFront = null;
+        Texture2D? atlasBack  = null;
+        var frontRects = new Dictionary<int, Rectangle>();
+        var backRects  = new Dictionary<int, Rectangle>();
+        try
+        {
+            using var scope = _services.CreateScope();
+            var db = scope.ServiceProvider.GetRequiredService<PokemonDbContext>();
+
+            var frontEntries = db.SpriteAtlasEntries.Where(e => e.View == "front").ToList();
+            if (frontEntries.Count > 0 && System.IO.File.Exists(frontEntries[0].AtlasPath))
+            {
+                using var fs = System.IO.File.OpenRead(frontEntries[0].AtlasPath);
+                atlasFront = Texture2D.FromStream(GraphicsDevice, fs);
+                foreach (var e in frontEntries)
+                    if (e.AssetKey.Length >= 5 && int.TryParse(e.AssetKey[..5], out var sid))
+                        frontRects[sid] = new Rectangle(e.X, e.Y, e.Width, e.Height);
+            }
+
+            var backEntries = db.SpriteAtlasEntries.Where(e => e.View == "back").ToList();
+            if (backEntries.Count > 0 && System.IO.File.Exists(backEntries[0].AtlasPath))
+            {
+                using var fs = System.IO.File.OpenRead(backEntries[0].AtlasPath);
+                atlasBack = Texture2D.FromStream(GraphicsDevice, fs);
+                foreach (var e in backEntries)
+                    if (e.AssetKey.Length >= 5 && int.TryParse(e.AssetKey[..5], out var sid))
+                        backRects[sid] = new Rectangle(e.X, e.Y, e.Width, e.Height);
+            }
+        }
+        catch (Exception ex)
+        {
+            Serilog.Log.Warning("[SPRITES] Atlas load failed: {Msg}", ex.Message);
+        }
+        _battleScene.Initialize(GraphicsDevice, _font, atlasFront, frontRects, atlasBack, backRects);
     }
 
     protected override void Update(GameTime gameTime)

@@ -33,3 +33,10 @@ sixlabors.lic
 # Windows alternate data stream metadata (WSL2/NTFS)
 *:Zone.Identifier
 nupkg-local/
+
+# Atlases générés par le pipeline asset (runtime — ne pas committer)
+Content/atlas/
+Content/atlas-back/
+
+# Configs DataPack locales (chemins machine-spécifiques)
+assets/import-datapack*.json
