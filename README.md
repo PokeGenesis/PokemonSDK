@@ -8,14 +8,14 @@ runtime MonoGame DesktopGL, système de plugins modulaire.
 
 | Package | Rôle |
 |---------|------|
-| `PokeForge.SDK.Core` | Modèles domaine, interfaces, value objects — zéro dépendance NuGet |
+| `PokeForge.SDK.Core` | Modèles domaine, interfaces, value objects, zéro dépendance NuGet |
 | `PokeForge.SDK.Data` | EF Core 10 + SQLite, schéma 9 générations, table `translations` centrale |
 | `PokeForge.SDK.Battle` | Battle engine 1v1 headless, BattleState immuable, formules par génération |
 | `PokeForge.SDK.Scripting` | MoonSharp Preset_SoftSandbox, GameState, SaveSystem JSON |
-| `PokeForge.SDK.Plugins.Nuzlocke` | Plugin IBattlePlugin — Nuzlocke (permadeath, catch-first-only) |
-| `PokeForge.SDK.Plugins.Randomizer` | Plugin IBattlePlugin — Randomizer (seed-déterministe) |
-| `PokeForge.SDK.Plugins.Turbo` | Plugin IBattlePlugin — Turbo (TextSpeedMultiplier) |
-| `PokeForge.SDK.Plugins.TTS` | Narration vocale — PiperTTS (cross-platform) + Windows Speech, asynchrone, non-bloquant |
+| `PokeForge.SDK.Plugins.Nuzlocke` | Plugin IBattlePlugin, Nuzlocke (permadeath, catch-first-only) |
+| `PokeForge.SDK.Plugins.Randomizer` | Plugin IBattlePlugin, Randomizer (seed-déterministe) |
+| `PokeForge.SDK.Plugins.Turbo` | Plugin IBattlePlugin, Turbo (TextSpeedMultiplier) |
+| `PokeForge.SDK.Plugins.TTS` | Narration vocale, PiperTTS (cross-platform) + Windows Speech, asynchrone, non-bloquant |
 
 ## Prérequis
 
@@ -24,32 +24,52 @@ runtime MonoGame DesktopGL, système de plugins modulaire.
 
 ## Installation
 
-\`\`\`bash
+```bash
 dotnet add package PokeForge.SDK.Core
 dotnet add package PokeForge.SDK.Data
 dotnet add package PokeForge.SDK.Battle
 dotnet add package PokeForge.SDK.Scripting
-\`\`\`
+```
 
 Plugins optionnels :
 
-\`\`\`bash
+```bash
 dotnet add package PokeForge.SDK.Plugins.Nuzlocke
 dotnet add package PokeForge.SDK.Plugins.Randomizer
 dotnet add package PokeForge.SDK.Plugins.Turbo
 dotnet add package PokeForge.SDK.Plugins.TTS
-\`\`\`
+```
 
 ## DataPack
 
 Le DataPack fournit les données de jeu prêtes à l'emploi (Pokémon, moves, types, items) pour 9 générations.
 
-\`\`\`bash
+```bash
 git clone https://github.com/PokeGenesis/PokemonSDK-DataPack.git
 pokeforge datapack --use ./PokemonSDK-DataPack
-\`\`\`
+```
 
 Le DataPack est optionnel : sans lui, la base SQLite reste vide et les seeds doivent être fournis manuellement.
+
+## Build et tests
+
+Prérequis : .NET 10 SDK (la CI utilise `10.0.x`).
+
+```bash
+dotnet restore PokemonSDK.slnx
+dotnet build PokemonSDK.slnx --no-restore --configuration Release
+dotnet test PokemonSDK.slnx --no-build --configuration Release
+```
+
+La solution compte 11 projets de tests xUnit (`tests/`). Dernière exécution locale : 296 tests réussis, 0 échec.
+
+## Workflow de développement avec agents IA
+
+- Développement piloté par Claude Code. Les consignes de travail sont dans `CLAUDE.md` et `.claude/`.
+- Planification sous forme de fichiers Markdown versionnés : `.paul/` (état, roadmap, plans par phase).
+- TDD : les tests sont écrits avant l'implémentation.
+- Revues croisées par plusieurs modèles.
+- Branches `dev`, `staging` et `main`. La CI (build et tests sous Linux et Windows) s'exécute sur les pull requests vers ces trois branches.
 
 ## Licence
 
@@ -67,14 +87,14 @@ MonoGame DesktopGL runtime, modular plugin system.
 
 | Package | Role |
 |---------|------|
-| `PokeForge.SDK.Core` | Domain models, interfaces, value objects — zero NuGet dependency |
+| `PokeForge.SDK.Core` | Domain models, interfaces, value objects, zero NuGet dependency |
 | `PokeForge.SDK.Data` | EF Core 10 + SQLite, 9-generation schema, central `translations` table |
 | `PokeForge.SDK.Battle` | Headless 1v1 battle engine, immutable BattleState, per-generation formulas |
 | `PokeForge.SDK.Scripting` | MoonSharp Preset_SoftSandbox, GameState, JSON SaveSystem |
-| `PokeForge.SDK.Plugins.Nuzlocke` | IBattlePlugin — Nuzlocke (permadeath, catch-first-only) |
-| `PokeForge.SDK.Plugins.Randomizer` | IBattlePlugin — Randomizer (seed-deterministic) |
-| `PokeForge.SDK.Plugins.Turbo` | IBattlePlugin — Turbo (TextSpeedMultiplier) |
-| `PokeForge.SDK.Plugins.TTS` | Voice narration — PiperTTS (cross-platform) + Windows Speech, async, non-blocking |
+| `PokeForge.SDK.Plugins.Nuzlocke` | IBattlePlugin, Nuzlocke (permadeath, catch-first-only) |
+| `PokeForge.SDK.Plugins.Randomizer` | IBattlePlugin, Randomizer (seed-deterministic) |
+| `PokeForge.SDK.Plugins.Turbo` | IBattlePlugin, Turbo (TextSpeedMultiplier) |
+| `PokeForge.SDK.Plugins.TTS` | Voice narration, PiperTTS (cross-platform) + Windows Speech, async, non-blocking |
 
 ## Requirements
 
@@ -83,32 +103,52 @@ MonoGame DesktopGL runtime, modular plugin system.
 
 ## Installation
 
-\`\`\`bash
+```bash
 dotnet add package PokeForge.SDK.Core
 dotnet add package PokeForge.SDK.Data
 dotnet add package PokeForge.SDK.Battle
 dotnet add package PokeForge.SDK.Scripting
-\`\`\`
+```
 
 Optional plugins:
 
-\`\`\`bash
+```bash
 dotnet add package PokeForge.SDK.Plugins.Nuzlocke
 dotnet add package PokeForge.SDK.Plugins.Randomizer
 dotnet add package PokeForge.SDK.Plugins.Turbo
 dotnet add package PokeForge.SDK.Plugins.TTS
-\`\`\`
+```
 
 ## DataPack
 
 The DataPack provides ready-to-use game data (Pokémon, moves, types, items) for 9 generations.
 
-\`\`\`bash
+```bash
 git clone https://github.com/PokeGenesis/PokemonSDK-DataPack.git
 pokeforge datapack --use ./PokemonSDK-DataPack
-\`\`\`
+```
 
 The DataPack is optional: without it, the SQLite database remains empty and seeds must be provided manually.
+
+## Build and tests
+
+Requirement: .NET 10 SDK (CI uses `10.0.x`).
+
+```bash
+dotnet restore PokemonSDK.slnx
+dotnet build PokemonSDK.slnx --no-restore --configuration Release
+dotnet test PokemonSDK.slnx --no-build --configuration Release
+```
+
+The solution has 11 xUnit test projects (`tests/`). Last local run: 296 tests passed, 0 failed.
+
+## AI-assisted development workflow
+
+- Development driven by Claude Code. Working instructions live in `CLAUDE.md` and `.claude/`.
+- Planning as versioned Markdown files: `.paul/` (state, roadmap, per-phase plans).
+- TDD: tests are written before the implementation.
+- Cross-reviews by several models.
+- Branches `dev`, `staging` and `main`. CI (build and tests on Linux and Windows) runs on pull requests targeting these three branches.
 
 ## License
 
