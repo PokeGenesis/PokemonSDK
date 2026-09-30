@@ -77,6 +77,7 @@ La solution compte 11 projets de tests xUnit (`tests/`). Dernière exécution lo
 
 ---
 
+<!-- markdownlint-disable-next-line MD025 -->
 # PokemonSDK (English)
 
 Open-source C# / .NET 10 SDK for Pokémon fan-games.
