@@ -40,3 +40,6 @@ Content/atlas-back/
 
 # Configs DataPack locales (chemins machine-spécifiques)
 assets/import-datapack*.json
+.planning/gsd-*
+*.bak-*
+state.md
