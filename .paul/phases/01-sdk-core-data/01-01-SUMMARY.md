@@ -139,7 +139,7 @@ completed: 2026-06-01T20:19:00Z
 | Problème | Résolution |
 |----------|------------|
 | `.NET 8` installé (pas `.NET 10`) | Bloquant — utilisateur a installé .NET 10.0.108. Reprise sans changement de plan. |
-| `dotnet test` MSB1009 hors projet root | Préfixer `cd /home/subarnan/projects/PokemonSDK &&` après travail dans `/tmp` |
+| `dotnet test` MSB1009 hors projet root | Préfixer `cd <repo> &&` après travail dans `/tmp` |
 
 ## Next Phase Readiness
 
