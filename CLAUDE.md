@@ -273,3 +273,27 @@ Jamais d'em dash dans la prose, les titres, les tableaux.
 ### Résumé anti-IA
 
 Écrire sans : em dashes, "simplement", "il convient de noter", tournures passives excessives. Préférer les phrases courtes et directes.
+
+## Stack
+- Language: [decided per project]
+- Framework: [decided per project]
+- Database: [decided per project, if applicable]
+- Deployed: [decided per project]
+
+
+## Structure
+- Source: [src/ or app/ or ...]
+- Tests: [tests/ or test/ or ...]
+- Config: [config/ or appsettings.json or ...]
+
+
+## Constraints
+- [Project-specific rules: API versioning, naming conventions, etc]
+- [Performance SLAs if applicable]
+- [Dependencies or integrations to be aware of]
+
+
+## CI/CD
+- [Workflow file: .github/workflows/... or none yet]
+- [What runs on PR: tests, lint, build, etc]
+- [Branch model: main+dev, or main+dev+staging if this project uses one]
